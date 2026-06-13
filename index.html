@@ -214,6 +214,55 @@ body:not(.js-on) .reset{display:none}
   .afiche,.ficha{break-inside:avoid}
   .fila.oculta{display:grid}
 }
+
+/* ============ FILAS CLICKEABLES + DESTINO ============ */
+a.fila{color:inherit;text-decoration:none}
+.fila:not(.head){cursor:pointer}
+@media(hover:hover){.fila:not(.head):hover{background:rgba(212,175,55,.08)}}
+.fila:not(.head):active{background:rgba(212,175,55,.14)}
+.afiche,.ficha{scroll-margin-top:90px}
+.afiche:target,.ficha:target{outline:2px solid var(--carmesi);outline-offset:5px}
+.sala.oscura .afiche:target,.sala.oscura .ficha:target{outline-color:var(--orosuave)}
+.pista{font-family:'Space Mono';font-size:10px;letter-spacing:.14em;text-transform:uppercase;opacity:.55;margin-top:8px}
+
+/* ============ TAPAS DE JUEGOS ============ */
+.afiche.conTapa{display:grid;grid-template-columns:182px 1fr;gap:clamp(18px,2.2vw,26px);align-items:start}
+.acover{margin:0;position:relative;overflow:hidden;border-radius:2px;aspect-ratio:1/1;box-shadow:0 6px 24px rgba(0,0,0,.22)}
+.sala.oscura .acover{box-shadow:0 8px 34px rgba(0,0,0,.5)}
+.acover img{width:100%;height:100%;object-fit:cover;display:block;transform:scale(1.13);transform-origin:center;filter:saturate(.97)}
+/* salas claras: multiply funde cualquier resto de blanco con el crema */
+.sala:not(.oscura) .acover img{mix-blend-mode:multiply}
+.acover .ph{display:none}
+.acover.falla img{display:none}
+.acover.falla .ph,body:not(.js-on) .acover .ph{display:flex;aspect-ratio:1/1;flex-direction:column;align-items:center;justify-content:center;gap:7px;background:linear-gradient(155deg,rgba(157,28,36,.10),rgba(26,18,14,.05))}
+body:not(.js-on) .acover img{display:none}
+.sala.oscura .acover.falla .ph,body:not(.js-on) .sala.oscura .acover .ph{background:linear-gradient(155deg,rgba(240,231,214,.06),rgba(0,0,0,.18))}
+.ph .phl{font-family:'Anton';font-size:54px;line-height:1;color:var(--carmesi)}
+.sala.oscura .ph .phl{color:var(--orosuave)}
+.ph .phs{color:var(--carmesivivo);font-size:12px}
+.ph .phc{font-family:'Space Mono';font-size:8.5px;letter-spacing:.2em;opacity:.55}
+.colofon .cred{color:var(--orosuave);text-decoration:none;border-bottom:1px solid rgba(212,175,55,.4)}
+@media(max-width:880px){.afiche.conTapa{grid-template-columns:1fr}.acover{max-width:200px}}
+
+.sala.oscura .fthumb .phl{color:var(--orosuave)}
+
+/* ============ ENCABEZADO ORDENABLE ============ */
+.head .th{cursor:pointer;user-select:none;-webkit-user-select:none;transition:color .15s;white-space:nowrap}
+@media(hover:hover){.head .th:hover{color:var(--carmesi)}}
+.head .th .ar{display:inline-block;width:0;height:0;margin-left:5px;vertical-align:middle;opacity:0;border-left:3.5px solid transparent;border-right:3.5px solid transparent;border-bottom:5px solid currentColor;transition:opacity .15s,transform .2s}
+.head .th.activo{color:var(--carmesi)}
+.head .th.activo .ar{opacity:.9}
+.head .th.activo.desc .ar{transform:rotate(180deg)}
+
+/* ============ PULIDO VISUAL ============ */
+.fila.alt{background:rgba(26,18,14,.025)}
+.sala.oscura .fila.alt{background:rgba(240,231,214,.022)}
+.fila:not(.head){transition:background .12s}
+.acover{box-shadow:0 5px 18px rgba(0,0,0,.16)}
+.sala.oscura .acover{box-shadow:0 6px 26px rgba(0,0,0,.42)}
+.head .th .ar{border-bottom-width:6px;border-left-width:4px;border-right-width:4px}
+.head .th.activo{position:relative}
+.head .th.activo::after{content:"";position:absolute;left:0;right:14px;bottom:-3px;height:1.5px;background:var(--carmesi);opacity:.5}
 </style>
 </head>
 <body>
@@ -276,7 +325,7 @@ body:not(.js-on) .reset{display:none}
        <div class="salameta">Sala 01 — 9 funciones</div>
      </div>
      <hr class="regla">
-     <div class="afiches"><article class="afiche rev in">
+     <div class="afiches"><article class="afiche rev conTapa in" id="g-t01">
    <svg class="sello" viewBox="0 0 100 100" aria-label="Sello de la casa">
  <circle cx="50" cy="50" r="46" fill="none" stroke="var(--carmesivivo)" stroke-width="2"></circle>
  <circle cx="50" cy="50" r="37" fill="none" stroke="var(--carmesivivo)" stroke-width="1"></circle>
@@ -286,19 +335,24 @@ body:not(.js-on) .reset{display:none}
  </text>
  <text x="50" y="58" text-anchor="middle" font-size="20" fill="var(--carmesivivo)">★</text>
 </svg>
+   <figure class="acover"><img src="https://www.cazagangas.com.ar/images/juegos/final-girl.jpg" alt="Tapa de Final Girl" loading="lazy" onerror="this.closest('.acover').classList.add('falla')"><span class="ph"><span class="phl">F</span><span class="phs">✦</span><span class="phc">FUNCIÓN T·01</span></span></figure>
+   <div class="acuerpo">
    <div class="codigo">T·01 · FAVORITO</div>
    <h3>Final Girl</h3>
-   <div class="logline">Sos la última chica de la película.</div>
+   <div class="logline">La que sigue en pie cuando bajan los créditos.</div>
    <p class="pitch">Un asesino, una locación maldita y vos. Sobreviví la noche o eliminá al villano: cada caja es una película slasher distinta, del campamento al manicomio.</p>
    <div class="fichastats">
-     <span><span class="k">Jugadores</span>1 jugador</span>
+     <span><span class="k">Jugadores</span>1–2 jugadores</span>
      <span><span class="k">Duración</span>30–60′</span>
      <span><span class="k">Intensidad</span><span class="rombos">◆◆◆◆◇</span> exigente</span>
      <span><span class="k">Modo</span>Solitario</span>
    </div>
    <span class="expchip">15 películas en el archivo</span>
- </article><article class="afiche rev in">
+   </div>
+ </article><article class="afiche rev conTapa in" id="g-t02">
    
+   <figure class="acover"><img src="https://www.cazagangas.com.ar/images/juegos/nemesis-retaliation.jpg" alt="Tapa de Nemesis: Retaliation" loading="lazy" onerror="this.closest('.acover').classList.add('falla')"><span class="ph"><span class="phl">N</span><span class="phs">✦</span><span class="phc">FUNCIÓN T·02</span></span></figure>
+   <div class="acuerpo">
    <div class="codigo">T·02</div>
    <h3>Nemesis: Retaliation</h3>
    <div class="logline">Esta vez, los humanos entran al nido.</div>
@@ -310,44 +364,65 @@ body:not(.js-on) .reset{display:none}
      <span><span class="k">Modo</span>Cooperativo</span>
    </div>
    
+   </div>
+ </article><article class="afiche rev conTapa in" id="g-t04">
+   
+   <figure class="acover"><img src="https://www.cazagangas.com.ar/images/juegos/las-mansiones-de-la-locura-segunda-edicion.jpg" alt="Tapa de Las Mansiones de la Locura" loading="lazy" onerror="this.closest('.acover').classList.add('falla')"><span class="ph"><span class="phl">L</span><span class="phs">✦</span><span class="phc">FUNCIÓN T·04</span></span></figure>
+   <div class="acuerpo">
+   <div class="codigo">T·04</div>
+   <h3>Las Mansiones de la Locura</h3>
+   <div class="logline">Una casa que respira, y no a tu favor.</div>
+   <p class="pitch">La app dirige la pesadilla; ustedes exploran una mansión que quiere volverlos locos. Inmersión total con banda sonora incluida.</p>
+   <div class="fichastats">
+     <span><span class="k">Jugadores</span>1–5 jugadores</span>
+     <span><span class="k">Duración</span>120–180′</span>
+     <span><span class="k">Intensidad</span><span class="rombos">◆◆◆◆◇</span> exigente</span>
+     <span><span class="k">Modo</span>Cooperativo</span>
+   </div>
+   
+   </div>
+ </article><article class="afiche rev conTapa in" id="g-t06">
+   
+   <figure class="acover"><img src="https://www.cazagangas.com.ar/images/juegos/terrorscape.jpg" alt="Tapa de Terrorscape" loading="lazy" onerror="this.closest('.acover').classList.add('falla')"><span class="ph"><span class="phl">T</span><span class="phs">✦</span><span class="phc">FUNCIÓN T·06</span></span></figure>
+   <div class="acuerpo">
+   <div class="codigo">T·06</div>
+   <h3>Terrorscape</h3>
+   <div class="logline">Alguien en la mesa no quiere que salgas.</div>
+   <p class="pitch">Un asesino mueve en secreto; las víctimas buscan escapar de la casa. El gato y el ratón del cine de terror, en 40 minutos.</p>
+   <div class="fichastats">
+     <span><span class="k">Jugadores</span>1–4 jugadores</span>
+     <span><span class="k">Duración</span>30–45′</span>
+     <span><span class="k">Intensidad</span><span class="rombos">◆◆◆◇◇</span> medio</span>
+     <span><span class="k">Modo</span>Roles ocultos</span>
+   </div>
+   
+   </div>
  </article></div>
-     <div class="fichas"><article class="ficha rev in">
+     <div class="fichas"><article class="ficha rev in" id="g-t03">
    <div class="top"><span>T·03</span></div>
    <h4>Cthulhu: Death May Die</h4>
    <p class="pitch">Interrumpir el ritual, enloquecer en el intento y dispararle a un primigenio en la cara. Acción lovecraftiana sin vueltas.</p>
    <div class="datos"><span><i class="dk">jug</i> 1–5</span><span>90′</span><span class="rombos">◆◆◆◇◇</span></div>
    <div class="modo">Cooperativo</div>
- </article><article class="ficha rev in">
-   <div class="top"><span>T·04</span></div>
-   <h4>Las Mansiones de la Locura</h4>
-   <p class="pitch">La app dirige la pesadilla; ustedes exploran una mansión que quiere volverlos locos. Inmersión total con banda sonora incluida.</p>
-   <div class="datos"><span><i class="dk">jug</i> 1–5</span><span>120–180′</span><span class="rombos">◆◆◆◆◇</span></div>
-   <div class="modo">Cooperativo</div>
- </article><article class="ficha rev in">
+ </article><article class="ficha rev in" id="g-t05">
    <div class="top"><span>T·05</span></div>
    <h4>The Night Cage</h4>
    <p class="pitch">Un laberinto a oscuras, cuatro velas que se consumen y la memoria colectiva como única linterna. Claustrofobia elegante.</p>
    <div class="datos"><span><i class="dk">jug</i> 1–5</span><span>45′</span><span class="rombos">◆◆◆◇◇</span></div>
    <div class="modo">Cooperativo</div>
- </article><article class="ficha rev in">
-   <div class="top"><span>T·06</span></div>
-   <h4>Terrorscape</h4>
-   <p class="pitch">Un asesino mueve en secreto; las víctimas buscan escapar de la casa. El gato y el ratón del cine de terror, en 40 minutos.</p>
-   <div class="datos"><span><i class="dk">jug</i> 1–4</span><span>30–45′</span><span class="rombos">◆◆◆◇◇</span></div>
-   <div class="modo">Roles ocultos</div>
- </article><article class="ficha rev in">
+ </article><article class="ficha rev in" id="g-t07">
    <div class="top"><span>T·07</span></div>
    <h4>Zombicide 2ª ed.</h4>
    <p class="pitch">Hordas, equipo pesado y cero culpa: el blockbuster palomitero de la casa. Ideal para iniciarse en el terror cooperativo.</p>
    <div class="datos"><span><i class="dk">jug</i> 1–6</span><span>60–90′</span><span class="rombos">◆◆◆◇◇</span></div>
    <div class="modo">Cooperativo</div>
- </article><article class="ficha rev in">
+ </article><article class="ficha rev in" id="g-t08">
    <div class="top"><span>T·08</span></div>
    <h4>Betrayal at House on the Hill</h4>
    <p class="pitch">Exploran la casa embrujada juntos… hasta que la casa elige a su traidor. Cincuenta finales posibles, ninguno tranquilo.</p>
    <div class="datos"><span><i class="dk">jug</i> 3–6</span><span>60′</span><span class="rombos">◆◆◆◇◇</span></div>
    <div class="modo">Roles ocultos</div>
- </article><article class="ficha rev in">
+ </article><article class="ficha rev in" id="g-t09">
    <div class="top"><span>T·09</span></div>
    <h4>This War of Mine</h4>
    <p class="pitch">Civiles sobreviviendo a una ciudad sitiada. Duro, hermoso y para mesas dispuestas a sentir de verdad. Avisados están.</p>
@@ -366,7 +441,7 @@ body:not(.js-on) .reset{display:none}
        <div class="salameta">Sala 02 — 4 funciones</div>
      </div>
      <hr class="regla">
-     <div class="afiches"><article class="afiche rev in">
+     <div class="afiches"><article class="afiche rev conTapa in" id="g-d01">
    <svg class="sello" viewBox="0 0 100 100" aria-label="Sello de la casa">
  <circle cx="50" cy="50" r="46" fill="none" stroke="var(--carmesivivo)" stroke-width="2"></circle>
  <circle cx="50" cy="50" r="37" fill="none" stroke="var(--carmesivivo)" stroke-width="1"></circle>
@@ -376,9 +451,11 @@ body:not(.js-on) .reset{display:none}
  </text>
  <text x="50" y="58" text-anchor="middle" font-size="20" fill="var(--carmesivivo)">★</text>
 </svg>
+   <figure class="acover"><img src="https://www.cazagangas.com.ar/images/juegos/sherlock-holmes-detective-asesor-los-crimenes-del-tamesis-y-otros-casos.jpg" alt="Tapa de Sherlock Holmes: Detective Asesor" loading="lazy" onerror="this.closest('.acover').classList.add('falla')"><span class="ph"><span class="phl">S</span><span class="phs">✦</span><span class="phc">FUNCIÓN D·01</span></span></figure>
+   <div class="acuerpo">
    <div class="codigo">D·01 · FAVORITO</div>
    <h3>Sherlock Holmes: Detective Asesor</h3>
-   <div class="logline">Londres, 188—. Un caso abierto sobre la mesa.</div>
+   <div class="logline">Londres, 1880. Un caso abierto sobre la mesa.</div>
    <p class="pitch">Sin tablero y sin dados: un caso, un mapa de Londres victoriano, el directorio y la conversación de la mesa como única mecánica. La joya intelectual de la casa — pidan café antes de empezar.</p>
    <div class="fichastats">
      <span><span class="k">Jugadores</span>1–8</span>
@@ -387,20 +464,21 @@ body:not(.js-on) .reset{display:none}
      <span><span class="k">Modo</span>Cooperativo</span>
    </div>
    <span class="expchip">5 cajas de casos</span>
+   </div>
  </article></div>
-     <div class="fichas"><article class="ficha rev in">
+     <div class="fichas"><article class="ficha rev in" id="g-d02">
    <div class="top"><span>D·02</span></div>
    <h4>Arkham Horror: El Juego de Cartas</h4>
    <p class="pitch">Investigadores contra los Mitos: cartas, campañas y decisiones que dejan cicatriz de un escenario al siguiente.</p>
    <div class="datos"><span><i class="dk">jug</i> 1–2</span><span>60–120′</span><span class="rombos">◆◆◆◆◆</span></div>
    <div class="modo">Cooperativo</div>
- </article><article class="ficha rev in">
+ </article><article class="ficha rev in" id="g-d03">
    <div class="top"><span>D·03</span></div>
    <h4>Mysterium</h4>
    <p class="pitch">Un fantasma mudo muestra visiones oníricas; los médiums interpretan. Resolver un crimen leyendo imágenes imposibles.</p>
    <div class="datos"><span><i class="dk">jug</i> 2–7</span><span>45′</span><span class="rombos">◆◆◇◇◇</span></div>
    <div class="modo">Cooperativo</div>
- </article><article class="ficha rev in">
+ </article><article class="ficha rev in" id="g-d04">
    <div class="top"><span>D·04</span></div>
    <h4>Misterio</h4>
    <p class="pitch">Personaje, arma y habitación: deducción de la vieja escuela para detectives en formación.</p>
@@ -419,7 +497,7 @@ body:not(.js-on) .reset{display:none}
        <div class="salameta">Sala 03 — 6 funciones</div>
      </div>
      <hr class="regla">
-     <div class="afiches"><article class="afiche rev in">
+     <div class="afiches"><article class="afiche rev conTapa in" id="g-c01">
    <svg class="sello" viewBox="0 0 100 100" aria-label="Sello de la casa">
  <circle cx="50" cy="50" r="46" fill="none" stroke="var(--carmesivivo)" stroke-width="2"></circle>
  <circle cx="50" cy="50" r="37" fill="none" stroke="var(--carmesivivo)" stroke-width="1"></circle>
@@ -429,6 +507,8 @@ body:not(.js-on) .reset{display:none}
  </text>
  <text x="50" y="58" text-anchor="middle" font-size="20" fill="var(--carmesivivo)">★</text>
 </svg>
+   <figure class="acover"><img src="https://www.cazagangas.com.ar/images/juegos/paleo.jpg" alt="Tapa de Paleo" loading="lazy" onerror="this.closest('.acover').classList.add('falla')"><span class="ph"><span class="phl">P</span><span class="phs">✦</span><span class="phc">FUNCIÓN C·01</span></span></figure>
+   <div class="acuerpo">
    <div class="codigo">C·01 · FAVORITO</div>
    <h3>Paleo</h3>
    <div class="logline">La Edad de Piedra no perdona a nadie.</div>
@@ -440,8 +520,11 @@ body:not(.js-on) .reset{display:none}
      <span><span class="k">Modo</span>Cooperativo</span>
    </div>
    <span class="expchip">4 expansiones</span>
- </article><article class="afiche rev in">
+   </div>
+ </article><article class="afiche rev conTapa in" id="g-c02">
    
+   <figure class="acover"><img src="https://www.cazagangas.com.ar/images/juegos/sleeping-gods.jpg" alt="Tapa de Sleeping Gods" loading="lazy" onerror="this.closest('.acover').classList.add('falla')"><span class="ph"><span class="phl">S</span><span class="phs">✦</span><span class="phc">FUNCIÓN C·02</span></span></figure>
+   <div class="acuerpo">
    <div class="codigo">C·02</div>
    <h3>Sleeping Gods</h3>
    <div class="logline">Un barco varado en un mar que no figura en los mapas.</div>
@@ -453,26 +536,27 @@ body:not(.js-on) .reset{display:none}
      <span><span class="k">Modo</span>Cooperativo</span>
    </div>
    <span class="expchip">2 expansiones</span>
+   </div>
  </article></div>
-     <div class="fichas"><article class="ficha rev in">
+     <div class="fichas"><article class="ficha rev in" id="g-c03">
    <div class="top"><span>C·03</span><span class="fav">★ DE LA CASA</span></div>
    <h4>Pandemic</h4>
    <p class="pitch">Cuatro enfermedades, un planeta y cero egos: el cooperativo moderno por excelencia. Gana la mesa o no gana nadie.</p>
    <div class="datos"><span><i class="dk">jug</i> 2–4</span><span>45′</span><span class="rombos">◆◆◆◇◇</span></div>
    <div class="modo">Cooperativo · 3 expansiones</div>
- </article><article class="ficha rev in">
+ </article><article class="ficha rev in" id="g-c04">
    <div class="top"><span>C·04</span></div>
    <h4>La Tripulación: Mar Profundo</h4>
    <p class="pitch">Misiones submarinas con cartas y casi sin hablar: coordinarse en silencio es el verdadero desafío.</p>
    <div class="datos"><span><i class="dk">jug</i> 2–5</span><span>30′</span><span class="rombos">◆◆◇◇◇</span></div>
    <div class="modo">Cooperativo</div>
- </article><article class="ficha rev in">
+ </article><article class="ficha rev in" id="g-c05">
    <div class="top"><span>C·05</span></div>
    <h4>The Mind</h4>
    <p class="pitch">Sin hablar, sin señas, sin orden de turnos: jugar las cartas en orden por pura telepatía. Magia rara que funciona.</p>
    <div class="datos"><span><i class="dk">jug</i> 2–4</span><span>20′</span><span class="rombos">◆◇◇◇◇</span></div>
    <div class="modo">Cooperativo</div>
- </article><article class="ficha rev in">
+ </article><article class="ficha rev in" id="g-c06">
    <div class="top"><span>C·06</span></div>
    <h4>Oltréé</h4>
    <p class="pitch">Patrullas que salen de la fortaleza, crónicas que se escriben solas: un cuento de aventuras contado entre todos.</p>
@@ -491,7 +575,7 @@ body:not(.js-on) .reset{display:none}
        <div class="salameta">Sala 04 — 19 funciones</div>
      </div>
      <hr class="regla">
-     <div class="afiches"><article class="afiche rev in">
+     <div class="afiches"><article class="afiche rev conTapa in" id="g-e01">
    <svg class="sello" viewBox="0 0 100 100" aria-label="Sello de la casa">
  <circle cx="50" cy="50" r="46" fill="none" stroke="var(--carmesivivo)" stroke-width="2"></circle>
  <circle cx="50" cy="50" r="37" fill="none" stroke="var(--carmesivivo)" stroke-width="1"></circle>
@@ -501,6 +585,8 @@ body:not(.js-on) .reset{display:none}
  </text>
  <text x="50" y="58" text-anchor="middle" font-size="20" fill="var(--carmesivivo)">★</text>
 </svg>
+   <figure class="acover"><img src="https://www.cazagangas.com.ar/images/juegos/-aventureros-al-tren-europa.jpg" alt="Tapa de Aventureros al Tren: Europa" loading="lazy" onerror="this.closest('.acover').classList.add('falla')"><span class="ph"><span class="phl">A</span><span class="phs">✦</span><span class="phc">FUNCIÓN E·01</span></span></figure>
+   <div class="acuerpo">
    <div class="codigo">E·01 · FAVORITO</div>
    <h3>Aventureros al Tren: Europa</h3>
    <div class="logline">Europa entera, vagón por vagón.</div>
@@ -512,8 +598,11 @@ body:not(.js-on) .reset{display:none}
      <span><span class="k">Modo</span>Competitivo</span>
    </div>
    
- </article><article class="afiche rev in">
+   </div>
+ </article><article class="afiche rev conTapa in" id="g-e02">
    
+   <figure class="acover"><img src="https://www.cazagangas.com.ar/images/juegos/blood-rage.jpg" alt="Tapa de Blood Rage" loading="lazy" onerror="this.closest('.acover').classList.add('falla')"><span class="ph"><span class="phl">B</span><span class="phs">✦</span><span class="phc">FUNCIÓN E·02</span></span></figure>
+   <div class="acuerpo">
    <div class="codigo">E·02</div>
    <h3>Blood Rage</h3>
    <div class="logline">El fin del mundo ya está decidido. La gloria, no.</div>
@@ -525,104 +614,125 @@ body:not(.js-on) .reset{display:none}
      <span><span class="k">Modo</span>Competitivo</span>
    </div>
    <span class="expchip">2 expansiones · hasta 5 jugadores</span>
+   </div>
+ </article><article class="afiche rev conTapa in" id="g-e05">
+   
+   <figure class="acover"><img src="https://www.cazagangas.com.ar/images/juegos/ankh-dioses-de-egipto.jpg" alt="Tapa de Ankh: Dioses de Egipto" loading="lazy" onerror="this.closest('.acover').classList.add('falla')"><span class="ph"><span class="phl">A</span><span class="phs">✦</span><span class="phc">FUNCIÓN E·05</span></span></figure>
+   <div class="acuerpo">
+   <div class="codigo">E·05</div>
+   <h3>Ankh: Dioses de Egipto</h3>
+   <div class="logline">Un solo dios queda en pie cuando el Nilo baja.</div>
+   <p class="pitch">Dioses egipcios disputando la fe de los mortales: el que cae en el olvido, desaparece. Miniaturas imponentes, tensión constante.</p>
+   <div class="fichastats">
+     <span><span class="k">Jugadores</span>2–5 jugadores</span>
+     <span><span class="k">Duración</span>90′</span>
+     <span><span class="k">Intensidad</span><span class="rombos">◆◆◆◆◇</span> exigente</span>
+     <span><span class="k">Modo</span>Competitivo</span>
+   </div>
+   
+   </div>
+ </article><article class="afiche rev conTapa in" id="g-e11">
+   
+   <figure class="acover"><img src="https://www.cazagangas.com.ar/images/juegos/cyclades.jpg" alt="Tapa de Cyclades" loading="lazy" onerror="this.closest('.acover').classList.add('falla')"><span class="ph"><span class="phl">C</span><span class="phs">✦</span><span class="phc">FUNCIÓN E·11</span></span></figure>
+   <div class="acuerpo">
+   <div class="codigo">E·11</div>
+   <h3>Cyclades</h3>
+   <div class="logline">Los dioses se compran; la guerra se gana en la puja.</div>
+   <p class="pitch">Pujas por el favor de los dioses griegos para dominar el Egeo. Tenso hasta la última ofrenda a Zeus.</p>
+   <div class="fichastats">
+     <span><span class="k">Jugadores</span>2–5 jugadores</span>
+     <span><span class="k">Duración</span>90′</span>
+     <span><span class="k">Intensidad</span><span class="rombos">◆◆◆◇◇</span> medio</span>
+     <span><span class="k">Modo</span>Competitivo</span>
+   </div>
+   <span class="expchip">+ Titans</span>
+   </div>
  </article></div>
-     <div class="fichas"><article class="ficha rev in">
+     <div class="fichas"><article class="ficha rev in" id="g-e03">
    <div class="top"><span>E·03</span></div>
    <h4>7 Wonders Duel</h4>
    <p class="pitch">El duelo de civilizaciones definitivo para dos: tres caminos a la victoria y cero piedad entre turnos.</p>
    <div class="datos"><span><i class="dk">jug</i> 2</span><span>30′</span><span class="rombos">◆◆◆◇◇</span></div>
    <div class="modo">Competitivo</div>
- </article><article class="ficha rev in">
+ </article><article class="ficha rev in" id="g-e04">
    <div class="top"><span>E·04</span></div>
    <h4>Akropolis</h4>
    <p class="pitch">Construir la polis perfecta apilando losetas en altura. Ágil, hermoso y bastante más filoso de lo que aparenta.</p>
    <div class="datos"><span><i class="dk">jug</i> 2–4</span><span>25–30′</span><span class="rombos">◆◆◇◇◇</span></div>
    <div class="modo">Competitivo · + Athena</div>
- </article><article class="ficha rev in">
-   <div class="top"><span>E·05</span></div>
-   <h4>Ankh: Dioses de Egipto</h4>
-   <p class="pitch">Dioses egipcios disputando la fe de los mortales: el que cae en el olvido, desaparece. Miniaturas imponentes, tensión constante.</p>
-   <div class="datos"><span><i class="dk">jug</i> 2–5</span><span>90′</span><span class="rombos">◆◆◆◆◇</span></div>
-   <div class="modo">Competitivo</div>
- </article><article class="ficha rev in">
+ </article><article class="ficha rev in" id="g-e06">
    <div class="top"><span>E·06</span></div>
    <h4>Azul</h4>
    <p class="pitch">Azulejos portugueses, belleza serena y la maldad silenciosa de dejarle al rival justo las fichas que no quiere.</p>
    <div class="datos"><span><i class="dk">jug</i> 2–4</span><span>30–45′</span><span class="rombos">◆◆◇◇◇</span></div>
    <div class="modo">Competitivo</div>
- </article><article class="ficha rev in">
+ </article><article class="ficha rev in" id="g-e07">
    <div class="top"><span>E·07</span></div>
    <h4>Carcassonne</h4>
    <p class="pitch">Caminos, ciudades y campesinos en la campiña francesa: el clásico de losetas que enseñó a jugar a una generación.</p>
    <div class="datos"><span><i class="dk">jug</i> 2–5</span><span>35′</span><span class="rombos">◆◆◇◇◇</span></div>
    <div class="modo">Competitivo</div>
- </article><article class="ficha rev in">
+ </article><article class="ficha rev in" id="g-e08">
    <div class="top"><span>E·08</span></div>
    <h4>Catan</h4>
    <p class="pitch">Madera por oveja: comercio, dados y la isla que convirtió a millones en jugadores. Acá se negocia en voz alta.</p>
    <div class="datos"><span><i class="dk">jug</i> 3–6</span><span>75–90′</span><span class="rombos">◆◆◆◇◇</span></div>
    <div class="modo">Competitivo · + ampliación 5/6 jugadores</div>
- </article><article class="ficha rev in">
+ </article><article class="ficha rev in" id="g-e09">
    <div class="top"><span>E·09</span></div>
    <h4>Clank!</h4>
    <p class="pitch">Ladrones armando su mazo dentro de la guarida de un dragón: cada ruido puede ser el último. Codicia con consecuencias.</p>
    <div class="datos"><span><i class="dk">jug</i> 2–4</span><span>60′</span><span class="rombos">◆◆◆◇◇</span></div>
    <div class="modo">Competitivo</div>
- </article><article class="ficha rev in">
+ </article><article class="ficha rev in" id="g-e10">
    <div class="top"><span>E·10</span></div>
    <h4>Coffee Rush</h4>
    <p class="pitch">Baristas a contrarreloj: planificar los próximos movimientos y servir los pedidos antes de que la clientela se enfríe.</p>
    <div class="datos"><span><i class="dk">jug</i> 2–4</span><span>30′</span><span class="rombos">◆◆◇◇◇</span></div>
    <div class="modo">Competitivo</div>
- </article><article class="ficha rev in">
-   <div class="top"><span>E·11</span></div>
-   <h4>Cyclades</h4>
-   <p class="pitch">Pujas por el favor de los dioses griegos para dominar el Egeo. Tenso hasta la última ofrenda a Zeus.</p>
-   <div class="datos"><span><i class="dk">jug</i> 2–5</span><span>90′</span><span class="rombos">◆◆◆◇◇</span></div>
-   <div class="modo">Competitivo · + Titans</div>
- </article><article class="ficha rev in">
+ </article><article class="ficha rev in" id="g-e12">
    <div class="top"><span>E·12</span></div>
    <h4>Feed the Kraken</h4>
    <p class="pitch">Marineros leales, piratas y un culto del Kraken disputan el timón del barco. Motín garantizado en mesas grandes.</p>
    <div class="datos"><span><i class="dk">jug</i> 5–11</span><span>45–90′</span><span class="rombos">◆◆◆◇◇</span></div>
    <div class="modo">Roles ocultos</div>
- </article><article class="ficha rev in">
+ </article><article class="ficha rev in" id="g-e13">
    <div class="top"><span>E·13</span></div>
    <h4>Heat</h4>
    <p class="pitch">Fórmula 1 años 60: gestionar el motor, pegarse al rival en la recta y rezar en cada curva. Velocidad de cartón puro.</p>
    <div class="datos"><span><i class="dk">jug</i> 1–6</span><span>60′</span><span class="rombos">◆◆◆◇◇</span></div>
    <div class="modo">Competitivo</div>
- </article><article class="ficha rev in">
+ </article><article class="ficha rev in" id="g-e14">
    <div class="top"><span>E·14</span></div>
    <h4>Quoridor Pac-Man</h4>
    <p class="pitch">El comecocos escapa, los fantasmas levantan muros: Pac-Man convertido en duelo de ingenio exprés.</p>
    <div class="datos"><span><i class="dk">jug</i> 2–5</span><span>20′</span><span class="rombos">◆◇◇◇◇</span></div>
    <div class="modo">Competitivo</div>
- </article><article class="ficha rev in">
+ </article><article class="ficha rev in" id="g-e15">
    <div class="top"><span>E·15</span></div>
    <h4>Quorum</h4>
    <p class="pitch">Senadores romanos repartiéndose provincias a golpe de cartas. Fácil de aprender, picante de dominar.</p>
    <div class="datos"><span><i class="dk">jug</i> 2–4</span><span>45′</span><span class="rombos">◆◆◇◇◇</span></div>
    <div class="modo">Competitivo</div>
- </article><article class="ficha rev in">
+ </article><article class="ficha rev in" id="g-e16">
    <div class="top"><span>E·16</span></div>
    <h4>Survive the Island</h4>
    <p class="pitch">La isla se hunde, los tiburones esperan y acá nadie es amigo de nadie. Maldad pura, carcajadas garantizadas.</p>
    <div class="datos"><span><i class="dk">jug</i> 2–4</span><span>45–60′</span><span class="rombos">◆◆◇◇◇</span></div>
    <div class="modo">Competitivo · + monstruos marinos</div>
- </article><article class="ficha rev in">
+ </article><article class="ficha rev in" id="g-e17">
    <div class="top"><span>E·17</span></div>
    <h4>TEG</h4>
    <p class="pitch">El plan táctico y estratégico de siempre: pactos, dados y traiciones de sobremesa larga. Patrimonio nacional.</p>
    <div class="datos"><span><i class="dk">jug</i> 2–6</span><span>120′+</span><span class="rombos">◆◆◇◇◇</span></div>
    <div class="modo">Competitivo</div>
- </article><article class="ficha rev in">
+ </article><article class="ficha rev in" id="g-e18">
    <div class="top"><span>E·18</span></div>
    <h4>Twilight Struggle</h4>
    <p class="pitch">La Guerra Fría entera sobre una mesa para dos: influencia, crisis y el dedo sobre el botón. El duelo más respetado del hobby.</p>
    <div class="datos"><span><i class="dk">jug</i> 2</span><span>150–180′</span><span class="rombos">◆◆◆◆◆</span></div>
    <div class="modo">Competitivo</div>
- </article><article class="ficha rev in">
+ </article><article class="ficha rev in" id="g-e19">
    <div class="top"><span>E·19</span></div>
    <h4>Wingspan</h4>
    <p class="pitch">Un santuario de aves, ilustraciones bellísimas y un motor que ronronea. Competencia serena para tardes sin apuro.</p>
@@ -630,7 +740,7 @@ body:not(.js-on) .reset{display:none}
    <div class="modo">Competitivo · + aves de América</div>
  </article></div>
      
-     
+     <div class="cita rev in"><p>Esos de estrategia para competir están buenos, los juego, la paso bien, pero no los elijo.</p><div class="firma">J. — jugadora de la casa</div></div>
    </div>
  </section>
  <section class="sala clara " id="sala-r">
@@ -641,7 +751,7 @@ body:not(.js-on) .reset{display:none}
        <div class="salameta">Sala 05 — 26 funciones</div>
      </div>
      <hr class="regla">
-     <div class="afiches"><article class="afiche rev in">
+     <div class="afiches"><article class="afiche rev conTapa in" id="g-r01">
    <svg class="sello" viewBox="0 0 100 100" aria-label="Sello de la casa">
  <circle cx="50" cy="50" r="46" fill="none" stroke="var(--carmesivivo)" stroke-width="2"></circle>
  <circle cx="50" cy="50" r="37" fill="none" stroke="var(--carmesivivo)" stroke-width="1"></circle>
@@ -651,6 +761,8 @@ body:not(.js-on) .reset{display:none}
  </text>
  <text x="50" y="58" text-anchor="middle" font-size="20" fill="var(--carmesivivo)">★</text>
 </svg>
+   <figure class="acover"><img src="https://www.cazagangas.com.ar/images/juegos/say-my-name.jpg" alt="Tapa de Say My Name" loading="lazy" onerror="this.closest('.acover').classList.add('falla')"><span class="ph"><span class="phl">S</span><span class="phs">✦</span><span class="phc">FUNCIÓN R·01</span></span></figure>
+   <div class="acuerpo">
    <div class="codigo">R·01 · FAVORITO</div>
    <h3>Say My Name</h3>
    <div class="logline">Tres rondas, un personaje y cero vergüenza.</div>
@@ -662,7 +774,8 @@ body:not(.js-on) .reset{display:none}
      <span><span class="k">Modo</span>En equipos</span>
    </div>
    <span class="expchip">+ 2 expansiones</span>
- </article><article class="afiche rev in">
+   </div>
+ </article><article class="afiche rev conTapa in" id="g-r02">
    <svg class="sello" viewBox="0 0 100 100" aria-label="Sello de la casa">
  <circle cx="50" cy="50" r="46" fill="none" stroke="var(--carmesivivo)" stroke-width="2"></circle>
  <circle cx="50" cy="50" r="37" fill="none" stroke="var(--carmesivivo)" stroke-width="1"></circle>
@@ -672,6 +785,8 @@ body:not(.js-on) .reset{display:none}
  </text>
  <text x="50" y="58" text-anchor="middle" font-size="20" fill="var(--carmesivivo)">★</text>
 </svg>
+   <figure class="acover"><img src="https://www.cazagangas.com.ar/images/juegos/dixit.jpg" alt="Tapa de Dixit" loading="lazy" onerror="this.closest('.acover').classList.add('falla')"><span class="ph"><span class="phl">D</span><span class="phs">✦</span><span class="phc">FUNCIÓN R·02</span></span></figure>
+   <div class="acuerpo">
    <div class="codigo">R·02 · FAVORITO</div>
    <h3>Dixit</h3>
    <div class="logline">Una imagen, una frase, y la cabeza de los demás.</div>
@@ -683,146 +798,147 @@ body:not(.js-on) .reset{display:none}
      <span><span class="k">Modo</span>Competitivo</span>
    </div>
    <span class="expchip">5 expansiones de cartas</span>
+   </div>
  </article></div>
-     <div class="fichas"><article class="ficha rev in">
+     <div class="fichas"><article class="ficha rev in" id="g-r03">
    <div class="top"><span>R·03</span></div>
    <h4>Código Secreto</h4>
    <p class="pitch">Dos jefes de espías, una grilla de palabras y pistas de una sola palabra. Queda en evidencia cómo razona cada uno.</p>
    <div class="datos"><span><i class="dk">jug</i> 2–8</span><span>15–30′</span><span class="rombos">◆◆◇◇◇</span></div>
    <div class="modo">En equipos</div>
- </article><article class="ficha rev in">
+ </article><article class="ficha rev in" id="g-r04">
    <div class="top"><span>R·04</span></div>
    <h4>Wavelength</h4>
    <p class="pitch">¿Dónde cae «café fuerte» entre suave e intenso? Sintonía mental, debates gloriosos y un dial satisfactorio.</p>
    <div class="datos"><span><i class="dk">jug</i> 2–12</span><span>30–45′</span><span class="rombos">◆◇◇◇◇</span></div>
    <div class="modo">En equipos</div>
- </article><article class="ficha rev in">
+ </article><article class="ficha rev in" id="g-r05">
    <div class="top"><span>R·05</span></div>
    <h4>El Melómano</h4>
    <p class="pitch">Tararear, cantar mal y adivinar igual: el karaoke convertido en juego de mesa. Favorito absoluto de las reuniones.</p>
    <div class="datos"><span>4+ en equipos</span><span>30–45′</span><span class="rombos">◆◇◇◇◇</span></div>
    <div class="modo">En equipos</div>
- </article><article class="ficha rev in">
+ </article><article class="ficha rev in" id="g-r06">
    <div class="top"><span>R·06</span></div>
    <h4>Unánimo Party</h4>
    <p class="pitch">Escribir lo mismo que los demás sin ponerse de acuerdo: coincidir nunca fue tan gracioso.</p>
    <div class="datos"><span><i class="dk">jug</i> 3–12</span><span>20′</span><span class="rombos">◆◇◇◇◇</span></div>
    <div class="modo">Competitivo</div>
- </article><article class="ficha rev in">
+ </article><article class="ficha rev in" id="g-r07">
    <div class="top"><span>R·07</span></div>
    <h4>Tutti Frutti</h4>
    <p class="pitch">Lápiz, papel y una letra: el clásico escolar elevado a deporte de sobremesa. ¡Basta para mí, basta para todos!</p>
    <div class="datos"><span><i class="dk">jug</i> 2–8</span><span>20′</span><span class="rombos">◆◇◇◇◇</span></div>
    <div class="modo">Competitivo</div>
- </article><article class="ficha rev in">
+ </article><article class="ficha rev in" id="g-r08">
    <div class="top"><span>R·08</span></div>
    <h4>Dígalo con Memes</h4>
    <p class="pitch">Combinar memes con situaciones: el humor del grupo de WhatsApp, impreso en cartas.</p>
    <div class="datos"><span><i class="dk">jug</i> 3–8</span><span>30′</span><span class="rombos">◆◇◇◇◇</span></div>
    <div class="modo">Competitivo</div>
- </article><article class="ficha rev in">
+ </article><article class="ficha rev in" id="g-r09">
    <div class="top"><span>R·09</span></div>
    <h4>Taco Gato Cabra Queso Pizza</h4>
    <p class="pitch">Decir, tirar y manotear la pila a tiempo: caos, reflejos y manos apiladas. Imposible jugar una sola.</p>
    <div class="datos"><span><i class="dk">jug</i> 2–8</span><span>15′</span><span class="rombos">◆◇◇◇◇</span></div>
    <div class="modo">Competitivo</div>
- </article><article class="ficha rev in">
+ </article><article class="ficha rev in" id="g-r10">
    <div class="top"><span>R·10</span></div>
    <h4>Ghost Blitz</h4>
    <p class="pitch">Cinco objetos, una carta y manotazos: reflejos puros para reírse en quince minutos.</p>
    <div class="datos"><span><i class="dk">jug</i> 2–8</span><span>15′</span><span class="rombos">◆◇◇◇◇</span></div>
    <div class="modo">Competitivo</div>
- </article><article class="ficha rev in">
+ </article><article class="ficha rev in" id="g-r11">
    <div class="top"><span>R·11</span></div>
    <h4>Polilla Tramposa</h4>
    <p class="pitch">Acá hacer trampa es la regla: esconder cartas en la manga, bajo la mesa o donde se pueda — sin que el guardián vea.</p>
    <div class="datos"><span><i class="dk">jug</i> 3–5</span><span>20′</span><span class="rombos">◆◇◇◇◇</span></div>
    <div class="modo">Competitivo</div>
- </article><article class="ficha rev in">
+ </article><article class="ficha rev in" id="g-r12">
    <div class="top"><span>R·12</span></div>
    <h4>Kaker Laken Poker</h4>
    <p class="pitch">¿Es una cucaracha o te están vendiendo humo? Bluff destilado con bichos: mentir mirando a los ojos.</p>
    <div class="datos"><span><i class="dk">jug</i> 2–6</span><span>20′</span><span class="rombos">◆◇◇◇◇</span></div>
    <div class="modo">Competitivo</div>
- </article><article class="ficha rev in">
+ </article><article class="ficha rev in" id="g-r13">
    <div class="top"><span>R·13</span></div>
    <h4>Virus!</h4>
    <p class="pitch">Infectar, vacunar y robar órganos ajenos: el filler que nunca falla, con maldad médica incluida.</p>
    <div class="datos"><span><i class="dk">jug</i> 2–6</span><span>20′</span><span class="rombos">◆◇◇◇◇</span></div>
    <div class="modo">Competitivo · 2 expansiones</div>
- </article><article class="ficha rev in">
+ </article><article class="ficha rev in" id="g-r14">
    <div class="top"><span>R·14</span></div>
    <h4>Flip 7</h4>
    <p class="pitch">¿Una carta más o me planto? Presión pura para toda la mesa: el 21 reinventado y al palo.</p>
    <div class="datos"><span>3 a 18</span><span>20′</span><span class="rombos">◆◇◇◇◇</span></div>
    <div class="modo">Competitivo</div>
- </article><article class="ficha rev in">
+ </article><article class="ficha rev in" id="g-r15">
    <div class="top"><span>R·15</span></div>
    <h4>La Gran Siete</h4>
    <p class="pitch">De la familia del UNO pero con mañas propias: rápido, criollo y con revancha automática.</p>
    <div class="datos"><span><i class="dk">jug</i> 2–8</span><span>15–20′</span><span class="rombos">◆◇◇◇◇</span></div>
    <div class="modo">Competitivo</div>
- </article><article class="ficha rev in">
+ </article><article class="ficha rev in" id="g-r16">
    <div class="top"><span>R·16</span></div>
    <h4>Kluster</h4>
    <p class="pitch">Imanes que se atraen cuando menos conviene: pulso firme o se arma el racimo y perdiste.</p>
    <div class="datos"><span><i class="dk">jug</i> 1–4</span><span>10′</span><span class="rombos">◆◇◇◇◇</span></div>
    <div class="modo">Competitivo</div>
- </article><article class="ficha rev in">
+ </article><article class="ficha rev in" id="g-r17">
    <div class="top"><span>R·17</span></div>
    <h4>Cobra Shanghai</h4>
    <p class="pitch">Fichas estilo mahjong y pulso de cirujano: destreza pura para picar entre rondas de otra cosa.</p>
    <div class="datos"><span><i class="dk">jug</i> 2–6</span><span>15′</span><span class="rombos">◆◇◇◇◇</span></div>
    <div class="modo">Competitivo</div>
- </article><article class="ficha rev in">
+ </article><article class="ficha rev in" id="g-r18">
    <div class="top"><span>R·18</span></div>
    <h4>Hombres Lobo de Castronegro</h4>
    <p class="pitch">La aldea duerme, los lobos no: acusaciones, teatro y linchamientos amistosos para mesas multitudinarias.</p>
    <div class="datos"><span>8 a 18</span><span>30′</span><span class="rombos">◆◇◇◇◇</span></div>
    <div class="modo">Roles ocultos</div>
- </article><article class="ficha rev in">
+ </article><article class="ficha rev in" id="g-r19">
    <div class="top"><span>R·19</span></div>
    <h4>Alfamanía</h4>
    <p class="pitch">Letras contra reloj: armar palabras antes que el resto. Gimnasia verbal de bolsillo.</p>
    <div class="datos"><span><i class="dk">jug</i> 2–6</span><span>20′</span><span class="rombos">◆◇◇◇◇</span></div>
    <div class="modo">Competitivo</div>
- </article><article class="ficha rev in">
+ </article><article class="ficha rev in" id="g-r20">
    <div class="top"><span>R·20</span></div>
    <h4>Remando en Dulce de Leche</h4>
    <p class="pitch">Argentinidad al palo: preguntas y desafíos bien de acá, remando hasta la meta entre risas.</p>
    <div class="datos"><span><i class="dk">jug</i> 3–8</span><span>45′</span><span class="rombos">◆◇◇◇◇</span></div>
    <div class="modo">Competitivo</div>
- </article><article class="ficha rev in">
+ </article><article class="ficha rev in" id="g-r21">
    <div class="top"><span>R·21</span></div>
    <h4>Trio</h4>
    <p class="pitch">Memoria y deducción mínimas, adicción máxima: encontrá el trío antes que nadie. Engaña con lo simple.</p>
    <div class="datos"><span><i class="dk">jug</i> 3–6</span><span>15′</span><span class="rombos">◆◇◇◇◇</span></div>
    <div class="modo">Competitivo</div>
- </article><article class="ficha rev in">
+ </article><article class="ficha rev in" id="g-r22">
    <div class="top"><span>R·22</span></div>
    <h4>El Camarero</h4>
    <p class="pitch">Tomá el pedido de toda la mesa… y servilo de memoria. Un mozo bajo presión vale por diez.</p>
    <div class="datos"><span><i class="dk">jug</i> 2–6</span><span>20′</span><span class="rombos">◆◇◇◇◇</span></div>
    <div class="modo">Competitivo</div>
- </article><article class="ficha rev in">
+ </article><article class="ficha rev in" id="g-r23">
    <div class="top"><span>R·23</span></div>
    <h4>Love Letter</h4>
    <p class="pitch">Dieciséis cartas y deducción exprés para hacer llegar la carta a la princesa. Elegancia de bolsillo.</p>
    <div class="datos"><span><i class="dk">jug</i> 2–4</span><span>15′</span><span class="rombos">◆◇◇◇◇</span></div>
    <div class="modo">Competitivo</div>
- </article><article class="ficha rev in">
+ </article><article class="ficha rev in" id="g-r24">
    <div class="top"><span>R·24</span></div>
    <h4>La Dama y el Tigre</h4>
    <p class="pitch">Cinco microjuegos de engaño en una caja chiquita: ¿detrás de la puerta hay dama o tigre?</p>
    <div class="datos"><span><i class="dk">jug</i> 2–4</span><span>15′</span><span class="rombos">◆◇◇◇◇</span></div>
    <div class="modo">Competitivo</div>
- </article><article class="ficha rev in">
+ </article><article class="ficha rev in" id="g-r25">
    <div class="top"><span>R·25</span></div>
    <h4>Quickstop</h4>
    <p class="pitch">Cinco letras en mano y consignas delirantes: respondé más rápido que todos o cargá con tus cartas.</p>
    <div class="datos"><span><i class="dk">jug</i> 2–7</span><span>15–30′</span><span class="rombos">◆◇◇◇◇</span></div>
    <div class="modo">Competitivo</div>
- </article><article class="ficha rev in">
+ </article><article class="ficha rev in" id="g-r26">
    <div class="top"><span>R·26</span></div>
    <h4>Caranchos</h4>
    <p class="pitch">Humor negro criollo: la herencia de la abuela no se reparte sola. Manipular a la familia jamás fue tan divertido.</p>
@@ -864,61 +980,61 @@ body:not(.js-on) .reset{display:none}
      </div>
      <hr class="regla">
      
-     <div class="fichas"><article class="ficha rev in">
+     <div class="fichas"><article class="ficha rev in" id="g-k01">
    <div class="top"><span>K·01</span></div>
    <h4>Monopoly</h4>
    <p class="pitch">Comprar, cobrar y fundir amistades con hoteles en la avenida. El de siempre, con todas las de la ley.</p>
    <div class="datos"><span><i class="dk">jug</i> 2–8</span><span>90′+</span><span class="rombos">◆◇◇◇◇</span></div>
    <div class="modo">Competitivo</div>
- </article><article class="ficha rev in">
+ </article><article class="ficha rev in" id="g-k02">
    <div class="top"><span>K·02</span></div>
    <h4>UNO</h4>
    <p class="pitch">+4, reversa y gritar a tiempo: el idioma universal de las cartas.</p>
    <div class="datos"><span><i class="dk">jug</i> 2–10</span><span>30′</span><span class="rombos">◆◇◇◇◇</span></div>
    <div class="modo">Competitivo</div>
- </article><article class="ficha rev in">
+ </article><article class="ficha rev in" id="g-k03">
    <div class="top"><span>K·03</span></div>
    <h4>Dominó</h4>
    <p class="pitch">Fichas, cadena y golpe seco en la mesa: clásico de patio y de sobremesa.</p>
    <div class="datos"><span><i class="dk">jug</i> 2–4</span><span>20′</span><span class="rombos">◆◇◇◇◇</span></div>
    <div class="modo">Competitivo</div>
- </article><article class="ficha rev in">
+ </article><article class="ficha rev in" id="g-k04">
    <div class="top"><span>K·04</span></div>
    <h4>Generala</h4>
    <p class="pitch">Cinco dados y un cubilete: servida vale doble y el que canta primero, manda.</p>
    <div class="datos"><span><i class="dk">jug</i> 2–6</span><span>20′</span><span class="rombos">◆◇◇◇◇</span></div>
    <div class="modo">Competitivo</div>
- </article><article class="ficha rev in">
+ </article><article class="ficha rev in" id="g-k05">
    <div class="top"><span>K·05</span></div>
    <h4>Naipes Españoles</h4>
    <p class="pitch">Truco, escoba, chinchón: la baraja que nunca falta. Quiero retruco… y la mentira está permitida.</p>
    <div class="datos"><span><i class="dk">jug</i> 2–6</span><span>a convenir</span><span class="rombos">◆◇◇◇◇</span></div>
    <div class="modo">Competitivo</div>
- </article><article class="ficha rev in">
+ </article><article class="ficha rev in" id="g-k06">
    <div class="top"><span>K·06</span></div>
    <h4>Batalla Naval</h4>
    <p class="pitch">B-7: agua. El duelo de coordenadas de toda la vida, hundido a hundido.</p>
    <div class="datos"><span><i class="dk">jug</i> 2</span><span>20′</span><span class="rombos">◆◇◇◇◇</span></div>
    <div class="modo">Competitivo</div>
- </article><article class="ficha rev in">
+ </article><article class="ficha rev in" id="g-k07">
    <div class="top"><span>K·07</span></div>
    <h4>4 en Línea</h4>
    <p class="pitch">Cuatro fichas alineadas y a otra cosa: duelos de cinco minutos, revanchas infinitas.</p>
    <div class="datos"><span><i class="dk">jug</i> 2</span><span>10′</span><span class="rombos">◆◇◇◇◇</span></div>
    <div class="modo">Competitivo</div>
- </article><article class="ficha rev in">
+ </article><article class="ficha rev in" id="g-k08">
    <div class="top"><span>K·08</span></div>
    <h4>Carrera de Mente</h4>
    <p class="pitch">Preguntas y respuestas de la vieja escuela, categoría por categoría.</p>
    <div class="datos"><span><i class="dk">jug</i> 2–6</span><span>45′</span><span class="rombos">◆◇◇◇◇</span></div>
    <div class="modo">En equipos</div>
- </article><article class="ficha rev in">
+ </article><article class="ficha rev in" id="g-k09">
    <div class="top"><span>K·09</span></div>
    <h4>El Erudito</h4>
    <p class="pitch">Trivia de cultura general para medir sabihondos con elegancia.</p>
    <div class="datos"><span><i class="dk">jug</i> 2–6</span><span>30′</span><span class="rombos">◆◇◇◇◇</span></div>
    <div class="modo">Competitivo</div>
- </article><article class="ficha rev in">
+ </article><article class="ficha rev in" id="g-k10">
    <div class="top"><span>K·10</span></div>
    <h4>El Ilustrado</h4>
    <p class="pitch">Trivia con ojo artístico: para mesas que distinguen un Van Gogh de un Monet.</p>
@@ -926,7 +1042,7 @@ body:not(.js-on) .reset{display:none}
    <div class="modo">Competitivo</div>
  </article></div>
      
-     
+     <div class="cita rev in"><p>Es un clásico. Dependés mucho de los dados, pero un clásico es un clásico.</p><div class="firma">J. — sobre el TEG</div></div>
    </div>
  </section></main>
 
@@ -939,6 +1055,7 @@ body:not(.js-on) .reset{display:none}
         <div class="sub">Todas las funciones, un solo listado — y una boletería para decidir rápido.</div>
       </div>
       <div class="salameta mono" id="metacartelera">81 juegos · 75 entradas — sagas agrupadas</div>
+      <p class="pista">Tocá una función para ir a su ficha · tocá los títulos de columna para ordenar.</p>
     </div>
 
     <div class="boleteria rev in" role="group" aria-label="Boletería: filtros del catálogo">
@@ -952,7 +1069,7 @@ body:not(.js-on) .reset{display:none}
         </div>
         <div class="fgrupo">
           <div class="flabel">¿Cuánto tiempo tienen?</div>
-          <div class="chips" id="f-tiempo"><button class="chip" type="button" data-v="20" aria-pressed="false">hasta 20′</button><button class="chip" type="button" data-v="45" aria-pressed="false">20–45′</button><button class="chip" type="button" data-v="6090" aria-pressed="false">45–90′</button><button class="chip" type="button" data-v="91" aria-pressed="false">más de 90′</button></div>
+          <div class="chips" id="f-tiempo"><button class="chip" type="button" data-v="20" aria-pressed="false">hasta 20′</button><button class="chip" type="button" data-v="45" aria-pressed="false">hasta 45′</button><button class="chip" type="button" data-v="90" aria-pressed="false">hasta 90′</button><button class="chip" type="button" data-v="999" aria-pressed="false">sin límite</button></div>
         </div>
         <div class="fgrupo">
           <div class="flabel">¿Qué ambiente buscan?</div>
@@ -966,532 +1083,532 @@ body:not(.js-on) .reset{display:none}
       </div>
     </div>
 
-    <div class="programa" id="programa" aria-live="polite"><div class="fila head"><span>Código</span><span>Función</span><span>Jugadores</span><span>Tiempo</span><span class="col-int">Intensidad</span><span class="col-modo">Modo</span></div><div class="fila" data-i="0">
+    <div class="programa" id="programa" aria-live="polite"><div class="fila head"><span class="th" data-sort="code">Código<i class="ar"></i></span><span class="th" data-sort="nom">Función<i class="ar"></i></span><span class="th" data-sort="jug">Jugadores<i class="ar"></i></span><span class="th" data-sort="tb">Tiempo<i class="ar"></i></span><span class="th col-int" data-sort="int">Intensidad<i class="ar"></i></span><span class="th col-modo" data-sort="modo">Modo<i class="ar"></i></span></div><a class="fila" data-i="0" href="#g-t01">
    <span class="c">T·01</span>
    <span class="nom"><span class="fav">★ </span>Final Girl<small>Terror · 15 películas en el archivo</small></span>
-   <span class="d">1 jugador</span>
+   <span class="d">1–2 jugadores</span>
    <span class="d">30–60′</span>
    <span class="d col-int rombos">◆◆◆◆◇</span>
    <span class="m col-modo">Solitario</span>
- </div><div class="fila" data-i="1">
+ </a><a class="fila alt" data-i="1" href="#g-t02">
    <span class="c">T·02</span>
    <span class="nom">Nemesis: Retaliation<small>Terror</small></span>
    <span class="d">1–5</span>
    <span class="d">90–180′</span>
    <span class="d col-int rombos">◆◆◆◆◆</span>
    <span class="m col-modo">Cooperativo</span>
- </div><div class="fila" data-i="2">
+ </a><a class="fila" data-i="2" href="#g-t03">
    <span class="c">T·03</span>
    <span class="nom">Cthulhu: Death May Die<small>Terror</small></span>
    <span class="d">1–5</span>
    <span class="d">90′</span>
    <span class="d col-int rombos">◆◆◆◇◇</span>
    <span class="m col-modo">Cooperativo</span>
- </div><div class="fila" data-i="3">
+ </a><a class="fila alt" data-i="3" href="#g-t04">
    <span class="c">T·04</span>
    <span class="nom">Las Mansiones de la Locura<small>Terror</small></span>
-   <span class="d">1–5</span>
+   <span class="d">1–5 jugadores</span>
    <span class="d">120–180′</span>
    <span class="d col-int rombos">◆◆◆◆◇</span>
    <span class="m col-modo">Cooperativo</span>
- </div><div class="fila" data-i="4">
+ </a><a class="fila" data-i="4" href="#g-t05">
    <span class="c">T·05</span>
    <span class="nom">The Night Cage<small>Terror</small></span>
    <span class="d">1–5</span>
    <span class="d">45′</span>
    <span class="d col-int rombos">◆◆◆◇◇</span>
    <span class="m col-modo">Cooperativo</span>
- </div><div class="fila" data-i="5">
+ </a><a class="fila alt" data-i="5" href="#g-t06">
    <span class="c">T·06</span>
    <span class="nom">Terrorscape<small>Terror</small></span>
-   <span class="d">1–4</span>
+   <span class="d">1–4 jugadores</span>
    <span class="d">30–45′</span>
    <span class="d col-int rombos">◆◆◆◇◇</span>
    <span class="m col-modo">Roles ocultos</span>
- </div><div class="fila" data-i="6">
+ </a><a class="fila" data-i="6" href="#g-t07">
    <span class="c">T·07</span>
    <span class="nom">Zombicide 2ª ed.<small>Terror</small></span>
    <span class="d">1–6</span>
    <span class="d">60–90′</span>
    <span class="d col-int rombos">◆◆◆◇◇</span>
    <span class="m col-modo">Cooperativo</span>
- </div><div class="fila" data-i="7">
+ </a><a class="fila alt" data-i="7" href="#g-t08">
    <span class="c">T·08</span>
    <span class="nom">Betrayal at House on the Hill<small>Terror</small></span>
    <span class="d">3–6</span>
    <span class="d">60′</span>
    <span class="d col-int rombos">◆◆◆◇◇</span>
    <span class="m col-modo">Roles ocultos</span>
- </div><div class="fila" data-i="8">
+ </a><a class="fila" data-i="8" href="#g-t09">
    <span class="c">T·09</span>
    <span class="nom">This War of Mine<small>Terror</small></span>
    <span class="d">1–6</span>
    <span class="d">120′+</span>
    <span class="d col-int rombos">◆◆◆◆◇</span>
    <span class="m col-modo">Cooperativo</span>
- </div><div class="fila" data-i="9">
+ </a><a class="fila alt" data-i="9" href="#g-d01">
    <span class="c">D·01</span>
    <span class="nom"><span class="fav">★ </span>Sherlock Holmes: Detective Asesor<small>Detectives · 5 cajas de casos</small></span>
    <span class="d">1–8</span>
    <span class="d">90–120′</span>
    <span class="d col-int rombos">◆◆◆◆◇</span>
    <span class="m col-modo">Cooperativo</span>
- </div><div class="fila" data-i="10">
+ </a><a class="fila" data-i="10" href="#g-d02">
    <span class="c">D·02</span>
    <span class="nom">Arkham Horror: El Juego de Cartas<small>Detectives</small></span>
    <span class="d">1–2</span>
    <span class="d">60–120′</span>
    <span class="d col-int rombos">◆◆◆◆◆</span>
    <span class="m col-modo">Cooperativo</span>
- </div><div class="fila" data-i="11">
+ </a><a class="fila alt" data-i="11" href="#g-d03">
    <span class="c">D·03</span>
    <span class="nom">Mysterium<small>Detectives</small></span>
    <span class="d">2–7</span>
    <span class="d">45′</span>
    <span class="d col-int rombos">◆◆◇◇◇</span>
    <span class="m col-modo">Cooperativo</span>
- </div><div class="fila" data-i="12">
+ </a><a class="fila" data-i="12" href="#g-d04">
    <span class="c">D·04</span>
    <span class="nom">Misterio<small>Detectives</small></span>
    <span class="d">3–6</span>
    <span class="d">45′</span>
    <span class="d col-int rombos">◆◇◇◇◇</span>
    <span class="m col-modo">Competitivo</span>
- </div><div class="fila" data-i="13">
+ </a><a class="fila alt" data-i="13" href="#g-c01">
    <span class="c">C·01</span>
    <span class="nom"><span class="fav">★ </span>Paleo<small>Cooperativos · 4 expansiones</small></span>
    <span class="d">2–4</span>
    <span class="d">45–60′</span>
    <span class="d col-int rombos">◆◆◆◆◇</span>
    <span class="m col-modo">Cooperativo</span>
- </div><div class="fila" data-i="14">
+ </a><a class="fila" data-i="14" href="#g-c02">
    <span class="c">C·02</span>
    <span class="nom">Sleeping Gods<small>Cooperativos · 2 expansiones</small></span>
    <span class="d">1–4</span>
    <span class="d">60–120′ por sesión</span>
    <span class="d col-int rombos">◆◆◆◆◆</span>
    <span class="m col-modo">Cooperativo</span>
- </div><div class="fila" data-i="15">
+ </a><a class="fila alt" data-i="15" href="#g-c03">
    <span class="c">C·03</span>
    <span class="nom"><span class="fav">★ </span>Pandemic<small>Cooperativos · 3 expansiones</small></span>
    <span class="d">2–4</span>
    <span class="d">45′</span>
    <span class="d col-int rombos">◆◆◆◇◇</span>
    <span class="m col-modo">Cooperativo</span>
- </div><div class="fila" data-i="16">
+ </a><a class="fila" data-i="16" href="#g-c04">
    <span class="c">C·04</span>
    <span class="nom">La Tripulación: Mar Profundo<small>Cooperativos</small></span>
    <span class="d">2–5</span>
    <span class="d">30′</span>
    <span class="d col-int rombos">◆◆◇◇◇</span>
    <span class="m col-modo">Cooperativo</span>
- </div><div class="fila" data-i="17">
+ </a><a class="fila alt" data-i="17" href="#g-c05">
    <span class="c">C·05</span>
    <span class="nom">The Mind<small>Cooperativos</small></span>
    <span class="d">2–4</span>
    <span class="d">20′</span>
    <span class="d col-int rombos">◆◇◇◇◇</span>
    <span class="m col-modo">Cooperativo</span>
- </div><div class="fila" data-i="18">
+ </a><a class="fila" data-i="18" href="#g-c06">
    <span class="c">C·06</span>
    <span class="nom">Oltréé<small>Cooperativos</small></span>
    <span class="d">2–4</span>
    <span class="d">60–90′</span>
    <span class="d col-int rombos">◆◆◆◇◇</span>
    <span class="m col-modo">Cooperativo</span>
- </div><div class="fila" data-i="19">
+ </a><a class="fila alt" data-i="19" href="#g-e01">
    <span class="c">E·01</span>
    <span class="nom"><span class="fav">★ </span>Aventureros al Tren: Europa<small>Estrategia</small></span>
    <span class="d">2–5</span>
    <span class="d">45–60′</span>
    <span class="d col-int rombos">◆◆◇◇◇</span>
    <span class="m col-modo">Competitivo</span>
- </div><div class="fila" data-i="20">
+ </a><a class="fila" data-i="20" href="#g-e02">
    <span class="c">E·02</span>
    <span class="nom">Blood Rage<small>Estrategia · 2 expansiones · hasta 5 jugadores</small></span>
    <span class="d">2–5</span>
    <span class="d">60–90′</span>
    <span class="d col-int rombos">◆◆◆◆◇</span>
    <span class="m col-modo">Competitivo</span>
- </div><div class="fila" data-i="21">
+ </a><a class="fila alt" data-i="21" href="#g-e03">
    <span class="c">E·03</span>
    <span class="nom">7 Wonders Duel<small>Estrategia</small></span>
    <span class="d">2</span>
    <span class="d">30′</span>
    <span class="d col-int rombos">◆◆◆◇◇</span>
    <span class="m col-modo">Competitivo</span>
- </div><div class="fila" data-i="22">
+ </a><a class="fila" data-i="22" href="#g-e04">
    <span class="c">E·04</span>
    <span class="nom">Akropolis<small>Estrategia · + Athena</small></span>
    <span class="d">2–4</span>
    <span class="d">25–30′</span>
    <span class="d col-int rombos">◆◆◇◇◇</span>
    <span class="m col-modo">Competitivo</span>
- </div><div class="fila" data-i="23">
+ </a><a class="fila alt" data-i="23" href="#g-e05">
    <span class="c">E·05</span>
    <span class="nom">Ankh: Dioses de Egipto<small>Estrategia</small></span>
-   <span class="d">2–5</span>
+   <span class="d">2–5 jugadores</span>
    <span class="d">90′</span>
    <span class="d col-int rombos">◆◆◆◆◇</span>
    <span class="m col-modo">Competitivo</span>
- </div><div class="fila" data-i="24">
+ </a><a class="fila" data-i="24" href="#g-e06">
    <span class="c">E·06</span>
    <span class="nom">Azul<small>Estrategia</small></span>
    <span class="d">2–4</span>
    <span class="d">30–45′</span>
    <span class="d col-int rombos">◆◆◇◇◇</span>
    <span class="m col-modo">Competitivo</span>
- </div><div class="fila" data-i="25">
+ </a><a class="fila alt" data-i="25" href="#g-e07">
    <span class="c">E·07</span>
    <span class="nom">Carcassonne<small>Estrategia</small></span>
    <span class="d">2–5</span>
    <span class="d">35′</span>
    <span class="d col-int rombos">◆◆◇◇◇</span>
    <span class="m col-modo">Competitivo</span>
- </div><div class="fila" data-i="26">
+ </a><a class="fila" data-i="26" href="#g-e08">
    <span class="c">E·08</span>
    <span class="nom">Catan<small>Estrategia · + ampliación 5/6 jugadores</small></span>
    <span class="d">3–6</span>
    <span class="d">75–90′</span>
    <span class="d col-int rombos">◆◆◆◇◇</span>
    <span class="m col-modo">Competitivo</span>
- </div><div class="fila" data-i="27">
+ </a><a class="fila alt" data-i="27" href="#g-e09">
    <span class="c">E·09</span>
    <span class="nom">Clank!<small>Estrategia</small></span>
    <span class="d">2–4</span>
    <span class="d">60′</span>
    <span class="d col-int rombos">◆◆◆◇◇</span>
    <span class="m col-modo">Competitivo</span>
- </div><div class="fila" data-i="28">
+ </a><a class="fila" data-i="28" href="#g-e10">
    <span class="c">E·10</span>
    <span class="nom">Coffee Rush<small>Estrategia</small></span>
    <span class="d">2–4</span>
    <span class="d">30′</span>
    <span class="d col-int rombos">◆◆◇◇◇</span>
    <span class="m col-modo">Competitivo</span>
- </div><div class="fila" data-i="29">
+ </a><a class="fila alt" data-i="29" href="#g-e11">
    <span class="c">E·11</span>
    <span class="nom">Cyclades<small>Estrategia · + Titans</small></span>
-   <span class="d">2–5</span>
+   <span class="d">2–5 jugadores</span>
    <span class="d">90′</span>
    <span class="d col-int rombos">◆◆◆◇◇</span>
    <span class="m col-modo">Competitivo</span>
- </div><div class="fila" data-i="30">
+ </a><a class="fila" data-i="30" href="#g-e12">
    <span class="c">E·12</span>
    <span class="nom">Feed the Kraken<small>Estrategia</small></span>
    <span class="d">5–11</span>
    <span class="d">45–90′</span>
    <span class="d col-int rombos">◆◆◆◇◇</span>
    <span class="m col-modo">Roles ocultos</span>
- </div><div class="fila" data-i="31">
+ </a><a class="fila alt" data-i="31" href="#g-e13">
    <span class="c">E·13</span>
    <span class="nom">Heat<small>Estrategia</small></span>
    <span class="d">1–6</span>
    <span class="d">60′</span>
    <span class="d col-int rombos">◆◆◆◇◇</span>
    <span class="m col-modo">Competitivo</span>
- </div><div class="fila" data-i="32">
+ </a><a class="fila" data-i="32" href="#g-e14">
    <span class="c">E·14</span>
    <span class="nom">Quoridor Pac-Man<small>Estrategia</small></span>
    <span class="d">2–5</span>
    <span class="d">20′</span>
    <span class="d col-int rombos">◆◇◇◇◇</span>
    <span class="m col-modo">Competitivo</span>
- </div><div class="fila" data-i="33">
+ </a><a class="fila alt" data-i="33" href="#g-e15">
    <span class="c">E·15</span>
    <span class="nom">Quorum<small>Estrategia</small></span>
    <span class="d">2–4</span>
    <span class="d">45′</span>
    <span class="d col-int rombos">◆◆◇◇◇</span>
    <span class="m col-modo">Competitivo</span>
- </div><div class="fila" data-i="34">
+ </a><a class="fila" data-i="34" href="#g-e16">
    <span class="c">E·16</span>
    <span class="nom">Survive the Island<small>Estrategia · + monstruos marinos</small></span>
    <span class="d">2–4</span>
    <span class="d">45–60′</span>
    <span class="d col-int rombos">◆◆◇◇◇</span>
    <span class="m col-modo">Competitivo</span>
- </div><div class="fila" data-i="35">
+ </a><a class="fila alt" data-i="35" href="#g-e17">
    <span class="c">E·17</span>
    <span class="nom">TEG<small>Estrategia</small></span>
    <span class="d">2–6</span>
    <span class="d">120′+</span>
    <span class="d col-int rombos">◆◆◇◇◇</span>
    <span class="m col-modo">Competitivo</span>
- </div><div class="fila" data-i="36">
+ </a><a class="fila" data-i="36" href="#g-e18">
    <span class="c">E·18</span>
    <span class="nom">Twilight Struggle<small>Estrategia</small></span>
    <span class="d">2</span>
    <span class="d">150–180′</span>
    <span class="d col-int rombos">◆◆◆◆◆</span>
    <span class="m col-modo">Competitivo</span>
- </div><div class="fila" data-i="37">
+ </a><a class="fila alt" data-i="37" href="#g-e19">
    <span class="c">E·19</span>
    <span class="nom">Wingspan<small>Estrategia · + aves de América</small></span>
    <span class="d">1–5</span>
    <span class="d">60–75′</span>
    <span class="d col-int rombos">◆◆◆◇◇</span>
    <span class="m col-modo">Competitivo</span>
- </div><div class="fila" data-i="38">
+ </a><a class="fila" data-i="38" href="#g-r01">
    <span class="c">R·01</span>
    <span class="nom"><span class="fav">★ </span>Say My Name<small>Fiesta · + 2 expansiones</small></span>
    <span class="d">4+ en equipos</span>
    <span class="d">30–45′</span>
    <span class="d col-int rombos">◆◇◇◇◇</span>
    <span class="m col-modo">En equipos</span>
- </div><div class="fila" data-i="39">
+ </a><a class="fila alt" data-i="39" href="#g-r02">
    <span class="c">R·02</span>
    <span class="nom"><span class="fav">★ </span>Dixit<small>Fiesta · 5 expansiones de cartas</small></span>
    <span class="d">3–6</span>
    <span class="d">30′</span>
    <span class="d col-int rombos">◆◇◇◇◇</span>
    <span class="m col-modo">Competitivo</span>
- </div><div class="fila" data-i="40">
+ </a><a class="fila" data-i="40" href="#g-r03">
    <span class="c">R·03</span>
    <span class="nom">Código Secreto<small>Fiesta</small></span>
    <span class="d">2–8</span>
    <span class="d">15–30′</span>
    <span class="d col-int rombos">◆◆◇◇◇</span>
    <span class="m col-modo">En equipos</span>
- </div><div class="fila" data-i="41">
+ </a><a class="fila alt" data-i="41" href="#g-r04">
    <span class="c">R·04</span>
    <span class="nom">Wavelength<small>Fiesta</small></span>
    <span class="d">2–12</span>
    <span class="d">30–45′</span>
    <span class="d col-int rombos">◆◇◇◇◇</span>
    <span class="m col-modo">En equipos</span>
- </div><div class="fila" data-i="42">
+ </a><a class="fila" data-i="42" href="#g-r05">
    <span class="c">R·05</span>
    <span class="nom">El Melómano<small>Fiesta</small></span>
    <span class="d">4+ en equipos</span>
    <span class="d">30–45′</span>
    <span class="d col-int rombos">◆◇◇◇◇</span>
    <span class="m col-modo">En equipos</span>
- </div><div class="fila" data-i="43">
+ </a><a class="fila alt" data-i="43" href="#g-r06">
    <span class="c">R·06</span>
    <span class="nom">Unánimo Party<small>Fiesta</small></span>
    <span class="d">3–12</span>
    <span class="d">20′</span>
    <span class="d col-int rombos">◆◇◇◇◇</span>
    <span class="m col-modo">Competitivo</span>
- </div><div class="fila" data-i="44">
+ </a><a class="fila" data-i="44" href="#g-r07">
    <span class="c">R·07</span>
    <span class="nom">Tutti Frutti<small>Fiesta</small></span>
    <span class="d">2–8</span>
    <span class="d">20′</span>
    <span class="d col-int rombos">◆◇◇◇◇</span>
    <span class="m col-modo">Competitivo</span>
- </div><div class="fila" data-i="45">
+ </a><a class="fila alt" data-i="45" href="#g-r08">
    <span class="c">R·08</span>
    <span class="nom">Dígalo con Memes<small>Fiesta</small></span>
    <span class="d">3–8</span>
    <span class="d">30′</span>
    <span class="d col-int rombos">◆◇◇◇◇</span>
    <span class="m col-modo">Competitivo</span>
- </div><div class="fila" data-i="46">
+ </a><a class="fila" data-i="46" href="#g-r09">
    <span class="c">R·09</span>
    <span class="nom">Taco Gato Cabra Queso Pizza<small>Fiesta</small></span>
    <span class="d">2–8</span>
    <span class="d">15′</span>
    <span class="d col-int rombos">◆◇◇◇◇</span>
    <span class="m col-modo">Competitivo</span>
- </div><div class="fila" data-i="47">
+ </a><a class="fila alt" data-i="47" href="#g-r10">
    <span class="c">R·10</span>
    <span class="nom">Ghost Blitz<small>Fiesta</small></span>
    <span class="d">2–8</span>
    <span class="d">15′</span>
    <span class="d col-int rombos">◆◇◇◇◇</span>
    <span class="m col-modo">Competitivo</span>
- </div><div class="fila" data-i="48">
+ </a><a class="fila" data-i="48" href="#g-r11">
    <span class="c">R·11</span>
    <span class="nom">Polilla Tramposa<small>Fiesta</small></span>
    <span class="d">3–5</span>
    <span class="d">20′</span>
    <span class="d col-int rombos">◆◇◇◇◇</span>
    <span class="m col-modo">Competitivo</span>
- </div><div class="fila" data-i="49">
+ </a><a class="fila alt" data-i="49" href="#g-r12">
    <span class="c">R·12</span>
    <span class="nom">Kaker Laken Poker<small>Fiesta</small></span>
    <span class="d">2–6</span>
    <span class="d">20′</span>
    <span class="d col-int rombos">◆◇◇◇◇</span>
    <span class="m col-modo">Competitivo</span>
- </div><div class="fila" data-i="50">
+ </a><a class="fila" data-i="50" href="#g-r13">
    <span class="c">R·13</span>
    <span class="nom">Virus!<small>Fiesta · 2 expansiones</small></span>
    <span class="d">2–6</span>
    <span class="d">20′</span>
    <span class="d col-int rombos">◆◇◇◇◇</span>
    <span class="m col-modo">Competitivo</span>
- </div><div class="fila" data-i="51">
+ </a><a class="fila alt" data-i="51" href="#g-r14">
    <span class="c">R·14</span>
    <span class="nom">Flip 7<small>Fiesta</small></span>
    <span class="d">3 a 18</span>
    <span class="d">20′</span>
    <span class="d col-int rombos">◆◇◇◇◇</span>
    <span class="m col-modo">Competitivo</span>
- </div><div class="fila" data-i="52">
+ </a><a class="fila" data-i="52" href="#g-r15">
    <span class="c">R·15</span>
    <span class="nom">La Gran Siete<small>Fiesta</small></span>
    <span class="d">2–8</span>
    <span class="d">15–20′</span>
    <span class="d col-int rombos">◆◇◇◇◇</span>
    <span class="m col-modo">Competitivo</span>
- </div><div class="fila" data-i="53">
+ </a><a class="fila alt" data-i="53" href="#g-r16">
    <span class="c">R·16</span>
    <span class="nom">Kluster<small>Fiesta</small></span>
    <span class="d">1–4</span>
    <span class="d">10′</span>
    <span class="d col-int rombos">◆◇◇◇◇</span>
    <span class="m col-modo">Competitivo</span>
- </div><div class="fila" data-i="54">
+ </a><a class="fila" data-i="54" href="#g-r17">
    <span class="c">R·17</span>
    <span class="nom">Cobra Shanghai<small>Fiesta</small></span>
    <span class="d">2–6</span>
    <span class="d">15′</span>
    <span class="d col-int rombos">◆◇◇◇◇</span>
    <span class="m col-modo">Competitivo</span>
- </div><div class="fila" data-i="55">
+ </a><a class="fila alt" data-i="55" href="#g-r18">
    <span class="c">R·18</span>
    <span class="nom">Hombres Lobo de Castronegro<small>Fiesta</small></span>
    <span class="d">8 a 18</span>
    <span class="d">30′</span>
    <span class="d col-int rombos">◆◇◇◇◇</span>
    <span class="m col-modo">Roles ocultos</span>
- </div><div class="fila" data-i="56">
+ </a><a class="fila" data-i="56" href="#g-r19">
    <span class="c">R·19</span>
    <span class="nom">Alfamanía<small>Fiesta</small></span>
    <span class="d">2–6</span>
    <span class="d">20′</span>
    <span class="d col-int rombos">◆◇◇◇◇</span>
    <span class="m col-modo">Competitivo</span>
- </div><div class="fila" data-i="57">
+ </a><a class="fila alt" data-i="57" href="#g-r20">
    <span class="c">R·20</span>
    <span class="nom">Remando en Dulce de Leche<small>Fiesta</small></span>
    <span class="d">3–8</span>
    <span class="d">45′</span>
    <span class="d col-int rombos">◆◇◇◇◇</span>
    <span class="m col-modo">Competitivo</span>
- </div><div class="fila" data-i="58">
+ </a><a class="fila" data-i="58" href="#g-r21">
    <span class="c">R·21</span>
    <span class="nom">Trio<small>Fiesta</small></span>
    <span class="d">3–6</span>
    <span class="d">15′</span>
    <span class="d col-int rombos">◆◇◇◇◇</span>
    <span class="m col-modo">Competitivo</span>
- </div><div class="fila" data-i="59">
+ </a><a class="fila alt" data-i="59" href="#g-r22">
    <span class="c">R·22</span>
    <span class="nom">El Camarero<small>Fiesta</small></span>
    <span class="d">2–6</span>
    <span class="d">20′</span>
    <span class="d col-int rombos">◆◇◇◇◇</span>
    <span class="m col-modo">Competitivo</span>
- </div><div class="fila" data-i="60">
+ </a><a class="fila" data-i="60" href="#g-r23">
    <span class="c">R·23</span>
    <span class="nom">Love Letter<small>Fiesta</small></span>
    <span class="d">2–4</span>
    <span class="d">15′</span>
    <span class="d col-int rombos">◆◇◇◇◇</span>
    <span class="m col-modo">Competitivo</span>
- </div><div class="fila" data-i="61">
+ </a><a class="fila alt" data-i="61" href="#g-r24">
    <span class="c">R·24</span>
    <span class="nom">La Dama y el Tigre<small>Fiesta</small></span>
    <span class="d">2–4</span>
    <span class="d">15′</span>
    <span class="d col-int rombos">◆◇◇◇◇</span>
    <span class="m col-modo">Competitivo</span>
- </div><div class="fila" data-i="62">
+ </a><a class="fila" data-i="62" href="#g-r25">
    <span class="c">R·25</span>
    <span class="nom">Quickstop<small>Fiesta</small></span>
    <span class="d">2–7</span>
    <span class="d">15–30′</span>
    <span class="d col-int rombos">◆◇◇◇◇</span>
    <span class="m col-modo">Competitivo</span>
- </div><div class="fila" data-i="63">
+ </a><a class="fila alt" data-i="63" href="#g-r26">
    <span class="c">R·26</span>
    <span class="nom">Caranchos<small>Fiesta</small></span>
    <span class="d">2–6</span>
    <span class="d">30–60′</span>
    <span class="d col-int rombos">◆◇◇◇◇</span>
    <span class="m col-modo">Competitivo</span>
- </div><div class="fila" data-i="64">
+ </a><a class="fila" data-i="64" href="#g-s01">
    <span class="c">S·01</span>
    <span class="nom">En Palabras<small>Sobremesa · 3 ediciones</small></span>
    <span class="d">2 o más</span>
    <span class="d">el que quieran</span>
    <span class="d col-int rombos">◆◇◇◇◇</span>
    <span class="m col-modo">Conversación</span>
- </div><div class="fila" data-i="65">
+ </a><a class="fila alt" data-i="65" href="#g-k01">
    <span class="c">K·01</span>
    <span class="nom">Monopoly<small>Clásicos</small></span>
    <span class="d">2–8</span>
    <span class="d">90′+</span>
    <span class="d col-int rombos">◆◇◇◇◇</span>
    <span class="m col-modo">Competitivo</span>
- </div><div class="fila" data-i="66">
+ </a><a class="fila" data-i="66" href="#g-k02">
    <span class="c">K·02</span>
    <span class="nom">UNO<small>Clásicos</small></span>
    <span class="d">2–10</span>
    <span class="d">30′</span>
    <span class="d col-int rombos">◆◇◇◇◇</span>
    <span class="m col-modo">Competitivo</span>
- </div><div class="fila" data-i="67">
+ </a><a class="fila alt" data-i="67" href="#g-k03">
    <span class="c">K·03</span>
    <span class="nom">Dominó<small>Clásicos</small></span>
    <span class="d">2–4</span>
    <span class="d">20′</span>
    <span class="d col-int rombos">◆◇◇◇◇</span>
    <span class="m col-modo">Competitivo</span>
- </div><div class="fila" data-i="68">
+ </a><a class="fila" data-i="68" href="#g-k04">
    <span class="c">K·04</span>
    <span class="nom">Generala<small>Clásicos</small></span>
    <span class="d">2–6</span>
    <span class="d">20′</span>
    <span class="d col-int rombos">◆◇◇◇◇</span>
    <span class="m col-modo">Competitivo</span>
- </div><div class="fila" data-i="69">
+ </a><a class="fila alt" data-i="69" href="#g-k05">
    <span class="c">K·05</span>
    <span class="nom">Naipes Españoles<small>Clásicos</small></span>
    <span class="d">2–6</span>
    <span class="d">a convenir</span>
    <span class="d col-int rombos">◆◇◇◇◇</span>
    <span class="m col-modo">Competitivo</span>
- </div><div class="fila" data-i="70">
+ </a><a class="fila" data-i="70" href="#g-k06">
    <span class="c">K·06</span>
    <span class="nom">Batalla Naval<small>Clásicos</small></span>
    <span class="d">2</span>
    <span class="d">20′</span>
    <span class="d col-int rombos">◆◇◇◇◇</span>
    <span class="m col-modo">Competitivo</span>
- </div><div class="fila" data-i="71">
+ </a><a class="fila alt" data-i="71" href="#g-k07">
    <span class="c">K·07</span>
    <span class="nom">4 en Línea<small>Clásicos</small></span>
    <span class="d">2</span>
    <span class="d">10′</span>
    <span class="d col-int rombos">◆◇◇◇◇</span>
    <span class="m col-modo">Competitivo</span>
- </div><div class="fila" data-i="72">
+ </a><a class="fila" data-i="72" href="#g-k08">
    <span class="c">K·08</span>
    <span class="nom">Carrera de Mente<small>Clásicos</small></span>
    <span class="d">2–6</span>
    <span class="d">45′</span>
    <span class="d col-int rombos">◆◇◇◇◇</span>
    <span class="m col-modo">En equipos</span>
- </div><div class="fila" data-i="73">
+ </a><a class="fila alt" data-i="73" href="#g-k09">
    <span class="c">K·09</span>
    <span class="nom">El Erudito<small>Clásicos</small></span>
    <span class="d">2–6</span>
    <span class="d">30′</span>
    <span class="d col-int rombos">◆◇◇◇◇</span>
    <span class="m col-modo">Competitivo</span>
- </div><div class="fila" data-i="74">
+ </a><a class="fila" data-i="74" href="#g-k10">
    <span class="c">K·10</span>
    <span class="nom">El Ilustrado<small>Clásicos</small></span>
    <span class="d">2–6</span>
    <span class="d">30′</span>
    <span class="d col-int rombos">◆◇◇◇◇</span>
    <span class="m col-modo">Competitivo</span>
- </div></div>
+ </a></div>
     <div class="vacio" id="vacio" style="display: none;">No hay funciones con esa combinación — aflojen un filtro y aparece la magia.</div>
   </div>
 </section>
@@ -1499,6 +1616,7 @@ body:not(.js-on) .reset{display:none}
 <footer class="colofon">
   <div class="logo2">LUDOTECA <b>CARON</b></div>
   <p>81 juegos · 39 expansiones · curaduría de la casa · Temperley, GBA</p>
+    <p>Tapas de juegos: cortesía de <a class="cred" href="https://www.cazagangas.com.ar" target="_blank" rel="noopener">Cazagangas</a></p>
   <p class="pedi">Las reglas se piden al anfitrión. Las revanchas, también.</p>
 </footer>
 
@@ -1509,19 +1627,21 @@ body:not(.js-on) .reset{display:none}
    feat: afiche destacado · fav: sello de la casa · exp: badge expansiones · log: logline (solo afiches) */
 const JUEGOS=[
 /* ——— SALA 1 · TERROR & SUSPENSO ——— */
-{c:"T·01",n:"Final Girl",sala:"t",jug:[1,1],jl:"1 jugador",min:"30–60′",tb:45,int:4,modo:"Solitario",feat:1,fav:1,exp:"15 películas en el archivo",
- log:"Sos la última chica de la película.",
+{c:"T·01",n:"Final Girl",tapa:"final-girl",sala:"t",jug:[1,2],jl:"1–2 jugadores",min:"30–60′",tb:45,int:4,modo:"Solitario",feat:1,fav:1,exp:"15 películas en el archivo",
+ log:"La que sigue en pie cuando bajan los créditos.",
  p:"Un asesino, una locación maldita y vos. Sobreviví la noche o eliminá al villano: cada caja es una película slasher distinta, del campamento al manicomio."},
-{c:"T·02",n:"Nemesis: Retaliation",sala:"t",jug:[1,5],jl:"1–5",min:"90–180′",tb:91,int:5,modo:"Cooperativo",feat:1,
+{c:"T·02",n:"Nemesis: Retaliation",tapa:"nemesis-retaliation",sala:"t",jug:[1,5],jl:"1–5",min:"90–180′",tb:91,int:5,modo:"Cooperativo",feat:1,
  log:"Esta vez, los humanos entran al nido.",
  p:"Un escuadrón militar se adentra en la colmena alienígena. Sci-fi de supervivencia con miniaturas brutales, ruido que atrae horrores y objetivos que no siempre coinciden."},
 {c:"T·03",n:"Cthulhu: Death May Die",sala:"t",jug:[1,5],min:"90′",tb:90,int:3,modo:"Cooperativo",
  p:"Interrumpir el ritual, enloquecer en el intento y dispararle a un primigenio en la cara. Acción lovecraftiana sin vueltas."},
-{c:"T·04",n:"Las Mansiones de la Locura",sala:"t",jug:[1,5],min:"120–180′",tb:91,int:4,modo:"Cooperativo",
- p:"La app dirige la pesadilla; ustedes exploran una mansión que quiere volverlos locos. Inmersión total con banda sonora incluida."},
+{c:"T·04",n:"Las Mansiones de la Locura",tapa:"las-mansiones-de-la-locura-segunda-edicion",sala:"t",jug:[1,5],jl:"1–5 jugadores",min:"120–180′",tb:91,int:4,modo:"Cooperativo",
+log:"Una casa que respira, y no a tu favor.",
+ p:"La app dirige la pesadilla; ustedes exploran una mansión que quiere volverlos locos. Inmersión total con banda sonora incluida.",feat:1},
 {c:"T·05",n:"The Night Cage",sala:"t",jug:[1,5],min:"45′",tb:45,int:3,modo:"Cooperativo",
  p:"Un laberinto a oscuras, cuatro velas que se consumen y la memoria colectiva como única linterna. Claustrofobia elegante."},
-{c:"T·06",n:"Terrorscape",sala:"t",jug:[1,4],min:"30–45′",tb:45,int:3,modo:"Roles ocultos",
+{c:"T·06",n:"Terrorscape",tapa:"terrorscape",sala:"t",jug:[1,4],jl:"1–4 jugadores",min:"30–45′",tb:45,int:3,modo:"Roles ocultos",feat:1,
+log:"Alguien en la mesa no quiere que salgas.",
  p:"Un asesino mueve en secreto; las víctimas buscan escapar de la casa. El gato y el ratón del cine de terror, en 40 minutos."},
 {c:"T·07",n:"Zombicide 2ª ed.",sala:"t",jug:[1,6],min:"60–90′",tb:90,int:3,modo:"Cooperativo",
  p:"Hordas, equipo pesado y cero culpa: el blockbuster palomitero de la casa. Ideal para iniciarse en el terror cooperativo."},
@@ -1531,8 +1651,8 @@ const JUEGOS=[
  p:"Civiles sobreviviendo a una ciudad sitiada. Duro, hermoso y para mesas dispuestas a sentir de verdad. Avisados están."},
 
 /* ——— SALA 2 · GABINETE DEL DETECTIVE ——— */
-{c:"D·01",n:"Sherlock Holmes: Detective Asesor",sala:"d",jug:[1,8],min:"90–120′",tb:91,int:4,modo:"Cooperativo",feat:1,fav:1,exp:"5 cajas de casos",
- log:"Londres, 188—. Un caso abierto sobre la mesa.",
+{c:"D·01",n:"Sherlock Holmes: Detective Asesor",tapa:"sherlock-holmes-detective-asesor-los-crimenes-del-tamesis-y-otros-casos",sala:"d",jug:[1,8],min:"90–120′",tb:91,int:4,modo:"Cooperativo",feat:1,fav:1,exp:"5 cajas de casos",
+ log:"Londres, 1880. Un caso abierto sobre la mesa.",
  p:"Sin tablero y sin dados: un caso, un mapa de Londres victoriano, el directorio y la conversación de la mesa como única mecánica. La joya intelectual de la casa — pidan café antes de empezar."},
 {c:"D·02",n:"Arkham Horror: El Juego de Cartas",sala:"d",jug:[1,2],min:"60–120′",tb:90,int:5,modo:"Cooperativo",
  p:"Investigadores contra los Mitos: cartas, campañas y decisiones que dejan cicatriz de un escenario al siguiente."},
@@ -1542,10 +1662,10 @@ const JUEGOS=[
  p:"Personaje, arma y habitación: deducción de la vieja escuela para detectives en formación."},
 
 /* ——— SALA 3 · AVENTURA COOPERATIVA ——— */
-{c:"C·01",n:"Paleo",sala:"c",jug:[2,4],min:"45–60′",tb:60,int:4,modo:"Cooperativo",feat:1,fav:1,exp:"4 expansiones",
+{c:"C·01",n:"Paleo",tapa:"paleo",sala:"c",jug:[2,4],min:"45–60′",tb:60,int:4,modo:"Cooperativo",feat:1,fav:1,exp:"4 expansiones",
  log:"La Edad de Piedra no perdona a nadie.",
  p:"Cazar, curar, sobrevivir al día y, si la tribu aguanta, pintar el mamut en la cueva. Desafío real, decisiones que duelen y el 10/10 indiscutido de esta casa."},
-{c:"C·02",n:"Sleeping Gods",sala:"c",jug:[1,4],min:"60–120′ por sesión",tb:91,int:5,modo:"Cooperativo",feat:1,exp:"2 expansiones",
+{c:"C·02",n:"Sleeping Gods",tapa:"sleeping-gods",sala:"c",jug:[1,4],min:"60–120′ por sesión",tb:91,int:5,modo:"Cooperativo",feat:1,exp:"2 expansiones",
  log:"Un barco varado en un mar que no figura en los mapas.",
  p:"1929: la tripulación del Manticore despierta en un mundo desconocido. Un atlas entero para explorar, decisiones con consecuencias y una campaña para perderse durante semanas."},
 {c:"C·03",n:"Pandemic",sala:"c",jug:[2,4],min:"45′",tb:45,int:3,modo:"Cooperativo",fav:1,exp:"3 expansiones",
@@ -1558,18 +1678,19 @@ const JUEGOS=[
  p:"Patrullas que salen de la fortaleza, crónicas que se escriben solas: un cuento de aventuras contado entre todos."},
 
 /* ——— SALA 4 · ESTRATEGIA & CONQUISTA ——— */
-{c:"E·01",n:"Aventureros al Tren: Europa",sala:"e",jug:[2,5],min:"45–60′",tb:60,int:2,modo:"Competitivo",feat:1,fav:1,
+{c:"E·01",n:"Aventureros al Tren: Europa",tapa:"-aventureros-al-tren-europa",sala:"e",jug:[2,5],min:"45–60′",tb:60,int:2,modo:"Competitivo",feat:1,fav:1,
  log:"Europa entera, vagón por vagón.",
  p:"Rutas, túneles y estaciones de Lisboa a Moscú. La puerta de entrada perfecta al hobby: en diez minutos están jugando, en veinte ya hay rencores ferroviarios."},
-{c:"E·02",n:"Blood Rage",sala:"e",jug:[2,5],min:"60–90′",tb:90,int:4,modo:"Competitivo",feat:1,exp:"2 expansiones · hasta 5 jugadores",
+{c:"E·02",n:"Blood Rage",tapa:"blood-rage",sala:"e",jug:[2,5],min:"60–90′",tb:90,int:4,modo:"Competitivo",feat:1,exp:"2 expansiones · hasta 5 jugadores",
  log:"El fin del mundo ya está decidido. La gloria, no.",
  p:"Clanes vikingos peleando por morir con honor antes del Ragnarök. Drafting filoso, batallas épicas y miniaturas que imponen respeto."},
 {c:"E·03",n:"7 Wonders Duel",sala:"e",jug:[2,2],min:"30′",tb:45,int:3,modo:"Competitivo",
  p:"El duelo de civilizaciones definitivo para dos: tres caminos a la victoria y cero piedad entre turnos."},
 {c:"E·04",n:"Akropolis",sala:"e",jug:[2,4],min:"25–30′",tb:45,int:2,modo:"Competitivo",exp:"+ Athena",
  p:"Construir la polis perfecta apilando losetas en altura. Ágil, hermoso y bastante más filoso de lo que aparenta."},
-{c:"E·05",n:"Ankh: Dioses de Egipto",sala:"e",jug:[2,5],min:"90′",tb:90,int:4,modo:"Competitivo",
- p:"Dioses egipcios disputando la fe de los mortales: el que cae en el olvido, desaparece. Miniaturas imponentes, tensión constante."},
+{c:"E·05",n:"Ankh: Dioses de Egipto",tapa:"ankh-dioses-de-egipto",sala:"e",jug:[2,5],jl:"2–5 jugadores",min:"90′",tb:90,int:4,modo:"Competitivo",
+ log:"Un solo dios queda en pie cuando el Nilo baja.",
+ p:"Dioses egipcios disputando la fe de los mortales: el que cae en el olvido, desaparece. Miniaturas imponentes, tensión constante.",feat:1},
 {c:"E·06",n:"Azul",sala:"e",jug:[2,4],min:"30–45′",tb:45,int:2,modo:"Competitivo",
  p:"Azulejos portugueses, belleza serena y la maldad silenciosa de dejarle al rival justo las fichas que no quiere."},
 {c:"E·07",n:"Carcassonne",sala:"e",jug:[2,5],min:"35′",tb:45,int:2,modo:"Competitivo",
@@ -1580,8 +1701,9 @@ const JUEGOS=[
  p:"Ladrones armando su mazo dentro de la guarida de un dragón: cada ruido puede ser el último. Codicia con consecuencias."},
 {c:"E·10",n:"Coffee Rush",sala:"e",jug:[2,4],min:"30′",tb:45,int:2,modo:"Competitivo",
  p:"Baristas a contrarreloj: planificar los próximos movimientos y servir los pedidos antes de que la clientela se enfríe."},
-{c:"E·11",n:"Cyclades",sala:"e",jug:[2,5],min:"90′",tb:90,int:3,modo:"Competitivo",exp:"+ Titans",
- p:"Pujas por el favor de los dioses griegos para dominar el Egeo. Tenso hasta la última ofrenda a Zeus."},
+{c:"E·11",n:"Cyclades",tapa:"cyclades",sala:"e",jug:[2,5],jl:"2–5 jugadores",min:"90′",tb:90,int:3,modo:"Competitivo",exp:"+ Titans",
+ log:"Los dioses se compran; la guerra se gana en la puja.",
+ p:"Pujas por el favor de los dioses griegos para dominar el Egeo. Tenso hasta la última ofrenda a Zeus.",feat:1},
 {c:"E·12",n:"Feed the Kraken",sala:"e",jug:[5,11],min:"45–90′",tb:90,int:3,modo:"Roles ocultos",
  p:"Marineros leales, piratas y un culto del Kraken disputan el timón del barco. Motín garantizado en mesas grandes."},
 {c:"E·13",n:"Heat",sala:"e",jug:[1,6],min:"60′",tb:90,int:3,modo:"Competitivo",
@@ -1600,10 +1722,10 @@ const JUEGOS=[
  p:"Un santuario de aves, ilustraciones bellísimas y un motor que ronronea. Competencia serena para tardes sin apuro."},
 
 /* ——— SALA 5 · RISAS & FIESTA ——— */
-{c:"R·01",n:"Say My Name",sala:"r",jug:[4,12],jl:"4+ en equipos",min:"30–45′",tb:45,int:1,modo:"En equipos",feat:1,fav:1,exp:"+ 2 expansiones",
+{c:"R·01",n:"Say My Name",tapa:"say-my-name",sala:"r",jug:[4,12],jl:"4+ en equipos",min:"30–45′",tb:45,int:1,modo:"En equipos",feat:1,fav:1,exp:"+ 2 expansiones",
  log:"Tres rondas, un personaje y cero vergüenza.",
  p:"Describir, actuar y hacer mímica de personajes contra el reloj, ronda tras ronda. El juego que rompe cualquier asado y deja frases para el grupo de WhatsApp."},
-{c:"R·02",n:"Dixit",sala:"r",jug:[3,6],min:"30′",tb:45,int:1,modo:"Competitivo",feat:1,fav:1,exp:"5 expansiones de cartas",
+{c:"R·02",n:"Dixit",tapa:"dixit",sala:"r",jug:[3,6],min:"30′",tb:45,int:1,modo:"Competitivo",feat:1,fav:1,exp:"5 expansiones de cartas",
  log:"Una imagen, una frase, y la cabeza de los demás.",
  p:"Cartas oníricas, pistas al borde de lo obvio y lo imposible: poesía convertida en juego. Con cinco mazos extra, acá nunca se repite."},
 {c:"R·03",n:"Código Secreto",sala:"r",jug:[2,8],min:"15–30′",tb:45,int:2,modo:"En equipos",
@@ -1689,11 +1811,13 @@ const SALAS=[
   cita:{t:"Amo las cosas de detectives. Me encantan.",f:"J. — jugadora de la casa"}},
  {id:"c",num:"03",nombre:"Aventura Cooperativa",sub:"Acá se gana en equipo o se pierde con honor.",tema:"clara2",
   cita:{t:"Tenés que intentarlo mucho para ganar. Está espectacular.",f:"J. — sobre Paleo, el 10/10 de la casa"}},
- {id:"e",num:"04",nombre:"Estrategia & Conquista",sub:"Dioses, imperios y rencores deportivos.",tema:"oscura"},
+ {id:"e",num:"04",nombre:"Estrategia & Conquista",sub:"Dioses, imperios y rencores deportivos.",tema:"oscura",
+  cita:{t:"Esos de estrategia para competir están buenos, los juego, la paso bien, pero no los elijo.",f:"J. — jugadora de la casa"}},
  {id:"r",num:"05",nombre:"Risas & Fiesta",sub:"Para asados, previas y mesas que no paran de hablar.",tema:"clara",
   cita:{t:"Te saca un montón de estar con el celular: tenés que estar recontra en juego.",f:"J. — jugadora de la casa"}},
  {id:"s",num:"06",nombre:"La Sobremesa",sub:"Cuando la mejor jugada es la conversación.",tema:"clara2"},
- {id:"k",num:"07",nombre:"Los Clásicos",sub:"La vitrina nostálgica: siempre en cartel.",tema:"clara"}
+ {id:"k",num:"07",nombre:"Los Clásicos",sub:"La vitrina nostálgica: siempre en cartel.",tema:"clara",
+  cita:{t:"Es un clásico. Dependés mucho de los dados, pero un clásico es un clásico.",f:"J. — sobre el TEG"}}
 ];
 
 document.body.classList.add("js-on");
@@ -1715,10 +1839,15 @@ const SELLO=`<svg class="sello" viewBox="0 0 100 100" aria-label="Sello de la ca
 
 /* ============ RENDER SALAS ============ */
 let selloN=0;
+const gid=c=>"g-"+c.toLowerCase().replace("·","");
+const TAPA="https://www.cazagangas.com.ar/images/juegos/";
 function afficheHTML(g){
  const sello=g.fav?SELLO.replaceAll("_ID_",String(++selloN)):"";
- return `<article class="afiche rev">
+ const tapa=g.tapa?`<figure class="acover"><img src="${TAPA}${g.tapa}.jpg" alt="Tapa de ${g.n}" loading="lazy" onerror="this.closest('.acover').classList.add('falla')"><span class="ph"><span class="phl">${g.n.charAt(0)}</span><span class="phs">✦</span><span class="phc">FUNCIÓN ${g.c}</span></span></figure>`:"";
+ return `<article class="afiche rev${g.tapa?" conTapa":""}" id="${gid(g.c)}">
    ${sello}
+   ${tapa}
+   <div class="acuerpo">
    <div class="codigo">${g.c}${g.fav?" · FAVORITO":""}</div>
    <h3>${g.n}</h3>
    <div class="logline">${g.log||""}</div>
@@ -1730,12 +1859,14 @@ function afficheHTML(g){
      <span><span class="k">Modo</span>${g.modo}</span>
    </div>
    ${g.exp?`<span class="expchip">${g.exp}</span>`:""}
+   </div>
  </article>`;
 }
 function fichaHTML(g){
- return `<article class="ficha rev">
+ const mini=g.tapa?`<figure class="fthumb"><img src="${TAPA}${g.tapa}.jpg" alt="" loading="lazy" onerror="this.closest('.fthumb').classList.add('falla')"><span class="ph"><span class="phl">${g.n.charAt(0)}</span></span></figure>`:"";
+ return `<article class="ficha rev${g.tapa?" conMini":""}" id="${gid(g.c)}">
    <div class="top"><span>${g.c}</span>${g.fav?'<span class="fav">★ DE LA CASA</span>':""}</div>
-   <h4>${g.n}</h4>
+   ${mini}<h4>${g.n}</h4>
    <p class="pitch">${g.p}</p>
    <div class="datos"><span>${g.jl?"":'<i class="dk">jug</i> '}${jugTxt(g)}</span><span>${g.min}</span><span class="rombos">${rombos(g.int)}</span></div>
    <div class="modo">${g.modo}${g.exp?" · "+g.exp:""}</div>
@@ -1797,21 +1928,56 @@ SALAS.forEach(s=>{
 /* ============ CARTELERA + FILTROS ============ */
 const NOMSALA={t:"Terror",d:"Detectives",c:"Cooperativos",e:"Estrategia",r:"Fiesta",s:"Sobremesa",k:"Clásicos"};
 const programa=$("#programa");
-programa.innerHTML=`<div class="fila head"><span>Código</span><span>Función</span><span>Jugadores</span><span>Tiempo</span><span class="col-int">Intensidad</span><span class="col-modo">Modo</span></div>`+
- JUEGOS.map((g,i)=>`<div class="fila" data-i="${i}">
+programa.innerHTML=`<div class="fila head"><span class="th" data-sort="code">Código<i class="ar"></i></span><span class="th" data-sort="nom">Función<i class="ar"></i></span><span class="th" data-sort="jug">Jugadores<i class="ar"></i></span><span class="th" data-sort="tb">Tiempo<i class="ar"></i></span><span class="th col-int" data-sort="int">Intensidad<i class="ar"></i></span><span class="th col-modo" data-sort="modo">Modo<i class="ar"></i></span></div>`+
+ JUEGOS.map((g,i)=>`<a class="fila" data-i="${i}" href="#${gid(g.c)}">
    <span class="c">${g.c}</span>
    <span class="nom">${g.fav?'<span class="fav">★ </span>':""}${g.n}<small>${NOMSALA[g.sala]}${g.exp?" · "+g.exp:""}</small></span>
    <span class="d">${jugTxt(g)}</span>
    <span class="d">${g.min}</span>
    <span class="d col-int rombos">${rombos(g.int)}</span>
    <span class="m col-modo">${g.modo}</span>
- </div>`).join("");
+ </a>`).join("");
 
 $("#metacartelera").textContent=`81 juegos · ${JUEGOS.length} entradas — sagas agrupadas`;
 
+/* ============ ORDENAR CARTELERA POR COLUMNA ============ */
+(function(){
+ const cont=programa;
+ const orig=[...cont.querySelectorAll(".fila[data-i]")];
+ let curKey="code",curDir=1;
+ const G=n=>JUEGOS[+n.dataset.i];
+ const cmp={
+   code:(a,b)=>(+a.dataset.i)-(+b.dataset.i),
+   nom:(a,b)=>G(a).n.localeCompare(G(b).n,"es"),
+   jug:(a,b)=>G(a).jug[0]-G(b).jug[0]||G(a).jug[1]-G(b).jug[1],
+   tb:(a,b)=>G(a).tb-G(b).tb,
+   int:(a,b)=>G(a).int-G(b).int,
+   modo:(a,b)=>G(a).modo.localeCompare(G(b).modo,"es")
+ };
+ function restripe(){
+   let k=0;
+   document.querySelectorAll("#programa .fila[data-i]").forEach(f=>{
+     if(f.classList.contains("oculta"))return;
+     f.classList.toggle("alt",k%2===1); k++;
+   });
+ }
+ function ordenar(key){
+   if(key===curKey)curDir=-curDir;else{curKey=key;curDir=1;}
+   [...orig].sort((a,b)=>cmp[key](a,b)*curDir).forEach(n=>cont.appendChild(n));
+   document.querySelectorAll(".head .th").forEach(th=>{
+     const on=th.dataset.sort===key;
+     th.classList.toggle("activo",on);
+     th.classList.toggle("desc",on&&curDir<0);
+   });
+   restripe();
+ }
+ restripe();
+ document.querySelectorAll(".head .th").forEach(th=>th.addEventListener("click",()=>ordenar(th.dataset.sort)));
+})();
+
 const F={p:null,t:null,m:null};
 const PJ=[["2","2"],["3","3"],["4","4"],["5","5"],["6","6"],["7","7"],["8+","8"]];
-const PT=[["hasta 20′","20"],["20–45′","45"],["45–90′","6090"],["más de 90′","91"]];
+const PT=[["hasta 20′","20"],["hasta 45′","45"],["hasta 90′","90"],["sin límite","999"]];
 const PM=["Cooperativo","Competitivo","En equipos","Roles ocultos","Conversación"];
 
 function chips(cont,items,key){
@@ -1832,10 +1998,7 @@ chips("#f-jug",PJ,"p"); chips("#f-tiempo",PT,"t"); chips("#f-modo",PM,"m");
 
 function pasaTiempo(g){
  if(!F.t)return true;
- if(F.t==="20")return g.tb===20;
- if(F.t==="45")return g.tb===45;
- if(F.t==="6090")return g.tb===60||g.tb===90;
- return g.tb===91;
+ return g.tb<=Number(F.t);
 }
 function aplicar(){
  let n=0;
@@ -1854,6 +2017,7 @@ function aplicar(){
  if(F.t)parts.push(PT.find(x=>x[1]===F.t)[0]);
  if(F.m)parts.push(F.m.toLowerCase());
  $("#tk-texto").innerHTML=parts.length?`ENTRADA — <b>${parts.join(" · ").toUpperCase()}</b>`:`ENTRADA GENERAL — <b>SIN FILTROS</b>`;
+ if(typeof restripe==="function")restripe();
 }
 $("#resetf").addEventListener("click",()=>{
  F.p=F.t=F.m=null;
