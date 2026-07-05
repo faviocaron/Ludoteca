@@ -5,7 +5,7 @@
 <title>Ludoteca Caron — Programa de Funciones · Temporada 2026</title>
 <meta name="description" content="La colección de juegos de mesa de la casa Caron, presentada como cartelera de cine: siete salas, boletería con filtros y el sello rojo de los favoritos.">
 <meta name="theme-color" content="#0B0807">
-<meta name="ludoteca-edicion" content="8">
+<meta name="ludoteca-edicion" content="10">
 <link rel="canonical" href="https://faviocaron.github.io/Ludoteca/">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='10' fill='%230B0807'/%3E%3Ccircle cx='32' cy='32' r='26' fill='none' stroke='%23C9A24B' stroke-width='3'/%3E%3Ctext x='32' y='42' text-anchor='middle' font-family='Impact,sans-serif' font-size='26' fill='%23EBC878'%3ELC%3C/text%3E%3C/svg%3E">
 <meta property="og:type" content="website">
@@ -2083,7 +2083,7 @@ footer{
 <div class="wrap">
 <div class="salahead rev">
 <div class="salanum" aria-hidden="true">VI</div>
-<div class="salatit"><div class="sobret">Sala 06 — 1 funciones</div><h2>La Sobremesa</h2><div class="sub">Cuando la mejor jugada es la conversación.</div></div>
+<div class="salatit"><div class="sobret">Sala 06 — 1 función</div><h2>La Sobremesa</h2><div class="sub">Cuando la mejor jugada es la conversación.</div></div>
 <div class="salameta">Última función</div>
 </div>
 <hr class="regla">
@@ -2881,7 +2881,7 @@ footer{
 <p class="strap" style="margin-top:6px">Las luces se encienden. La próxima historia la elegís vos.</p>
 <div class="creditos">
 Ludoteca Caron · Buenos Aires<br>
-Temporada 2026 — Programa N.º 1 · 8.ª edición · Curaduría de la casa · <a href="#portada">Volver a la marquesina</a>
+Temporada 2026 — Programa N.º 1 · 10.ª edición · Curaduría de la casa · <a href="#portada">Volver a la marquesina</a>
 </div>
 </div>
 </footer>
@@ -3192,7 +3192,7 @@ ${detBtn}
 <div class="wrap">
 <div class="salahead rev">
 <div class="salanum" aria-hidden="true">${NUMROM[s.num]||s.num}</div>
-<div class="salatit"><div class="sobret">Sala ${s.num} — ${juegos.length} funciones</div><h2>${s.nombre}</h2><div class="sub">${s.sub}</div></div>
+<div class="salatit"><div class="sobret">Sala ${s.num} — ${juegos.length} ${juegos.length===1?"función":"funciones"}</div><h2>${s.nombre}</h2><div class="sub">${s.sub}</div></div>
 <div class="salameta">${HORARIO_SALA[s.id]||"Función continuada"}</div>
 </div>
 <hr class="regla"/>
@@ -3534,17 +3534,19 @@ if(qdob){
 })();
 
 /* ============ SUSTO DE COCO — FIN DE LA SALA DE TERROR ============ */
-/* Desbloqueo de audio: cualquier toque previo habilita el sting */
-let AC=null;
+/* Ladrido embebido + desbloqueo en la primera interacción */
+const LADRIDO=new Audio("data:audio/mpeg;base64,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");
+LADRIDO.preload="auto";
+let audioListo=false;
 function desbloquearAudio(){
-  if(AC)return;
-  try{
-    const A=window.AudioContext||window.webkitAudioContext; if(!A)return;
-    AC=new A();
-    if(AC.state==="suspended")AC.resume();
-  }catch(e){}
+  if(audioListo)return;
+  audioListo=true;
+  const v=LADRIDO.volume;LADRIDO.volume=0;
+  LADRIDO.play().then(()=>{LADRIDO.pause();LADRIDO.currentTime=0;LADRIDO.volume=v;})
+    .catch(()=>{LADRIDO.volume=v;audioListo=false;});
 }
 addEventListener("pointerdown",desbloquearAudio,{passive:true});
+addEventListener("touchend",desbloquearAudio,{passive:true});
 addEventListener("keydown",desbloquearAudio);
 (function(){
   if(REDUCED)return;
@@ -3556,45 +3558,43 @@ addEventListener("keydown",desbloquearAudio);
     pre=new Image();pre.src="img/coco-susto.jpg";
   },{passive:true,once:true});
   let hecho=false,lastY=window.scrollY,raf=0;
+  let vistoMs=0,lastT=0,navegando=false;
+  /* saltos por anchor (nav, FAB, botones) no cuentan como recorrer la sala */
+  document.addEventListener("click",e=>{
+    if(e.target.closest&&e.target.closest('a[href^="#"]')){
+      navegando=true;
+      setTimeout(()=>{navegando=false;},1500);
+    }
+  },{passive:true});
   function chequear(){
     raf=0;
     if(hecho)return;
     const y=window.scrollY, bajando=y>lastY; lastY=y;
-    if(!bajando)return;
     const r=salaT.getBoundingClientRect();
+    /* acumular tiempo real de permanencia con la sala en pantalla */
+    const ahora=performance.now();
+    if(r.top<innerHeight&&r.bottom>0){
+      if(lastT)vistoMs+=Math.min(200,ahora-lastT);
+      lastT=ahora;
+    }else{lastT=0;}
+    if(!bajando)return;
     /* la sala de terror acaba de salir por arriba del viewport */
     if(r.bottom>0||r.bottom<-1200)return;
+    if(navegando||vistoMs<600)return; /* pasó de largo: sin susto */
     const ae=document.activeElement;
     if(ae&&/INPUT|TEXTAREA/.test(ae.tagName))return;
     hecho=true;susto();
   }
   addEventListener("scroll",()=>{if(!raf)raf=requestAnimationFrame(chequear);},{passive:true});
-  function sting(){
-    try{
-      const C=AC||new (window.AudioContext||window.webkitAudioContext)();
-      if(!C||C.state!=="running")return; /* sin toque previo: susto mudo */
-      const t=C.currentTime;
-      const o=C.createOscillator(),g=C.createGain();
-      o.type="sawtooth";
-      o.frequency.setValueAtTime(660,t);
-      o.frequency.exponentialRampToValueAtTime(85,t+.34);
-      g.gain.setValueAtTime(.0001,t);
-      g.gain.exponentialRampToValueAtTime(.28,t+.025);
-      g.gain.exponentialRampToValueAtTime(.0001,t+.45);
-      o.connect(g).connect(C.destination);o.start(t);o.stop(t+.47);
-      const nb=C.createBuffer(1,C.sampleRate*.22,C.sampleRate),d=nb.getChannelData(0);
-      for(let i=0;i<d.length;i++)d[i]=(Math.random()*2-1)*Math.pow(1-i/d.length,2.2);
-      const n=C.createBufferSource();n.buffer=nb;
-      const ng=C.createGain();ng.gain.value=.2;
-      n.connect(ng).connect(C.destination);n.start(t);
-    }catch(e){}
+  function ladrar(){
+    try{LADRIDO.currentTime=0;LADRIDO.play().catch(()=>{});}catch(e){}
   }
   function susto(){
     const s=document.createElement("div");
     s.className="susto";s.setAttribute("role","presentation");
     s.innerHTML=`<img alt="" onerror="this.src='img/coco.jpg'" src="img/coco-susto.jpg"/><div class="grito"><b>¡¿YA SE VAN DE LA SALA?!</b><i>— Coco, acomodador · turno trasnoche</i></div>`;
     document.body.appendChild(s);
-    sting();
+    ladrar();
     let fuera=false;
     const chau=()=>{
       if(fuera)return;fuera=true;
