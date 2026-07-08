@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="es" class=""><head>
 <meta charset="utf-8">
-<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport">
 <title>Ludoteca Caron — Programa de Funciones · Temporada 2026</title>
 <meta name="description" content="La colección de juegos de mesa de la casa Caron, presentada como cartelera de cine: siete salas, boletería con filtros y el sello rojo de los favoritos.">
 <meta name="theme-color" content="#0B0807">
-<meta name="ludoteca-edicion" content="10">
+<meta name="ludoteca-edicion" content="14">
 <link rel="canonical" href="https://faviocaron.github.io/Ludoteca/">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='10' fill='%230B0807'/%3E%3Ccircle cx='32' cy='32' r='26' fill='none' stroke='%23C9A24B' stroke-width='3'/%3E%3Ctext x='32' y='42' text-anchor='middle' font-family='Impact,sans-serif' font-size='26' fill='%23EBC878'%3ELC%3C/text%3E%3C/svg%3E">
 <meta property="og:type" content="website">
@@ -142,6 +142,7 @@ body.boot .bombillas.abajo i{animation:prende .4s calc(.55s + var(--i,0)*.05s) b
 /* ───────────────────────────── NAV ───────────────────────────── */
 nav{
   position:fixed;top:0;left:0;right:0;z-index:900;
+  padding-top:env(safe-area-inset-top,0px);
   background:rgba(11,8,7,.86);
   -webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);
   border-bottom:1px solid var(--linea-oro);
@@ -161,7 +162,7 @@ nav{
 /* ───────────────────────────── HERO ───────────────────────────── */
 header{
   position:relative;min-height:100svh;display:flex;flex-direction:column;justify-content:center;
-  padding:110px 0 0;overflow:hidden;
+  padding:calc(110px + env(safe-area-inset-top,0px)) 0 0;overflow:hidden;
   background:
     radial-gradient(ellipse 120% 62% at 50% 112%, rgba(75,20,16,.55), transparent 62%),
     radial-gradient(ellipse 90% 55% at 50% -18%, rgba(201,162,75,.10), transparent 60%),
@@ -658,7 +659,7 @@ footer{
 
 /* ───────────────────────────── FAB ───────────────────────────── */
 .fab{
-  position:fixed;right:22px;bottom:22px;z-index:950;width:56px;height:56px;border-radius:50%;
+  position:fixed;right:22px;bottom:calc(22px + env(safe-area-inset-bottom,0px));z-index:950;width:56px;height:56px;border-radius:50%;
   background:linear-gradient(180deg,var(--orovivo),var(--oro));border:1px solid var(--orovivo);
   color:var(--noche);font-family:var(--anton);font-size:1.25rem;
   box-shadow:0 14px 36px rgba(0,0,0,.55);
@@ -667,7 +668,7 @@ footer{
 .fab.on{opacity:1;pointer-events:auto;transform:translateY(0)}
 .fab:hover{background:var(--marfil)}
 .fabmenu{
-  position:fixed;right:22px;bottom:88px;z-index:950;display:flex;flex-direction:column;gap:6px;
+  position:fixed;right:22px;bottom:calc(88px + env(safe-area-inset-bottom,0px));z-index:950;display:flex;flex-direction:column;gap:6px;
   opacity:0;pointer-events:none;transform:translateY(10px);transition:all .25s ease;
 }
 .fabmenu.on{opacity:1;pointer-events:auto;transform:translateY(0)}
@@ -695,40 +696,6 @@ footer{
 .fab{transition:all .3s ease, transform .35s cubic-bezier(.3,1.4,.4,1)}
 .fab.abierto{transform:rotate(135deg);background:var(--marfil)}
 
-/* ─────────────── SUSTO DE COCO (fin de sala terror) ─────────────── */
-.susto{
-  position:fixed;inset:0;z-index:4000;background:#020101;
-  display:grid;place-items:center;overflow:hidden;
-  animation:sustoIn .09s both;
-}
-.susto::before{
-  content:"";position:absolute;inset:0;pointer-events:none;
-  background:radial-gradient(ellipse 70% 60% at 50% 45%, transparent 40%, rgba(120,8,8,.55) 78%, rgba(0,0,0,.95));
-}
-.susto img{
-  width:min(88vw,640px);max-height:74vh;object-fit:contain;
-  filter:contrast(1.08) brightness(.96);
-  animation:sustoShake .55s .04s;
-}
-.susto .grito{position:absolute;bottom:9%;left:0;right:0;text-align:center;padding:0 20px;animation:fadeup .45s .55s both}
-.susto .grito b{
-  display:block;font-family:var(--anton);font-weight:400;font-size:clamp(2rem,7vw,4.2rem);
-  letter-spacing:.06em;color:var(--carmesivivo);
-  text-shadow:0 0 26px rgba(224,68,64,.9), 0 4px 0 #000;
-}
-.susto .grito i{font-family:var(--playfair);font-style:italic;font-size:clamp(.95rem,2.4vw,1.2rem);color:var(--humo)}
-.susto.chau{animation:sustoOut .35s both}
-@keyframes sustoIn{from{opacity:0}to{opacity:1}}
-@keyframes sustoOut{to{opacity:0}}
-@keyframes sustoShake{
-  0%,100%{transform:translate(0,0) rotate(0) scale(1.06)}
-  12%{transform:translate(-14px,8px) rotate(-1.6deg) scale(1.09)}
-  28%{transform:translate(12px,-10px) rotate(1.4deg) scale(1.08)}
-  46%{transform:translate(-9px,-7px) rotate(-1deg) scale(1.07)}
-  64%{transform:translate(8px,9px) rotate(.9deg) scale(1.06)}
-  82%{transform:translate(-5px,4px) rotate(-.5deg) scale(1.05)}
-}
-
 /* ─────────────── PROGRAMA IMPRIMIBLE ─────────────── */
 .hc-print{
   margin-left:14px;background:none;border:1px solid rgba(36,27,16,.5);color:var(--tinta2);
@@ -736,7 +703,7 @@ footer{
 }
 .hc-print:hover{border-color:var(--carmesi);color:var(--carmesi)}
 @media print{
-  nav,header,.coco-intro,.comousar,.sala,.boleteria,footer,.fab,.fabmenu,#prog,.pista,.hc-print,.telon,.susto,.avisojs{display:none !important}
+  nav,header,.coco-intro,.comousar,.sala,.boleteria,footer,.fab,.fabmenu,#prog,.pista,.hc-print,.telon,.avisojs{display:none !important}
   body{background:#fff;color:#000}
   body::before{display:none}
   #cartelera{padding:0;border:0;background:#fff}
@@ -847,7 +814,7 @@ footer{
 <div class="in">
 <a class="bajar" href="#acomodador-coco">↓ Abrir el programa</a>
 <div class="stats">
-<div class="stat"><div class="n">81</div><div class="l">Juegos en cartel</div></div>
+<div class="stat"><div class="n">83</div><div class="l">Juegos en cartel</div></div>
 <div class="stat"><div class="n">39</div><div class="l">Expansiones</div></div>
 <div class="stat"><div class="n">1–18</div><div class="l">Jugadores</div></div>
 <div class="stat"><div class="n">10–180</div><div class="l">Minutos</div></div>
@@ -884,7 +851,7 @@ footer{
 <div class="wrap">
 <div class="salahead rev">
 <div class="salanum" aria-hidden="true">I</div>
-<div class="salatit"><div class="sobret">Sala 01 — 9 funciones</div><h2>Terror &amp; Suspenso</h2><div class="sub">La especialidad de la casa: nadie se salva solo.</div></div>
+<div class="salatit"><div class="sobret">Sala 01 — 11 funciones</div><h2>Terror &amp; Suspenso</h2><div class="sub">La especialidad de la casa: nadie se salva solo.</div></div>
 <div class="salameta">Función trasnoche</div>
 </div>
 <hr class="regla">
@@ -1049,6 +1016,40 @@ footer{
 
 <button class="vermas" type="button" aria-expanded="false" aria-controls="detalle-g-t09">+ Ficha técnica</button>
 <div class="detalle-juego" hidden="" id="detalle-g-t09"><p>Supervivencia civil en una ciudad sitiada. No se trata de ganar con eficiencia, sino de administrar hambre, frío, heridas, cansancio y decisiones éticas. El juego funciona como una crónica dura: cada salida nocturna puede traer comida, culpa o una pérdida imposible de maquillar.</p><div class="detalle-grid"><div><strong>Ideal para</strong><span>mesas adultas que quieren una experiencia narrativa seria</span></div><div><strong>No ideal si</strong><span>si buscan diversión liviana o escapismo puro</span></div><div><strong>Sensación</strong><span>opresivo, humano, memorable y nada complaciente</span></div></div></div>
+</div>
+</article><article class="afiche rev sinTapa" id="g-t10" style="--d:0ms">
+<div class="lobby" aria-hidden="true"><span class="lb-ini">N</span><span class="lb-tx"><i class="lb-gen">Sci-fi con traición</i><i class="lb-cod">Función T·10</i></span><span class="lb-orn">✦</span><b class="lb-sheen"></b></div>
+<div class="acuerpo">
+<div class="codigo">T·10 · Sci-fi con traición</div>
+<h3>Nemesis</h3>
+<div class="logline">En el espacio nadie oye tus planes… ni la traición del de al lado.</div>
+<p class="pitch">Una tripulación despierta con amnesia en una nave infestada. Explorar, sobrevivir a los Intrusos que evolucionan y volver a la Tierra — mientras cada uno esconde su propio objetivo. Terror sci-fi con ADN de Alien.</p>
+<div class="fichastats">
+<span><span class="k">Jugadores</span>1–5 jugadores</span>
+<span><span class="k">Duración</span>90–180′</span>
+<span><span class="k">Intensidad</span><span class="rombos">◆◆◆◆◆</span> intenso</span>
+<span><span class="k">Modo</span>Roles ocultos</span>
+</div>
+
+<button class="vermas" type="button" aria-expanded="false" aria-controls="detalle-g-t10">+ Ficha técnica</button>
+<div class="detalle-juego" hidden="" id="detalle-g-t10"><p>Semi-cooperativo de terror y ciencia ficción diseñado por Adam Kwapiński (Awaken Realms, 2018). La tripulación despierta con amnesia parcial y debe explorar la nave, gestionar recursos y escapar de los Intrusos —criaturas que se vuelven más letales con cada turno— a lo largo de quince rondas. Cada personaje tiene un mazo asimétrico y un objetivo secreto que puede enfrentarlo al resto: es posible que ganen todos, algunos o nadie. Producción muy alta y tensión constante al estilo de la saga Alien.</p><div class="detalle-grid"><div><strong>Ideal para</strong><span>mesas que disfrutan la traición, el riesgo y la narrativa emergente</span></div><div><strong>No ideal si</strong><span>si se busca cooperación pura sin agendas ocultas</span></div><div><strong>Sensación</strong><span>paranoia, decisiones a vida o muerte, motín en órbita</span></div></div></div>
+</div>
+</article><article class="afiche rev sinTapa" id="g-t11" style="--d:110ms">
+<div class="lobby" aria-hidden="true"><span class="lb-ini">C</span><span class="lb-tx"><i class="lb-gen">Pulp lovecraftiano</i><i class="lb-cod">Función T·11</i></span><span class="lb-orn">✦</span><b class="lb-sheen"></b></div>
+<div class="acuerpo">
+<div class="codigo">T·11 · Pulp lovecraftiano</div>
+<h3>Cthulhu: Death May Die — Miedo a lo Desconocido</h3>
+<div class="logline">Invocá al Primigenio. Después, pegale un tiro en la cara.</div>
+<p class="pitch">Investigadores irrumpen en un ritual para matar a un Dios Antiguo antes de perder la cordura. Dados, locura y acción pulp lovecraftiana. Caja independiente con episodios y Primigenios propios.</p>
+<div class="fichastats">
+<span><span class="k">Jugadores</span>1–5 jugadores</span>
+<span><span class="k">Duración</span>60–180′</span>
+<span><span class="k">Intensidad</span><span class="rombos">◆◆◆◇◇</span> medio</span>
+<span><span class="k">Modo</span>Cooperativo</span>
+</div>
+
+<button class="vermas" type="button" aria-expanded="false" aria-controls="detalle-g-t11">+ Ficha técnica</button>
+<div class="detalle-juego" hidden="" id="detalle-g-t11"><p>Caja independiente de la saga Death May Die (diseño de Rob Daviau y Marco Portugal, CMON), totalmente cooperativa para 1 a 5 jugadores. Los investigadores interrumpen rituales para derribar a Dioses Antiguos, tirando dados y administrando una cordura que, al quebrarse, otorga poder a cambio de riesgo. Esta temporada suma seis episodios y dos Primigenios nuevos, más Monstruos Desconocidos y Reliquias que pueden incorporarse a escenarios previos. Acción pulp veloz sobre la mitología de Lovecraft, con reglas modulares afinadas.</p><div class="detalle-grid"><div><strong>Ideal para</strong><span>quienes buscan terror cósmico dinámico y muy temático</span></div><div><strong>No ideal si</strong><span>si se prefiere una experiencia pausada o de bajo azar</span></div><div><strong>Sensación</strong><span>terror cósmico, tiradas desesperadas, heroísmo temerario</span></div></div></div>
 </div>
 </article></div>
 </div>
@@ -2299,7 +2300,7 @@ footer{
 <h2>Cartelera completa</h2>
 <div class="sub">Todas las funciones, un solo listado — y una boletería para decidir rápido.</div>
 </div>
-<div class="salameta" id="metacartelera">81 juegos · 75 entradas — sagas agrupadas</div>
+<div class="salameta" id="metacartelera">83 juegos · 77 entradas — sagas agrupadas</div>
 </div>
 <hr class="regla">
 
@@ -2331,9 +2332,9 @@ footer{
 <div class="ticket">
 <span class="tk" id="tk-texto">ENTRADA GENERAL — <b>SIN FILTROS</b></span>
 <button class="reset" id="resetf" type="button">Limpiar filtros</button>
-<span class="cuenta"><span id="cuenta">75</span> EN CARTEL</span>
+<span class="cuenta"><span id="cuenta">77</span> EN CARTEL</span>
 </div>
-<div aria-live="polite" class="resultado-filtros" id="resultado-filtros">Mostrando 75 funciones disponibles.</div>
+<div aria-live="polite" class="resultado-filtros" id="resultado-filtros">Mostrando 77 funciones disponibles.</div>
 <div aria-live="polite" class="reco-ticket" hidden="" id="reco-ticket"></div>
 </div>
 
@@ -2407,462 +2408,476 @@ footer{
    <span class="d">120–180′</span>
    <span class="d col-int rombos">◆◆◆◆◇</span>
    <span class="m col-modo">Cooperativo</span>
- </a><a class="fila alt" data-i="9" href="#g-d01">
+ </a><a class="fila alt" data-i="9" href="#g-t10">
+   <span class="c">T·10</span>
+   <span class="nom">Nemesis<small>Terror</small></span>
+   <span class="d">1–5</span>
+   <span class="d">90–180′</span>
+   <span class="d col-int rombos">◆◆◆◆◆</span>
+   <span class="m col-modo">Roles ocultos</span>
+ </a><a class="fila" data-i="10" href="#g-t11">
+   <span class="c">T·11</span>
+   <span class="nom">Cthulhu: Death May Die — Miedo a lo Desconocido<small>Terror</small></span>
+   <span class="d">1–5</span>
+   <span class="d">60–180′</span>
+   <span class="d col-int rombos">◆◆◆◇◇</span>
+   <span class="m col-modo">Cooperativo</span>
+ </a><a class="fila alt" data-i="11" href="#g-d01">
    <span class="c">D·01</span>
    <span class="nom"><span class="fav">★ </span>Sherlock Holmes: Detective Asesor<small>Detectives · 5 cajas de casos</small></span>
    <span class="d">1–8</span>
    <span class="d">90–120′</span>
    <span class="d col-int rombos">◆◆◆◆◇</span>
    <span class="m col-modo">Cooperativo</span>
- </a><a class="fila" data-i="10" href="#g-d02">
+ </a><a class="fila" data-i="12" href="#g-d02">
    <span class="c">D·02</span>
    <span class="nom">Arkham Horror: El Juego de Cartas<small>Detectives</small></span>
    <span class="d">1–4</span>
    <span class="d">60–120′</span>
    <span class="d col-int rombos">◆◆◆◆◆</span>
    <span class="m col-modo">Cooperativo</span>
- </a><a class="fila alt" data-i="11" href="#g-d03">
+ </a><a class="fila alt" data-i="13" href="#g-d03">
    <span class="c">D·03</span>
    <span class="nom">Mysterium<small>Detectives</small></span>
    <span class="d">2–7</span>
    <span class="d">45′</span>
    <span class="d col-int rombos">◆◆◇◇◇</span>
    <span class="m col-modo">Cooperativo</span>
- </a><a class="fila" data-i="12" href="#g-d04">
+ </a><a class="fila" data-i="14" href="#g-d04">
    <span class="c">D·04</span>
    <span class="nom">Misterio<small>Detectives</small></span>
    <span class="d">3–6</span>
    <span class="d">45′</span>
    <span class="d col-int rombos">◆◇◇◇◇</span>
    <span class="m col-modo">Competitivo</span>
- </a><a class="fila alt" data-i="13" href="#g-c01">
+ </a><a class="fila alt" data-i="15" href="#g-c01">
    <span class="c">C·01</span>
    <span class="nom"><span class="fav">★ </span>Paleo<small>Cooperativos · 4 expansiones</small></span>
    <span class="d">1–4</span>
    <span class="d">45–60′</span>
    <span class="d col-int rombos">◆◆◆◇◇</span>
    <span class="m col-modo">Cooperativo</span>
- </a><a class="fila" data-i="14" href="#g-c02">
+ </a><a class="fila" data-i="16" href="#g-c02">
    <span class="c">C·02</span>
    <span class="nom">Sleeping Gods<small>Cooperativos · 2 expansiones</small></span>
    <span class="d">1–4</span>
    <span class="d">60–120′ por sesión</span>
    <span class="d col-int rombos">◆◆◆◆◇</span>
    <span class="m col-modo">Cooperativo</span>
- </a><a class="fila alt" data-i="15" href="#g-c03">
+ </a><a class="fila alt" data-i="17" href="#g-c03">
    <span class="c">C·03</span>
    <span class="nom"><span class="fav">★ </span>Pandemic<small>Cooperativos · 3 expansiones</small></span>
    <span class="d">2–4</span>
    <span class="d">45–60′</span>
    <span class="d col-int rombos">◆◆◆◇◇</span>
    <span class="m col-modo">Cooperativo</span>
- </a><a class="fila" data-i="16" href="#g-c04">
+ </a><a class="fila" data-i="18" href="#g-c04">
    <span class="c">C·04</span>
    <span class="nom">La Tripulación: Mar Profundo<small>Cooperativos</small></span>
    <span class="d">3–5</span>
    <span class="d">30′</span>
    <span class="d col-int rombos">◆◆◇◇◇</span>
    <span class="m col-modo">Cooperativo</span>
- </a><a class="fila alt" data-i="17" href="#g-c05">
+ </a><a class="fila alt" data-i="19" href="#g-c05">
    <span class="c">C·05</span>
    <span class="nom">The Mind<small>Cooperativos</small></span>
    <span class="d">2–4</span>
    <span class="d">20′</span>
    <span class="d col-int rombos">◆◇◇◇◇</span>
    <span class="m col-modo">Cooperativo</span>
- </a><a class="fila" data-i="18" href="#g-c06">
+ </a><a class="fila" data-i="20" href="#g-c06">
    <span class="c">C·06</span>
    <span class="nom">Oltréé<small>Cooperativos</small></span>
    <span class="d">2–4</span>
    <span class="d">60–90′</span>
    <span class="d col-int rombos">◆◆◆◇◇</span>
    <span class="m col-modo">Cooperativo</span>
- </a><a class="fila alt" data-i="19" href="#g-e01">
+ </a><a class="fila alt" data-i="21" href="#g-e01">
    <span class="c">E·01</span>
    <span class="nom"><span class="fav">★ </span>Aventureros al Tren: Europa<small>Estrategia</small></span>
    <span class="d">2–5</span>
    <span class="d">45–60′</span>
    <span class="d col-int rombos">◆◆◇◇◇</span>
    <span class="m col-modo">Competitivo</span>
- </a><a class="fila" data-i="20" href="#g-e02">
+ </a><a class="fila" data-i="22" href="#g-e02">
    <span class="c">E·02</span>
    <span class="nom">Blood Rage<small>Estrategia · 2 expansiones · hasta 5 jugadores</small></span>
    <span class="d">2–5</span>
    <span class="d">60–90′</span>
    <span class="d col-int rombos">◆◆◆◆◇</span>
    <span class="m col-modo">Competitivo</span>
- </a><a class="fila alt" data-i="21" href="#g-e03">
+ </a><a class="fila alt" data-i="23" href="#g-e03">
    <span class="c">E·03</span>
    <span class="nom">7 Wonders Duel<small>Estrategia</small></span>
    <span class="d">2</span>
    <span class="d">30′</span>
    <span class="d col-int rombos">◆◆◆◇◇</span>
    <span class="m col-modo">Competitivo</span>
- </a><a class="fila" data-i="22" href="#g-e04">
+ </a><a class="fila" data-i="24" href="#g-e04">
    <span class="c">E·04</span>
    <span class="nom">Akropolis<small>Estrategia · + Athena</small></span>
    <span class="d">1–4</span>
    <span class="d">25–30′</span>
    <span class="d col-int rombos">◆◆◇◇◇</span>
    <span class="m col-modo">Competitivo</span>
- </a><a class="fila alt" data-i="23" href="#g-e05">
+ </a><a class="fila alt" data-i="25" href="#g-e05">
    <span class="c">E·05</span>
    <span class="nom">Ankh: Dioses de Egipto<small>Estrategia</small></span>
    <span class="d">2–5 jugadores</span>
    <span class="d">90–120′</span>
    <span class="d col-int rombos">◆◆◆◆◇</span>
    <span class="m col-modo">Competitivo</span>
- </a><a class="fila" data-i="24" href="#g-e06">
+ </a><a class="fila" data-i="26" href="#g-e06">
    <span class="c">E·06</span>
    <span class="nom">Azul<small>Estrategia</small></span>
    <span class="d">2–4</span>
    <span class="d">30–45′</span>
    <span class="d col-int rombos">◆◆◇◇◇</span>
    <span class="m col-modo">Competitivo</span>
- </a><a class="fila alt" data-i="25" href="#g-e07">
+ </a><a class="fila alt" data-i="27" href="#g-e07">
    <span class="c">E·07</span>
    <span class="nom">Carcassonne<small>Estrategia</small></span>
    <span class="d">2–5</span>
    <span class="d">35′</span>
    <span class="d col-int rombos">◆◆◇◇◇</span>
    <span class="m col-modo">Competitivo</span>
- </a><a class="fila" data-i="26" href="#g-e08">
+ </a><a class="fila" data-i="28" href="#g-e08">
    <span class="c">E·08</span>
    <span class="nom">Catan<small>Estrategia · + ampliación 5/6 jugadores</small></span>
    <span class="d">3–6</span>
    <span class="d">75–90′</span>
    <span class="d col-int rombos">◆◆◆◇◇</span>
    <span class="m col-modo">Competitivo</span>
- </a><a class="fila alt" data-i="27" href="#g-e09">
+ </a><a class="fila alt" data-i="29" href="#g-e09">
    <span class="c">E·09</span>
    <span class="nom">Clank!<small>Estrategia</small></span>
    <span class="d">2–4</span>
    <span class="d">60′</span>
    <span class="d col-int rombos">◆◆◆◇◇</span>
    <span class="m col-modo">Competitivo</span>
- </a><a class="fila" data-i="28" href="#g-e10">
+ </a><a class="fila" data-i="30" href="#g-e10">
    <span class="c">E·10</span>
    <span class="nom">Coffee Rush<small>Estrategia</small></span>
    <span class="d">2–4</span>
    <span class="d">30′</span>
    <span class="d col-int rombos">◆◆◇◇◇</span>
    <span class="m col-modo">Competitivo</span>
- </a><a class="fila alt" data-i="29" href="#g-e11">
+ </a><a class="fila alt" data-i="31" href="#g-e11">
    <span class="c">E·11</span>
    <span class="nom">Cyclades<small>Estrategia · + Titans</small></span>
    <span class="d">2–5 jugadores</span>
    <span class="d">60–90′</span>
    <span class="d col-int rombos">◆◆◆◇◇</span>
    <span class="m col-modo">Competitivo</span>
- </a><a class="fila" data-i="30" href="#g-e12">
+ </a><a class="fila" data-i="32" href="#g-e12">
    <span class="c">E·12</span>
    <span class="nom">Feed the Kraken<small>Estrategia</small></span>
    <span class="d">5–11</span>
    <span class="d">45–90′</span>
    <span class="d col-int rombos">◆◆◆◇◇</span>
    <span class="m col-modo">Roles ocultos</span>
- </a><a class="fila alt" data-i="31" href="#g-e13">
+ </a><a class="fila alt" data-i="33" href="#g-e13">
    <span class="c">E·13</span>
    <span class="nom">Heat<small>Estrategia</small></span>
    <span class="d">1–6</span>
    <span class="d">60′</span>
    <span class="d col-int rombos">◆◆◆◇◇</span>
    <span class="m col-modo">Competitivo</span>
- </a><a class="fila" data-i="32" href="#g-e14">
+ </a><a class="fila" data-i="34" href="#g-e14">
    <span class="c">E·14</span>
    <span class="nom">Quoridor Pac-Man<small>Estrategia</small></span>
    <span class="d">2–5</span>
    <span class="d">15′</span>
    <span class="d col-int rombos">◆◇◇◇◇</span>
    <span class="m col-modo">Competitivo</span>
- </a><a class="fila alt" data-i="33" href="#g-e15">
+ </a><a class="fila alt" data-i="35" href="#g-e15">
    <span class="c">E·15</span>
    <span class="nom">Quorum<small>Estrategia</small></span>
    <span class="d">2–4</span>
    <span class="d">45′</span>
    <span class="d col-int rombos">◆◆◇◇◇</span>
    <span class="m col-modo">Competitivo</span>
- </a><a class="fila" data-i="34" href="#g-e16">
+ </a><a class="fila" data-i="36" href="#g-e16">
    <span class="c">E·16</span>
    <span class="nom">Survive the Island<small>Estrategia · + monstruos marinos</small></span>
    <span class="d">2–5</span>
    <span class="d">45–60′</span>
    <span class="d col-int rombos">◆◆◇◇◇</span>
    <span class="m col-modo">Competitivo</span>
- </a><a class="fila alt" data-i="35" href="#g-e17">
+ </a><a class="fila alt" data-i="37" href="#g-e17">
    <span class="c">E·17</span>
    <span class="nom">TEG<small>Estrategia</small></span>
    <span class="d">2–6</span>
    <span class="d">120′+</span>
    <span class="d col-int rombos">◆◆◆◇◇</span>
    <span class="m col-modo">Competitivo</span>
- </a><a class="fila" data-i="36" href="#g-e18">
+ </a><a class="fila" data-i="38" href="#g-e18">
    <span class="c">E·18</span>
    <span class="nom">Twilight Struggle<small>Estrategia</small></span>
    <span class="d">2</span>
    <span class="d">150–180′</span>
    <span class="d col-int rombos">◆◆◆◆◆</span>
    <span class="m col-modo">Competitivo</span>
- </a><a class="fila alt" data-i="37" href="#g-e19">
+ </a><a class="fila alt" data-i="39" href="#g-e19">
    <span class="c">E·19</span>
    <span class="nom">Wingspan<small>Estrategia · + aves de América</small></span>
    <span class="d">1–5</span>
    <span class="d">60–75′</span>
    <span class="d col-int rombos">◆◆◆◇◇</span>
    <span class="m col-modo">Competitivo</span>
- </a><a class="fila" data-i="38" href="#g-r01">
+ </a><a class="fila" data-i="40" href="#g-r01">
    <span class="c">R·01</span>
    <span class="nom"><span class="fav">★ </span>Say My Name<small>Fiesta · + 2 expansiones</small></span>
    <span class="d">4+ en equipos</span>
    <span class="d">30–45′</span>
    <span class="d col-int rombos">◆◇◇◇◇</span>
    <span class="m col-modo">En equipos</span>
- </a><a class="fila alt" data-i="39" href="#g-r02">
+ </a><a class="fila alt" data-i="41" href="#g-r02">
    <span class="c">R·02</span>
    <span class="nom"><span class="fav">★ </span>Dixit<small>Fiesta · 5 expansiones de cartas</small></span>
    <span class="d">3–8</span>
    <span class="d">30–45′</span>
    <span class="d col-int rombos">◆◇◇◇◇</span>
    <span class="m col-modo">Competitivo</span>
- </a><a class="fila" data-i="40" href="#g-r03">
+ </a><a class="fila" data-i="42" href="#g-r03">
    <span class="c">R·03</span>
    <span class="nom">Código Secreto<small>Fiesta</small></span>
    <span class="d">2–8</span>
    <span class="d">15–30′</span>
    <span class="d col-int rombos">◆◆◇◇◇</span>
    <span class="m col-modo">En equipos</span>
- </a><a class="fila alt" data-i="41" href="#g-r04">
+ </a><a class="fila alt" data-i="43" href="#g-r04">
    <span class="c">R·04</span>
    <span class="nom">Wavelength<small>Fiesta</small></span>
    <span class="d">2–12</span>
    <span class="d">30–45′</span>
    <span class="d col-int rombos">◆◇◇◇◇</span>
    <span class="m col-modo">En equipos</span>
- </a><a class="fila" data-i="42" href="#g-r05">
+ </a><a class="fila" data-i="44" href="#g-r05">
    <span class="c">R·05</span>
    <span class="nom">El Melómano<small>Fiesta</small></span>
    <span class="d">4+ en equipos</span>
    <span class="d">30–45′</span>
    <span class="d col-int rombos">◆◇◇◇◇</span>
    <span class="m col-modo">En equipos</span>
- </a><a class="fila alt" data-i="43" href="#g-r06">
+ </a><a class="fila alt" data-i="45" href="#g-r06">
    <span class="c">R·06</span>
    <span class="nom">Unánimo Party<small>Fiesta</small></span>
    <span class="d">3–12</span>
    <span class="d">20′</span>
    <span class="d col-int rombos">◆◇◇◇◇</span>
    <span class="m col-modo">Competitivo</span>
- </a><a class="fila" data-i="44" href="#g-r07">
+ </a><a class="fila" data-i="46" href="#g-r07">
    <span class="c">R·07</span>
    <span class="nom">Tutti Frutti<small>Fiesta</small></span>
    <span class="d">2–8</span>
    <span class="d">20′</span>
    <span class="d col-int rombos">◆◇◇◇◇</span>
    <span class="m col-modo">Competitivo</span>
- </a><a class="fila alt" data-i="45" href="#g-r08">
+ </a><a class="fila alt" data-i="47" href="#g-r08">
    <span class="c">R·08</span>
    <span class="nom">Dígalo con Memes<small>Fiesta</small></span>
    <span class="d">3–8</span>
    <span class="d">30′</span>
    <span class="d col-int rombos">◆◇◇◇◇</span>
    <span class="m col-modo">Competitivo</span>
- </a><a class="fila" data-i="46" href="#g-r09">
+ </a><a class="fila" data-i="48" href="#g-r09">
    <span class="c">R·09</span>
    <span class="nom">Taco Gato Cabra Queso Pizza<small>Fiesta</small></span>
    <span class="d">2–8</span>
    <span class="d">15′</span>
    <span class="d col-int rombos">◆◇◇◇◇</span>
    <span class="m col-modo">Competitivo</span>
- </a><a class="fila alt" data-i="47" href="#g-r10">
+ </a><a class="fila alt" data-i="49" href="#g-r10">
    <span class="c">R·10</span>
    <span class="nom">Ghost Blitz<small>Fiesta</small></span>
    <span class="d">2–8</span>
    <span class="d">15′</span>
    <span class="d col-int rombos">◆◇◇◇◇</span>
    <span class="m col-modo">Competitivo</span>
- </a><a class="fila" data-i="48" href="#g-r11">
+ </a><a class="fila" data-i="50" href="#g-r11">
    <span class="c">R·11</span>
    <span class="nom">Polilla Tramposa<small>Fiesta</small></span>
    <span class="d">3–5</span>
    <span class="d">20′</span>
    <span class="d col-int rombos">◆◇◇◇◇</span>
    <span class="m col-modo">Competitivo</span>
- </a><a class="fila alt" data-i="49" href="#g-r12">
+ </a><a class="fila alt" data-i="51" href="#g-r12">
    <span class="c">R·12</span>
    <span class="nom">Kaker Laken Poker<small>Fiesta</small></span>
    <span class="d">2–6</span>
    <span class="d">20′</span>
    <span class="d col-int rombos">◆◇◇◇◇</span>
    <span class="m col-modo">Competitivo</span>
- </a><a class="fila" data-i="50" href="#g-r13">
+ </a><a class="fila" data-i="52" href="#g-r13">
    <span class="c">R·13</span>
    <span class="nom">Virus!<small>Fiesta · 2 expansiones</small></span>
    <span class="d">2–6</span>
    <span class="d">20′</span>
    <span class="d col-int rombos">◆◇◇◇◇</span>
    <span class="m col-modo">Competitivo</span>
- </a><a class="fila alt" data-i="51" href="#g-r14">
+ </a><a class="fila alt" data-i="53" href="#g-r14">
    <span class="c">R·14</span>
    <span class="nom">Flip 7<small>Fiesta</small></span>
    <span class="d">3 a 18</span>
    <span class="d">20′</span>
    <span class="d col-int rombos">◆◇◇◇◇</span>
    <span class="m col-modo">Competitivo</span>
- </a><a class="fila" data-i="52" href="#g-r15">
+ </a><a class="fila" data-i="54" href="#g-r15">
    <span class="c">R·15</span>
    <span class="nom">La Gran Siete<small>Fiesta</small></span>
    <span class="d">3–8</span>
    <span class="d">15–20′</span>
    <span class="d col-int rombos">◆◇◇◇◇</span>
    <span class="m col-modo">Competitivo</span>
- </a><a class="fila alt" data-i="53" href="#g-r16">
+ </a><a class="fila alt" data-i="55" href="#g-r16">
    <span class="c">R·16</span>
    <span class="nom">Kluster<small>Fiesta</small></span>
    <span class="d">1–4</span>
    <span class="d">10′</span>
    <span class="d col-int rombos">◆◇◇◇◇</span>
    <span class="m col-modo">Competitivo</span>
- </a><a class="fila" data-i="54" href="#g-r17">
+ </a><a class="fila" data-i="56" href="#g-r17">
    <span class="c">R·17</span>
    <span class="nom">Cobra Shanghai<small>Fiesta</small></span>
    <span class="d">2–6</span>
    <span class="d">15′</span>
    <span class="d col-int rombos">◆◇◇◇◇</span>
    <span class="m col-modo">Competitivo</span>
- </a><a class="fila alt" data-i="55" href="#g-r18">
+ </a><a class="fila alt" data-i="57" href="#g-r18">
    <span class="c">R·18</span>
    <span class="nom">Hombres Lobo de Castronegro<small>Fiesta</small></span>
    <span class="d">8 a 18</span>
    <span class="d">30′</span>
    <span class="d col-int rombos">◆◇◇◇◇</span>
    <span class="m col-modo">Roles ocultos</span>
- </a><a class="fila" data-i="56" href="#g-r19">
+ </a><a class="fila" data-i="58" href="#g-r19">
    <span class="c">R·19</span>
    <span class="nom">Alfamanía<small>Fiesta</small></span>
    <span class="d">2–8</span>
    <span class="d">20′</span>
    <span class="d col-int rombos">◆◇◇◇◇</span>
    <span class="m col-modo">Competitivo</span>
- </a><a class="fila alt" data-i="57" href="#g-r20">
+ </a><a class="fila alt" data-i="59" href="#g-r20">
    <span class="c">R·20</span>
    <span class="nom">Remando en Dulce de Leche<small>Fiesta</small></span>
    <span class="d">2–6</span>
    <span class="d">30–60′</span>
    <span class="d col-int rombos">◆◇◇◇◇</span>
    <span class="m col-modo">Competitivo</span>
- </a><a class="fila" data-i="58" href="#g-r21">
+ </a><a class="fila" data-i="60" href="#g-r21">
    <span class="c">R·21</span>
    <span class="nom">Trio<small>Fiesta</small></span>
    <span class="d">3–6</span>
    <span class="d">15′</span>
    <span class="d col-int rombos">◆◇◇◇◇</span>
    <span class="m col-modo">Competitivo</span>
- </a><a class="fila alt" data-i="59" href="#g-r22">
+ </a><a class="fila alt" data-i="61" href="#g-r22">
    <span class="c">R·22</span>
    <span class="nom">El Camarero<small>Fiesta</small></span>
    <span class="d">2–6</span>
    <span class="d">20′</span>
    <span class="d col-int rombos">◆◇◇◇◇</span>
    <span class="m col-modo">Competitivo</span>
- </a><a class="fila" data-i="60" href="#g-r23">
+ </a><a class="fila" data-i="62" href="#g-r23">
    <span class="c">R·23</span>
    <span class="nom">Love Letter<small>Fiesta</small></span>
    <span class="d">2–6</span>
    <span class="d">15′</span>
    <span class="d col-int rombos">◆◇◇◇◇</span>
    <span class="m col-modo">Competitivo</span>
- </a><a class="fila alt" data-i="61" href="#g-r24">
+ </a><a class="fila alt" data-i="63" href="#g-r24">
    <span class="c">R·24</span>
    <span class="nom">La Dama y el Tigre<small>Fiesta</small></span>
    <span class="d">1–6</span>
    <span class="d">15′</span>
    <span class="d col-int rombos">◆◇◇◇◇</span>
    <span class="m col-modo">Competitivo</span>
- </a><a class="fila" data-i="62" href="#g-r25">
+ </a><a class="fila" data-i="64" href="#g-r25">
    <span class="c">R·25</span>
    <span class="nom">Quickstop<small>Fiesta</small></span>
    <span class="d">2–7</span>
    <span class="d">15–30′</span>
    <span class="d col-int rombos">◆◇◇◇◇</span>
    <span class="m col-modo">Competitivo</span>
- </a><a class="fila alt" data-i="63" href="#g-r26">
+ </a><a class="fila alt" data-i="65" href="#g-r26">
    <span class="c">R·26</span>
    <span class="nom">Caranchos<small>Fiesta</small></span>
    <span class="d">2–6</span>
    <span class="d">30–60′</span>
    <span class="d col-int rombos">◆◇◇◇◇</span>
    <span class="m col-modo">Competitivo</span>
- </a><a class="fila" data-i="64" href="#g-s01">
+ </a><a class="fila" data-i="66" href="#g-s01">
    <span class="c">S·01</span>
    <span class="nom">En Palabras<small>Sobremesa · 3 ediciones</small></span>
    <span class="d">2 o más</span>
    <span class="d">el que quieran</span>
    <span class="d col-int rombos">◆◇◇◇◇</span>
    <span class="m col-modo">Cooperativo</span>
- </a><a class="fila alt" data-i="65" href="#g-k01">
+ </a><a class="fila alt" data-i="67" href="#g-k01">
    <span class="c">K·01</span>
    <span class="nom">Monopoly<small>Clásicos</small></span>
    <span class="d">2–8</span>
    <span class="d">90′+</span>
    <span class="d col-int rombos">◆◇◇◇◇</span>
    <span class="m col-modo">Competitivo</span>
- </a><a class="fila" data-i="66" href="#g-k02">
+ </a><a class="fila" data-i="68" href="#g-k02">
    <span class="c">K·02</span>
    <span class="nom">UNO<small>Clásicos</small></span>
    <span class="d">2–10</span>
    <span class="d">30′</span>
    <span class="d col-int rombos">◆◇◇◇◇</span>
    <span class="m col-modo">Competitivo</span>
- </a><a class="fila alt" data-i="67" href="#g-k03">
+ </a><a class="fila alt" data-i="69" href="#g-k03">
    <span class="c">K·03</span>
    <span class="nom">Dominó<small>Clásicos</small></span>
    <span class="d">2–4</span>
    <span class="d">20′</span>
    <span class="d col-int rombos">◆◇◇◇◇</span>
    <span class="m col-modo">Competitivo</span>
- </a><a class="fila" data-i="68" href="#g-k04">
+ </a><a class="fila" data-i="70" href="#g-k04">
    <span class="c">K·04</span>
    <span class="nom">Generala<small>Clásicos</small></span>
    <span class="d">2–6</span>
    <span class="d">20′</span>
    <span class="d col-int rombos">◆◇◇◇◇</span>
    <span class="m col-modo">Competitivo</span>
- </a><a class="fila alt" data-i="69" href="#g-k05">
+ </a><a class="fila alt" data-i="71" href="#g-k05">
    <span class="c">K·05</span>
    <span class="nom">Naipes Españoles<small>Clásicos</small></span>
    <span class="d">2–6</span>
    <span class="d">a convenir</span>
    <span class="d col-int rombos">◆◇◇◇◇</span>
    <span class="m col-modo">Competitivo</span>
- </a><a class="fila" data-i="70" href="#g-k06">
+ </a><a class="fila" data-i="72" href="#g-k06">
    <span class="c">K·06</span>
    <span class="nom">Batalla Naval<small>Clásicos</small></span>
    <span class="d">2</span>
    <span class="d">20′</span>
    <span class="d col-int rombos">◆◇◇◇◇</span>
    <span class="m col-modo">Competitivo</span>
- </a><a class="fila alt" data-i="71" href="#g-k07">
+ </a><a class="fila alt" data-i="73" href="#g-k07">
    <span class="c">K·07</span>
    <span class="nom">4 en Línea<small>Clásicos</small></span>
    <span class="d">2</span>
    <span class="d">10′</span>
    <span class="d col-int rombos">◆◇◇◇◇</span>
    <span class="m col-modo">Competitivo</span>
- </a><a class="fila" data-i="72" href="#g-k08">
+ </a><a class="fila" data-i="74" href="#g-k08">
    <span class="c">K·08</span>
    <span class="nom">Carrera de Mente<small>Clásicos</small></span>
    <span class="d">2–6</span>
    <span class="d">45′</span>
    <span class="d col-int rombos">◆◇◇◇◇</span>
    <span class="m col-modo">En equipos</span>
- </a><a class="fila alt" data-i="73" href="#g-k09">
+ </a><a class="fila alt" data-i="75" href="#g-k09">
    <span class="c">K·09</span>
    <span class="nom">El Erudito<small>Clásicos</small></span>
    <span class="d">2–4 equipos</span>
    <span class="d">60′</span>
    <span class="d col-int rombos">◆◇◇◇◇</span>
    <span class="m col-modo">En equipos</span>
- </a><a class="fila" data-i="74" href="#g-k10">
+ </a><a class="fila" data-i="76" href="#g-k10">
    <span class="c">K·10</span>
    <span class="nom">El Ilustrado<small>Clásicos</small></span>
    <span class="d">2–9</span>
@@ -2881,7 +2896,7 @@ footer{
 <p class="strap" style="margin-top:6px">Las luces se encienden. La próxima historia la elegís vos.</p>
 <div class="creditos">
 Ludoteca Caron · Buenos Aires<br>
-Temporada 2026 — Programa N.º 1 · 10.ª edición · Curaduría de la casa · <a href="#portada">Volver a la marquesina</a>
+Temporada 2026 — Programa N.º 1 · 14.ª edición · Curaduría de la casa · <a href="#portada">Volver a la marquesina</a>
 </div>
 </div>
 </footer>
@@ -2899,7 +2914,7 @@ Temporada 2026 — Programa N.º 1 · 10.ª edición · Curaduría de la casa ·
    feat: afiche destacado · fav: sello de la casa · exp: badge expansiones · log: logline (solo afiches) */
 /* TOTAL_COLECCION: 81 = 82 juegos base de la colección − Junior Pictionary (regalado may-2026).
    Las 75 entradas de JUEGOS son por sagas colapsadas (Sherlock ×5, En Palabras ×3). Si cambia la colección, actualizar acá y en el string de portada. */
-const TOTAL_COLECCION=81;
+const TOTAL_COLECCION=83;
 const JUEGOS=[
 /* ——— SALA 1 · TERROR & SUSPENSO ——— */
 {c:"T·01",n:"Final Girl",tapa:"img/T-01.jpg",sala:"t",jug:[1,2],jl:"1–2 jugadores",min:"30–60′",tb:45,int:4,modo:"Cooperativo",feat:1,fav:1,exp:"15 películas en el archivo",
@@ -2929,6 +2944,14 @@ log:"Alguien en la mesa no quiere que salgas.",
 {c:"T·09",n:"This War of Mine",sala:"t",feat:1,tapa:"img/T-09.jpg",jug:[1,6],min:"120–180′",tb:91,int:4,modo:"Cooperativo",
  log:"No hay héroes cuando la noche se mide en latas.",
  p:"Civiles sobreviviendo a una ciudad sitiada. Duro, hermoso y para mesas dispuestas a sentir de verdad. Avisados están."},
+{c:"T·10",n:"Nemesis",sala:"t",tapa:"#",jug:[1,5],jl:"1–5",min:"90–180′",tb:91,int:5,modo:"Roles ocultos",
+ log:"En el espacio nadie oye tus planes… ni la traición del de al lado.",
+ p:"Una tripulación despierta con amnesia en una nave infestada. Explorar, sobrevivir a los Intrusos que evolucionan y volver a la Tierra — mientras cada uno esconde su propio objetivo. Terror sci-fi con ADN de Alien.",
+ exp:"", gid:"g-t10"},
+{c:"T·11",n:"Cthulhu: Death May Die — Miedo a lo Desconocido",sala:"t",tapa:"#",jug:[1,5],jl:"1–5",min:"60–180′",tb:91,int:3,modo:"Cooperativo",
+ log:"Invocá al Primigenio. Después, pegale un tiro en la cara.",
+ p:"Investigadores irrumpen en un ritual para matar a un Dios Antiguo antes de perder la cordura. Dados, locura y acción pulp lovecraftiana. Caja independiente con episodios y Primigenios propios.",
+ exp:"", gid:"g-t11"},
 
 /* ——— SALA 2 · GABINETE DEL DETECTIVE ——— */
 {c:"D·01",n:"Sherlock Holmes: Detective Asesor",tapa:"img/D-01.jpg",sala:"d",jug:[1,8],min:"90–120′",tb:91,int:4,modo:"Cooperativo",feat:1,fav:1,exp:"5 cajas de casos",
@@ -3105,12 +3128,12 @@ const SALAS=[
 document.body.classList.add("js-on");
 
 
-const DETALLES_JUEGOS={"T·01":{"desc":"Horror solitario y modular: elegís una Final Girl, un asesino y una localización, y la mesa arma una película distinta. La gracia está en gestionar cartas, tiempo y horror mientras rescatás víctimas, buscás objetos y decidís cuándo dejar de correr para enfrentar al villano.","ideal":"una noche solo, con tensión y revancha rápida","no":"mesas que necesitan cooperación o charla constante","sens":"slasher táctico, presión creciente, final cinematográfico","gid":"g-t01"},"T·02":{"desc":"Sci‑fi horror grande, físico y paranoico. La escuadra entra a una instalación infestada sabiendo que va a encontrar algo peor que un simple combate: ruido, heridas, objetivos personales y decisiones que pueden salvar al grupo o condenarlo.","ideal":"grupo con ganas de una película de aliens larga y tensa","no":"partidas rápidas o mesas que odian la traición posible","sens":"marines contra la colmena, épica sucia, supervivencia incierta","gid":"g-t02"},"T·03":{"desc":"Cooperativo lovecraftiano de acción directa: primero hay que interrumpir el ritual, después sobrevivir a cultistas, monstruos y a la locura propia. No es un misterio lento: es entrar a golpes, aceptar que algo se va a romper y tratar de matar a un dios antes de caer.","ideal":"quienes quieren miniaturas, dados y caos heroico","no":"si buscan investigación pausada o control perfecto","sens":"pulpy, salvaje, gloriosamente desesperado","gid":"g-t03"},"T·04":{"desc":"Aventura cooperativa guiada por app, con exploración, pistas y eventos ocultos. La aplicación maneja la mansión, los monstruos y los giros narrativos, mientras la mesa decide cómo investigar, pelear, separarse o permanecer junta antes de que Arkham se cierre sobre ustedes.","ideal":"mesas que quieren inmersión, historia y atmósfera","no":"si no quieren depender de una app o preparar muchos componentes","sens":"misterio lovecraftiano, susto elegante, campaña de una noche","gid":"g-t04"},"T·05":{"desc":"Cooperativo minimalista de terror: cada paso revela una loseta y deja que la oscuridad borre lo que queda atrás. Las velas duran poco, el mapa cambia todo el tiempo y escapar exige memoria, comunicación y aceptar que no siempre conviene ir a buscar al perdido.","ideal":"terror corto, silencioso y fácil de enseñar","no":"si quieren combate, desarrollo de personaje o mucho texto","sens":"claustrofobia, oscuridad viva, cooperación con los dientes apretados","gid":"g-t05"},"T·06":{"desc":"Horror asimétrico de movimiento oculto: un jugador encarna al asesino y los demás intentan escapar sin verlo venir. El suspenso nace del sonido, la incertidumbre y la lectura de intenciones; no gana quien pega más fuerte, sino quien administra mejor el miedo.","ideal":"una mesa que disfruta perseguir, esconderse y gritar","no":"si el grupo no quiere roles enfrentados","sens":"casa embrujada, pasos en el pasillo, gato y ratón","gid":"g-t06"},"T·07":{"desc":"Cooperativo de zombis con espíritu de blockbuster. Los supervivientes buscan equipo, abren puertas, suben de nivel y limpian escenarios mientras la ciudad se llena de muertos. Es directo, vistoso y muy de “hagamos ruido total, después vemos cómo salimos”.","ideal":"iniciar gente en miniaturas sin ponerse solemnes","no":"si quieren terror psicológico o decisiones morales duras","sens":"palomitas, motosierra, hordas y festejo de mesa","gid":"g-t07"},"T·08":{"desc":"Primero todos exploran la mansión juntos: aparecen habitaciones, objetos, presagios y eventos raros. Después llega el Haunt y la partida cambia de género: puede aparecer un traidor, un monstruo o una regla absurda que convierte la casa en una historia distinta cada vez.","ideal":"grupos narrativos que toleran sorpresa y caos","no":"si buscan balance competitivo quirúrgico","sens":"casa viva, giro de película, risas nerviosas","gid":"g-t08"},"T·09":{"desc":"Supervivencia civil en una ciudad sitiada. No se trata de ganar con eficiencia, sino de administrar hambre, frío, heridas, cansancio y decisiones éticas. El juego funciona como una crónica dura: cada salida nocturna puede traer comida, culpa o una pérdida imposible de maquillar.","ideal":"mesas adultas que quieren una experiencia narrativa seria","no":"si buscan diversión liviana o escapismo puro","sens":"opresivo, humano, memorable y nada complaciente","gid":"g-t09"},"D·01":{"desc":"Investigación pura, sin tablero tradicional. La mesa recibe un caso, consulta el mapa, el directorio y el periódico, y decide a qué pistas dedicar tiempo. La victoria no está en tirar dados, sino en razonar juntos y llegar a una conclusión antes que Holmes los humille.","ideal":"pareja o grupo que disfruta discutir hipótesis","no":"si llegan cansados o quieren acción inmediata","sens":"café, lápiz, Londres victoriano y orgullo intelectual","gid":"g-d01"},"C·01":{"desc":"Cooperativo de supervivencia en la Edad de Piedra. Cada grupo explora cartas sin saber del todo qué encontrará: comida, peligro, herramientas, heridas o una decisión incómoda. Se gana si la tribu completa su objetivo y llega viva al final del día.","ideal":"pareja o grupo que quiere sufrir unido y celebrar cada logro","no":"si no toleran perder por desgaste acumulado","sens":"aventura primitiva, decisiones tensas, tribu contra mundo","gid":"g-c01"},"C·02":{"desc":"Campaña cooperativa de exploración: un barco perdido navega un atlas lleno de islas, ciudades, ruinas y encuentros. Cada localización abre párrafos de historia, recompensas y consecuencias, con una tripulación que se cansa, mejora y arrastra heridas de sesión en sesión.","ideal":"quienes quieren perderse varias noches en una aventura","no":"si buscan una partida cerrada y autoconclusiva","sens":"viaje largo, mapa misterioso, descubrimiento constante","gid":"g-c02"},"C·03":{"desc":"Cooperativo moderno y clarísimo: cada jugador tiene un rol, el mapa se infecta y el equipo debe viajar, tratar focos y juntar cartas para descubrir curas antes de que los brotes se salgan de control. Es tensión accesible, conversación permanente y derrota compartida.","ideal":"presentar cooperativos a casi cualquier mesa","no":"si alguien odia planificar en voz alta con el grupo","sens":"reloj global, trabajo en equipo, “una más y sale”","gid":"g-c03"},"E·01":{"desc":"Construcción de rutas por Europa con reglas simples y decisiones muy visibles. Tomás cartas, reclamás trayectos, conectás ciudades y tratás de completar destinos secretos antes de quedarte sin trenes. La edición Europa agrega túneles, ferries y estaciones para hacerlo más amable y más picante.","ideal":"familia, pareja o gente nueva en juegos modernos","no":"si quieren conflicto directo fuerte","sens":"viaje elegante, bloqueo suave, satisfacción ferroviaria","gid":"g-e01"},"E·02":{"desc":"Control de áreas vikingo donde morir también puede dar gloria. Cada era empieza con draft de cartas y termina con batallas, saqueos y Ragnarök destruyendo provincias. El juego premia planear combos, leer al rival y aceptar que una buena derrota puede valer más que sobrevivir.","ideal":"grupo competitivo que disfruta épica y choque frontal","no":"si molestan las mayorías, las cartas fuertes o el ataque directo","sens":"Ragnarök, minis enormes, estrategia con hacha","gid":"g-e02"},"E·05":{"desc":"Control de áreas entre dioses egipcios que pelean por no ser olvidados. Cada deidad tiene poderes propios, seguidores en el tablero y guardianes míticos; la partida es elegante, tensa y con un giro muy particular: el juego puede forzar alianzas cuando algunos dioses quedan atrás.","ideal":"quienes quieren estrategia confrontativa con presencia de mesa","no":"si el grupo rechaza la negociación dura o las mayorías","sens":"culto, territorio, divinidad en decadencia","gid":"g-e05"},"E·11":{"desc":"Conquista del Egeo mediante subastas por el favor de los dioses. Ares permite atacar, Poseidón mueve flotas, Atenea trae filósofos y Zeus cambia el orden del Olimpo. La puja es el corazón: ganar el dios correcto en el momento justo vale más que tener el ejército más grande.","ideal":"mesas que disfrutan negociación, tensión y oportunismo","no":"si no quieren pujas ni ataques directos","sens":"mitología, subasta cruel, guerra contenida hasta explotar","gid":"g-e11"},"R·01":{"desc":"Party por equipos que mezcla celebridades, pistas tipo Taboo, mímica y rondas rápidas donde el grupo empieza a reconocer sus propios códigos. Primero se explica; después la mesa ya grita nombres, gestos y asociaciones imposibles como si fueran un idioma privado.","ideal":"asados, previas y grupos con ganas de actuar un poco","no":"si la mesa está tímida o quiere pensar en silencio","sens":"ruido, complicidad, frases que quedan","gid":"g-r01"},"R·02":{"desc":"Juego de imaginación y lectura social: el narrador elige una carta ilustrada y da una pista que no debe ser ni demasiado obvia ni demasiado imposible. Los demás mezclan cartas propias para confundir, votan y revelan cuánto se conocen las cabezas de la mesa.","ideal":"familia, grupos creativos o gente que disfruta interpretar imágenes","no":"si todos quieren estrategia pura y cero subjetividad","sens":"poesía rara, intuición, conversación visual","gid":"g-r02"},"K·09":{"desc":"La trivia de Maldón donde las preguntas se agrupan por formato y no por tema: Secuencia (ordenar cinco elementos), Asociación (unir columnas), En común y Aproximación. Según el casillero se apuesta plata del juego antes de responder, así que administrar lo que uno cree saber vale tanto como saberlo. Ilustrado por Liniers.","ideal":"equipos mixtos donde cada generación aporta lo suyo","no":"si la mesa quiere acción física o respuestas al grito","sens":"deducción, apuestas medidas, «¡lo sabía!»","gid":"g-k09"},"D·02":{"desc":"Campaña cooperativa de investigación y terror cósmico: cada escenario te obliga a preparar mazos, descubrir pistas, medir riesgos y aceptar consecuencias que vuelven en la siguiente partida. Es más narrativo y persistente que un cooperativo de una sola noche.","ideal":"pareja o grupo chico que quiera campaña y construcción de mazos","no":"si quieren abrir, explicar y cerrar en media hora","sens":"misterio, preparación, tensión acumulada","gid":"g-d02"},"D·03":{"desc":"Un fantasma intenta guiar a los médiums con cartas de visión surrealistas. La mesa conversa, interpreta imágenes imposibles y trata de reconstruir quién, dónde y con qué ocurrió el crimen antes de que se acabe el tiempo.","ideal":"familias y grupos que disfrutan interpretar imágenes","no":"si el grupo se frustra con pistas ambiguas","sens":"sueño raro, deducción suave, charla colectiva","gid":"g-d03"},"D·04":{"desc":"Deducción clásica de sospechosos, armas y habitaciones: preguntar bien, anotar mejor y cerrar el caso antes que los demás. Funciona cuando la mesa quiere competir sin aprender reglas modernas ni preparar demasiado.","ideal":"nostalgia, familia y detectives casuales","no":"si buscan sorpresa narrativa o cooperación","sens":"clásico policial, descarte, acusación final","gid":"g-d04"},"C·04":{"desc":"Cooperativo de bazas con comunicación limitada: todos ven parte del problema, nadie puede decirlo todo, y cada misión cambia la forma de pensar la mano. En Mar Profundo el reto es más variado y flexible, con objetivos que obligan a coordinar silenciosamente.","ideal":"mesas que aman cartas, lógica y miradas cómplices","no":"si alguien odia jugar sin poder hablar libremente","sens":"sincronía, precisión, pequeño milagro colectivo","gid":"g-c04"},"C·05":{"desc":"Un experimento de sincronización: jugar cartas en orden ascendente sin hablar ni hacer señas. Parece imposible hasta que la mesa entra en ritmo; después cada pausa se vuelve una apuesta emocional.","ideal":"relleno cooperativo extraño y memorable","no":"si necesitan reglas explícitas para cada decisión","sens":"telepatía falsa, silencio, carcajada nerviosa","gid":"g-c05"},"C·06":{"desc":"Aventura cooperativa de patrulla fantástica: el grupo protege una fortaleza, sale al camino, resuelve encuentros y deja que las crónicas empujen la historia. Tiene aire de cuento ilustrado más que de dungeon crawler pesado.","ideal":"familias o pareja que quieran fantasía narrativa accesible","no":"si buscan optimización dura o combate táctico profundo","sens":"cuento, expedición, heroicidad amable","gid":"g-c06"},"E·03":{"desc":"Duelo de civilizaciones para dos jugadores: elegís cartas, desarrollás ciencia, ejército y maravillas, y vigilás tres condiciones de victoria a la vez. La tensión está en cada carta que tomás y en cada carta que dejás disponible.","ideal":"parejas competitivas que quieran estrategia compacta","no":"si buscan juego relajado sin bloqueo directo","sens":"ajedrez de civilizaciones, presión, revancha inmediata","gid":"g-e03"},"E·04":{"desc":"Colocación de losetas en altura: no solo importa dónde construir, sino cuándo tapar, subir y multiplicar puntos. Es rápido de explicar y deja esa sensación deliciosa de ciudad que crece en tres dimensiones.","ideal":"quienes quieren estrategia bella, corta y cerebral","no":"si el grupo prefiere azar o negociación","sens":"polis elegante, puzzle espacial, filo silencioso","gid":"g-e04"},"E·06":{"desc":"Elegir azulejos, completar patrones y evitar que lo hermoso se convierta en castigo. Es abstracto, táctil y muy limpio: fácil de enseñar, pero con suficiente maldad para arruinarle el mural al de al lado.","ideal":"entrada elegante a juegos modernos","no":"si quieren tema fuerte o mucha narración","sens":"belleza, cálculo, bloqueo sutil","gid":"g-e06"},"E·07":{"desc":"Losetas medievales que forman caminos, ciudades y campos. La partida parece tranquila hasta que alguien mete un meeple en tu ciudad o te disputa una granja. Clásico porque cualquiera entra, pero siempre hay una decisión incómoda.","ideal":"familias y mesas mixtas con ganas de estrategia amable","no":"si buscan mucha interacción verbal o épica","sens":"campiña, oportunismo, expansión orgánica","gid":"g-e07"},"E·08":{"desc":"Colonizar una isla produciendo y negociando recursos: madera por oveja, trigo por ladrillo y una promesa que quizá no se cumpla. El corazón del juego es leer la mesa y comerciar mejor que los dados.","ideal":"grupos que disfrutan negociar y pactar","no":"si odian el azar de dados o quedarse bloqueados","sens":"comercio, expansión, diplomacia doméstica","gid":"g-e08"},"E·09":{"desc":"Deck-building con exploración y carrera por escapar vivo. Cada carta mejora tu plan, pero cada ruido despierta al dragón; el dilema es cuánto tesoro vale arriesgar antes de salir corriendo.","ideal":"aventura competitiva con humor y tensión creciente","no":"si buscan control total o cero azar","sens":"saqueo, codicia, dragón respirando cerca","gid":"g-e09"},"E·10":{"desc":"Programación espacial de baristas: moverse por ingredientes, completar pedidos y optimizar rutas mientras la cafetería se llena. Es simpático por fuera, pero exige mirar dos turnos adelante si no querés servir tarde.","ideal":"mesas que quieren puzzle ágil y colorido","no":"si buscan interacción agresiva o tema oscuro","sens":"rush de cocina, orden mental, presión amable","gid":"g-e10"},"E·12":{"desc":"Roles ocultos en alta mar: el barco avanza, pero nadie está seguro de quién empuja hacia puerto seguro, quién quiere entregarlo a los piratas y quién susurra por el Kraken. La gracia está en discutir rutas, acusar y leer votaciones.","ideal":"grupos grandes que disfrutan mentir con teatralidad","no":"si la mesa odia sospechar de todos","sens":"motín, paranoia, negociación ruidosa","gid":"g-e12"},"E·13":{"desc":"Carreras con gestión de mano y motor: acelerar es fácil, frenar bien es lo difícil. Cada curva te obliga a calcular calor, marchas y rebufo, con una sensación de velocidad muy clara sin volverse simulador pesado.","ideal":"competencia emocionante sin reglas interminables","no":"si esperan azar puro o choques constantes","sens":"recta final, motor al rojo, adelantamiento limpio","gid":"g-e13"},"E·14":{"desc":"El clásico duelo de laberinto llevado al universo Pac-Man: avanzar, bloquear y leer el camino del rival. Las reglas entran en segundos, pero cada muro puede cambiar toda la persecución.","ideal":"duelos rápidos y partidas de revancha","no":"si quieren tema narrativo o varios jugadores","sens":"persecución, bloqueo, pulseada espacial","gid":"g-e14"},"E·15":{"desc":"Juego de cartas de doble uso: cada una puede ir al mapa —sumando influencia en una de las seis provincias del imperio— o a tu zona personal, armando colecciones de milicia, comercio, arquitectura e intriga que puntúan al final. Doce rondas exactas y cartas de dioses que alteran el valor de las provincias cuando menos conviene.","ideal":"dos o tres jugadores que quieran pensar sin reglamento pesado","no":"si esperan negociación hablada: acá se negocia con cartas","sens":"tironeo de mayorías, cálculo fino, «una ronda más»","gid":"g-e15"},"E·16":{"desc":"La isla se hunde y todos quieren sacar sus exploradores antes que el mar se los coma. Parece familiar, pero es una máquina de maldades: tiburones, monstruos y rutas de escape que se arruinan en el peor momento.","ideal":"grupo competitivo que se banca traiciones divertidas","no":"si alguien se toma personal que le hundan el bote","sens":"caos tropical, venganza, risa malvada","gid":"g-e16"},"E·17":{"desc":"Conquista territorial de escuela argentina: objetivos secretos, alianzas de palabra y dados que deciden imperios. Brilla cuando la mesa negocia, amenaza y sobreactúa cada frontera.","ideal":"sobremesa larga con pactos y traiciones","no":"si no quieren azar ni discusiones diplomáticas","sens":"mapa, dados, alianza que dura poco","gid":"g-e17"},"E·18":{"desc":"La Guerra Fría completa para dos: cartas históricas, influencia global y crisis que pueden escalar demasiado. Es denso, tenso y brillante cuando ambos aceptan jugar una pulseada larga de control político.","ideal":"dos jugadores con ganas de estrategia histórica seria","no":"si buscan algo liviano o de explicación corta","sens":"geopolítica, presión nuclear, ajedrez histórico","gid":"g-e18"},"E·19":{"desc":"Construir un santuario de aves combinando hábitats, alimentos, huevos y poderes. Es competitivo sin sentirse agresivo, con una producción hermosa y una curva de satisfacción muy alta cuando el motor empieza a cantar.","ideal":"mesas que disfrutan motores, naturaleza y ritmo tranquilo","no":"si necesitan conflicto directo constante","sens":"motor sereno, colección, belleza natural","gid":"g-e19"},"R·03":{"desc":"Dos equipos intentan ubicar a sus agentes en una grilla de palabras usando pistas de una sola palabra. La tensión no está en hablar mucho, sino en decir lo justo para que tu equipo entienda sin tocar al asesino.","ideal":"grupos grandes que disfrutan asociaciones mentales","no":"si quieren actuar, dibujar o moverse","sens":"espionaje abstracto, complicidad, miedo a una palabra","gid":"g-r03"},"R·04":{"desc":"Un party de sintonía mental: una pista debe ubicarse en una escala invisible entre dos extremos. La mesa debate matices ridículos y descubre que nadie entiende igual conceptos como frío, elegante o peligroso.","ideal":"grupos conversadores y discusiones graciosas","no":"si quieren ganar sin debatir subjetividades","sens":"debate absurdo, intuición grupal, carcajada limpia","gid":"g-r04"},"R·05":{"desc":"Juego musical para tararear, cantar, adivinar y quedar expuesto con dignidad. Funciona porque no premia cantar bien: premia animarse, reconocer canciones y reírse de la memoria colectiva del grupo.","ideal":"previas, familia y mesas con cero vergüenza","no":"si nadie quiere hacer ruido o cantar","sens":"karaoke lúdico, nostalgia, vergüenza compartida","gid":"g-r05"},"R·06":{"desc":"El objetivo es coincidir con la mayoría: ante una consigna, no gana la respuesta más creativa sino la más común. Es simple, rápido y revela cómo piensa el grupo cuando intenta ser normal a propósito.","ideal":"romper el hielo y jugar con gente no jugona","no":"si buscan estrategia o profundidad","sens":"mente colectiva, coincidencias, sorpresa social","gid":"g-r06"},"R·07":{"desc":"El Basta de toda la vida: letra, categorías y velocidad mental. La gracia está en encontrar una palabra válida antes que todos y defenderla con la seguridad de quien inventó medio diccionario.","ideal":"cualquier mesa con papel, lápiz y ganas de gritar basta","no":"si el grupo no disfruta juegos de palabras","sens":"colegio, rapidez, discusión de diccionario","gid":"g-r07"},"R·08":{"desc":"Cartas de situaciones y memes para elegir la combinación más graciosa. No intenta ser justo ni elegante: depende del humor del grupo, de conocer los códigos de la mesa y de bancarse chistes malos.","ideal":"previas informales y grupos con humor compartido","no":"si quieren reglas finas o humor cuidado","sens":"meme, remate, grupo de WhatsApp","gid":"g-r08"},"R·09":{"desc":"Reflejos y caos en una secuencia absurda: decís una palabra, tirás carta y manoteás cuando coincide. Es tan fácil que entra cualquiera y tan caótico que nadie conserva la dignidad demasiado tiempo.","ideal":"arrancar la noche o levantar energía","no":"si no quieren gritos, golpes de mano y confusión","sens":"manotazo, velocidad, risa inmediata","gid":"g-r09"},"R·10":{"desc":"Cinco objetos, cartas tramposas y una decisión instantánea: agarrar lo correcto antes que los demás. Es un filler de reflejos puro, ideal para mesas donde pensar un segundo de más ya es perder.","ideal":"familia, chicos y adultos competitivos","no":"si alguien odia los juegos de velocidad","sens":"reflejos, confusión visual, revancha corta","gid":"g-r10"},"R·11":{"desc":"Un juego donde hacer trampa es parte del sistema: esconder cartas, descartarse como se pueda y evitar que el guardián te pesque. Es desprolijo a propósito y vive del teatro de la mesa.","ideal":"grupos con humor y ganas de jugar sucio","no":"si quieren reglas solemnes o control perfecto","sens":"trampa autorizada, vigilancia, carcajada culpable","gid":"g-r11"},"R·12":{"desc":"Bluff minimalista con bichos: ofrecés una carta diciendo qué es y el otro decide creer, dudar o pasar el problema. Entra en dos minutos y se vuelve una guerra psicológica de gestos mínimos.","ideal":"mesas que disfrutan mentir sin tablero","no":"si el grupo se incomoda con el faroleo directo","sens":"póker de bichos, mirada fija, veneno elegante","gid":"g-r12"},"R·13":{"desc":"Formar un cuerpo sano mientras otros te infectan, te roban órganos o te tiran tratamientos encima. Es directo, caótico y muy fácil de pedir otra partida cuando alguien queda a una carta de ganar.","ideal":"familias y grupos que quieren cartas con maldad liviana","no":"si buscan control estratégico profundo","sens":"puteada amistosa, combo simple, filler viral","gid":"g-r13"},"R·14":{"desc":"Push your luck de mesa grande: levantás cartas buscando llegar a siete diferentes, pero repetir número te puede hacer perder todo. Es tensión instantánea, gritos de “una más” y decisiones que duran tres segundos.","ideal":"muchos jugadores y energía de casino familiar","no":"si quieren pensar largo antes de cada turno","sens":"riesgo, euforia, desastre anunciado","gid":"g-r14"},"R·15":{"desc":"Party de reflejos con efecto Stroop y lenguaje explícito, de la casa argentina Fight: cada uno da vuelta la primera carta de su mazo y grita el color del fondo si el texto es negro, el color del texto si viene coloreado, o el insulto tal cual. La frase «la gran siete» está prohibida. El que se equivoca junta todas las cartas del centro; gana el primero en quedarse sin nada.","ideal":"previas, sobremesas ruidosas y mesas que no se ofenden con nada","no":"si hay menores en la mesa o el lenguaje fuerte incomoda","sens":"gritos cruzados, cortocircuito mental, risa culposa","gid":"g-r15"},"R·16":{"desc":"Imanes dentro de una cuerda: colocar uno parece fácil hasta que el campo magnético decide por vos. Es destreza, tensión física y esa risa inevitable cuando todo se junta de golpe.","ideal":"relleno visual y táctil para cualquier edad","no":"si quieren estrategia de cartas o tablero","sens":"pulso, magnetismo, desastre instantáneo","gid":"g-r16"},"R·17":{"desc":"El mikado criollo de Ruibal: 28 piezas plásticas —cobras, lechuzas, lanzas, espadas, bastones y el sable corvo— se sueltan sobre la mesa y por turnos se levantan de a una sin mover ninguna otra. Cada pieza vale puntos, y el sable corvo, una vez ganado, sirve de herramienta para levantar el resto.","ideal":"sobremesas tranquilas y mesas mixtas de chicos y grandes","no":"manos ansiosas o mesa que se tambalea","sens":"respiración contenida, pulso firme, «¡se movió!»","gid":"g-r17"},"R·18":{"desc":"Roles ocultos clásicos: la aldea intenta descubrir a los lobos antes de ser devorada, mientras todos hablan, acusan y actúan inocencia. Cuantos más jugadores, más teatro y más sospecha.","ideal":"grupos grandes que disfrutan acusarse sin piedad","no":"si odian eliminación, mentira o discusión social","sens":"hoguera, paranoia, juicio popular","gid":"g-r18"},"R·19":{"desc":"El Basta oral, por eliminación y contra reloj: se lee una consigna, arranca el temporizador de doce segundos y por turnos hay que nombrar algo que empiece con una letra libre de la rueda y apretar su botón. Las letras se van agotando, la estrella es comodín, y quien no llega queda afuera. El último en pie se lleva la tarjeta; con tres, ganó.","ideal":"familia amplia, mezcla de edades, sobremesas con energía","no":"si la presión del reloj estresa más de lo que divierte","sens":"cuenta regresiva, letras que se acaban, manoteo del botón","gid":"g-r19"},"R·20":{"desc":"Sátira argentina en forma de tablero: intentás avanzar, ahorrar y sobrevivir mientras el entorno cambia las reglas y te complica la vida. El chiste es que todos pierden un poco, pero se ríen bastante en el proceso.","ideal":"grupos con humor local y ganas de reírse del país","no":"si buscan euro serio o cero azar","sens":"argentinidad, crisis, humor negro cotidiano","gid":"g-r20"},"R·21":{"desc":"Memoria y deducción en formato mínimo: las cartas están en manos y mesa, y hay que encontrar tríos iguales antes que los demás. Parece inocente, pero castiga cada distracción.","ideal":"relleno rápido para enganchar a cualquiera","no":"si quieren tema o historia","sens":"memoria, picardía, una más y listo","gid":"g-r21"},"R·22":{"desc":"Memoria bajo presión gastronómica: recordá pedidos, detectá errores y serví lo correcto antes de que la cocina te pase por arriba. Es liviano, familiar y muy gracioso cuando la mesa empieza a confundir platos.","ideal":"familia y grupos que disfrutan memoria activa","no":"si no quieren memorizar información cambiante","sens":"mozo heroico, pedido imposible, reflejos mentales","gid":"g-r22"},"R·23":{"desc":"Microjuego de deducción y riesgo: con una carta en mano y pocas acciones posibles, cada turno es leer al rival, protegerse o eliminar a alguien con elegancia. Chiquito, rápido y sorprendentemente tenso.","ideal":"bolsillo, viajes y partidas encadenadas","no":"si quieren tablero grande o desarrollo largo","sens":"corte real, farol, deducción express","gid":"g-r23"},"R·24":{"desc":"Cinco microjuegos en una caja, todos alrededor del engaño, la lectura y la decisión mínima. Sirve como kit de duelos y faroleo liviano, con partidas muy cortas y bastante personalidad.","ideal":"parejas o grupos chicos que quieran variedad compacta","no":"si buscan una sola experiencia larga","sens":"puertas, farol, miniaturas de engaño","gid":"g-r24"},"R·25":{"desc":"Party de palabras frenético: cada jugador tiene cinco cartas de letra y sobre la mesa hay un tema («algo que encontrás en un baño»). Sin turnos: el primero que grita una palabra válida con una de sus letras la descarta, y el tema va cambiando todo el tiempo. Gana el que vacía la mano primero.","ideal":"grupos con energía y gente rápida de lengua","no":"si prefieren pensar con calma y por turnos","sens":"gatillo verbal, temas disparatados, carcajada","gid":"g-r25"},"R·26":{"desc":"Humor negro criollo por una herencia familiar: parientes y allegados pelean por los terrenos de la abuela con estrategia, oportunismo y cero solemnidad. Es competitivo, ácido y muy argentino.","ideal":"mesas que disfrutan maldad familiar y humor negro","no":"si quieren un juego correcto, amable o solemne","sens":"herencia, buitres, familia en guerra","gid":"g-r26"},"S·01":{"desc":"Mazos de conversación para bajar un cambio y poner a la mesa a hablar de verdad. No hay victoria, puntos ni eliminación: hay preguntas que abren historias, recuerdos y opiniones que normalmente no aparecen entre juego y juego.","ideal":"pareja, amigos cercanos o gente nueva con ganas de conectar","no":"si buscan competir, optimizar o escapar de conversar","sens":"pausa, intimidad, sobremesa honesta","gid":"g-s01"},"K·01":{"desc":"El clásico de comprar propiedades, cobrar alquileres y empujar al resto a la bancarrota con una sonrisa. No es sutil ni corto: es negociación, azar y drama económico de sobremesa.","ideal":"familia nostálgica y tardes largas","no":"si quieren partidas equilibradas o modernas","sens":"capitalismo de mesa, hoteles, venganza inmobiliaria","gid":"g-k01"},"K·02":{"desc":"Cartas de colores, números y efectos que todo el mundo entiende. Funciona porque no necesita presentación: una reversa cambia el humor, un +4 arruina amistades y gritar UNO sigue importando.","ideal":"cualquier grupo, cualquier edad, cero explicación","no":"si buscan estrategia profunda","sens":"clásico universal, castigo instantáneo, revancha rápida","gid":"g-k02"},"K·03":{"desc":"Fichas encadenadas, números que cierran caminos y ese golpe seco sobre la mesa cuando la jugada aparece. Un clásico de ritmo tranquilo, lectura de manos y memoria de lo que ya salió.","ideal":"sobremesa calma y jugadores de todas las edades","no":"si quieren tema moderno o mucha sorpresa","sens":"patio, cálculo, tradición","gid":"g-k03"},"K·04":{"desc":"Cinco dados, categorías y la esperanza de que salga servida. Es azar con decisiones simples: cuándo arriesgar, cuándo cerrar puntos y cuándo aceptar que los dados no te quieren.","ideal":"charla, café y partidas sin preparación","no":"si no toleran que el azar mande","sens":"cubilete, suerte, grito de generala","gid":"g-k04"},"K·05":{"desc":"La caja de herramientas de la mesa argentina: truco, escoba, chinchón y lo que pinte. Más que un juego, es un repertorio completo para elegir según el grupo y el tiempo disponible.","ideal":"sobremesa criolla y jugadores que ya conocen cartas","no":"si quieren componentes llamativos o reglas nuevas","sens":"truco, mentira permitida, tradición de mesa","gid":"g-k05"},"K·06":{"desc":"Deducción por coordenadas: disparar, fallar, ajustar y hundir la flota rival antes de que encuentren la tuya. Simple, directo y perfecto para duelos rápidos.","ideal":"dos jugadores y nostalgia inmediata","no":"si buscan profundidad estratégica moderna","sens":"cuadrícula, intuición, hundido","gid":"g-k06"},"K·07":{"desc":"Conectar cuatro fichas antes que el rival, bloqueando amenazas verticales, horizontales y diagonales. Dura poco, pero cada partida deja servido el pedido de revancha.","ideal":"duelos rápidos entre juegos más grandes","no":"si quieren narrativa o varios jugadores","sens":"táctica mínima, bloqueo, revancha instantánea","gid":"g-k07"},"K·08":{"desc":"Trivia de recorrido clásico: responder categorías, avanzar y medir cultura general contra la mesa. Ideal para equipos que discuten respuestas antes de jugársela.","ideal":"familia, equipos y sobremesas de preguntas","no":"si el grupo no disfruta trivia","sens":"conocimiento general, competencia amable, debate","gid":"g-k08"},"K·10":{"desc":"Trivia por equipos con tarjetas ilustradas por Andrés Miguens: cada carta propone reconocer, ubicar, ordenar o clasificar elementos de cultura general bien terrenal — tipos de baile, yerbas, canchas, herramientas, tapas de discos. No hace falta ser académico: hace falta haber vivido y tener buen ojo.","ideal":"sobremesas mixtas donde cada generación aporta lo suyo","no":"si la mesa quiere acción física en vez de pensar en equipo","sens":"reconocimiento, debate interno, «¡lo tengo en la punta de la lengua!»","gid":"g-k10"}};
+const DETALLES_JUEGOS={"T·01":{"desc":"Horror solitario y modular: elegís una Final Girl, un asesino y una localización, y la mesa arma una película distinta. La gracia está en gestionar cartas, tiempo y horror mientras rescatás víctimas, buscás objetos y decidís cuándo dejar de correr para enfrentar al villano.","ideal":"una noche solo, con tensión y revancha rápida","no":"mesas que necesitan cooperación o charla constante","sens":"slasher táctico, presión creciente, final cinematográfico","gid":"g-t01"},"T·02":{"desc":"Sci‑fi horror grande, físico y paranoico. La escuadra entra a una instalación infestada sabiendo que va a encontrar algo peor que un simple combate: ruido, heridas, objetivos personales y decisiones que pueden salvar al grupo o condenarlo.","ideal":"grupo con ganas de una película de aliens larga y tensa","no":"partidas rápidas o mesas que odian la traición posible","sens":"marines contra la colmena, épica sucia, supervivencia incierta","gid":"g-t02"},"T·03":{"desc":"Cooperativo lovecraftiano de acción directa: primero hay que interrumpir el ritual, después sobrevivir a cultistas, monstruos y a la locura propia. No es un misterio lento: es entrar a golpes, aceptar que algo se va a romper y tratar de matar a un dios antes de caer.","ideal":"quienes quieren miniaturas, dados y caos heroico","no":"si buscan investigación pausada o control perfecto","sens":"pulpy, salvaje, gloriosamente desesperado","gid":"g-t03"},"T·04":{"desc":"Aventura cooperativa guiada por app, con exploración, pistas y eventos ocultos. La aplicación maneja la mansión, los monstruos y los giros narrativos, mientras la mesa decide cómo investigar, pelear, separarse o permanecer junta antes de que Arkham se cierre sobre ustedes.","ideal":"mesas que quieren inmersión, historia y atmósfera","no":"si no quieren depender de una app o preparar muchos componentes","sens":"misterio lovecraftiano, susto elegante, campaña de una noche","gid":"g-t04"},"T·05":{"desc":"Cooperativo minimalista de terror: cada paso revela una loseta y deja que la oscuridad borre lo que queda atrás. Las velas duran poco, el mapa cambia todo el tiempo y escapar exige memoria, comunicación y aceptar que no siempre conviene ir a buscar al perdido.","ideal":"terror corto, silencioso y fácil de enseñar","no":"si quieren combate, desarrollo de personaje o mucho texto","sens":"claustrofobia, oscuridad viva, cooperación con los dientes apretados","gid":"g-t05"},"T·06":{"desc":"Horror asimétrico de movimiento oculto: un jugador encarna al asesino y los demás intentan escapar sin verlo venir. El suspenso nace del sonido, la incertidumbre y la lectura de intenciones; no gana quien pega más fuerte, sino quien administra mejor el miedo.","ideal":"una mesa que disfruta perseguir, esconderse y gritar","no":"si el grupo no quiere roles enfrentados","sens":"casa embrujada, pasos en el pasillo, gato y ratón","gid":"g-t06"},"T·07":{"desc":"Cooperativo de zombis con espíritu de blockbuster. Los supervivientes buscan equipo, abren puertas, suben de nivel y limpian escenarios mientras la ciudad se llena de muertos. Es directo, vistoso y muy de “hagamos ruido total, después vemos cómo salimos”.","ideal":"iniciar gente en miniaturas sin ponerse solemnes","no":"si quieren terror psicológico o decisiones morales duras","sens":"palomitas, motosierra, hordas y festejo de mesa","gid":"g-t07"},"T·08":{"desc":"Primero todos exploran la mansión juntos: aparecen habitaciones, objetos, presagios y eventos raros. Después llega el Haunt y la partida cambia de género: puede aparecer un traidor, un monstruo o una regla absurda que convierte la casa en una historia distinta cada vez.","ideal":"grupos narrativos que toleran sorpresa y caos","no":"si buscan balance competitivo quirúrgico","sens":"casa viva, giro de película, risas nerviosas","gid":"g-t08"},"T·09":{"desc":"Supervivencia civil en una ciudad sitiada. No se trata de ganar con eficiencia, sino de administrar hambre, frío, heridas, cansancio y decisiones éticas. El juego funciona como una crónica dura: cada salida nocturna puede traer comida, culpa o una pérdida imposible de maquillar.","ideal":"mesas adultas que quieren una experiencia narrativa seria","no":"si buscan diversión liviana o escapismo puro","sens":"opresivo, humano, memorable y nada complaciente","gid":"g-t09"},"D·01":{"desc":"Investigación pura, sin tablero tradicional. La mesa recibe un caso, consulta el mapa, el directorio y el periódico, y decide a qué pistas dedicar tiempo. La victoria no está en tirar dados, sino en razonar juntos y llegar a una conclusión antes que Holmes los humille.","ideal":"pareja o grupo que disfruta discutir hipótesis","no":"si llegan cansados o quieren acción inmediata","sens":"café, lápiz, Londres victoriano y orgullo intelectual","gid":"g-d01"},"C·01":{"desc":"Cooperativo de supervivencia en la Edad de Piedra. Cada grupo explora cartas sin saber del todo qué encontrará: comida, peligro, herramientas, heridas o una decisión incómoda. Se gana si la tribu completa su objetivo y llega viva al final del día.","ideal":"pareja o grupo que quiere sufrir unido y celebrar cada logro","no":"si no toleran perder por desgaste acumulado","sens":"aventura primitiva, decisiones tensas, tribu contra mundo","gid":"g-c01"},"C·02":{"desc":"Campaña cooperativa de exploración: un barco perdido navega un atlas lleno de islas, ciudades, ruinas y encuentros. Cada localización abre párrafos de historia, recompensas y consecuencias, con una tripulación que se cansa, mejora y arrastra heridas de sesión en sesión.","ideal":"quienes quieren perderse varias noches en una aventura","no":"si buscan una partida cerrada y autoconclusiva","sens":"viaje largo, mapa misterioso, descubrimiento constante","gid":"g-c02"},"C·03":{"desc":"Cooperativo moderno y clarísimo: cada jugador tiene un rol, el mapa se infecta y el equipo debe viajar, tratar focos y juntar cartas para descubrir curas antes de que los brotes se salgan de control. Es tensión accesible, conversación permanente y derrota compartida.","ideal":"presentar cooperativos a casi cualquier mesa","no":"si alguien odia planificar en voz alta con el grupo","sens":"reloj global, trabajo en equipo, “una más y sale”","gid":"g-c03"},"E·01":{"desc":"Construcción de rutas por Europa con reglas simples y decisiones muy visibles. Tomás cartas, reclamás trayectos, conectás ciudades y tratás de completar destinos secretos antes de quedarte sin trenes. La edición Europa agrega túneles, ferries y estaciones para hacerlo más amable y más picante.","ideal":"familia, pareja o gente nueva en juegos modernos","no":"si quieren conflicto directo fuerte","sens":"viaje elegante, bloqueo suave, satisfacción ferroviaria","gid":"g-e01"},"E·02":{"desc":"Control de áreas vikingo donde morir también puede dar gloria. Cada era empieza con draft de cartas y termina con batallas, saqueos y Ragnarök destruyendo provincias. El juego premia planear combos, leer al rival y aceptar que una buena derrota puede valer más que sobrevivir.","ideal":"grupo competitivo que disfruta épica y choque frontal","no":"si molestan las mayorías, las cartas fuertes o el ataque directo","sens":"Ragnarök, minis enormes, estrategia con hacha","gid":"g-e02"},"E·05":{"desc":"Control de áreas entre dioses egipcios que pelean por no ser olvidados. Cada deidad tiene poderes propios, seguidores en el tablero y guardianes míticos; la partida es elegante, tensa y con un giro muy particular: el juego puede forzar alianzas cuando algunos dioses quedan atrás.","ideal":"quienes quieren estrategia confrontativa con presencia de mesa","no":"si el grupo rechaza la negociación dura o las mayorías","sens":"culto, territorio, divinidad en decadencia","gid":"g-e05"},"E·11":{"desc":"Conquista del Egeo mediante subastas por el favor de los dioses. Ares permite atacar, Poseidón mueve flotas, Atenea trae filósofos y Zeus cambia el orden del Olimpo. La puja es el corazón: ganar el dios correcto en el momento justo vale más que tener el ejército más grande.","ideal":"mesas que disfrutan negociación, tensión y oportunismo","no":"si no quieren pujas ni ataques directos","sens":"mitología, subasta cruel, guerra contenida hasta explotar","gid":"g-e11"},"R·01":{"desc":"Party por equipos que mezcla celebridades, pistas tipo Taboo, mímica y rondas rápidas donde el grupo empieza a reconocer sus propios códigos. Primero se explica; después la mesa ya grita nombres, gestos y asociaciones imposibles como si fueran un idioma privado.","ideal":"asados, previas y grupos con ganas de actuar un poco","no":"si la mesa está tímida o quiere pensar en silencio","sens":"ruido, complicidad, frases que quedan","gid":"g-r01"},"R·02":{"desc":"Juego de imaginación y lectura social: el narrador elige una carta ilustrada y da una pista que no debe ser ni demasiado obvia ni demasiado imposible. Los demás mezclan cartas propias para confundir, votan y revelan cuánto se conocen las cabezas de la mesa.","ideal":"familia, grupos creativos o gente que disfruta interpretar imágenes","no":"si todos quieren estrategia pura y cero subjetividad","sens":"poesía rara, intuición, conversación visual","gid":"g-r02"},"K·09":{"desc":"La trivia de Maldón donde las preguntas se agrupan por formato y no por tema: Secuencia (ordenar cinco elementos), Asociación (unir columnas), En común y Aproximación. Según el casillero se apuesta plata del juego antes de responder, así que administrar lo que uno cree saber vale tanto como saberlo. Ilustrado por Liniers.","ideal":"equipos mixtos donde cada generación aporta lo suyo","no":"si la mesa quiere acción física o respuestas al grito","sens":"deducción, apuestas medidas, «¡lo sabía!»","gid":"g-k09"},"D·02":{"desc":"Campaña cooperativa de investigación y terror cósmico: cada escenario te obliga a preparar mazos, descubrir pistas, medir riesgos y aceptar consecuencias que vuelven en la siguiente partida. Es más narrativo y persistente que un cooperativo de una sola noche.","ideal":"pareja o grupo chico que quiera campaña y construcción de mazos","no":"si quieren abrir, explicar y cerrar en media hora","sens":"misterio, preparación, tensión acumulada","gid":"g-d02"},"D·03":{"desc":"Un fantasma intenta guiar a los médiums con cartas de visión surrealistas. La mesa conversa, interpreta imágenes imposibles y trata de reconstruir quién, dónde y con qué ocurrió el crimen antes de que se acabe el tiempo.","ideal":"familias y grupos que disfrutan interpretar imágenes","no":"si el grupo se frustra con pistas ambiguas","sens":"sueño raro, deducción suave, charla colectiva","gid":"g-d03"},"D·04":{"desc":"Deducción clásica de sospechosos, armas y habitaciones: preguntar bien, anotar mejor y cerrar el caso antes que los demás. Funciona cuando la mesa quiere competir sin aprender reglas modernas ni preparar demasiado.","ideal":"nostalgia, familia y detectives casuales","no":"si buscan sorpresa narrativa o cooperación","sens":"clásico policial, descarte, acusación final","gid":"g-d04"},"C·04":{"desc":"Cooperativo de bazas con comunicación limitada: todos ven parte del problema, nadie puede decirlo todo, y cada misión cambia la forma de pensar la mano. En Mar Profundo el reto es más variado y flexible, con objetivos que obligan a coordinar silenciosamente.","ideal":"mesas que aman cartas, lógica y miradas cómplices","no":"si alguien odia jugar sin poder hablar libremente","sens":"sincronía, precisión, pequeño milagro colectivo","gid":"g-c04"},"C·05":{"desc":"Un experimento de sincronización: jugar cartas en orden ascendente sin hablar ni hacer señas. Parece imposible hasta que la mesa entra en ritmo; después cada pausa se vuelve una apuesta emocional.","ideal":"relleno cooperativo extraño y memorable","no":"si necesitan reglas explícitas para cada decisión","sens":"telepatía falsa, silencio, carcajada nerviosa","gid":"g-c05"},"C·06":{"desc":"Aventura cooperativa de patrulla fantástica: el grupo protege una fortaleza, sale al camino, resuelve encuentros y deja que las crónicas empujen la historia. Tiene aire de cuento ilustrado más que de dungeon crawler pesado.","ideal":"familias o pareja que quieran fantasía narrativa accesible","no":"si buscan optimización dura o combate táctico profundo","sens":"cuento, expedición, heroicidad amable","gid":"g-c06"},"E·03":{"desc":"Duelo de civilizaciones para dos jugadores: elegís cartas, desarrollás ciencia, ejército y maravillas, y vigilás tres condiciones de victoria a la vez. La tensión está en cada carta que tomás y en cada carta que dejás disponible.","ideal":"parejas competitivas que quieran estrategia compacta","no":"si buscan juego relajado sin bloqueo directo","sens":"ajedrez de civilizaciones, presión, revancha inmediata","gid":"g-e03"},"E·04":{"desc":"Colocación de losetas en altura: no solo importa dónde construir, sino cuándo tapar, subir y multiplicar puntos. Es rápido de explicar y deja esa sensación deliciosa de ciudad que crece en tres dimensiones.","ideal":"quienes quieren estrategia bella, corta y cerebral","no":"si el grupo prefiere azar o negociación","sens":"polis elegante, puzzle espacial, filo silencioso","gid":"g-e04"},"E·06":{"desc":"Elegir azulejos, completar patrones y evitar que lo hermoso se convierta en castigo. Es abstracto, táctil y muy limpio: fácil de enseñar, pero con suficiente maldad para arruinarle el mural al de al lado.","ideal":"entrada elegante a juegos modernos","no":"si quieren tema fuerte o mucha narración","sens":"belleza, cálculo, bloqueo sutil","gid":"g-e06"},"E·07":{"desc":"Losetas medievales que forman caminos, ciudades y campos. La partida parece tranquila hasta que alguien mete un meeple en tu ciudad o te disputa una granja. Clásico porque cualquiera entra, pero siempre hay una decisión incómoda.","ideal":"familias y mesas mixtas con ganas de estrategia amable","no":"si buscan mucha interacción verbal o épica","sens":"campiña, oportunismo, expansión orgánica","gid":"g-e07"},"E·08":{"desc":"Colonizar una isla produciendo y negociando recursos: madera por oveja, trigo por ladrillo y una promesa que quizá no se cumpla. El corazón del juego es leer la mesa y comerciar mejor que los dados.","ideal":"grupos que disfrutan negociar y pactar","no":"si odian el azar de dados o quedarse bloqueados","sens":"comercio, expansión, diplomacia doméstica","gid":"g-e08"},"E·09":{"desc":"Deck-building con exploración y carrera por escapar vivo. Cada carta mejora tu plan, pero cada ruido despierta al dragón; el dilema es cuánto tesoro vale arriesgar antes de salir corriendo.","ideal":"aventura competitiva con humor y tensión creciente","no":"si buscan control total o cero azar","sens":"saqueo, codicia, dragón respirando cerca","gid":"g-e09"},"E·10":{"desc":"Programación espacial de baristas: moverse por ingredientes, completar pedidos y optimizar rutas mientras la cafetería se llena. Es simpático por fuera, pero exige mirar dos turnos adelante si no querés servir tarde.","ideal":"mesas que quieren puzzle ágil y colorido","no":"si buscan interacción agresiva o tema oscuro","sens":"rush de cocina, orden mental, presión amable","gid":"g-e10"},"E·12":{"desc":"Roles ocultos en alta mar: el barco avanza, pero nadie está seguro de quién empuja hacia puerto seguro, quién quiere entregarlo a los piratas y quién susurra por el Kraken. La gracia está en discutir rutas, acusar y leer votaciones.","ideal":"grupos grandes que disfrutan mentir con teatralidad","no":"si la mesa odia sospechar de todos","sens":"motín, paranoia, negociación ruidosa","gid":"g-e12"},"E·13":{"desc":"Carreras con gestión de mano y motor: acelerar es fácil, frenar bien es lo difícil. Cada curva te obliga a calcular calor, marchas y rebufo, con una sensación de velocidad muy clara sin volverse simulador pesado.","ideal":"competencia emocionante sin reglas interminables","no":"si esperan azar puro o choques constantes","sens":"recta final, motor al rojo, adelantamiento limpio","gid":"g-e13"},"E·14":{"desc":"El clásico duelo de laberinto llevado al universo Pac-Man: avanzar, bloquear y leer el camino del rival. Las reglas entran en segundos, pero cada muro puede cambiar toda la persecución.","ideal":"duelos rápidos y partidas de revancha","no":"si quieren tema narrativo o varios jugadores","sens":"persecución, bloqueo, pulseada espacial","gid":"g-e14"},"E·15":{"desc":"Juego de cartas de doble uso: cada una puede ir al mapa —sumando influencia en una de las seis provincias del imperio— o a tu zona personal, armando colecciones de milicia, comercio, arquitectura e intriga que puntúan al final. Doce rondas exactas y cartas de dioses que alteran el valor de las provincias cuando menos conviene.","ideal":"dos o tres jugadores que quieran pensar sin reglamento pesado","no":"si esperan negociación hablada: acá se negocia con cartas","sens":"tironeo de mayorías, cálculo fino, «una ronda más»","gid":"g-e15"},"E·16":{"desc":"La isla se hunde y todos quieren sacar sus exploradores antes que el mar se los coma. Parece familiar, pero es una máquina de maldades: tiburones, monstruos y rutas de escape que se arruinan en el peor momento.","ideal":"grupo competitivo que se banca traiciones divertidas","no":"si alguien se toma personal que le hundan el bote","sens":"caos tropical, venganza, risa malvada","gid":"g-e16"},"E·17":{"desc":"Conquista territorial de escuela argentina: objetivos secretos, alianzas de palabra y dados que deciden imperios. Brilla cuando la mesa negocia, amenaza y sobreactúa cada frontera.","ideal":"sobremesa larga con pactos y traiciones","no":"si no quieren azar ni discusiones diplomáticas","sens":"mapa, dados, alianza que dura poco","gid":"g-e17"},"E·18":{"desc":"La Guerra Fría completa para dos: cartas históricas, influencia global y crisis que pueden escalar demasiado. Es denso, tenso y brillante cuando ambos aceptan jugar una pulseada larga de control político.","ideal":"dos jugadores con ganas de estrategia histórica seria","no":"si buscan algo liviano o de explicación corta","sens":"geopolítica, presión nuclear, ajedrez histórico","gid":"g-e18"},"E·19":{"desc":"Construir un santuario de aves combinando hábitats, alimentos, huevos y poderes. Es competitivo sin sentirse agresivo, con una producción hermosa y una curva de satisfacción muy alta cuando el motor empieza a cantar.","ideal":"mesas que disfrutan motores, naturaleza y ritmo tranquilo","no":"si necesitan conflicto directo constante","sens":"motor sereno, colección, belleza natural","gid":"g-e19"},"R·03":{"desc":"Dos equipos intentan ubicar a sus agentes en una grilla de palabras usando pistas de una sola palabra. La tensión no está en hablar mucho, sino en decir lo justo para que tu equipo entienda sin tocar al asesino.","ideal":"grupos grandes que disfrutan asociaciones mentales","no":"si quieren actuar, dibujar o moverse","sens":"espionaje abstracto, complicidad, miedo a una palabra","gid":"g-r03"},"R·04":{"desc":"Un party de sintonía mental: una pista debe ubicarse en una escala invisible entre dos extremos. La mesa debate matices ridículos y descubre que nadie entiende igual conceptos como frío, elegante o peligroso.","ideal":"grupos conversadores y discusiones graciosas","no":"si quieren ganar sin debatir subjetividades","sens":"debate absurdo, intuición grupal, carcajada limpia","gid":"g-r04"},"R·05":{"desc":"Juego musical para tararear, cantar, adivinar y quedar expuesto con dignidad. Funciona porque no premia cantar bien: premia animarse, reconocer canciones y reírse de la memoria colectiva del grupo.","ideal":"previas, familia y mesas con cero vergüenza","no":"si nadie quiere hacer ruido o cantar","sens":"karaoke lúdico, nostalgia, vergüenza compartida","gid":"g-r05"},"R·06":{"desc":"El objetivo es coincidir con la mayoría: ante una consigna, no gana la respuesta más creativa sino la más común. Es simple, rápido y revela cómo piensa el grupo cuando intenta ser normal a propósito.","ideal":"romper el hielo y jugar con gente no jugona","no":"si buscan estrategia o profundidad","sens":"mente colectiva, coincidencias, sorpresa social","gid":"g-r06"},"R·07":{"desc":"El Basta de toda la vida: letra, categorías y velocidad mental. La gracia está en encontrar una palabra válida antes que todos y defenderla con la seguridad de quien inventó medio diccionario.","ideal":"cualquier mesa con papel, lápiz y ganas de gritar basta","no":"si el grupo no disfruta juegos de palabras","sens":"colegio, rapidez, discusión de diccionario","gid":"g-r07"},"R·08":{"desc":"Cartas de situaciones y memes para elegir la combinación más graciosa. No intenta ser justo ni elegante: depende del humor del grupo, de conocer los códigos de la mesa y de bancarse chistes malos.","ideal":"previas informales y grupos con humor compartido","no":"si quieren reglas finas o humor cuidado","sens":"meme, remate, grupo de WhatsApp","gid":"g-r08"},"R·09":{"desc":"Reflejos y caos en una secuencia absurda: decís una palabra, tirás carta y manoteás cuando coincide. Es tan fácil que entra cualquiera y tan caótico que nadie conserva la dignidad demasiado tiempo.","ideal":"arrancar la noche o levantar energía","no":"si no quieren gritos, golpes de mano y confusión","sens":"manotazo, velocidad, risa inmediata","gid":"g-r09"},"R·10":{"desc":"Cinco objetos, cartas tramposas y una decisión instantánea: agarrar lo correcto antes que los demás. Es un filler de reflejos puro, ideal para mesas donde pensar un segundo de más ya es perder.","ideal":"familia, chicos y adultos competitivos","no":"si alguien odia los juegos de velocidad","sens":"reflejos, confusión visual, revancha corta","gid":"g-r10"},"R·11":{"desc":"Un juego donde hacer trampa es parte del sistema: esconder cartas, descartarse como se pueda y evitar que el guardián te pesque. Es desprolijo a propósito y vive del teatro de la mesa.","ideal":"grupos con humor y ganas de jugar sucio","no":"si quieren reglas solemnes o control perfecto","sens":"trampa autorizada, vigilancia, carcajada culpable","gid":"g-r11"},"R·12":{"desc":"Bluff minimalista con bichos: ofrecés una carta diciendo qué es y el otro decide creer, dudar o pasar el problema. Entra en dos minutos y se vuelve una guerra psicológica de gestos mínimos.","ideal":"mesas que disfrutan mentir sin tablero","no":"si el grupo se incomoda con el faroleo directo","sens":"póker de bichos, mirada fija, veneno elegante","gid":"g-r12"},"R·13":{"desc":"Formar un cuerpo sano mientras otros te infectan, te roban órganos o te tiran tratamientos encima. Es directo, caótico y muy fácil de pedir otra partida cuando alguien queda a una carta de ganar.","ideal":"familias y grupos que quieren cartas con maldad liviana","no":"si buscan control estratégico profundo","sens":"puteada amistosa, combo simple, filler viral","gid":"g-r13"},"R·14":{"desc":"Push your luck de mesa grande: levantás cartas buscando llegar a siete diferentes, pero repetir número te puede hacer perder todo. Es tensión instantánea, gritos de “una más” y decisiones que duran tres segundos.","ideal":"muchos jugadores y energía de casino familiar","no":"si quieren pensar largo antes de cada turno","sens":"riesgo, euforia, desastre anunciado","gid":"g-r14"},"R·15":{"desc":"Party de reflejos con efecto Stroop y lenguaje explícito, de la casa argentina Fight: cada uno da vuelta la primera carta de su mazo y grita el color del fondo si el texto es negro, el color del texto si viene coloreado, o el insulto tal cual. La frase «la gran siete» está prohibida. El que se equivoca junta todas las cartas del centro; gana el primero en quedarse sin nada.","ideal":"previas, sobremesas ruidosas y mesas que no se ofenden con nada","no":"si hay menores en la mesa o el lenguaje fuerte incomoda","sens":"gritos cruzados, cortocircuito mental, risa culposa","gid":"g-r15"},"R·16":{"desc":"Imanes dentro de una cuerda: colocar uno parece fácil hasta que el campo magnético decide por vos. Es destreza, tensión física y esa risa inevitable cuando todo se junta de golpe.","ideal":"relleno visual y táctil para cualquier edad","no":"si quieren estrategia de cartas o tablero","sens":"pulso, magnetismo, desastre instantáneo","gid":"g-r16"},"R·17":{"desc":"El mikado criollo de Ruibal: 28 piezas plásticas —cobras, lechuzas, lanzas, espadas, bastones y el sable corvo— se sueltan sobre la mesa y por turnos se levantan de a una sin mover ninguna otra. Cada pieza vale puntos, y el sable corvo, una vez ganado, sirve de herramienta para levantar el resto.","ideal":"sobremesas tranquilas y mesas mixtas de chicos y grandes","no":"manos ansiosas o mesa que se tambalea","sens":"respiración contenida, pulso firme, «¡se movió!»","gid":"g-r17"},"R·18":{"desc":"Roles ocultos clásicos: la aldea intenta descubrir a los lobos antes de ser devorada, mientras todos hablan, acusan y actúan inocencia. Cuantos más jugadores, más teatro y más sospecha.","ideal":"grupos grandes que disfrutan acusarse sin piedad","no":"si odian eliminación, mentira o discusión social","sens":"hoguera, paranoia, juicio popular","gid":"g-r18"},"R·19":{"desc":"El Basta oral, por eliminación y contra reloj: se lee una consigna, arranca el temporizador de doce segundos y por turnos hay que nombrar algo que empiece con una letra libre de la rueda y apretar su botón. Las letras se van agotando, la estrella es comodín, y quien no llega queda afuera. El último en pie se lleva la tarjeta; con tres, ganó.","ideal":"familia amplia, mezcla de edades, sobremesas con energía","no":"si la presión del reloj estresa más de lo que divierte","sens":"cuenta regresiva, letras que se acaban, manoteo del botón","gid":"g-r19"},"R·20":{"desc":"Sátira argentina en forma de tablero: intentás avanzar, ahorrar y sobrevivir mientras el entorno cambia las reglas y te complica la vida. El chiste es que todos pierden un poco, pero se ríen bastante en el proceso.","ideal":"grupos con humor local y ganas de reírse del país","no":"si buscan euro serio o cero azar","sens":"argentinidad, crisis, humor negro cotidiano","gid":"g-r20"},"R·21":{"desc":"Memoria y deducción en formato mínimo: las cartas están en manos y mesa, y hay que encontrar tríos iguales antes que los demás. Parece inocente, pero castiga cada distracción.","ideal":"relleno rápido para enganchar a cualquiera","no":"si quieren tema o historia","sens":"memoria, picardía, una más y listo","gid":"g-r21"},"R·22":{"desc":"Memoria bajo presión gastronómica: recordá pedidos, detectá errores y serví lo correcto antes de que la cocina te pase por arriba. Es liviano, familiar y muy gracioso cuando la mesa empieza a confundir platos.","ideal":"familia y grupos que disfrutan memoria activa","no":"si no quieren memorizar información cambiante","sens":"mozo heroico, pedido imposible, reflejos mentales","gid":"g-r22"},"R·23":{"desc":"Microjuego de deducción y riesgo: con una carta en mano y pocas acciones posibles, cada turno es leer al rival, protegerse o eliminar a alguien con elegancia. Chiquito, rápido y sorprendentemente tenso.","ideal":"bolsillo, viajes y partidas encadenadas","no":"si quieren tablero grande o desarrollo largo","sens":"corte real, farol, deducción express","gid":"g-r23"},"R·24":{"desc":"Cinco microjuegos en una caja, todos alrededor del engaño, la lectura y la decisión mínima. Sirve como kit de duelos y faroleo liviano, con partidas muy cortas y bastante personalidad.","ideal":"parejas o grupos chicos que quieran variedad compacta","no":"si buscan una sola experiencia larga","sens":"puertas, farol, miniaturas de engaño","gid":"g-r24"},"R·25":{"desc":"Party de palabras frenético: cada jugador tiene cinco cartas de letra y sobre la mesa hay un tema («algo que encontrás en un baño»). Sin turnos: el primero que grita una palabra válida con una de sus letras la descarta, y el tema va cambiando todo el tiempo. Gana el que vacía la mano primero.","ideal":"grupos con energía y gente rápida de lengua","no":"si prefieren pensar con calma y por turnos","sens":"gatillo verbal, temas disparatados, carcajada","gid":"g-r25"},"R·26":{"desc":"Humor negro criollo por una herencia familiar: parientes y allegados pelean por los terrenos de la abuela con estrategia, oportunismo y cero solemnidad. Es competitivo, ácido y muy argentino.","ideal":"mesas que disfrutan maldad familiar y humor negro","no":"si quieren un juego correcto, amable o solemne","sens":"herencia, buitres, familia en guerra","gid":"g-r26"},"S·01":{"desc":"Mazos de conversación para bajar un cambio y poner a la mesa a hablar de verdad. No hay victoria, puntos ni eliminación: hay preguntas que abren historias, recuerdos y opiniones que normalmente no aparecen entre juego y juego.","ideal":"pareja, amigos cercanos o gente nueva con ganas de conectar","no":"si buscan competir, optimizar o escapar de conversar","sens":"pausa, intimidad, sobremesa honesta","gid":"g-s01"},"K·01":{"desc":"El clásico de comprar propiedades, cobrar alquileres y empujar al resto a la bancarrota con una sonrisa. No es sutil ni corto: es negociación, azar y drama económico de sobremesa.","ideal":"familia nostálgica y tardes largas","no":"si quieren partidas equilibradas o modernas","sens":"capitalismo de mesa, hoteles, venganza inmobiliaria","gid":"g-k01"},"K·02":{"desc":"Cartas de colores, números y efectos que todo el mundo entiende. Funciona porque no necesita presentación: una reversa cambia el humor, un +4 arruina amistades y gritar UNO sigue importando.","ideal":"cualquier grupo, cualquier edad, cero explicación","no":"si buscan estrategia profunda","sens":"clásico universal, castigo instantáneo, revancha rápida","gid":"g-k02"},"K·03":{"desc":"Fichas encadenadas, números que cierran caminos y ese golpe seco sobre la mesa cuando la jugada aparece. Un clásico de ritmo tranquilo, lectura de manos y memoria de lo que ya salió.","ideal":"sobremesa calma y jugadores de todas las edades","no":"si quieren tema moderno o mucha sorpresa","sens":"patio, cálculo, tradición","gid":"g-k03"},"K·04":{"desc":"Cinco dados, categorías y la esperanza de que salga servida. Es azar con decisiones simples: cuándo arriesgar, cuándo cerrar puntos y cuándo aceptar que los dados no te quieren.","ideal":"charla, café y partidas sin preparación","no":"si no toleran que el azar mande","sens":"cubilete, suerte, grito de generala","gid":"g-k04"},"K·05":{"desc":"La caja de herramientas de la mesa argentina: truco, escoba, chinchón y lo que pinte. Más que un juego, es un repertorio completo para elegir según el grupo y el tiempo disponible.","ideal":"sobremesa criolla y jugadores que ya conocen cartas","no":"si quieren componentes llamativos o reglas nuevas","sens":"truco, mentira permitida, tradición de mesa","gid":"g-k05"},"K·06":{"desc":"Deducción por coordenadas: disparar, fallar, ajustar y hundir la flota rival antes de que encuentren la tuya. Simple, directo y perfecto para duelos rápidos.","ideal":"dos jugadores y nostalgia inmediata","no":"si buscan profundidad estratégica moderna","sens":"cuadrícula, intuición, hundido","gid":"g-k06"},"K·07":{"desc":"Conectar cuatro fichas antes que el rival, bloqueando amenazas verticales, horizontales y diagonales. Dura poco, pero cada partida deja servido el pedido de revancha.","ideal":"duelos rápidos entre juegos más grandes","no":"si quieren narrativa o varios jugadores","sens":"táctica mínima, bloqueo, revancha instantánea","gid":"g-k07"},"K·08":{"desc":"Trivia de recorrido clásico: responder categorías, avanzar y medir cultura general contra la mesa. Ideal para equipos que discuten respuestas antes de jugársela.","ideal":"familia, equipos y sobremesas de preguntas","no":"si el grupo no disfruta trivia","sens":"conocimiento general, competencia amable, debate","gid":"g-k08"},"K·10":{"desc":"Trivia por equipos con tarjetas ilustradas por Andrés Miguens: cada carta propone reconocer, ubicar, ordenar o clasificar elementos de cultura general bien terrenal — tipos de baile, yerbas, canchas, herramientas, tapas de discos. No hace falta ser académico: hace falta haber vivido y tener buen ojo.","ideal":"sobremesas mixtas donde cada generación aporta lo suyo","no":"si la mesa quiere acción física en vez de pensar en equipo","sens":"reconocimiento, debate interno, «¡lo tengo en la punta de la lengua!»","gid":"g-k10"},"T·10":{"desc":"Semi-cooperativo de terror y ciencia ficción diseñado por Adam Kwapiński (Awaken Realms, 2018). La tripulación despierta con amnesia parcial y debe explorar la nave, gestionar recursos y escapar de los Intrusos —criaturas que se vuelven más letales con cada turno— a lo largo de quince rondas. Cada personaje tiene un mazo asimétrico y un objetivo secreto que puede enfrentarlo al resto: es posible que ganen todos, algunos o nadie. Producción muy alta y tensión constante al estilo de la saga Alien.","ideal":"mesas que disfrutan la traición, el riesgo y la narrativa emergente","no":"si se busca cooperación pura sin agendas ocultas","sens":"paranoia, decisiones a vida o muerte, motín en órbita","gid":"g-t10"},"T·11":{"desc":"Caja independiente de la saga Death May Die (diseño de Rob Daviau y Marco Portugal, CMON), totalmente cooperativa para 1 a 5 jugadores. Los investigadores interrumpen rituales para derribar a Dioses Antiguos, tirando dados y administrando una cordura que, al quebrarse, otorga poder a cambio de riesgo. Esta temporada suma seis episodios y dos Primigenios nuevos, más Monstruos Desconocidos y Reliquias que pueden incorporarse a escenarios previos. Acción pulp veloz sobre la mitología de Lovecraft, con reglas modulares afinadas.","ideal":"quienes buscan terror cósmico dinámico y muy temático","no":"si se prefiere una experiencia pausada o de bajo azar","sens":"terror cósmico, tiradas desesperadas, heroísmo temerario","gid":"g-t11"}};
 
-const FRASES_ACOMODADOR={"T·01": "Coco le gruñó al villano toda la función y no le sacó los ojos de encima. Cola tiesa: máxima aprobación.", "T·02": "Coco olfateó algo raro en los conductos de la nave y se escondió abajo de la butaca. Si él tiene miedo, ustedes van a gritar.", "T·03": "Coco le ladró tres veces al Primigenio y después pidió upa. Dice que la cordura está sobrevalorada.", "T·04": "Coco no entra solo a esa mansión: camina pegado a tu pierna, con las orejas paradas y la cola entre las patas. Señal de gran función.", "T·05": "A oscuras, el olfato de Coco vale más que cualquier vela. Síganlo a él, que ya encontró la salida dos veces.", "T·06": "Coco escuchó pasos en la casa antes que nadie y se erizó entero. Cuando el lomo se le pone así, la función es de las buenas.", "T·07": "Hordas de zombis y Coco corriendo entre las patas de todos: para él es el mejor juego de persecución jamás inventado.", "T·08": "Coco entró moviendo la cola y salió gruñéndole a uno de ustedes. Él ya sabe quién es el traidor; no lo va a decir.", "T·09": "Coco se quedó quietito toda la función, con la cabeza apoyada en tus pies. Hay noches que se acompañan así, en silencio.", "D·01": "Coco olfateó el mapa de Londres, se detuvo en una esquina y ladró una sola vez. El caso está ahí; el café lo ponen ustedes.", "D·02": "Coco enterró una carta del mazo en el jardín y no dice cuál. Dice que toda investigación necesita una pista que duela.", "D·03": "Coco es el único que ve al fantasma y no le parece gran cosa: le olfateó los pies y se volvió a dormir. Los sueños, interprétenlos ustedes.", "D·04": "Coco ya sabe quién fue, con qué arma y en qué habitación: lo delató el olfato. Por un bocadito, capaz que ladra una pista.", "C·01": "Coco volvió de la cueva con una rama enorme y cara de héroe. La tribu come esta noche: él ya hizo su parte.", "C·02": "Coco se subió al barco, apoyó el hocico en la borda y se quedó mirando el horizonte. Zarpen tranquilos: el vigía ya está en su puesto.", "C·03": "Coco puso la pata sobre el mapa justo donde brota el cuarto virus. Curen rápido, que él ya hizo el diagnóstico.", "C·04": "Coco baja al fondo del mar sin oxígeno y sin quejarse: es un salchicha, ya vive a baja profundidad. Jueguen la carta justa y síganlo.", "C·05": "Coco es el maestro absoluto de este juego: lleva años mirándote fijo hasta que entendés exactamente lo que quiere. Sin decir una palabra.", "C·06": "Coco hizo la ronda nocturna alrededor de la fortaleza, marcó dos árboles y volvió a informar. La patrulla puede salir: el perímetro es suyo.", "E·01": "Coco persiguió el tren por todo el mapa moviendo la cola. No entiende de rutas, pero sabe que los vagones de colores son la felicidad.", "E·02": "Coco aulló mirando al cielo como un lobo de Ragnarök. Le salió un aullido finito de salchicha, pero la épica estaba.", "E·03": "Dos imperios, una mesa y Coco sentado exactamente en el medio, cobrando peaje en caricias a ambos bandos. Neutralidad bien entendida.", "E·04": "Coco inspeccionó la ciudad piso por piso y aprobó la obra: dice que toda acrópolis necesita una plaza donde echarse al sol.", "E·05": "Coco vio a Anubis en la caja y se sentó derechito, orejas en punta: cuestión de respeto entre colegas. Los dioses con cabeza de perro no se discuten.", "E·06": "Coco caminó por encima de los azulejos y no volteó ninguno. El azulejero real puede dormir tranquilo; el palacio quedó precioso.", "E·07": "Coco olfateó cada camino y cada claustro, y levantó la pata en un prado. Ese territorio ya tiene dueño; disculpen.", "E·08": "Coco no entiende el regateo, pero cada vez que alguien dice «oveja» se le paran las orejas. Ofrézcanle lana y cierran cualquier trato.", "E·09": "Coco entró a la mazmorra sin hacer ruido, agarró el tesoro y salió trotando. El dragón sigue durmiendo. Aprendan del profesional.", "E·10": "Coco se instaló al lado de la cafetera esperando que se caiga una medialuna. Dice que en la hora pico siempre cae algo.", "E·11": "Coco ladra en cada subasta y sube todos los precios. Nadie sabe por quién ofertaba: él tampoco, pero qué emoción.", "E·12": "Coco olfateó a la tripulación uno por uno y le gruñó despacito al cocinero. El motín se sirve esta noche; él ya eligió bando.", "E·13": "Coco sacó la cabeza por la ventanilla en cada curva, orejas al viento. Dice que así se toma una chicana: sin frenar y con la lengua afuera.", "E·14": "Coco persiguió a los fantasmitas por todo el laberinto y se comió dos fichas. Piezas faltantes: consultar con el acomodador.", "E·15": "Coco marcó las seis provincias del imperio con el método tradicional del perrito. Legalmente discutible; territorialmente irrefutable.", "E·16": "La isla se hunde y Coco ya está nadando como un torpedo peludo hacia la orilla. Sálvense como puedan: él ya se salvó.", "E·17": "Coco atacó Kamchatka con un solo dado y perdió, como todos. Después se echó arriba del mapa: territorio ocupado, guerra terminada.", "E·18": "Coco pasó toda la guerra fría durmiendo sobre el mapa, una oreja en cada superpotencia. Equilibrio de poder: lo inventó él.", "E·19": "Coco se quedó una hora mirando los pajaritos de las cartas, temblando de emoción contenida. Es lo más cerca que estuvo de cazar uno.", "R·01": "Coco no puede decir nombres, pero los actúa: la imitación que hace de cada visita que llega a casa es reconocible al instante.", "R·02": "Coco miró las cartas ilustradas, ladró algo poético e incomprensible y se fue. Los surrealistas eran así.", "R·03": "Coco es doble agente: le pasa información a los dos equipos a cambio de bocaditos. Una palabra de más y los delata a todos.", "R·04": "En la escala del uno al diez, ¿cuánta hambre tiene Coco? Exacto: todos adivinaron sin dudar. Están listos para jugar.", "R·05": "Coco acompaña cada canción con un aullido afinadísimo. Bueno, afinado para un salchicha. Igual canta mejor que alguno de ustedes.", "R·06": "Escriban lo que escriban, Coco ya pensó lo mismo: «comida». Coincide con la mayoría en todas las rondas. Imbatible.", "R·07": "Letra T, categoría comida: Coco ladró «¡tuco!» antes que nadie agarrara el lápiz. Nadie lo escuchó, pero él sabe que ganó.", "R·08": "Coco le puso la pata al meme exacto y la mesa lloró de risa. El remate perfecto no se explica: se olfatea.", "R·09": "Taco, gato, cabra… Coco escuchó «gato», gruñó por reflejo y tiró la pila entera. Reglas de la casa: eso también vale.", "R·10": "Manotear el objeto correcto antes que nadie es literalmente el deporte favorito de Coco. Juega con ventaja: tiene reflejos de cazador de pelotas.", "R·11": "Coco esconde bocaditos abajo de la alfombra hace años y jamás lo atraparon. Ante la maestra de la trampa, humildad y a aprender.", "R·12": "Coco olfateó la carta boca abajo y ya sabe si mentís: le tiembla la nariz cuando hay cucaracha. Es un detector viviente de faroles.", "R·13": "Coco intentó vacunarse lamiendo la caja. Científicamente dudoso, pero el compromiso con la sanidad de la mesa es total.", "R·14": "¿Una carta más? Coco siempre pide una más. De todo. Es el espíritu de este juego con cuerpo de salchicha.", "R·15": "Coco es pésimo en este juego: ve cualquier color y ladra igual, que es su forma de decir malas palabras. Se lleva el mazo entero en cada ronda.", "R·16": "Coco empujó un imán con el hocico y se le pegaron tres más. Perdió la ronda, ganó un bigote magnético. La física no perdona.", "R·17": "Coco ve 28 palitos tirados en la mesa y entiende otra cosa: para él son todos suyos y hay que correrlo. Jueguen rápido.", "R·18": "En la aldea todos sospechan de todos, menos de Coco: quedó demostrado que a la luna solo le aúlla, no la obedece.", "R·19": "Doce segundos, letra B: Coco apoyó la pata en el botón y ladró «¡bocadito!». Válido. El salchicha sigue en la ronda; ustedes vayan pensando.", "R·20": "Coco remó en dulce de leche de verdad una vez: metió el hocico en el frasco. Tardó dos días en despegarse los bigotes. No se arrepiente.", "R·21": "Coco recuerda dónde está enterrado cada hueso del barrio desde 2019. Un trío de cartas es un juego de niños para esa memoria.", "R·22": "Coco anotó el pedido de toda la mesa con el olfato y no se olvidó de nadie. Propina sugerida: un bocadito por comensal.", "R·23": "Coco le llevó la carta a la princesa en el hocico, apenas mordisqueada en una esquina. El mensaje llegó: eso es lo que cuenta.", "R·24": "Dos puertas, y Coco ya está rascando la de la izquierda. ¿Dama o tigre? Él dice que atrás hay comida. Siempre dice eso. A veces acierta.", "R·25": "Coco tiene una sola palabra para cada tema y la ladra primero. Técnicamente inválida, moralmente ganadora.", "R·26": "Coco enterró la parte de la herencia que le tocaba en el fondo del jardín. Los buitres pueden dar vueltas: el tesoro tiene guardián.", "S·01": "Coco se acomoda entre los dos cuando arrancan las preguntas y se queda hasta la última. Las mejores charlas de la casa las escuchó él primero.", "K·01": "Coco cayó tres veces en la casilla del impuesto y pagó con la misma pelota mordida. El banco la aceptó: nadie discute con el acomodador.", "K·02": "Coco se comió un +4 en el sentido literal de la expresión. La partida siguió igual: nadie extraña un +4.", "K·03": "Coco olfateó todas las fichas del pozo y juró que sabe dónde está el doble seis. Cóbrenle la consultoría en bocaditos.", "K·04": "Coco escuchó los dados en el cubilete y se puso a girar en círculos: para él, ese ruido significa que empieza la diversión. Generala servida.", "K·05": "Coco no sabe mentir: cuando tenés el ancho de espadas, mueve la cola y te delata ante toda la mesa. No lo dejen mirar tus cartas.", "K·06": "Coco ladró «¡B-4!» y acertó al portaaviones de una. Hundido. El sonar del acomodador no falla: es todo nariz.", "K·07": "Coco mira caer las fichas por la ranura hipnotizado, la cabeza inclinada 45 grados. Cuatro en línea: la felicidad tiene forma de columna.", "K·08": "Coco sabe todas las respuestas pero las ladra, y el reglamento exige palabras. Injusticia histórica de este clásico.", "K·09": "Coco apostó dos bocaditos a que ustedes no saben la capital de Burkina Faso. El erudito de la casa camina en cuatro patas.", "K·10": "Coco reconoció las 320 tarjetas por el olfato, incluidas todas las yerbas. En trivia ilustrada, el acomodador juega en otra categoría."};
+const FRASES_ACOMODADOR={"T·01": "Coco le gruñó al villano toda la función y no le sacó los ojos de encima. Cola tiesa: máxima aprobación.", "T·02": "Coco olfateó algo raro en los conductos de la nave y se escondió abajo de la butaca. Si él tiene miedo, ustedes van a gritar.", "T·03": "Coco le ladró tres veces al Primigenio y después pidió upa. Dice que la cordura está sobrevalorada.", "T·04": "Coco no entra solo a esa mansión: camina pegado a tu pierna, con las orejas paradas y la cola entre las patas. Señal de gran función.", "T·05": "A oscuras, el olfato de Coco vale más que cualquier vela. Síganlo a él, que ya encontró la salida dos veces.", "T·06": "Coco escuchó pasos en la casa antes que nadie y se erizó entero. Cuando el lomo se le pone así, la función es de las buenas.", "T·07": "Hordas de zombis y Coco corriendo entre las patas de todos: para él es el mejor juego de persecución jamás inventado.", "T·08": "Coco entró moviendo la cola y salió gruñéndole a uno de ustedes. Él ya sabe quién es el traidor; no lo va a decir.", "T·09": "Coco se quedó quietito toda la función, con la cabeza apoyada en tus pies. Hay noches que se acompañan así, en silencio.", "T·10": "Coco olfateó a cada tripulante y le gruñó al que tenía cara de traidor. En una nave con objetivos secretos, la nariz del acomodador es el único detector confiable.", "T·11": "Coco le ladró a dos Dioses Antiguos nuevos y no retrocedió ni un paso. Reglas afinadas, horrores frescos, misma cola en alto.", "D·01": "Coco olfateó el mapa de Londres, se detuvo en una esquina y ladró una sola vez. El caso está ahí; el café lo ponen ustedes.", "D·02": "Coco enterró una carta del mazo en el jardín y no dice cuál. Dice que toda investigación necesita una pista que duela.", "D·03": "Coco es el único que ve al fantasma y no le parece gran cosa: le olfateó los pies y se volvió a dormir. Los sueños, interprétenlos ustedes.", "D·04": "Coco ya sabe quién fue, con qué arma y en qué habitación: lo delató el olfato. Por un bocadito, capaz que ladra una pista.", "C·01": "Coco volvió de la cueva con una rama enorme y cara de héroe. La tribu come esta noche: él ya hizo su parte.", "C·02": "Coco se subió al barco, apoyó el hocico en la borda y se quedó mirando el horizonte. Zarpen tranquilos: el vigía ya está en su puesto.", "C·03": "Coco puso la pata sobre el mapa justo donde brota el cuarto virus. Curen rápido, que él ya hizo el diagnóstico.", "C·04": "Coco baja al fondo del mar sin oxígeno y sin quejarse: es un salchicha, ya vive a baja profundidad. Jueguen la carta justa y síganlo.", "C·05": "Coco es el maestro absoluto de este juego: lleva años mirándote fijo hasta que entendés exactamente lo que quiere. Sin decir una palabra.", "C·06": "Coco hizo la ronda nocturna alrededor de la fortaleza, marcó dos árboles y volvió a informar. La patrulla puede salir: el perímetro es suyo.", "E·01": "Coco persiguió el tren por todo el mapa moviendo la cola. No entiende de rutas, pero sabe que los vagones de colores son la felicidad.", "E·02": "Coco aulló mirando al cielo como un lobo de Ragnarök. Le salió un aullido finito de salchicha, pero la épica estaba.", "E·03": "Dos imperios, una mesa y Coco sentado exactamente en el medio, cobrando peaje en caricias a ambos bandos. Neutralidad bien entendida.", "E·04": "Coco inspeccionó la ciudad piso por piso y aprobó la obra: dice que toda acrópolis necesita una plaza donde echarse al sol.", "E·05": "Coco vio a Anubis en la caja y se sentó derechito, orejas en punta: cuestión de respeto entre colegas. Los dioses con cabeza de perro no se discuten.", "E·06": "Coco caminó por encima de los azulejos y no volteó ninguno. El azulejero real puede dormir tranquilo; el palacio quedó precioso.", "E·07": "Coco olfateó cada camino y cada claustro, y levantó la pata en un prado. Ese territorio ya tiene dueño; disculpen.", "E·08": "Coco no entiende el regateo, pero cada vez que alguien dice «oveja» se le paran las orejas. Ofrézcanle lana y cierran cualquier trato.", "E·09": "Coco entró a la mazmorra sin hacer ruido, agarró el tesoro y salió trotando. El dragón sigue durmiendo. Aprendan del profesional.", "E·10": "Coco se instaló al lado de la cafetera esperando que se caiga una medialuna. Dice que en la hora pico siempre cae algo.", "E·11": "Coco ladra en cada subasta y sube todos los precios. Nadie sabe por quién ofertaba: él tampoco, pero qué emoción.", "E·12": "Coco olfateó a la tripulación uno por uno y le gruñó despacito al cocinero. El motín se sirve esta noche; él ya eligió bando.", "E·13": "Coco sacó la cabeza por la ventanilla en cada curva, orejas al viento. Dice que así se toma una chicana: sin frenar y con la lengua afuera.", "E·14": "Coco persiguió a los fantasmitas por todo el laberinto y se comió dos fichas. Piezas faltantes: consultar con el acomodador.", "E·15": "Coco marcó las seis provincias del imperio con el método tradicional del perrito. Legalmente discutible; territorialmente irrefutable.", "E·16": "La isla se hunde y Coco ya está nadando como un torpedo peludo hacia la orilla. Sálvense como puedan: él ya se salvó.", "E·17": "Coco atacó Kamchatka con un solo dado y perdió, como todos. Después se echó arriba del mapa: territorio ocupado, guerra terminada.", "E·18": "Coco pasó toda la guerra fría durmiendo sobre el mapa, una oreja en cada superpotencia. Equilibrio de poder: lo inventó él.", "E·19": "Coco se quedó una hora mirando los pajaritos de las cartas, temblando de emoción contenida. Es lo más cerca que estuvo de cazar uno.", "R·01": "Coco no puede decir nombres, pero los actúa: la imitación que hace de cada visita que llega a casa es reconocible al instante.", "R·02": "Coco miró las cartas ilustradas, ladró algo poético e incomprensible y se fue. Los surrealistas eran así.", "R·03": "Coco es doble agente: le pasa información a los dos equipos a cambio de bocaditos. Una palabra de más y los delata a todos.", "R·04": "En la escala del uno al diez, ¿cuánta hambre tiene Coco? Exacto: todos adivinaron sin dudar. Están listos para jugar.", "R·05": "Coco acompaña cada canción con un aullido afinadísimo. Bueno, afinado para un salchicha. Igual canta mejor que alguno de ustedes.", "R·06": "Escriban lo que escriban, Coco ya pensó lo mismo: «comida». Coincide con la mayoría en todas las rondas. Imbatible.", "R·07": "Letra T, categoría comida: Coco ladró «¡tuco!» antes que nadie agarrara el lápiz. Nadie lo escuchó, pero él sabe que ganó.", "R·08": "Coco le puso la pata al meme exacto y la mesa lloró de risa. El remate perfecto no se explica: se olfatea.", "R·09": "Taco, gato, cabra… Coco escuchó «gato», gruñó por reflejo y tiró la pila entera. Reglas de la casa: eso también vale.", "R·10": "Manotear el objeto correcto antes que nadie es literalmente el deporte favorito de Coco. Juega con ventaja: tiene reflejos de cazador de pelotas.", "R·11": "Coco esconde bocaditos abajo de la alfombra hace años y jamás lo atraparon. Ante la maestra de la trampa, humildad y a aprender.", "R·12": "Coco olfateó la carta boca abajo y ya sabe si mentís: le tiembla la nariz cuando hay cucaracha. Es un detector viviente de faroles.", "R·13": "Coco intentó vacunarse lamiendo la caja. Científicamente dudoso, pero el compromiso con la sanidad de la mesa es total.", "R·14": "¿Una carta más? Coco siempre pide una más. De todo. Es el espíritu de este juego con cuerpo de salchicha.", "R·15": "Coco es pésimo en este juego: ve cualquier color y ladra igual, que es su forma de decir malas palabras. Se lleva el mazo entero en cada ronda.", "R·16": "Coco empujó un imán con el hocico y se le pegaron tres más. Perdió la ronda, ganó un bigote magnético. La física no perdona.", "R·17": "Coco ve 28 palitos tirados en la mesa y entiende otra cosa: para él son todos suyos y hay que correrlo. Jueguen rápido.", "R·18": "En la aldea todos sospechan de todos, menos de Coco: quedó demostrado que a la luna solo le aúlla, no la obedece.", "R·19": "Doce segundos, letra B: Coco apoyó la pata en el botón y ladró «¡bocadito!». Válido. El salchicha sigue en la ronda; ustedes vayan pensando.", "R·20": "Coco remó en dulce de leche de verdad una vez: metió el hocico en el frasco. Tardó dos días en despegarse los bigotes. No se arrepiente.", "R·21": "Coco recuerda dónde está enterrado cada hueso del barrio desde 2019. Un trío de cartas es un juego de niños para esa memoria.", "R·22": "Coco anotó el pedido de toda la mesa con el olfato y no se olvidó de nadie. Propina sugerida: un bocadito por comensal.", "R·23": "Coco le llevó la carta a la princesa en el hocico, apenas mordisqueada en una esquina. El mensaje llegó: eso es lo que cuenta.", "R·24": "Dos puertas, y Coco ya está rascando la de la izquierda. ¿Dama o tigre? Él dice que atrás hay comida. Siempre dice eso. A veces acierta.", "R·25": "Coco tiene una sola palabra para cada tema y la ladra primero. Técnicamente inválida, moralmente ganadora.", "R·26": "Coco enterró la parte de la herencia que le tocaba en el fondo del jardín. Los buitres pueden dar vueltas: el tesoro tiene guardián.", "S·01": "Coco se acomoda entre los dos cuando arrancan las preguntas y se queda hasta la última. Las mejores charlas de la casa las escuchó él primero.", "K·01": "Coco cayó tres veces en la casilla del impuesto y pagó con la misma pelota mordida. El banco la aceptó: nadie discute con el acomodador.", "K·02": "Coco se comió un +4 en el sentido literal de la expresión. La partida siguió igual: nadie extraña un +4.", "K·03": "Coco olfateó todas las fichas del pozo y juró que sabe dónde está el doble seis. Cóbrenle la consultoría en bocaditos.", "K·04": "Coco escuchó los dados en el cubilete y se puso a girar en círculos: para él, ese ruido significa que empieza la diversión. Generala servida.", "K·05": "Coco no sabe mentir: cuando tenés el ancho de espadas, mueve la cola y te delata ante toda la mesa. No lo dejen mirar tus cartas.", "K·06": "Coco ladró «¡B-4!» y acertó al portaaviones de una. Hundido. El sonar del acomodador no falla: es todo nariz.", "K·07": "Coco mira caer las fichas por la ranura hipnotizado, la cabeza inclinada 45 grados. Cuatro en línea: la felicidad tiene forma de columna.", "K·08": "Coco sabe todas las respuestas pero las ladra, y el reglamento exige palabras. Injusticia histórica de este clásico.", "K·09": "Coco apostó dos bocaditos a que ustedes no saben la capital de Burkina Faso. El erudito de la casa camina en cuatro patas.", "K·10": "Coco reconoció las 320 tarjetas por el olfato, incluidas todas las yerbas. En trivia ilustrada, el acomodador juega en otra categoría."};
 
 const LOG_EXTRA={"D·02": "Cada caso deja cicatriz. Y el mazo la recuerda.", "D·03": "El único testigo está muerto. Y no sabe hablar.", "D·04": "Alguien mintió en esta casa. Falta saber quién.", "C·04": "A esta profundidad, una carta de más es un funeral.", "C·05": "Nadie habla. Todos escuchan lo mismo.", "C·06": "La fortaleza aguanta. Los rumores, no.", "E·03": "Dos imperios, una mesa. Sobra uno.", "E·04": "La ciudad perfecta se construye pisando a la vecina.", "E·06": "Cada azulejo que te llevás es uno que me falta.", "E·07": "Un camino cerrado es una fortuna ajena.", "E·08": "La isla da para todos. Nadie lo cree.", "E·09": "El tesoro es gratis. La salida se paga.", "E·10": "El café se sirve caliente o no se cobra.", "E·12": "El motín no se anuncia. Se sirve.", "E·13": "La curva perdona. La soberbia, jamás.", "E·14": "Comer fantasmas era más fácil sin paredes.", "E·15": "Seis provincias, doce rondas y un Senado que no perdona.", "E·16": "La isla se hunde. Los modales, primero.", "E·17": "Los pactos duran hasta el próximo dado.", "E·18": "El mundo en dos colores. Ninguno inocente.", "E·19": "Cada pájaro que llega te delata el plan.", "R·03": "Una palabra de más y el equipo cae.", "R·04": "Todos ven la misma escala. Nadie el mismo punto.", "R·05": "La canción la sabés. El problema es cantarla.", "R·06": "Pensar igual que todos, por una vez, gana.", "R·07": "Una letra, diez categorías, cero piedad.", "R·08": "El remate correcto no se explica. Llega.", "R·09": "Tu mano sabe la regla. Tu boca la traiciona.", "R·10": "El objeto correcto estaba a la vista. Igual perdiste.", "R·11": "Acá la trampa es ley. Que no te vean es el arte.", "R·12": "Te miro, te miento, te lo paso.", "R·13": "Tu hígado es mío. No es personal.", "R·14": "Una carta más. Siempre es una carta más.", "R·15": "Decí el color, no la palabra. Fallaste: son todas tuyas.", "R·16": "Los imanes no negocian.", "R·17": "Veintiocho piezas en la mesa. Movés una de más y perdiste.", "R·18": "La aldea duerme. Los lobos, nunca.", "R·19": "Doce segundos, una letra libre. Hablá o quedás afuera.", "R·20": "El país se hunde y vos remás en postre.", "R·21": "El trío estaba ahí. Vos también. Alguien lo olvidó.", "R·22": "El pedido era simple. La memoria, corta.", "R·23": "Una carta en la mano y la corte en contra.", "R·24": "Dos puertas, una dama, ninguna garantía.", "R·25": "Tema nuevo, letra en mano: gritá primero o quedate con las cartas.", "R·26": "La herencia se reparte. La familia, se rompe.", "S·01": "Hay preguntas que solo salen con el juego abierto.", "K·01": "El alquiler no perdona ni en familia.", "K·02": "Todos conocen las reglas. Nadie las acepta.", "K·03": "La ficha justa llega tarde o no llega.", "K·04": "Cinco dados, un cubilete y la vieja escuela.", "K·05": "El truco está permitido. Mentir, obligatorio.", "K·06": "Agua por todos lados. Hasta que no.", "K·07": "Cuatro fichas de gloria, una de descuido.", "K·08": "Saber la respuesta es la mitad. Gritarla primero, el resto.", "K·10": "Saberlo no alcanza: hay que reconocerlo a simple vista."};
-const GENEROS={"T·01": "Slasher", "T·02": "Sci-fi de supervivencia", "T·03": "Pulp lovecraftiano", "T·04": "Gótico con app", "T·05": "Claustrofobia a vela", "T·06": "Gato y ratón", "T·07": "Zombis clase B", "T·08": "Casa embrujada", "T·09": "Drama de guerra", "D·01": "Policial victoriano", "D·02": "Horror de legajo", "D·03": "Sesión espiritista", "D·04": "Whodunit de salón", "C·01": "Aventura prehistórica", "C·02": "Odisea de atlas", "C·03": "Thriller sanitario", "C·04": "Inmersión silenciosa", "C·05": "Telepatía de café", "C·06": "Crónica de patrulla", "E·01": "Época ferroviaria", "E·02": "Épica vikinga", "E·03": "Duelo de imperios", "E·04": "Urbanismo de altura", "E·05": "Mitología monumental", "E·06": "Mosaico de corte", "E·07": "Medieval de campiña", "E·08": "Colonos y regateo", "E·09": "Aventura con dragón", "E·10": "Vodevil de cafetería", "E·11": "Subasta olímpica", "E·12": "Motín en altamar", "E·13": "Carrera de época", "E·14": "Persecución arcade", "E·15": "Intriga senatorial", "E·16": "Naufragio con maldad", "E·17": "Guerra de sobremesa", "E·18": "Guerra fría de autor", "E·19": "Documental de aves", "R·01": "Sketch de mímica", "R·02": "Surrealismo ilustrado", "R·03": "Espionaje de palabras", "R·04": "Telepatía de escala", "R·05": "Musical a capela", "R·06": "Coro de mayorías", "R·07": "Carrera de lápiz", "R·08": "Comedia de remate", "R·09": "Reflejos con queso", "R·10": "Vértigo de objetos", "R·11": "Picaresca de trampa", "R·12": "Farol con bichos", "R·13": "Comedia viral", "R·14": "Vértigo de una más", "R·15": "Reflejos malhablados", "R·16": "Física magnética", "R·17": "Pulso de cirujano", "R·18": "Caza de brujas", "R·19": "Basta contrarreloj", "R·20": "Sátira criolla", "R·21": "Memoria traicionera", "R·22": "Comedia de mozos", "R·23": "Intriga de corte", "R·24": "Duelo de puertas", "R·25": "Palabras al grito", "R·26": "Herencia con buitres", "S·01": "Cine de conversación", "K·01": "Drama inmobiliario", "K·02": "Clásico de sobremesa", "K·03": "Cadena y cálculo", "K·04": "Azar de cubilete", "K·05": "Baraja criolla", "K·06": "Guerra de coordenadas", "K·07": "Duelo vertical", "K·08": "Trivia de tribuna", "K·09": "Apuesta ilustrada", "K·10": "Trivia ilustrada"};
+const GENEROS={"T·01": "Slasher", "T·02": "Sci-fi de supervivencia", "T·03": "Pulp lovecraftiano", "T·04": "Gótico con app", "T·05": "Claustrofobia a vela", "T·06": "Gato y ratón", "T·07": "Zombis clase B", "T·08": "Casa embrujada", "T·09": "Drama de guerra", "T·10": "Sci-fi con traición", "T·11": "Pulp lovecraftiano", "D·01": "Policial victoriano", "D·02": "Horror de legajo", "D·03": "Sesión espiritista", "D·04": "Whodunit de salón", "C·01": "Aventura prehistórica", "C·02": "Odisea de atlas", "C·03": "Thriller sanitario", "C·04": "Inmersión silenciosa", "C·05": "Telepatía de café", "C·06": "Crónica de patrulla", "E·01": "Época ferroviaria", "E·02": "Épica vikinga", "E·03": "Duelo de imperios", "E·04": "Urbanismo de altura", "E·05": "Mitología monumental", "E·06": "Mosaico de corte", "E·07": "Medieval de campiña", "E·08": "Colonos y regateo", "E·09": "Aventura con dragón", "E·10": "Vodevil de cafetería", "E·11": "Subasta olímpica", "E·12": "Motín en altamar", "E·13": "Carrera de época", "E·14": "Persecución arcade", "E·15": "Intriga senatorial", "E·16": "Naufragio con maldad", "E·17": "Guerra de sobremesa", "E·18": "Guerra fría de autor", "E·19": "Documental de aves", "R·01": "Sketch de mímica", "R·02": "Surrealismo ilustrado", "R·03": "Espionaje de palabras", "R·04": "Telepatía de escala", "R·05": "Musical a capela", "R·06": "Coro de mayorías", "R·07": "Carrera de lápiz", "R·08": "Comedia de remate", "R·09": "Reflejos con queso", "R·10": "Vértigo de objetos", "R·11": "Picaresca de trampa", "R·12": "Farol con bichos", "R·13": "Comedia viral", "R·14": "Vértigo de una más", "R·15": "Reflejos malhablados", "R·16": "Física magnética", "R·17": "Pulso de cirujano", "R·18": "Caza de brujas", "R·19": "Basta contrarreloj", "R·20": "Sátira criolla", "R·21": "Memoria traicionera", "R·22": "Comedia de mozos", "R·23": "Intriga de corte", "R·24": "Duelo de puertas", "R·25": "Palabras al grito", "R·26": "Herencia con buitres", "S·01": "Cine de conversación", "K·01": "Drama inmobiliario", "K·02": "Clásico de sobremesa", "K·03": "Cadena y cálculo", "K·04": "Azar de cubilete", "K·05": "Baraja criolla", "K·06": "Guerra de coordenadas", "K·07": "Duelo vertical", "K·08": "Trivia de tribuna", "K·09": "Apuesta ilustrada", "K·10": "Trivia ilustrada"};
 const HORARIO_SALA={"t": "Función trasnoche", "d": "Matiné de domingo", "c": "Función vermú", "e": "Noche de estreno", "r": "Continuado de sábado", "s": "Última función", "k": "Ciclo permanente"};
 
 /* ============ HELPERS ============ */
@@ -3531,79 +3554,6 @@ if(qdob){
     fig.innerHTML=`<img alt="Tapa de ${esc(g.n)}" loading="lazy" onerror="this.closest('.acover').classList.add('falla')" src="img/${code}.jpg"/><span class="ph"><span class="phl">${esc(g.n[0])}</span><span class="phs">✦</span><span class="phc">FUNCIÓN ${g.c}</span></span>`;
     lob.replaceWith(fig);
   });
-})();
-
-/* ============ SUSTO DE COCO — FIN DE LA SALA DE TERROR ============ */
-/* Ladrido embebido + desbloqueo en la primera interacción */
-const LADRIDO=new Audio("data:audio/mpeg;base64,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");
-LADRIDO.preload="auto";
-let audioListo=false;
-function desbloquearAudio(){
-  if(audioListo)return;
-  audioListo=true;
-  const v=LADRIDO.volume;LADRIDO.volume=0;
-  LADRIDO.play().then(()=>{LADRIDO.pause();LADRIDO.currentTime=0;LADRIDO.volume=v;})
-    .catch(()=>{LADRIDO.volume=v;audioListo=false;});
-}
-addEventListener("pointerdown",desbloquearAudio,{passive:true});
-addEventListener("touchend",desbloquearAudio,{passive:true});
-addEventListener("keydown",desbloquearAudio);
-(function(){
-  if(REDUCED)return;
-  const salaT=document.querySelector("#sala-t"); if(!salaT)return;
-  /* precargar la imagen del susto en el primer scroll */
-  let pre=null;
-  addEventListener("scroll",function precarga(){
-    removeEventListener("scroll",precarga);
-    pre=new Image();pre.src="img/coco-susto.jpg";
-  },{passive:true,once:true});
-  let hecho=false,lastY=window.scrollY,raf=0;
-  let vistoMs=0,lastT=0,navegando=false;
-  /* saltos por anchor (nav, FAB, botones) no cuentan como recorrer la sala */
-  document.addEventListener("click",e=>{
-    if(e.target.closest&&e.target.closest('a[href^="#"]')){
-      navegando=true;
-      setTimeout(()=>{navegando=false;},1500);
-    }
-  },{passive:true});
-  function chequear(){
-    raf=0;
-    if(hecho)return;
-    const y=window.scrollY, bajando=y>lastY; lastY=y;
-    const r=salaT.getBoundingClientRect();
-    /* acumular tiempo real de permanencia con la sala en pantalla */
-    const ahora=performance.now();
-    if(r.top<innerHeight&&r.bottom>0){
-      if(lastT)vistoMs+=Math.min(200,ahora-lastT);
-      lastT=ahora;
-    }else{lastT=0;}
-    if(!bajando)return;
-    /* la sala de terror acaba de salir por arriba del viewport */
-    if(r.bottom>0||r.bottom<-1200)return;
-    if(navegando||vistoMs<600)return; /* pasó de largo: sin susto */
-    const ae=document.activeElement;
-    if(ae&&/INPUT|TEXTAREA/.test(ae.tagName))return;
-    hecho=true;susto();
-  }
-  addEventListener("scroll",()=>{if(!raf)raf=requestAnimationFrame(chequear);},{passive:true});
-  function ladrar(){
-    try{LADRIDO.currentTime=0;LADRIDO.play().catch(()=>{});}catch(e){}
-  }
-  function susto(){
-    const s=document.createElement("div");
-    s.className="susto";s.setAttribute("role","presentation");
-    s.innerHTML=`<img alt="" onerror="this.src='img/coco.jpg'" src="img/coco-susto.jpg"/><div class="grito"><b>¡¿YA SE VAN DE LA SALA?!</b><i>— Coco, acomodador · turno trasnoche</i></div>`;
-    document.body.appendChild(s);
-    ladrar();
-    let fuera=false;
-    const chau=()=>{
-      if(fuera)return;fuera=true;
-      s.classList.add("chau");
-      setTimeout(()=>s.remove(),420);
-    };
-    s.addEventListener("pointerdown",chau); /* un toque lo despide antes */
-    setTimeout(chau,3800);
-  }
 })();
 
 /* ============ BOTÓN IMPRIMIR PROGRAMA ============ */
