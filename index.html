@@ -799,6 +799,14 @@ html.rev-on .rev.in{opacity:1;transform:none}
 button:disabled{opacity:.55;cursor:not-allowed}#print-contexto{padding:12px 40px 0;font-family:var(--mono);font-size:.7rem;color:var(--tinta2)}
 @media(max-width:380px){.navin{padding:0 16px}.navlogo{font-size:1rem}.navlinks{gap:8px}.navcta{padding:8px;font-size:.6rem}.wrap{padding-left:20px;padding-right:20px}.rt-acto{gap:8px;flex-wrap:wrap}}
 @media print{.fila>span:nth-child(4){display:block!important}.programa{padding:12px 0}.fila{grid-template-columns:45px minmax(0,1fr) 100px 64px 70px 83px!important;gap:7px;font-size:9px}.fila.head{font-size:8px}.fila .nom small{font-size:8px}.hoja-cab{padding:12px 0}#print-contexto{padding-left:0}.fila .nom a{color:#000}}
+
+/* Boletería: selección simple, instrucciones próximas a cada control. */
+.boleteria .filtros{grid-template-columns:repeat(3,minmax(0,1fr));align-items:start;gap:26px}
+.boleteria .fgrupo{min-width:0}.boleteria .flabel{display:block;font-size:.875rem;letter-spacing:.025em;text-transform:none;line-height:1.5;margin-bottom:9px}.boleteria .opcional{color:var(--humo);font-family:var(--grotesk);font-size:.8rem;margin-left:8px}
+.fselect{width:100%;min-height:50px;padding:12px 30px 12px 14px;border:1px solid var(--linea-oro);border-radius:0;background:#0F0A06;color:var(--marfil);font-family:var(--grotesk);font-size:1rem;line-height:1.5;color-scheme:dark;cursor:pointer}.fselect option{background:#0F0A06;color:var(--marfil)}.fselect:focus-visible{outline:2px solid var(--orovivo);outline-offset:3px}.fayuda{margin:9px 0 0;color:var(--humo);font-family:var(--grotesk);font-size:.875rem;line-height:1.55;letter-spacing:normal;text-transform:none}
+.boleteria .fgrupo-accion{grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr;gap:24px;border-top:1px solid var(--linea-oro-suave);padding-top:24px}.boleteria .fgrupo-accion button{width:100%;white-space:normal;min-height:54px;letter-spacing:.07em;font-size:.875rem}.boleteria #jugadores-extra{margin-top:16px}.boleteria #jugadores-extra label{font-size:.875rem;line-height:1.5;margin-bottom:8px}.boleteria #jugadores-exactos{font-size:1rem;min-height:48px}.boleteria #jugadores-exactos[aria-invalid="true"]{border-color:var(--carmesivivo)}.boleteria .ayuda.guia{font-size:1rem;max-width:760px}.boleteria .resultado-filtros{font-family:var(--grotesk);font-size:.875rem;letter-spacing:normal}.boleteria .fbuscar{margin-bottom:28px}
+@media(max-width:900px){.boleteria .filtros{grid-template-columns:1fr 1fr}.boleteria .fgrupo:nth-child(3){grid-column:1/-1}}
+@media(max-width:620px){.boleteria .filtros,.boleteria .fgrupo-accion{grid-template-columns:1fr;gap:22px}.boleteria .fgrupo:nth-child(3){grid-column:auto}.boleteria .fgrupo-accion{gap:18px}.boleteria .ticket{padding:15px;gap:15px}.boleteria .tk{overflow-wrap:anywhere}}
 </style>
 <noscript><style>.rev{opacity:1!important;transform:none!important}</style></noscript>
 <noscript><style>.detalle-juego{display:block!important}.vermas{display:none!important}</style></noscript>
@@ -2578,32 +2586,20 @@ button:disabled{opacity:.55;cursor:not-allowed}#print-contexto{padding:12px 40px
 <hr class="regla">
 <div aria-label="Boletería: filtros del catálogo" class="boleteria rev" role="group">
 <h3>Boletería</h3>
-<p class="ayuda guia">Elegí cantidad de jugadores (incluido el solitario), tiempo disponible y clima de la noche — el ambiente admite combinaciones: cooperativo y competitivo pueden convivir en la misma búsqueda. La ventanilla devuelve las funciones posibles; después Coco puede elegir una sola — o armar el <b>programa doble</b>: una de apertura y la función central, con intermedio incluido.</p>
+<p class="ayuda guia">Elegí solo lo que ya sepan: cuántas personas van a jugar, cuánto tiempo tienen y qué experiencia buscan. <b>La lista se actualiza sola.</b> Podés elegir un juego de la lista o dejar que Coco decida.</p>
 <div class="avisojs">Este visor no ejecuta los filtros. Para usar la boletería, abrí el archivo en Chrome o Safari (menú → «Abrir en el navegador»). Mientras tanto, la cartelera completa está acá abajo, con todos los datos a la vista.</div>
 <div class="fbuscar">
-<input aria-label="Buscar un juego por nombre" autocomplete="off" id="q" placeholder="Buscar por nombre…" type="search">
+<label class="flabel" for="q">¿Buscás un juego en particular? <span class="opcional">Opcional</span></label><input aria-describedby="ayuda-busqueda" autocomplete="off" id="q" placeholder="Escribí un nombre, por ejemplo: Paleo" type="search"><p class="fayuda" id="ayuda-busqueda">Dejalo vacío para ver todos los juegos que coincidan con tus filtros.</p>
 </div>
 <div class="filtros">
-<div class="fgrupo">
-<div class="flabel">¿Cuántos son?</div>
-<div class="chips" id="f-jug"><button aria-pressed="false" class="chip" data-v="1" type="button">1</button><button aria-pressed="false" class="chip" data-v="2" type="button">2</button><button aria-pressed="false" class="chip" data-v="3" type="button">3</button><button aria-pressed="false" class="chip" data-v="4" type="button">4</button><button aria-pressed="false" class="chip" data-v="5" type="button">5</button><button aria-pressed="false" class="chip" data-v="6" type="button">6</button><button aria-pressed="false" class="chip" data-v="7" type="button">7</button><button aria-pressed="false" class="chip" data-v="8" type="button">8</button><button aria-pressed="false" class="chip" data-v="more" type="button">9+</button></div><div id="jugadores-extra" hidden=""><label for="jugadores-exactos">Cantidad exacta de personas</label><input id="jugadores-exactos" type="number" min="9" step="1" required="" value="9" inputmode="numeric"></div>
-</div>
-<div class="fgrupo">
-<div class="flabel">¿Cuánto tiempo tienen?</div>
-<div class="chips" id="f-tiempo"><button aria-pressed="false" class="chip" data-v="20" type="button">hasta 20′</button><button aria-pressed="false" class="chip" data-v="45" type="button">hasta 45′</button><button aria-pressed="false" class="chip" data-v="90" type="button">hasta 90′</button><button aria-pressed="false" class="chip" data-v="999" type="button">sin límite</button></div>
-</div>
-<div class="fgrupo">
-<div class="flabel">¿Qué ambiente buscan?</div>
-<div class="chips" id="f-modo"><button type="button" class="chip" data-v="Cooperativo" aria-pressed="false">Cooperativo</button><button type="button" class="chip" data-v="Competitivo" aria-pressed="false">Competitivo</button><button type="button" class="chip" data-v="En equipos" aria-pressed="false">En equipos</button><button type="button" class="chip" data-v="Roles ocultos" aria-pressed="false">Roles ocultos</button><button type="button" class="chip" data-v="Solitario" aria-pressed="false">Solitario</button></div>
-</div>
-<div class="fgrupo fgrupo-accion">
-<button class="qjugar" id="qjugar" title="Que Coco decida" type="button">🎟️ Que Coco decida</button>
-<button class="qdoble" id="qdoble" title="Armar programa doble" type="button">🎬 Doble función</button>
-</div>
+<div class="fgrupo"><label class="flabel" for="f-jug">¿Cuántas personas van a jugar?</label><select id="f-jug" class="fselect" aria-describedby="ayuda-jugadores"><option value="">Cualquier cantidad</option><option value="1">1 persona · solitario</option><option value="2">2 personas</option><option value="3">3 personas</option><option value="4">4 personas</option><option value="5">5 personas</option><option value="6">6 personas</option><option value="7">7 personas</option><option value="8">8 personas</option><option value="9">9 personas</option><option value="10">10 personas</option><option value="11">11 personas</option><option value="12">12 personas</option><option value="more">13 o más personas…</option></select><p class="fayuda" id="ayuda-jugadores">Contá personas, no equipos. Incluite a vos.</p><div id="jugadores-extra" hidden><label for="jugadores-exactos">¿Cuántas exactamente?</label><input id="jugadores-exactos" type="number" min="13" step="1" required value="13" inputmode="numeric" aria-describedby="ayuda-exactos"><p class="fayuda" id="ayuda-exactos">Escribí el total de personas, por ejemplo: 16.</p></div></div>
+<div class="fgrupo"><label class="flabel" for="f-tiempo">¿Cuánto tiempo tienen por juego?</label><select id="f-tiempo" class="fselect" aria-describedby="ayuda-tiempo"><option value="">Sin límite de tiempo</option><option value="20">Hasta 20 minutos</option><option value="45">Hasta 45 minutos</option><option value="60">Hasta 60 minutos</option><option value="90">Hasta 90 minutos</option><option value="120">Hasta 120 minutos</option><option value="180">Hasta 180 minutos</option></select><p class="fayuda" id="ayuda-tiempo">Elegí el máximo disponible. Las duraciones son aproximadas.</p></div>
+<div class="fgrupo"><label class="flabel" for="f-modo">¿Qué experiencia buscan?</label><select id="f-modo" class="fselect" aria-describedby="ayuda-modo"><option value="">Todas</option><option value="Cooperativo">Cooperativo</option><option value="Competitivo">Competitivo</option><option value="En equipos">En equipos</option><option value="Roles ocultos">Roles ocultos</option><option value="Solitario">Solitario</option><option value="Asimétrico">Asimétrico</option><option value="Conversación">Conversación</option></select><p class="fayuda" id="ayuda-modo" aria-live="polite">Todas: mostrá cualquier forma de jugar.</p></div>
+<div class="fgrupo fgrupo-accion"><div><button class="qjugar" id="qjugar" title="Elegir un juego entre los resultados" type="button" aria-describedby="ayuda-uno">🎟️ Que Coco elija un juego</button><p class="fayuda" id="ayuda-uno">Una recomendación entre los juegos de la lista.</p></div><div><button class="qdoble" id="qdoble" title="Elegir dos juegos para la misma mesa" type="button" aria-describedby="ayuda-doble">🎬 Programa doble · 2 juegos</button><p class="fayuda" id="ayuda-doble">Dos juegos para jugar uno después del otro. El tiempo elegido se aplica a cada uno.</p></div></div>
 </div>
 <div class="ticket">
 <span class="tk" id="tk-texto">ENTRADA GENERAL — <b>SIN FILTROS</b></span>
-<button class="reset" id="resetf" type="button">Limpiar filtros</button>
+<button class="reset" id="resetf" type="button">Restablecer todo</button>
 <span class="cuenta"><span id="cuenta">91</span> EN CARTEL</span>
 </div>
 <div aria-live="polite" class="resultado-filtros" id="resultado-filtros">Mostrando 91 funciones disponibles.</div>
@@ -5550,10 +5546,11 @@ seguro("orden-columnas",function(){
 
 /* ============ FILTROS ============ */
 const F={p:null,t:null,m:new Set(),q:null};
-const PT=[["hasta 20′","20"],["hasta 45′","45"],["hasta 90′","90"],["sin límite","999"]];
+const PT=[20,45,60,90,120,180].map(n=>["hasta "+n+" minutos por juego",String(n)]);
 const MODOS=["Cooperativo","Competitivo","En equipos","Roles ocultos","Solitario","Asimétrico","Conversación"];
 const fmodo=$("#f-modo");
-if(fmodo)fmodo.innerHTML=MODOS.filter(m=>JUEGOS.some(g=>modosDe(g).includes(m))).map(m=>`<button type="button" class="chip" data-v="${esc(m)}" aria-pressed="false">${esc(m)}</button>`).join("");
+const AYUDA_MODOS={"Cooperativo": "Todos colaboran para ganar juntos.", "Competitivo": "Cada jugador busca ganar por su cuenta.", "En equipos": "Los jugadores se agrupan para competir en equipos.", "Roles ocultos": "Hay identidades u objetivos secretos: hay que deducir en quién confiar.", "Solitario": "Juegos pensados para jugar a solas; algunas fichas también indican una opción compartida.", "Asimétrico": "Los bandos se enfrentan con objetivos o formas de jugar diferentes.", "Conversación": "Preguntas y charlas, sin competir por ganar."};
+if(fmodo)fmodo.innerHTML='<option value="">Todas</option>'+MODOS.filter(m=>JUEGOS.some(g=>modosDe(g).includes(m))).map(m=>`<option value="${esc(m)}">${esc(m)}</option>`).join("");
 let consultaTimer=null,recoTimer=null,recoOperacion=0;
 function cancelarRecomendacion(){
  recoOperacion++;clearTimeout(recoTimer);recoTimer=null;
@@ -5562,7 +5559,7 @@ function cancelarRecomendacion(){
 function norm(s){return String(s).toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"");}
 function pasaTiempo(g){return !F.t||F.t==="999"||g.tiempo.libre||(g.tiempo.hasta!==null&&g.tiempo.hasta<=Number(F.t));}
 function candidatos(){
- if(F.p>=9&&!$("#jugadores-exactos").checkValidity())return [];
+ if(F.p>=13&&!$("#jugadores-exactos").checkValidity())return [];
  const q=norm(F.q||"");
  return JUEGOS.filter(g=>(!F.p||admiteJugadores(g,F.p))&&pasaTiempo(g)&&(!F.m.size||modosDe(g).some(m=>F.m.has(m)))&&(!q||[g.n,g.c,GENEROS[g.c]||""].some(s=>norm(s).includes(q))));
 }
@@ -5584,27 +5581,29 @@ function aplicar(){
  const rf=$("#resultado-filtros");if(rf)rf.textContent=`Mostrando ${vis.length} ${vis.length===1?"función disponible":"funciones disponibles"}${parts.length?" para "+parts.join(" · "):""}.${F.t&&F.t!=="999"?" Se toma la duración máxima indicada; los juegos de tiempo libre se pueden adaptar.":""}`;
  const single=$("#qjugar"),double=$("#qdoble");if(single)single.disabled=!vis.length;
  const hasPair=vis.length>=2&&parejasCompatibles(vis).length>0;
- if(double){double.disabled=!hasPair;double.title=hasPair?"Armar programa doble":!vis.length?"No hay funciones disponibles":vis.length===1?"Se necesitan dos funciones":"No hay dos funciones para una misma cantidad de personas";}
- document.querySelectorAll("#f-jug .chip").forEach(c=>c.setAttribute("aria-pressed",String(c.dataset.v==="more"?F.p>=9:Number(c.dataset.v)===F.p)));
- document.querySelectorAll("#f-tiempo .chip").forEach(c=>c.setAttribute("aria-pressed",String(c.dataset.v===F.t)));
- document.querySelectorAll("#f-modo .chip").forEach(c=>c.setAttribute("aria-pressed",String(F.m.has(c.dataset.v))));
- const exacto=$("#jugadores-extra");if(exacto)exacto.hidden=!(F.p>=9);
+ if(double){double.disabled=!hasPair;const ayuda=$("#ayuda-doble");if(ayuda)ayuda.textContent=hasPair?"Dos juegos para jugar uno después del otro. El tiempo elegido se aplica a cada uno.":!vis.length?"No hay juegos con estos filtros. Probá cambiar una opción.":vis.length===1?"Hace falta al menos un juego más para armar el programa doble.":"No hay dos juegos compatibles con la misma cantidad de personas. Probá cambiar un filtro.";double.title=hasPair?"Armar programa doble":!vis.length?"No hay funciones disponibles":vis.length===1?"Se necesitan dos funciones":"No hay dos funciones para una misma cantidad de personas";}
+ $("#f-jug").value=F.p>=13?"more":F.p?String(F.p):"";
+ $("#f-tiempo").value=F.t||"";
+ $("#f-modo").value=[...F.m][0]||"";
+ $("#ayuda-modo").textContent=AYUDA_MODOS[$("#f-modo").value]||"Todas: mostrá cualquier forma de jugar.";
+ const exacto=$("#jugadores-extra");if(exacto)exacto.hidden=!(F.p>=13);
+ $("#jugadores-exactos").setAttribute("aria-invalid",String(F.p>=13&&!$("#jugadores-exactos").checkValidity()));
  const printLabel=$("#print-contexto");if(printLabel)printLabel.textContent=parts.length?`${vis.length} de ${JUEGOS.length} funciones · ${parts.join(" · ")}`:`${JUEGOS.length} funciones · catálogo completo`;
- if(F.p>=9&&!$("#jugadores-exactos").checkValidity()&&rf)rf.textContent="Indicá una cantidad entera de 9 personas o más.";
+ if(F.p>=13&&!$("#jugadores-exactos").checkValidity()&&rf)rf.textContent="Indicá una cantidad entera de 13 personas o más.";
  restripe();
 }
 function cambiarFiltros(){clearTimeout(consultaTimer);consultaTimer=null;cancelarRecomendacion();aplicar();}
-function resetTodo(){F.p=F.t=F.q=null;F.m.clear();const q=$("#q"),extra=$("#jugadores-exactos");if(q)q.value="";if(extra)extra.value="9";cambiarFiltros();}
+function resetTodo(){F.p=F.t=F.q=null;F.m.clear();const q=$("#q"),extra=$("#jugadores-exactos");if(q)q.value="";if(extra)extra.value="13";cambiarFiltros();}
 $("#resetf")?.addEventListener("click",resetTodo);
 document.addEventListener("click",e=>{if(e.target.closest("#resetf2"))resetTodo();});
-document.querySelectorAll(".chips").forEach(group=>group.addEventListener("click",e=>{
- const btn=e.target.closest(".chip");if(!btn)return;const value=btn.dataset.v;
- if(group.id==="f-modo"){F.m.has(value)?F.m.delete(value):F.m.add(value);}
- else if(group.id==="f-tiempo")F.t=F.t===value?null:value;
- else{F.p=value==="more"?(F.p>=9?null:Math.max(9,Number($("#jugadores-exactos").value)||9)):(F.p===Number(value)?null:Number(value));}
- cambiarFiltros();if(value==="more"&&F.p>=9)$("#jugadores-exactos").focus();
-}));
-$("#jugadores-exactos")?.addEventListener("input",e=>{const value=e.target.valueAsNumber;if(Number.isSafeInteger(value)&&value>=9)F.p=value;cambiarFiltros();});
+$("#f-jug").addEventListener("change",e=>{
+ const v=e.target.value;
+ if(v==="more"){const n=$("#jugadores-exactos").valueAsNumber;F.p=Number.isSafeInteger(n)&&n>=13?n:13;$("#jugadores-exactos").value=String(F.p);}else F.p=v?Number(v):null;
+ cambiarFiltros();if(v==="more")$("#jugadores-exactos").focus();
+});
+$("#f-tiempo").addEventListener("change",e=>{F.t=e.target.value||null;cambiarFiltros();});
+$("#f-modo").addEventListener("change",e=>{F.m.clear();if(e.target.value)F.m.add(e.target.value);cambiarFiltros();});
+$("#jugadores-exactos")?.addEventListener("input",e=>{const value=e.target.valueAsNumber;if(Number.isSafeInteger(value)&&value>=13)F.p=value;cambiarFiltros();});
 $("#q")?.addEventListener("input",e=>{F.q=e.target.value.trim()||null;cambiarFiltros();});
 
 /* ============ COCO DECIDE ============ */
