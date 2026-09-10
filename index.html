@@ -5789,6 +5789,117 @@ $("#jugadores-exactos")?.addEventListener("input",e=>{const value=e.target.value
 $("#q")?.addEventListener("input",e=>{F.q=e.target.value.trim()||null;cambiarFiltros();});
 
 /* ============ COCO DECIDE ============ */
+/* Criterios internos de la boletería. No añaden campos, categorías ni servicios.
+   El catálogo y sus filtros determinan qué se puede elegir; este motor ordena
+   esas opciones. Los pesos son decisiones editoriales, no valoraciones de BGG
+   ni supuestos sobre la cantidad «óptima» de jugadores. El azar solo desempata.
+   La memoria guarda códigos de recomendaciones mostradas en esta pestaña,
+   no gustos inferidos, búsquedas ni datos personales. Si no se puede guardar,
+   sigue funcionando en memoria. Como todo JavaScript público, es inspeccionable. */
+const COCO=(()=>{
+ const CLAVE="cine-coco:recomendaciones:v1",LIMITE=128;
+ const codigos=new Set(JUEGOS.map(g=>g.c));
+ // Evita encadenar ediciones de la misma serie; no cambia su clasificación.
+ const series=Object.freeze({
+  "T·10":"nemesis","T·12":"nemesis","T·02":"nemesis",
+  "T·03":"death-may-die","T·11":"death-may-die"
+ });
+ const serie=g=>series[g.c]||g.c;
+ const firma=c=>c.slice().sort().join("|");
+ const duracion=g=>!g.tiempo.libre&&Number.isFinite(g.tiempo.hasta)?g.tiempo.hasta:null;
+ const compartido=(g,p)=>!!p&&modosDe(g).includes("Solitario")&&p>g.jug[1];
+ let historial=[];
+ try{
+  const raw=sessionStorage.getItem(CLAVE);
+  const dato=raw&&raw.length<=65536?JSON.parse(raw):null;
+  if(dato?.v===1&&Array.isArray(dato.historial))historial=dato.historial.slice(-LIMITE).filter(c=>
+   Array.isArray(c)&&c.length>=1&&c.length<=2&&new Set(c).size===c.length&&c.every(id=>typeof id==="string"&&codigos.has(id))
+  );
+ }catch(_){/* Almacenamiento bloqueado o antiguo: memoria vacía y operativa. */}
+ function estado(){
+  const juegos=new Map(),programas=new Map();
+  historial.forEach((c,i)=>{c.forEach(id=>juegos.set(id,i));if(c.length===2)programas.set(firma(c),i);});
+  const ultimos=new Set(historial[historial.length-1]||[]);
+  const seriesRecientes=new Set([...ultimos].map(id=>series[id]||id));
+  return {juegos,programas,ultimos,seriesRecientes};
+ }
+ function preferir(opciones,criterio){
+  const preferidas=opciones.filter(criterio);
+  return preferidas.length?preferidas:opciones;
+ }
+ function mejores(opciones,puntos,minimo=false){
+  if(!opciones.length)return [];
+  const valores=opciones.map(puntos),mejor=valores.reduce((a,b)=>minimo?Math.min(a,b):Math.max(a,b));
+  return opciones.filter((_,i)=>valores[i]===mejor);
+ }
+ function novedad(opciones,ultimaVez){
+  if(!opciones.length)return [];
+  const nuevas=opciones.filter(o=>ultimaVez(o)<0);
+  if(nuevas.length)return nuevas;
+  // Agotadas las novedades, recupera el tercio menos reciente. No reinicia
+  // toda la memoria al cambiar filtros ni queda atrapado en una lista pequeña.
+  const orden=opciones.map(ultimaVez).sort((a,b)=>a-b);
+  const corte=orden[Math.ceil(orden.length/3)-1];
+  return opciones.filter(o=>ultimaVez(o)<=corte);
+ }
+ function desempatar(opciones){return opciones.length?opciones[Math.floor(Math.random()*opciones.length)]:null;}
+ function ajuste(g,e){
+  let puntos=g.fav?1:0; // Distintivo de la casa ya presente en el catálogo.
+  if(F.p&&g.jug[0]===F.p&&g.jug[1]===F.p)puntos+=4;
+  if(F.t&&F.t!=="999"&&duracion(g)!==null)puntos+=2;
+  if(e.seriesRecientes.has(serie(g)))puntos-=2;
+  return puntos;
+ }
+ function elegir(vis){
+  if(!vis.length)return null;
+  const e=estado();
+  // Compartir un solitario no equivale a tener dos puestos independientes.
+  let opciones=preferir(vis,g=>!compartido(g,F.p));
+  opciones=novedad(opciones,g=>e.juegos.get(g.c)??-1);
+  opciones=preferir(opciones,g=>!e.ultimos.has(g.c));
+  return desempatar(mejores(opciones,g=>ajuste(g,e)));
+ }
+ function ordenarPrograma(pareja){
+  return pareja.slice().sort((a,b)=>{
+   const da=duracion(a),db=duracion(b);
+   // No inventa una duración para clasificar campañas o tiempo libre.
+   if(da===null&&db!==null)return 1;
+   if(db===null&&da!==null)return -1;
+   return (da!==null&&db!==null?da-db:0)||a.int-b.int;
+  });
+ }
+ function programa(vis){
+  let opciones=parejasCompatibles(vis).map(ordenarPrograma);
+  if(!opciones.length)return null;
+  const e=estado();
+  opciones=preferir(opciones,p=>{
+   const personas=F.p||Math.max(...p.map(g=>rangoJugadores(g)[0]));
+   return p.every(g=>!compartido(g,personas));
+  });
+  opciones=preferir(opciones,([a,b])=>serie(a)!==serie(b));
+  opciones=novedad(opciones,p=>e.programas.get(firma(p.map(g=>g.c)))??-1);
+  opciones=mejores(opciones,p=>p.filter(g=>e.juegos.has(g.c)).length,true);
+  opciones=mejores(opciones,p=>p.filter(g=>e.ultimos.has(g.c)).length,true);
+  return desempatar(mejores(opciones,([a,b])=>{
+   const da=duracion(a),db=duracion(b);
+   let puntos=ajuste(a,e)+ajuste(b,e);
+   if(da!==null&&da<=30)puntos+=4;
+   if(a.int<=2)puntos+=3;
+   if(a.int<=b.int)puntos+=2;
+   if(da!==null&&db!==null&&db>=da+15)puntos+=2;
+   if(da!==null&&db!==null)puntos+=2;
+   if(a.sala!==b.sala)puntos+=1;
+   return puntos;
+  }));
+ }
+ function recordar(...juegos){
+  const c=juegos.map(g=>g.c);
+  if(!c.length||c.length>2||new Set(c).size!==c.length||!c.every(id=>codigos.has(id)))return;
+  historial.push(c);historial=historial.slice(-LIMITE);
+  try{sessionStorage.setItem(CLAVE,JSON.stringify({v:1,historial}));}catch(_){/* La memoria local sigue activa. */}
+ }
+ return Object.freeze({elegir,programa,recordar});
+})();
 function fraseAcomodador(g){return FRASES_ACOMODADOR[g.c]||"Coco olfateó todas las cajas, se sentó frente a esta y no se movió más. En idioma salchicha, eso es un sí rotundo.";}
 function ruletaCoco(juegos,final){
  cancelarRecomendacion();const operacion=recoOperacion,reco=$("#reco-ticket");if(!reco)return;
@@ -5819,24 +5930,27 @@ function tapaDe(g){
 function miniDe(g){const t=tapaDe(g);return t?`<span class="rt-mini" data-ini="${esc(g.n[0])}"><img alt="" loading="lazy" onerror="this.parentNode.classList.add('falla');this.remove()" src="${esc(t)}"/></span>`:`<span class="rt-mini rt-mini-tipo" aria-hidden="true">${esc(g.n[0])}</span>`;}
 function mostrarTicket(markup){const reco=$("#reco-ticket");if(!reco)return;reco.hidden=false;reco.removeAttribute("aria-busy");reco.classList.remove("print");reco.innerHTML=markup;void reco.offsetWidth;if(!REDUCED)reco.classList.add("print");reco.scrollIntoView({behavior:REDUCED?"auto":"smooth",block:"nearest"});}
 $("#qjugar")?.addEventListener("click",()=>{
- const vis=candidatos();if(!vis.length){cancelarRecomendacion();return;}
- const g=vis[Math.floor(Math.random()*vis.length)];
- ruletaCoco(vis,()=>mostrarTicket(`<div class="rt-cargo">🐾 Coco olfateó la cartelera y eligió</div><div class="rt-cuerpo">${miniDe(g)}<div class="rt-info"><h4>${esc(g.n)}</h4><p>${esc(fraseAcomodador(g))}</p><div class="rt-datos">${g.c} · ${jugFichaTxt(g)} · ${g.min} · ${g.int}/5 ${intTxt[g.int]} · ${esc(modoTxt(g))}</div><a href="#${gid(g.c)}">Ver la ficha completa →</a></div></div>`));
+ const vis=candidatos(),g=COCO.elegir(vis);if(!g){cancelarRecomendacion();return;}
+ ruletaCoco(vis,()=>{
+  mostrarTicket(`<div class="rt-cargo">🐾 Coco olfateó la cartelera y eligió</div><div class="rt-cuerpo">${miniDe(g)}<div class="rt-info"><h4>${esc(g.n)}</h4><p>${esc(fraseAcomodador(g))}</p><div class="rt-datos">${g.c} · ${jugFichaTxt(g)} · ${g.min} · ${g.int}/5 ${intTxt[g.int]} · ${esc(modoTxt(g))}</div><a href="#${gid(g.c)}">Ver la ficha completa →</a></div></div>`);
+  COCO.recordar(g);
+ });
 });
 
 /* ============ DOBLE FUNCIÓN ============ */
 const estimado=g=>g.tiempo.hasta??g.tiempo.desde??30;
 const hhmm=m=>`${Math.floor(m/60)%24}:${String(m%60).padStart(2,"0")}`;
 $("#qdoble")?.addEventListener("click",()=>{
- const vis=candidatos(),pairs=parejasCompatibles(vis);if(!pairs.length){cancelarRecomendacion();return;}
- const preferidas=pairs.filter(p=>Math.min(...p.map(estimado))<=30&&Math.max(...p.map(estimado))>=60);
- const pool=preferidas.length?preferidas:pairs;
- const [apertura,central]=pool[Math.floor(Math.random()*pool.length)].slice().sort((a,b)=>estimado(a)-estimado(b));
+ const vis=candidatos(),pareja=COCO.programa(vis);if(!pareja){cancelarRecomendacion();return;}
+ const [apertura,central]=pareja;
  const t0=21*60,t1=Math.ceil((t0+estimado(apertura)+15)/5)*5;
  const ra=rangoJugadores(apertura),rb=rangoJugadores(central),desde=Math.max(ra[0],rb[0]),hasta=Math.min(ra[1]??Infinity,rb[1]??Infinity);
  const personas=F.p?`${F.p} personas`:desde===hasta?`${desde} ${desde===1?"persona":"personas"}`:hasta===Infinity?`${desde} o más personas`:`${desde}–${hasta} personas`;
  const flexible=!apertura.tiempo.hasta||!central.tiempo.hasta;
- ruletaCoco(vis,()=>mostrarTicket(`<div class="rt-cargo">🎬 Programa doble de la casa · ${personas}</div><div class="rt-acto">${miniDe(apertura)}<span class="rt-hora">${hhmm(t0)}</span><span class="rt-acto-tx"><b>${esc(apertura.n)}</b><i>${apertura.c} · ${apertura.min} · ${apertura.int}/5 · de apertura, para entrar en clima</i><a href="#${gid(apertura.c)}">Ver ficha de apertura →</a></span></div><div class="rt-inter">— intermedio de 15 minutos · pochoclo para ustedes, un bocadito para el acomodador —</div><div class="rt-acto">${miniDe(central)}<span class="rt-hora">${hhmm(t1)}${flexible?" aprox.":""}</span><span class="rt-acto-tx"><b>${esc(central.n)}</b><i>${central.c} · ${central.min} · ${central.int}/5 · función central de la noche</i></span></div><p>${esc(fraseAcomodador(central))}</p><a href="#${gid(central.c)}">Ver la ficha de la función central →</a>`));
+ ruletaCoco(vis,()=>{
+  mostrarTicket(`<div class="rt-cargo">🎬 Programa doble de la casa · ${personas}</div><div class="rt-acto">${miniDe(apertura)}<span class="rt-hora">${hhmm(t0)}</span><span class="rt-acto-tx"><b>${esc(apertura.n)}</b><i>${apertura.c} · ${apertura.min} · ${apertura.int}/5 · de apertura, para entrar en clima</i><a href="#${gid(apertura.c)}">Ver ficha de apertura →</a></span></div><div class="rt-inter">— intermedio de 15 minutos · pochoclo para ustedes, un bocadito para el acomodador —</div><div class="rt-acto">${miniDe(central)}<span class="rt-hora">${hhmm(t1)}${flexible?" aprox.":""}</span><span class="rt-acto-tx"><b>${esc(central.n)}</b><i>${central.c} · ${central.min} · ${central.int}/5 · función central de la noche</i></span></div><p>${esc(fraseAcomodador(central))}</p><a href="#${gid(central.c)}">Ver la ficha de la función central →</a>`);
+  COCO.recordar(apertura,central);
+ });
 });
 aplicar();
 /* ============ CONTADOR DE TAQUILLA ============ */
