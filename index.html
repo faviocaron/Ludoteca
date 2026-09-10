@@ -860,6 +860,15 @@ html.rev-on .rev{transition-duration:.5s;transition-timing-function:var(--cine-e
 @media(hover:none){.afiche:active{transform:none!important}}
 
 </style>
+<style>
+/* Selección de Coco con portadas y desaceleración antes del resultado. */
+.coco-ruleta{display:flex;align-items:center;gap:20px;min-height:160px;padding:10px 0}
+.coco-ruleta .rt-mini{width:128px;height:128px;flex:0 0 128px;aspect-ratio:1;transform:none}
+.coco-ruleta .rt-mini img{width:100%;height:100%;object-fit:contain}
+.cr-texto{min-width:0;flex:1}.coco-ruleta h4{font-size:clamp(1.1rem,3vw,1.55rem);line-height:1.15;overflow-wrap:anywhere}
+.coco-ruleta .rt-datos{margin:10px 0 0;line-height:1.6}
+@media(max-width:500px){.coco-ruleta{gap:14px}.coco-ruleta .rt-mini{width:92px;height:108px;flex-basis:92px}}
+</style>
 </head>
 <body class="">
 <a class="skip" href="#contenido">Saltar al contenido</a>
@@ -5781,13 +5790,26 @@ $("#q")?.addEventListener("input",e=>{F.q=e.target.value.trim()||null;cambiarFil
 
 /* ============ COCO DECIDE ============ */
 function fraseAcomodador(g){return FRASES_ACOMODADOR[g.c]||"Coco olfateó todas las cajas, se sentó frente a esta y no se movió más. En idioma salchicha, eso es un sí rotundo.";}
-function ruletaCoco(nombres,final){
+function ruletaCoco(juegos,final){
  cancelarRecomendacion();const operacion=recoOperacion,reco=$("#reco-ticket");if(!reco)return;
  const terminar=()=>{if(operacion===recoOperacion){recoTimer=null;cinePending=null;reco.removeAttribute('aria-busy');final();}};
- if(REDUCED||nombres.length<3){terminar();return;}
+ if(REDUCED||juegos.length<2){terminar();return;}
+ // Hasta cuatro opciones diferentes, siempre dentro de los filtros actuales.
+ const mezcla=juegos.slice();for(let i=mezcla.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[mezcla[i],mezcla[j]]=[mezcla[j],mezcla[i]];}
+ const opciones=mezcla.slice(0,4),pausas=[600,750,900,1050];
+ opciones.forEach(g=>{const src=tapaDe(g);if(src){const img=new Image();img.src=src;}});
  cinePending=terminar;reco.hidden=false;reco.setAttribute('aria-busy','true');
- reco.innerHTML='<div class="coco-espera"><span class="coco-puntos" aria-hidden="true"><i></i><i></i><i></i></span><span>Coco está revisando la cartelera…</span></div>';
- reco.scrollIntoView({behavior:'smooth',block:'nearest'});recoTimer=setTimeout(terminar,650);
+ reco.innerHTML='<div class="rt-cargo">🐾 Coco está revisando la cartelera…</div><div class="coco-ruleta" aria-hidden="true"></div>';
+ const visor=reco.querySelector('.coco-ruleta');let paso=0;
+ function siguiente(){
+  if(operacion!==recoOperacion)return;
+  const g=opciones[paso];
+  visor.innerHTML=miniDe(g).replace('loading="lazy"','loading="eager"')+'<div class="cr-texto"><h4>'+esc(g.n)+'</h4><div class="rt-datos">'+esc(jugFichaTxt(g))+' · '+esc(g.min)+'</div></div>';
+  cineAnim(visor,[{opacity:.35,transform:'translateY(5px)'},{opacity:1,transform:'none'}],{duration:160});
+  const espera=paso===opciones.length-1?1050:pausas[paso];paso++;
+  recoTimer=setTimeout(paso<opciones.length?siguiente:terminar,espera);
+ }
+ siguiente();reco.scrollIntoView({behavior:'smooth',block:'nearest'});
 }
 function tapaDe(g){
  if(g.tapa&&g.tapa!=="#")return g.tapa;
@@ -5799,7 +5821,7 @@ function mostrarTicket(markup){const reco=$("#reco-ticket");if(!reco)return;reco
 $("#qjugar")?.addEventListener("click",()=>{
  const vis=candidatos();if(!vis.length){cancelarRecomendacion();return;}
  const g=vis[Math.floor(Math.random()*vis.length)];
- ruletaCoco(vis.map(x=>x.n),()=>mostrarTicket(`<div class="rt-cargo">🐾 Coco olfateó la cartelera y eligió</div><div class="rt-cuerpo">${miniDe(g)}<div class="rt-info"><h4>${esc(g.n)}</h4><p>${esc(fraseAcomodador(g))}</p><div class="rt-datos">${g.c} · ${jugFichaTxt(g)} · ${g.min} · ${g.int}/5 ${intTxt[g.int]} · ${esc(modoTxt(g))}</div><a href="#${gid(g.c)}">Ver la ficha completa →</a></div></div>`));
+ ruletaCoco(vis,()=>mostrarTicket(`<div class="rt-cargo">🐾 Coco olfateó la cartelera y eligió</div><div class="rt-cuerpo">${miniDe(g)}<div class="rt-info"><h4>${esc(g.n)}</h4><p>${esc(fraseAcomodador(g))}</p><div class="rt-datos">${g.c} · ${jugFichaTxt(g)} · ${g.min} · ${g.int}/5 ${intTxt[g.int]} · ${esc(modoTxt(g))}</div><a href="#${gid(g.c)}">Ver la ficha completa →</a></div></div>`));
 });
 
 /* ============ DOBLE FUNCIÓN ============ */
@@ -5814,7 +5836,7 @@ $("#qdoble")?.addEventListener("click",()=>{
  const ra=rangoJugadores(apertura),rb=rangoJugadores(central),desde=Math.max(ra[0],rb[0]),hasta=Math.min(ra[1]??Infinity,rb[1]??Infinity);
  const personas=F.p?`${F.p} personas`:desde===hasta?`${desde} ${desde===1?"persona":"personas"}`:hasta===Infinity?`${desde} o más personas`:`${desde}–${hasta} personas`;
  const flexible=!apertura.tiempo.hasta||!central.tiempo.hasta;
- ruletaCoco(vis.map(g=>g.n),()=>mostrarTicket(`<div class="rt-cargo">🎬 Programa doble de la casa · ${personas}</div><div class="rt-acto">${miniDe(apertura)}<span class="rt-hora">${hhmm(t0)}</span><span class="rt-acto-tx"><b>${esc(apertura.n)}</b><i>${apertura.c} · ${apertura.min} · ${apertura.int}/5 · de apertura, para entrar en clima</i><a href="#${gid(apertura.c)}">Ver ficha de apertura →</a></span></div><div class="rt-inter">— intermedio de 15 minutos · pochoclo para ustedes, un bocadito para el acomodador —</div><div class="rt-acto">${miniDe(central)}<span class="rt-hora">${hhmm(t1)}${flexible?" aprox.":""}</span><span class="rt-acto-tx"><b>${esc(central.n)}</b><i>${central.c} · ${central.min} · ${central.int}/5 · función central de la noche</i></span></div><p>${esc(fraseAcomodador(central))}</p><a href="#${gid(central.c)}">Ver la ficha de la función central →</a>`));
+ ruletaCoco(vis,()=>mostrarTicket(`<div class="rt-cargo">🎬 Programa doble de la casa · ${personas}</div><div class="rt-acto">${miniDe(apertura)}<span class="rt-hora">${hhmm(t0)}</span><span class="rt-acto-tx"><b>${esc(apertura.n)}</b><i>${apertura.c} · ${apertura.min} · ${apertura.int}/5 · de apertura, para entrar en clima</i><a href="#${gid(apertura.c)}">Ver ficha de apertura →</a></span></div><div class="rt-inter">— intermedio de 15 minutos · pochoclo para ustedes, un bocadito para el acomodador —</div><div class="rt-acto">${miniDe(central)}<span class="rt-hora">${hhmm(t1)}${flexible?" aprox.":""}</span><span class="rt-acto-tx"><b>${esc(central.n)}</b><i>${central.c} · ${central.min} · ${central.int}/5 · función central de la noche</i></span></div><p>${esc(fraseAcomodador(central))}</p><a href="#${gid(central.c)}">Ver la ficha de la función central →</a>`));
 });
 aplicar();
 /* ============ CONTADOR DE TAQUILLA ============ */
