@@ -709,7 +709,7 @@ html.rev-on .rev.in{opacity:1;transform:none}
 }
 .hc-print:hover{border-color:var(--carmesi);color:var(--carmesi)}
 @media print{
-  nav,header,.coco-intro,.comousar,.sala,.boleteria,footer,.fab,.fabmenu,#prog,.pista,.hc-print,.telon,.avisojs{display:none !important}
+  nav,header,.coco-intro,.comousar,.sala,.libro,.boleteria,footer,.fab,.fabmenu,#prog,.pista,.hc-print,.telon,.avisojs{display:none !important}
   body{background:#fff;color:#000}
   body::before{display:none}
   #cartelera{padding:0;border:0;background:#fff}
@@ -862,6 +862,71 @@ html.rev-on .rev{transition-duration:.5s;transition-timing-function:var(--cine-e
 .cr-texto{min-width:0;flex:1}.coco-ruleta h4{font-size:clamp(1.1rem,3vw,1.55rem);line-height:1.15;overflow-wrap:anywhere}
 .coco-ruleta .rt-datos{margin:10px 0 0;line-height:1.6}
 @media(max-width:500px){.coco-ruleta{gap:14px}.coco-ruleta .rt-mini{width:92px;height:108px;flex-basis:92px}}
+</style>
+<style>
+/* ═══════════════════════════════════════════════════════════════
+   EL LIBRO DE FUNCIONES — registro de partidas jugadas
+   Copia de trabajo: localStorage. Copia publicada: datos/partidas.json
+   ═══════════════════════════════════════════════════════════════ */
+.libro{padding:78px 0 96px;background:linear-gradient(180deg,var(--sala2),var(--noche))}
+.lf-panel{position:relative;margin-top:54px;padding:42px 42px 34px;background:linear-gradient(180deg,#1A1209,#140D07);border:1px solid var(--oro);box-shadow:0 30px 80px rgba(0,0,0,.55),inset 0 1px 0 rgba(235,200,120,.14)}
+.lf-panel::before{content:"";position:absolute;inset:8px;border:1px solid var(--linea-oro-suave);pointer-events:none}
+.lf-panel>*{position:relative}
+.lf-panel h3{font-family:var(--anton);font-weight:400;font-size:2rem;letter-spacing:.1em;text-transform:uppercase;margin:0 0 8px;color:var(--orovivo);display:flex;align-items:center;justify-content:center;gap:20px}
+.lf-panel h3::before,.lf-panel h3::after{content:"";height:1px;flex:1;background:linear-gradient(90deg,transparent,var(--oro))}
+.lf-panel h3::after{background:linear-gradient(90deg,var(--oro),transparent)}
+.lf-app{display:none}
+html.js .lf-app{display:block}
+
+/* Resumen */
+.lf-resumen{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;background:var(--linea-oro-suave);border:1px solid var(--linea-oro);margin:0 0 34px}
+.lf-rcard{background:#120C07;padding:18px 12px;text-align:center}
+.lf-rcard .n{font-family:var(--anton);font-size:2.05rem;line-height:1;color:var(--orovivo)}
+.lf-rcard .l{font-family:var(--mono);font-size:.55rem;letter-spacing:.18em;text-transform:uppercase;color:var(--humo2-texto);margin-top:8px}
+
+/* Formulario */
+.lf-form{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;align-items:start}
+.lf-input{width:100%;min-height:50px;background:#0F0A06;border:1px solid var(--linea-oro);color:var(--marfil);font-family:var(--grotesk);font-size:1rem;padding:12px 14px;border-radius:0;color-scheme:dark}
+.lf-input::placeholder{color:var(--humo2-texto)}
+.lf-input:focus{outline:none;border-color:var(--orovivo);box-shadow:0 0 0 3px rgba(235,200,120,.14)}
+.lf-jug{grid-column:1/-1;border:1px solid var(--linea-oro-suave);padding:18px;margin:0;min-width:0}
+.lf-jug legend{padding:0 10px;margin-bottom:0}
+.lf-jrow{display:grid;grid-template-columns:minmax(0,2fr) minmax(0,1fr) auto auto;gap:10px;align-items:center;margin-bottom:10px}
+.lf-gano{display:inline-flex;align-items:center;gap:7px;font-family:var(--mono);font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(--oro);white-space:nowrap;cursor:pointer}
+.lf-gano input{accent-color:var(--carmesivivo);width:17px;height:17px;flex:none}
+.lf-quitar{background:none;border:1px solid var(--linea-oro);color:var(--humo2-texto);width:38px;height:38px;font-size:1.15rem;line-height:1;flex:none}
+.lf-quitar:hover{border-color:var(--carmesivivo);color:var(--carmesivivo)}
+.lf-ancho{grid-column:1/-1}
+.lf-enviar{grid-column:1/-1;border-top:1px solid var(--linea-oro-suave);padding-top:22px;display:flex;flex-direction:column;gap:10px;align-items:flex-start}
+
+/* Listados */
+.lf-seccion{margin-top:40px;border-top:1px solid var(--linea-oro-suave);padding-top:26px}
+.lf-seccion h4{font-family:var(--mono);font-size:.63rem;letter-spacing:.22em;text-transform:uppercase;color:var(--oro);margin:0 0 16px}
+.lf-scroll{overflow-x:auto}
+.lf-tabla{width:100%;border-collapse:collapse;font-size:.9rem;min-width:420px}
+.lf-tabla th{font-family:var(--mono);font-size:.57rem;letter-spacing:.14em;text-transform:uppercase;color:var(--humo2-texto);text-align:left;padding:8px 10px;border-bottom:1px solid var(--linea-oro);white-space:nowrap}
+.lf-tabla td{padding:9px 10px;border-bottom:1px solid var(--linea-oro-suave);color:var(--marfil);vertical-align:top}
+.lf-tabla tr:nth-child(even) td{background:rgba(201,162,75,.035)}
+.lf-tabla .num{text-align:right;font-family:var(--mono);font-size:.82rem;white-space:nowrap}
+.lf-tabla .sec{color:var(--humo2-texto);font-size:.78rem}
+.lf-tabla a{color:var(--orovivo)}
+.lf-vacio{font-family:var(--playfair);font-style:italic;color:var(--humo);padding:12px 0;margin:0}
+.lf-chips{display:flex;flex-wrap:wrap;gap:8px}
+.lf-chip{font-family:var(--mono);font-size:.62rem;letter-spacing:.08em;border:1px solid var(--linea-oro);padding:6px 11px;color:var(--humo)}
+a.lf-chip:hover{border-color:var(--orovivo);color:var(--orovivo)}
+.lf-borrar{background:none;border:0;color:var(--humo2-texto);font-size:1.05rem;line-height:1;padding:4px 8px;min-height:32px}
+.lf-borrar:hover{color:var(--carmesivivo)}
+
+/* Acciones */
+.lf-acciones{margin-top:38px;border-top:1px solid var(--oro);padding-top:24px;display:flex;flex-wrap:wrap;gap:14px;align-items:center}
+.lf-btn{background:none;border:1px solid var(--linea-oro);color:var(--orovivo);font-family:var(--mono);font-size:.63rem;letter-spacing:.14em;text-transform:uppercase;padding:12px 18px;min-height:44px}
+.lf-btn:hover{background:var(--orovivo);color:var(--noche)}
+.lf-btn.peligro{color:var(--carmesivivo);border-color:rgba(197,48,44,.5)}
+.lf-btn.peligro:hover{background:var(--carmesivivo);color:var(--marfil)}
+.lf-nota{font-family:var(--mono);font-size:.62rem;line-height:1.8;color:var(--humo2-texto);margin:16px 0 0}
+
+@media(max-width:900px){.lf-resumen{grid-template-columns:repeat(2,minmax(0,1fr))}.lf-form{grid-template-columns:1fr 1fr}}
+@media(max-width:620px){.lf-panel{padding:26px 18px 24px}.lf-form{grid-template-columns:1fr;gap:20px}.lf-jrow{grid-template-columns:minmax(0,1fr) 88px auto;gap:8px}.lf-jrow .lf-gano{grid-column:1/-1}.lf-panel h3{font-size:1.5rem;gap:12px}}
 </style>
 </head>
 <body class="">
@@ -2674,6 +2739,103 @@ html.rev-on .rev{transition-duration:.5s;transition-timing-function:var(--cine-e
 </div>
 </div>
 </section>
+<section class="sala libro" id="libro">
+<div class="wrap">
+<div class="salahead rev">
+<div aria-hidden="true" class="salanum">✒</div>
+<div class="salatit">
+<div class="sobret">Bitácora de la casa</div>
+<h2>El Libro de Funciones</h2>
+<div class="sub">Cada partida que se juega en esta casa queda anotada acá.</div>
+</div>
+<div class="salameta">Registro permanente</div>
+</div>
+<hr class="regla">
+<div class="lf-panel rev">
+<h3>Anotar y comparar</h3>
+<p class="ayuda guia">Anotá qué se jugó, quiénes estuvieron y cómo terminó. El libro lleva la cuenta, arma la tabla de posiciones y marca qué juegos todavía no se estrenaron.</p>
+<div class="avisojs">Este visor no ejecuta el libro de funciones. Para cargar partidas, abrí el archivo en Chrome o Safari (menú → «Abrir en el navegador»).</div>
+<div class="lf-app" id="lf-app">
+
+<div class="lf-resumen" id="lf-resumen"></div>
+
+<form class="lf-form" id="lf-form">
+<div class="fgrupo">
+<label class="flabel" for="lf-juego">¿Qué función se jugó?</label>
+<select class="fselect" id="lf-juego" aria-describedby="lf-ayuda-juego"></select>
+<p class="fayuda" id="lf-ayuda-juego">Elegí el juego del catálogo.</p>
+</div>
+<div class="fgrupo">
+<label class="flabel" for="lf-fecha">¿Cuándo?</label>
+<input class="lf-input" id="lf-fecha" type="date">
+<p class="fayuda">Por defecto, hoy.</p>
+</div>
+<div class="fgrupo">
+<label class="flabel" for="lf-duracion">Duración real <span class="opcional">Opcional</span></label>
+<input class="lf-input" id="lf-duracion" type="number" min="1" max="1440" step="1" inputmode="numeric" placeholder="minutos" aria-describedby="lf-ayuda-dur">
+<p class="fayuda" id="lf-ayuda-dur">Cuánto duró de verdad, en minutos.</p>
+</div>
+
+<fieldset class="lf-jug">
+<legend class="flabel">¿Quiénes jugaron?</legend>
+<div id="lf-jugadores"></div>
+<button class="reset" id="lf-add" type="button">+ agregar jugador</button>
+</fieldset>
+
+<div class="fgrupo" hidden id="lf-coop-wrap">
+<label class="flabel" for="lf-resultado">¿Cómo terminó la mesa?</label>
+<select class="fselect" id="lf-resultado">
+<option value="">Sin registrar</option>
+<option value="victoria">Victoria de la mesa</option>
+<option value="derrota">Derrota de la mesa</option>
+</select>
+<p class="fayuda">Para los juegos donde se gana o se pierde en equipo.</p>
+</div>
+
+<div class="fgrupo lf-ancho">
+<label class="flabel" for="lf-notas">Anécdota <span class="opcional">Opcional</span></label>
+<input class="lf-input" id="lf-notas" maxlength="240" placeholder="La traición de Ana en el último turno">
+</div>
+
+<div class="lf-enviar">
+<button class="qjugar" type="submit">✒️ Anotar la función</button>
+<p aria-live="polite" class="fayuda" id="lf-estado"></p>
+</div>
+</form>
+
+<div class="lf-seccion">
+<h4>Tabla de posiciones</h4>
+<div class="lf-scroll" id="lf-ranking"></div>
+</div>
+
+<div class="lf-seccion">
+<h4>Las más jugadas de la casa</h4>
+<div class="lf-scroll" id="lf-top"></div>
+</div>
+
+<div class="lf-seccion">
+<h4>Todavía sin estrenar</h4>
+<div id="lf-sinestrenar"></div>
+</div>
+
+<div class="lf-seccion">
+<h4>Últimas funciones anotadas</h4>
+<div class="lf-scroll" id="lf-ultimas"></div>
+</div>
+
+<div class="lf-acciones">
+<button class="lf-btn" id="lf-exportar" type="button">⬇ Descargar JSON</button>
+<button class="lf-btn" id="lf-copiar" type="button">⧉ Copiar JSON</button>
+<button class="lf-btn" id="lf-importar" type="button">⬆ Importar archivo</button>
+<input accept="application/json,.json" hidden id="lf-archivo" type="file">
+<button class="lf-btn peligro" id="lf-limpiar" type="button">Borrar lo no publicado</button>
+</div>
+<p class="lf-nota" id="lf-origen"></p>
+
+</div>
+</div>
+</div>
+</section>
 </main>
 <footer>
 <div class="wrap">
@@ -2687,7 +2849,7 @@ Temporada 2026 — Programa N.º 1 · 16.ª edición · Curaduría de Coco · <a
 </div>
 </footer>
 <button aria-label="Menú de salas" class="fab" id="fab" type="button" aria-controls="fabmenu" aria-expanded="false" tabindex="-1" aria-hidden="true">≡</button>
-<div aria-label="Ir a sala" class="fabmenu" id="fabmenu" inert="" aria-hidden="true"><a href="#sala-t" data-sala="t" tabindex="-1">Sala 01 · Terror &amp; Suspenso</a><a href="#sala-d" data-sala="d" tabindex="-1">Sala 02 · El Gabinete del Detective</a><a href="#sala-c" data-sala="c" tabindex="-1">Sala 03 · Aventura Cooperativa</a><a href="#sala-e" data-sala="e" tabindex="-1">Sala 04 · Estrategia &amp; Conquista</a><a href="#sala-r" data-sala="r" tabindex="-1">Sala 05 · Risas &amp; Fiesta</a><a href="#sala-s" data-sala="s" tabindex="-1">Sala 06 · La Sobremesa</a><a href="#sala-k" data-sala="k" tabindex="-1">Sala 07 · Los Clásicos</a><a href="#cartelera" data-sala="x" tabindex="-1">∞ · Boletería</a></div>
+<div aria-label="Ir a sala" class="fabmenu" id="fabmenu" inert="" aria-hidden="true"><a href="#sala-t" data-sala="t" tabindex="-1">Sala 01 · Terror &amp; Suspenso</a><a href="#sala-d" data-sala="d" tabindex="-1">Sala 02 · El Gabinete del Detective</a><a href="#sala-c" data-sala="c" tabindex="-1">Sala 03 · Aventura Cooperativa</a><a href="#sala-e" data-sala="e" tabindex="-1">Sala 04 · Estrategia &amp; Conquista</a><a href="#sala-r" data-sala="r" tabindex="-1">Sala 05 · Risas &amp; Fiesta</a><a href="#sala-s" data-sala="s" tabindex="-1">Sala 06 · La Sobremesa</a><a href="#sala-k" data-sala="k" tabindex="-1">Sala 07 · Los Clásicos</a><a href="#cartelera" data-sala="x" tabindex="-1">∞ · Boletería</a><a href="#libro" data-sala="libro" tabindex="-1">✒ · Libro de Funciones</a></div>
 <script src="img/manifest.js"></script>
 <script>/* Datos únicos: fichas, programa y filtros se generan desde esta colección. */
 const JUEGOS=[
@@ -5983,7 +6145,7 @@ seguro("progreso-parallax",function(){
 seguro("fab-scrollspy",function(){
   const fab=$("#fab"), menu=$("#fabmenu");
   if(!fab||!menu)return;
-  menu.innerHTML=SALAS.map(s=>`<a href="#sala-${s.id}" data-sala="${s.id}">Sala ${s.num} · ${s.nombre}</a>`).join("")+`<a href="#cartelera" data-sala="x">∞ · Boletería</a>`;
+  menu.innerHTML=SALAS.map(s=>`<a href="#sala-${s.id}" data-sala="${s.id}">Sala ${s.num} · ${s.nombre}</a>`).join("")+`<a href="#cartelera" data-sala="x">∞ · Boletería</a><a href="#libro" data-sala="libro">✒ · Libro de Funciones</a>`;
   let abierto=false;
      const inerte=(el,v)=>{
      if(v){el.setAttribute("inert","");el.setAttribute("aria-hidden","true");}
@@ -6070,6 +6232,256 @@ seguro("imprimir",function(){
   b.type="button";b.className="hc-print";b.textContent="Imprimir programa";
   b.addEventListener("click",()=>window.print());
   cab.appendChild(b);
+});
+
+/* ============ EL LIBRO DE FUNCIONES ============ */
+/* Registro de partidas jugadas. Dos copias del mismo dato:
+   · copia de trabajo  → localStorage (se escribe al anotar, vive en este navegador)
+   · copia publicada   → datos/partidas.json (versionada en el repo, la lee todo el mundo)
+   Se unen por «id»: lo local pisa a lo publicado, así reimportar o volver a
+   visitar el sitio despues de commitear nunca duplica una partida. Al borrar
+   algo ya publicado se guarda una lapida (borradas) para que no reaparezca.
+   Los amigos son un campo del dato, no usuarios: la tabla de posiciones sale
+   de agrupar nombres, sin cuentas ni servidor. */
+seguro("libro-funciones",function(){
+ const app=$("#lf-app"); if(!app)return;
+ const CLAVE="cine-coco:partidas:v1", TOPE=5000;
+ const PORCODIGO=new Map(JUEGOS.map(g=>[g.c,g]));
+ let locales=[], borradas=[], publicadas=[];
+
+ const hoy=()=>{const d=new Date();return new Date(d.getTime()-d.getTimezoneOffset()*6e4).toISOString().slice(0,10);};
+ const nuevoId=()=>"p-"+Date.now().toString(36)+"-"+Math.random().toString(36).slice(2,7);
+ const nEnt=v=>Number.isFinite(v)&&v>0?Math.round(v):null;
+
+ function valida(p){
+  return !!p&&typeof p==="object"
+   &&typeof p.id==="string"&&p.id.length>0&&p.id.length<=64
+   &&typeof p.juego==="string"&&PORCODIGO.has(p.juego)
+   &&typeof p.fecha==="string"&&/^\d{4}-\d{2}-\d{2}$/.test(p.fecha)
+   &&Array.isArray(p.jugadores)&&p.jugadores.length>0&&p.jugadores.length<=30
+   &&p.jugadores.every(j=>!!j&&typeof j.nombre==="string"&&j.nombre.trim().length>0);
+ }
+ function limpia(p){
+  const o={id:p.id,juego:p.juego,fecha:p.fecha,
+   jugadores:p.jugadores.map(j=>{
+    const q={nombre:j.nombre.trim().slice(0,40)};
+    if(nEnt(j.puntos)!==null||j.puntos===0)q.puntos=Math.round(j.puntos);
+    if(j.gano)q.gano=true;
+    return q;
+   })};
+  if(p.resultado==="victoria"||p.resultado==="derrota")o.resultado=p.resultado;
+  if(nEnt(p.duracion))o.duracion=nEnt(p.duracion);
+  if(typeof p.notas==="string"&&p.notas.trim())o.notas=p.notas.trim().slice(0,240);
+  return o;
+ }
+ function leeLocal(){
+  try{
+   const raw=localStorage.getItem(CLAVE);
+   const d=raw&&raw.length<=4000000?JSON.parse(raw):null;
+   if(d&&d.v===1){
+    if(Array.isArray(d.partidas))locales=d.partidas.filter(valida).map(limpia).slice(-TOPE);
+    if(Array.isArray(d.borradas))borradas=d.borradas.filter(x=>typeof x==="string").slice(-TOPE);
+   }
+  }catch(_){/* Almacenamiento bloqueado o antiguo: memoria vacia y operativa. */}
+ }
+ function guardaLocal(){
+  try{localStorage.setItem(CLAVE,JSON.stringify({v:1,partidas:locales,borradas}));return true;}
+  catch(_){return false;}
+ }
+ /* Union por id; lo local manda. Ordenado de la mas reciente a la mas vieja. */
+ function todas(){
+  const muertas=new Set(borradas), m=new Map();
+  publicadas.forEach(p=>{if(!muertas.has(p.id))m.set(p.id,p);});
+  locales.forEach(p=>{if(!muertas.has(p.id))m.set(p.id,p);});
+  return [...m.values()].sort((a,b)=>b.fecha.localeCompare(a.fecha)||b.id.localeCompare(a.id));
+ }
+
+ /* ---- Formulario ---- */
+ const fJuego=$("#lf-juego"),fFecha=$("#lf-fecha"),fDur=$("#lf-duracion"),
+       fNotas=$("#lf-notas"),fRes=$("#lf-resultado"),coopWrap=$("#lf-coop-wrap"),
+       jugCont=$("#lf-jugadores"),estado=$("#lf-estado");
+
+ fJuego.innerHTML='<option value="">Elegí una función…</option>'+SALAS.map(s=>{
+  const gs=JUEGOS.filter(g=>g.sala===s.id);
+  return gs.length?`<optgroup label="${esc(s.nombre)}">`+gs.map(g=>`<option value="${esc(g.c)}">${esc(g.c)} · ${esc(g.n)}</option>`).join("")+`</optgroup>`:"";
+ }).join("");
+ fFecha.value=hoy(); fFecha.max=hoy();
+
+ function filaJugador(nombre=""){
+  const row=document.createElement("div");
+  row.className="lf-jrow";
+  row.innerHTML='<input class="lf-input lf-nombre" type="text" maxlength="40" placeholder="Nombre" aria-label="Nombre de quien jugó">'
+   +'<input class="lf-input lf-puntos" type="number" step="1" placeholder="Puntos" aria-label="Puntos obtenidos">'
+   +'<label class="lf-gano"><input type="checkbox" class="lf-chk"> ganó</label>'
+   +'<button class="lf-quitar" type="button" aria-label="Quitar a esta persona">×</button>';
+  if(nombre)row.querySelector(".lf-nombre").value=nombre;
+  jugCont.appendChild(row);
+  return row;
+ }
+ function resetJugadores(){jugCont.replaceChildren();filaJugador();filaJugador();}
+ resetJugadores();
+ $("#lf-add").addEventListener("click",()=>{filaJugador().querySelector(".lf-nombre").focus();});
+ jugCont.addEventListener("click",e=>{
+  const b=e.target.closest(".lf-quitar"); if(!b)return;
+  if(jugCont.querySelectorAll(".lf-jrow").length>1)b.closest(".lf-jrow").remove();
+  else b.closest(".lf-jrow").querySelectorAll("input").forEach(i=>{i.value="";i.checked=false;});
+ });
+
+ /* La ficha ya sabe cuanto dura y como se gana: se usa de guia al anotar. */
+ fJuego.addEventListener("change",()=>{
+  const g=PORCODIGO.get(fJuego.value);
+  $("#lf-ayuda-dur").textContent=g?`Cuánto duró de verdad. La ficha estima ${g.min}.`:"Cuánto duró de verdad, en minutos.";
+  const coop=g?modosDe(g).some(m=>m==="Cooperativo"||m==="Solitario"):false;
+  coopWrap.hidden=!coop; if(!coop)fRes.value="";
+ });
+
+ $("#lf-form").addEventListener("submit",e=>{
+  e.preventDefault();
+  const juego=fJuego.value;
+  if(!PORCODIGO.has(juego)){estado.textContent="Elegí qué función se jugó.";fJuego.focus();return;}
+  const jugadores=[...jugCont.querySelectorAll(".lf-jrow")].map(r=>{
+   const nombre=r.querySelector(".lf-nombre").value.trim();
+   if(!nombre)return null;
+   const pts=r.querySelector(".lf-puntos").valueAsNumber;
+   const j={nombre};
+   if(Number.isFinite(pts))j.puntos=Math.round(pts);
+   if(r.querySelector(".lf-chk").checked)j.gano=true;
+   return j;
+  }).filter(Boolean);
+  if(!jugadores.length){estado.textContent="Anotá al menos a una persona.";jugCont.querySelector(".lf-nombre").focus();return;}
+  const cruda={id:nuevoId(),juego,fecha:fFecha.value||hoy(),jugadores,
+   resultado:coopWrap.hidden?"":fRes.value,duracion:fDur.valueAsNumber,notas:fNotas.value};
+  if(!valida(cruda)){estado.textContent="Revisá la fecha: tiene que ser una fecha válida.";fFecha.focus();return;}
+  locales.push(limpia(cruda)); locales=locales.slice(-TOPE);
+  const ok=guardaLocal();
+  const g=PORCODIGO.get(juego);
+  estado.textContent=(ok?"Anotada: ":"Anotada solo en esta pantalla (el navegador bloqueó el guardado): ")+g.n+" · "+cruda.fecha;
+  fDur.value="";fNotas.value="";fRes.value="";resetJugadores();
+  pintar();
+ });
+
+ /* ---- Estadisticas ---- */
+ function estadisticas(ps){
+  const porJuego=new Map(), porPersona=new Map(); let minutos=0;
+  ps.forEach(p=>{
+   const e=porJuego.get(p.juego)||{n:0,mins:[],ultima:""};
+   e.n++; if(p.duracion){e.mins.push(p.duracion);minutos+=p.duracion;}
+   if(p.fecha>e.ultima)e.ultima=p.fecha;
+   porJuego.set(p.juego,e);
+   p.jugadores.forEach(j=>{
+    const k=j.nombre.trim(); if(!k)return;
+    const q=porPersona.get(k)||{n:0,g:0};
+    q.n++; if(j.gano)q.g++; porPersona.set(k,q);
+   });
+  });
+  return {porJuego,porPersona,minutos};
+ }
+ const prom=a=>a.length?Math.round(a.reduce((x,y)=>x+y,0)/a.length):null;
+ const vacio=t=>`<p class="lf-vacio">${esc(t)}</p>`;
+
+ function pintar(){
+  const ps=todas(), st=estadisticas(ps);
+  /* Resumen */
+  const cards=[
+   [ps.length,"Funciones anotadas"],
+   [`${st.porJuego.size}<span style="font-size:.5em"> / ${JUEGOS.length}</span>`,"Juegos estrenados"],
+   [JUEGOS.length-st.porJuego.size,"Sin estrenar"],
+   [Math.round(st.minutos/60),"Horas en la mesa"]
+  ];
+  $("#lf-resumen").innerHTML=cards.map(([n,l])=>`<div class="lf-rcard"><div class="n">${n}</div><div class="l">${esc(l)}</div></div>`).join("");
+
+  /* Tabla de posiciones */
+  const gente=[...st.porPersona.entries()].sort((a,b)=>b[1].g-a[1].g||b[1].n-a[1].n||a[0].localeCompare(b[0],"es"));
+  $("#lf-ranking").innerHTML=gente.length
+   ?`<table class="lf-tabla"><thead><tr><th>Quién</th><th class="num">Jugadas</th><th class="num">Ganadas</th><th class="num">Efectividad</th></tr></thead><tbody>`
+    +gente.map(([n,q])=>`<tr><td>${esc(n)}</td><td class="num">${q.n}</td><td class="num">${q.g}</td><td class="num">${q.n?Math.round(q.g/q.n*100):0}%</td></tr>`).join("")
+    +`</tbody></table>`
+   :vacio("Todavía nadie se sentó a la mesa. Anotá la primera función.");
+
+  /* Mas jugadas, con duracion real contra la estimada de la ficha */
+  const top=[...st.porJuego.entries()].sort((a,b)=>b[1].n-a[1].n||b[1].ultima.localeCompare(a[1].ultima)).slice(0,10);
+  $("#lf-top").innerHTML=top.length
+   ?`<table class="lf-tabla"><thead><tr><th>Función</th><th class="num">Veces</th><th class="num">Última</th><th>Duración real</th></tr></thead><tbody>`
+    +top.map(([c,e])=>{const g=PORCODIGO.get(c),pm=prom(e.mins);
+      return `<tr><td><a href="#${gid(c)}">${esc(g.n)}</a><div class="sec">${esc(c)} · ${esc(NOMSALA[g.sala])}</div></td><td class="num">${e.n}</td><td class="num">${esc(e.ultima)}</td><td class="sec">${pm?esc(pm+"′ real · "+g.min+" estimado"):"sin datos · "+esc(g.min)}</td></tr>`;
+     }).join("")+`</tbody></table>`
+   :vacio("Cuando anotes funciones, acá van a aparecer las más repetidas.");
+
+  /* Sin estrenar */
+  const sin=JUEGOS.filter(g=>!st.porJuego.has(g.c));
+  $("#lf-sinestrenar").innerHTML=sin.length
+   ?`<div class="lf-chips">`+sin.map(g=>`<a class="lf-chip" href="#${gid(g.c)}">${esc(g.n)}</a>`).join("")+`</div>`
+   :vacio("No queda ninguna: se estrenó toda la cartelera.");
+
+  /* Ultimas anotadas */
+  const ult=ps.slice(0,12);
+  $("#lf-ultimas").innerHTML=ult.length
+   ?`<table class="lf-tabla"><thead><tr><th>Fecha</th><th>Función</th><th>Mesa</th><th></th></tr></thead><tbody>`
+    +ult.map(p=>{const g=PORCODIGO.get(p.juego);
+      const mesa=p.jugadores.map(j=>(j.gano?"★ ":"")+j.nombre+(Number.isFinite(j.puntos)?" ("+j.puntos+")":"")).join(" · ");
+      const extra=[p.resultado?(p.resultado==="victoria"?"Victoria de la mesa":"Derrota de la mesa"):"",p.duracion?p.duracion+"′":"",p.notas||""].filter(Boolean).join(" · ");
+      return `<tr><td class="num">${esc(p.fecha)}</td><td><a href="#${gid(p.juego)}">${esc(g.n)}</a></td><td>${esc(mesa)}${extra?`<div class="sec">${esc(extra)}</div>`:""}</td><td><button class="lf-borrar" type="button" data-id="${esc(p.id)}" aria-label="Borrar la función de ${esc(g.n)} del ${esc(p.fecha)}">✕</button></td></tr>`;
+     }).join("")+`</tbody></table>`
+   :vacio("El libro está en blanco.");
+
+  $("#lf-origen").textContent=`${locales.length} anotada${locales.length===1?"":"s"} en este navegador · ${publicadas.length} publicada${publicadas.length===1?"":"s"} en datos/partidas.json`;
+ }
+
+ $("#lf-ultimas").addEventListener("click",e=>{
+  const b=e.target.closest(".lf-borrar"); if(!b)return;
+  const id=b.dataset.id;
+  locales=locales.filter(p=>p.id!==id);
+  if(publicadas.some(p=>p.id===id)&&!borradas.includes(id))borradas.push(id);
+  guardaLocal(); pintar();
+ });
+
+ /* ---- Exportar / importar: el puente hacia datos/partidas.json ---- */
+ const comoJSON=()=>JSON.stringify({v:1,actualizado:hoy(),partidas:todas()},null,1);
+ $("#lf-exportar").addEventListener("click",()=>{
+  const a=document.createElement("a"),url=URL.createObjectURL(new Blob([comoJSON()],{type:"application/json"}));
+  a.href=url;a.download="partidas.json";a.click();
+  setTimeout(()=>URL.revokeObjectURL(url),1000);
+  estado.textContent="Descargado. Subilo al repo como datos/partidas.json para publicarlo.";
+ });
+ $("#lf-copiar").addEventListener("click",()=>{
+  const txt=comoJSON();
+  const ok=()=>{estado.textContent="JSON copiado. Pegalo en datos/partidas.json y commiteá.";};
+  if(navigator.clipboard?.writeText)navigator.clipboard.writeText(txt).then(ok,()=>{estado.textContent="No se pudo copiar; usá «Descargar JSON».";});
+  else estado.textContent="Este navegador no permite copiar; usá «Descargar JSON».";
+ });
+ $("#lf-importar").addEventListener("click",()=>$("#lf-archivo").click());
+ $("#lf-archivo").addEventListener("change",e=>{
+  const f=e.target.files&&e.target.files[0]; if(!f)return;
+  f.text().then(txt=>{
+   let d; try{d=JSON.parse(txt);}catch(_){estado.textContent="Ese archivo no es un JSON válido.";return;}
+   const arr=Array.isArray(d)?d:(d&&Array.isArray(d.partidas)?d.partidas:null);
+   if(!arr){estado.textContent="No encontré una lista de partidas en ese archivo.";return;}
+   const buenas=arr.filter(valida).map(limpia);
+   const yaEstan=new Set(locales.map(p=>p.id));
+   const nuevas=buenas.filter(p=>!yaEstan.has(p.id));
+   locales=locales.concat(nuevas).slice(-TOPE);
+   borradas=borradas.filter(id=>!buenas.some(p=>p.id===id));
+   guardaLocal(); pintar();
+   estado.textContent=`Importadas ${nuevas.length} de ${arr.length}${arr.length-buenas.length?` (${arr.length-buenas.length} con datos inválidos)`:""}.`;
+  }).finally(()=>{e.target.value="";});
+ });
+ $("#lf-limpiar").addEventListener("click",()=>{
+  if(!locales.length&&!borradas.length){estado.textContent="No hay nada sin publicar para borrar.";return;}
+  if(!confirm(`Se van a borrar ${locales.length} partida(s) guardadas en este navegador. Lo que ya esté en datos/partidas.json se conserva. ¿Seguir?`))return;
+  locales=[];borradas=[];guardaLocal();pintar();
+  estado.textContent="Listo: quedó solo lo publicado en el repo.";
+ });
+
+ /* Copia publicada. Con file:// el fetch falla y el libro sigue con lo local. */
+ leeLocal(); pintar();
+ fetch("datos/partidas.json",{cache:"no-cache"})
+  .then(r=>r.ok?r.json():null)
+  .then(d=>{
+   const arr=d&&Array.isArray(d.partidas)?d.partidas:null; if(!arr)return;
+   publicadas=arr.filter(valida).map(limpia);
+   pintar();
+  })
+  .catch(()=>{});
 });
 
 </script>
