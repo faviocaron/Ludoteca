@@ -85,7 +85,6 @@ a{color:var(--orovivo);text-decoration:none}
 a:hover{color:var(--marfil)}
 :focus-visible{outline:2px solid var(--orovivo);outline-offset:3px;border-radius:2px}
 img{max-width:100%;height:auto;display:block}
-/* QC: img/coco.jpg no declara width/height. Agregarlos cuando se conozcan los px reales evita el salto de layout. */
 button{font-family:inherit;cursor:pointer}
 .wrap{max-width:var(--w);margin:0 auto;padding:0 28px}
 .mono{font-family:var(--mono)}
@@ -846,11 +845,6 @@ html.rev-on .rev{transition-duration:.5s;transition-timing-function:var(--cine-e
 .reco-ticket.print .rt-inter{animation-delay:390ms}
 .reco-ticket.print .rt-inter + .rt-acto{animation-delay:550ms}
 @keyframes acto-entrada{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:none}}
-.coco-espera{display:flex;align-items:center;gap:14px;min-height:82px;color:var(--orovivo);font-family:var(--playfair);font-size:1.15rem}
-.coco-puntos{display:inline-flex;gap:5px;flex:none}
-.coco-puntos i{width:5px;height:5px;border-radius:50%;background:var(--oro);animation:coco-piensa 650ms ease-in-out infinite alternate}
-.coco-puntos i:nth-child(2){animation-delay:120ms}.coco-puntos i:nth-child(3){animation-delay:240ms}
-@keyframes coco-piensa{to{opacity:.3;transform:translateY(-3px)}}
 .sala-ruta{position:fixed;bottom:22px;left:22px;z-index:940;display:flex;align-items:center;gap:12px;max-width:calc(100vw - 106px);padding:9px 13px;background:rgba(20,13,9,.96);border:1px solid var(--linea-oro);box-shadow:0 6px 20px #0004;color:var(--marfil);font:.65rem var(--mono)}
 .sala-ruta[hidden]{display:none}.sala-ruta a{color:var(--orovivo);min-height:32px;display:flex;align-items:center;white-space:nowrap}.sala-ruta span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 @media(max-width:600px){.portada-salas{gap:6px;margin-top:22px}.portada-salas a{font-size:.6rem;padding:8px 10px}.sala-ruta{left:10px;bottom:calc(14px + env(safe-area-inset-bottom));padding:5px 9px;gap:8px;font-size:.6rem}}
