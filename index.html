@@ -807,6 +807,50 @@ button:disabled{opacity:.55;cursor:not-allowed}#print-contexto{padding:12px 40px
 .boleteria .fgrupo-accion{grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr;gap:24px;border-top:1px solid var(--linea-oro-suave);padding-top:24px}.boleteria .fgrupo-accion button{width:100%;white-space:normal;min-height:54px;letter-spacing:.07em;font-size:.875rem}.boleteria #jugadores-extra{margin-top:16px}.boleteria #jugadores-extra label{font-size:.875rem;line-height:1.5;margin-bottom:8px}.boleteria #jugadores-exactos{font-size:1rem;min-height:48px}.boleteria #jugadores-exactos[aria-invalid="true"]{border-color:var(--carmesivivo)}.boleteria .ayuda.guia{font-size:1rem;max-width:760px}.boleteria .resultado-filtros{font-family:var(--grotesk);font-size:.875rem;letter-spacing:normal}.boleteria .fbuscar{margin-bottom:28px}
 @media(max-width:900px){.boleteria .filtros{grid-template-columns:1fr 1fr}.boleteria .fgrupo:nth-child(3){grid-column:1/-1}}
 @media(max-width:620px){.boleteria .filtros,.boleteria .fgrupo-accion{grid-template-columns:1fr;gap:22px}.boleteria .fgrupo:nth-child(3){grid-column:auto}.boleteria .fgrupo-accion{gap:18px}.boleteria .ticket{padding:15px;gap:15px}.boleteria .tk{overflow-wrap:anywhere}}
+
+
+/* ───────────────────── MIS PARTIDAS · ARCHIVO DE FUNCIONES ───────────────────── */
+.navpartidas{color:var(--orovivo)!important}
+#mis-partidas{padding:110px 0 120px;position:relative;border-top:1px solid var(--linea-oro);background:
+  radial-gradient(ellipse 85% 55% at 50% 0%,rgba(49,19,15,.62),transparent 68%),var(--sala2)}
+.partidas-auth,.partidas-panel{margin-top:44px;border:1px solid var(--linea-oro);background:linear-gradient(180deg,#1A1209,#120C07);box-shadow:0 28px 72px rgba(0,0,0,.48);position:relative}
+.partidas-auth::before,.partidas-panel::before{content:"";position:absolute;inset:8px;border:1px solid var(--linea-oro-suave);pointer-events:none}
+.partidas-auth{display:flex;align-items:center;justify-content:space-between;gap:28px;padding:34px 38px}
+.partidas-auth h3,.partidas-form h3,.partidas-subtit{font-family:var(--anton);font-weight:400;text-transform:uppercase;letter-spacing:.045em;color:var(--marfil);margin:0}
+.partidas-auth h3{font-size:1.65rem}.partidas-auth p{margin:7px 0 0;color:var(--humo);max-width:720px}
+.partidas-btn{border:1px solid var(--oro);background:linear-gradient(180deg,var(--orovivo),var(--oro));color:var(--noche);font-family:var(--mono);font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:13px 18px;min-height:46px}
+.partidas-btn:hover{background:var(--marfil);border-color:var(--marfil)}
+.partidas-btn.sec{background:transparent;color:var(--orovivo);box-shadow:none}.partidas-btn.sec:hover{background:rgba(201,162,75,.12);color:var(--marfil)}
+.partidas-btn.danger{background:transparent;color:var(--carmesivivo);border-color:rgba(224,68,64,.65)}.partidas-btn.danger:hover{background:rgba(224,68,64,.12)}
+.partidas-toolbar{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin:44px 0 24px}.partidas-toolbar .partidas-btn:first-child{margin-right:auto}
+.partidas-usuario{font-family:var(--mono);font-size:.68rem;color:var(--humo);letter-spacing:.06em;max-width:270px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.partidas-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin:0 0 34px}
+.partidas-stat{padding:22px 20px;border:1px solid var(--linea-oro-suave);background:rgba(11,8,7,.42);min-height:108px}
+.partidas-stat .n{font-family:var(--anton);font-size:2rem;line-height:1;color:var(--orovivo)}
+.partidas-stat .l{margin-top:9px;font-family:var(--mono);font-size:.61rem;letter-spacing:.13em;text-transform:uppercase;color:var(--humo2-texto)}
+.partidas-form{padding:32px 34px;margin:0 0 34px;border:1px solid var(--oro);background:linear-gradient(180deg,rgba(49,19,15,.72),rgba(18,12,7,.92));position:relative}
+.partidas-form[hidden]{display:none}.partidas-form h3{font-size:1.7rem;color:var(--orovivo);margin-bottom:5px}.partidas-form .intro{margin:0 0 24px;color:var(--humo);font-size:.9rem}
+.partidas-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px 24px}.partidas-campo.full{grid-column:1/-1}
+.partidas-campo label{display:block;font-family:var(--mono);font-size:.63rem;letter-spacing:.14em;text-transform:uppercase;color:var(--oro);margin-bottom:8px}
+.partidas-campo input,.partidas-campo select,.partidas-campo textarea{width:100%;min-height:48px;padding:11px 13px;background:#0F0A06;border:1px solid rgba(201,162,75,.45);border-radius:0;color:var(--marfil);font:1rem var(--grotesk);color-scheme:dark}
+.partidas-campo textarea{min-height:92px;resize:vertical}.partidas-campo input:focus,.partidas-campo select:focus,.partidas-campo textarea:focus{outline:none;border-color:var(--orovivo);box-shadow:0 0 0 3px rgba(235,200,120,.10)}
+.partidas-ayuda{display:block;margin-top:6px;color:var(--humo2-texto);font-size:.78rem}.partidas-form-acciones{display:flex;gap:12px;margin-top:25px;flex-wrap:wrap}
+.partidas-doscols{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(280px,.75fr);gap:28px;align-items:start}
+.partidas-bloque{border-top:1px solid var(--linea-oro-suave);padding-top:22px}.partidas-subtit{font-size:1.35rem;margin-bottom:15px}.partidas-filtros{display:flex;gap:12px;margin-bottom:16px;align-items:center}.partidas-filtros select{flex:1;min-height:44px;background:#0F0A06;color:var(--marfil);border:1px solid var(--linea-oro);padding:9px 12px;font: .9rem var(--grotesk)}
+.partidas-lista{display:flex;flex-direction:column;gap:12px}.partida-item{display:grid;grid-template-columns:74px minmax(0,1fr) auto;gap:16px;align-items:center;padding:17px 18px;border:1px solid var(--linea-oro-suave);background:rgba(11,8,7,.42)}
+.partida-fecha{text-align:center;border-right:1px solid var(--linea-oro-suave);padding-right:14px}.partida-fecha b{display:block;font-family:var(--anton);font-size:1.55rem;color:var(--orovivo);line-height:1}.partida-fecha span{font-family:var(--mono);font-size:.58rem;letter-spacing:.12em;color:var(--humo2-texto);text-transform:uppercase}
+.partida-info h4{font-family:var(--anton);font-weight:400;font-size:1.25rem;text-transform:uppercase;letter-spacing:.025em;margin:0 0 4px;color:var(--marfil)}
+.partida-meta{font-family:var(--mono);font-size:.65rem;color:var(--humo);letter-spacing:.04em}.partida-nota{margin-top:7px;color:var(--humo);font-size:.83rem;line-height:1.45}.partida-actions{display:flex;gap:6px}.partida-mini{border:1px solid var(--linea-oro-suave);background:transparent;color:var(--humo);font: .61rem var(--mono);padding:8px 9px;text-transform:uppercase}.partida-mini:hover{color:var(--orovivo);border-color:var(--oro)}
+.partidas-vacio{padding:28px 18px;border:1px dashed var(--linea-oro-suave);text-align:center;color:var(--humo);font-family:var(--playfair);font-style:italic}
+.partidas-estrenos{display:flex;flex-wrap:wrap;gap:8px}.partidas-chip{border:1px solid var(--linea-oro-suave);padding:7px 10px;color:var(--humo);font: .63rem var(--mono);background:rgba(11,8,7,.28)}
+.partidas-chip:hover{color:var(--orovivo);border-color:var(--oro)}
+.partidas-sync{transition:color .2s}.partidas-sync.ok{color:var(--orovivo)}.partidas-sync.warn{color:var(--carmesivivo)}
+.partidas-toast{position:fixed;left:50%;bottom:28px;z-index:2400;transform:translate(-50%,18px);opacity:0;pointer-events:none;max-width:min(92vw,560px);padding:13px 18px;background:#120C07;border:1px solid var(--oro);box-shadow:0 16px 44px rgba(0,0,0,.6);font: .72rem var(--mono);color:var(--marfil);transition:.25s}.partidas-toast.on{opacity:1;transform:translate(-50%,0)}
+.registrar-partida-rapida{align-self:flex-start;margin-top:12px;background:none;border:0;border-bottom:1px solid var(--linea-oro);padding:4px 0;color:var(--orovivo);font: .66rem var(--mono);letter-spacing:.16em;text-transform:uppercase}.registrar-partida-rapida:hover{color:var(--marfil);border-bottom-color:var(--marfil)}
+@media(max-width:980px){.partidas-stats{grid-template-columns:1fr 1fr}.partidas-doscols{grid-template-columns:1fr}}
+@media(max-width:700px){.partidas-auth{align-items:stretch;flex-direction:column;padding:26px 24px}.partidas-grid{grid-template-columns:1fr}.partidas-campo.full{grid-column:auto}.partidas-form{padding:26px 22px}.partidas-toolbar{align-items:stretch}.partidas-toolbar .partidas-btn:first-child{margin-right:0;width:100%}.partidas-usuario{order:4;max-width:100%;width:100%}.partida-item{grid-template-columns:58px 1fr}.partida-actions{grid-column:1/-1;justify-content:flex-end}.partida-fecha{padding-right:10px}.partidas-filtros{flex-direction:column;align-items:stretch}}
+@media(max-width:460px){.partidas-stats{grid-template-columns:1fr 1fr;gap:10px}.partidas-stat{padding:18px 14px;min-height:96px}.partidas-stat .n{font-size:1.6rem}.partidas-auth{margin-top:30px}.partidas-form-acciones .partidas-btn{width:100%}}
+
 </style>
 <noscript><style>.rev{opacity:1!important;transform:none!important}</style></noscript>
 <noscript><style>.detalle-juego{display:block!important}.vermas{display:none!important}</style></noscript>
@@ -885,6 +929,7 @@ html.rev-on .rev{transition-duration:.5s;transition-timing-function:var(--cine-e
 <a href="#sala-r">Fiesta</a>
 <a href="#sala-s">Sobremesa</a>
 <a href="#sala-k">Clásicos</a>
+<a class="navpartidas" href="#mis-partidas">Mis Partidas</a>
 <a class="navcta" href="#cartelera">Boletería</a>
 </div>
 </div>
@@ -2680,6 +2725,72 @@ html.rev-on .rev{transition-duration:.5s;transition-timing-function:var(--cine-e
 </div>
 </div>
 </section>
+
+<section id="mis-partidas" aria-labelledby="partidas-titulo">
+<div class="wrap">
+<div class="salahead rev">
+<div class="salanum" aria-hidden="true">A</div>
+<div class="salatit"><div class="sobret">Archivo privado — historial de la casa</div><h2 id="partidas-titulo">Mis Partidas</h2><div class="sub">Cada función deja una entrada en el archivo.</div></div>
+<div class="salameta partidas-sync" id="partidas-sync">Firebase · esperando acceso</div>
+</div>
+<hr class="regla">
+
+<div class="partidas-auth rev" id="partidas-auth">
+<div><h3>Tu archivo vive en la nube</h3><p>Iniciá sesión con Google para registrar partidas y ver el mismo historial desde tus dispositivos.</p></div>
+<button class="partidas-btn" id="partidas-login" type="button">Entrar con Google</button>
+</div>
+
+<div id="partidas-app" hidden>
+<div class="partidas-toolbar">
+<button class="partidas-btn" id="partidas-nueva" type="button">+ Registrar función</button>
+<span class="partidas-usuario" id="partidas-usuario"></span>
+<button class="partidas-btn sec" id="partidas-export-json" type="button">Exportar backup</button>
+<button class="partidas-btn sec" id="partidas-export-csv" type="button">CSV</button>
+<button class="partidas-btn sec" id="partidas-logout" type="button">Salir</button>
+</div>
+
+<div class="partidas-stats" aria-label="Resumen de partidas">
+<div class="partidas-stat"><div class="n" id="ps-total">0</div><div class="l">Partidas jugadas</div></div>
+<div class="partidas-stat"><div class="n" id="ps-juegos">0</div><div class="l">Juegos diferentes</div></div>
+<div class="partidas-stat"><div class="n" id="ps-horas">0 h</div><div class="l">Tiempo en mesa</div></div>
+<div class="partidas-stat"><div class="n" id="ps-top">—</div><div class="l">Más jugado</div></div>
+</div>
+
+<form class="partidas-form" id="partidas-form" hidden>
+<h3 id="partidas-form-titulo">Registrar función</h3>
+<p class="intro">Los únicos datos imprescindibles son el juego y la fecha. El resto lo completás sólo si te sirve.</p>
+<div class="partidas-grid">
+<div class="partidas-campo full"><label for="pf-juego">Juego</label><select id="pf-juego" required></select></div>
+<div class="partidas-campo"><label for="pf-fecha">Fecha y hora</label><input id="pf-fecha" type="datetime-local" required></div>
+<div class="partidas-campo"><label for="pf-duracion">Duración real · minutos</label><input id="pf-duracion" type="number" min="1" max="1440" inputmode="numeric" placeholder="Ej. 135"><small class="partidas-ayuda">Opcional. Podés dejarlo vacío.</small></div>
+<div class="partidas-campo full"><label for="pf-jugadores">Quiénes jugaron</label><input id="pf-jugadores" type="text" maxlength="240" placeholder="Favio, Juli"><small class="partidas-ayuda">Separá los nombres con coma.</small></div>
+<div class="partidas-campo"><label for="pf-resultado">Resultado</label><select id="pf-resultado"></select></div>
+<div class="partidas-campo" id="pf-ganador-wrap"><label for="pf-ganador">Ganador / ganadores</label><input id="pf-ganador" type="text" maxlength="120" placeholder="Opcional"></div>
+<div class="partidas-campo"><label for="pf-favio">Nota Favio</label><select id="pf-favio"><option value="">Sin nota</option></select></div>
+<div class="partidas-campo"><label for="pf-juli">Nota Juli</label><select id="pf-juli"><option value="">Sin nota</option></select></div>
+<div class="partidas-campo full"><label for="pf-nota">Nota de la función</label><textarea id="pf-nota" maxlength="900" placeholder="Algo que quieras recordar de esta partida…"></textarea></div>
+</div>
+<div class="partidas-form-acciones"><button class="partidas-btn" id="pf-guardar" type="submit">Guardar función</button><button class="partidas-btn sec" id="pf-cancelar" type="button">Cancelar</button></div>
+</form>
+
+<div class="partidas-doscols">
+<div class="partidas-bloque">
+<h3 class="partidas-subtit">Historial de funciones</h3>
+<div class="partidas-filtros"><select id="partidas-filtro-juego" aria-label="Filtrar historial por juego"></select></div>
+<div class="partidas-lista" id="partidas-lista"></div>
+<div class="partidas-vacio" id="partidas-vacio">Todavía no hay funciones archivadas.</div>
+</div>
+<div class="partidas-bloque">
+<h3 class="partidas-subtit">Funciones sin estrenar</h3>
+<p class="partidas-ayuda" style="margin:0 0 14px">Juegos de la cartelera que todavía no tienen ninguna partida registrada.</p>
+<div class="partidas-estrenos" id="partidas-estrenos"></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<div class="partidas-toast" id="partidas-toast" role="status" aria-live="polite"></div>
+
 </main>
 <footer>
 <div class="wrap">
@@ -2693,7 +2804,7 @@ Temporada 2026 — Programa N.º 1 · 16.ª edición · Curaduría de Coco · <a
 </div>
 </footer>
 <button aria-label="Menú de salas" class="fab" id="fab" type="button" aria-controls="fabmenu" aria-expanded="false" tabindex="-1" aria-hidden="true">≡</button>
-<div aria-label="Ir a sala" class="fabmenu" id="fabmenu" inert="" aria-hidden="true"><a href="#sala-t" data-sala="t" tabindex="-1">Sala 01 · Terror &amp; Suspenso</a><a href="#sala-d" data-sala="d" tabindex="-1">Sala 02 · El Gabinete del Detective</a><a href="#sala-c" data-sala="c" tabindex="-1">Sala 03 · Aventura Cooperativa</a><a href="#sala-e" data-sala="e" tabindex="-1">Sala 04 · Estrategia &amp; Conquista</a><a href="#sala-r" data-sala="r" tabindex="-1">Sala 05 · Risas &amp; Fiesta</a><a href="#sala-s" data-sala="s" tabindex="-1">Sala 06 · La Sobremesa</a><a href="#sala-k" data-sala="k" tabindex="-1">Sala 07 · Los Clásicos</a><a href="#cartelera" data-sala="x" tabindex="-1">∞ · Boletería</a></div>
+<div aria-label="Ir a sala" class="fabmenu" id="fabmenu" inert="" aria-hidden="true"><a href="#sala-t" data-sala="t" tabindex="-1">Sala 01 · Terror &amp; Suspenso</a><a href="#sala-d" data-sala="d" tabindex="-1">Sala 02 · El Gabinete del Detective</a><a href="#sala-c" data-sala="c" tabindex="-1">Sala 03 · Aventura Cooperativa</a><a href="#sala-e" data-sala="e" tabindex="-1">Sala 04 · Estrategia &amp; Conquista</a><a href="#sala-r" data-sala="r" tabindex="-1">Sala 05 · Risas &amp; Fiesta</a><a href="#sala-s" data-sala="s" tabindex="-1">Sala 06 · La Sobremesa</a><a href="#sala-k" data-sala="k" tabindex="-1">Sala 07 · Los Clásicos</a><a href="#cartelera" data-sala="x" tabindex="-1">∞ · Boletería</a><a href="#mis-partidas" data-sala="p" tabindex="-1">Archivo · Mis Partidas</a></div>
 <script src="img/manifest.js"></script>
 <script>/* Datos únicos: fichas, programa y filtros se generan desde esta colección. */
 const JUEGOS=[
@@ -5660,6 +5771,7 @@ ${log?`<div class="logline">${log}</div>`:""}
 </div>
 ${g.exp?`<span class="expchip">${g.exp}</span>`:""}
 ${detBtn}
+<button class="registrar-partida-rapida" type="button" data-juego="${g.c}">+ Registrar partida</button>
 </div>
 </article>`;
 }
@@ -5848,6 +5960,16 @@ const COCO=(()=>{
   if(F.p&&g.jug[0]===F.p&&g.jug[1]===F.p)puntos+=4;
   if(F.t&&F.t!=="999"&&duracion(g)!==null)puntos+=2;
   if(e.seriesRecientes.has(serie(g)))puntos-=2;
+  const hp=window.CINE_PARTIDAS_API;
+   if(hp&&hp.ready&&hp.ready()){
+    const dias=hp.diasDesde(g.c);
+    if(dias===null)puntos+=3;
+    else if(dias<2)puntos-=6;
+    else if(dias<7)puntos-=4;
+    else if(dias<30)puntos-=1;
+    const prom=hp.promedio(g.c);
+    if(prom!==null&&prom>=9)puntos+=2; else if(prom!==null&&prom>=8)puntos+=1;
+   }
   return puntos;
  }
  function elegir(vis){
@@ -6023,7 +6145,7 @@ seguro('navegacion-premium',function(){
  document.querySelectorAll('.vermas').forEach(b=>{b.innerHTML='<span class="vm-icon" aria-hidden="true">+</span><span>Ficha técnica</span>';});
  const route=document.createElement('div');route.className='sala-ruta';route.hidden=true;route.setAttribute('role','navigation');route.setAttribute('aria-label','Recorrer las salas');
  route.innerHTML='<span></span><a></a>';document.body.appendChild(route);
- const sections=[...document.querySelectorAll('.sala,#cartelera')];let current='',raf=0;
+ const sections=[...document.querySelectorAll('.sala,#cartelera,#mis-partidas')];let current='',raf=0;
  function update(){raf=0;let chosen=null;for(const s of sections){if(s.getBoundingClientRect().top<=innerHeight*.38)chosen=s;else break;}
   if(!chosen||chosen.getBoundingClientRect().bottom<90){route.hidden=true;document.querySelectorAll('a[aria-current="location"]').forEach(a=>a.removeAttribute('aria-current'));current='';return;}
   if(current===chosen.id)return;current=chosen.id;
@@ -6078,6 +6200,108 @@ seguro("imprimir",function(){
   cab.appendChild(b);
 });
 
+/* Catálogo expuesto en solo lectura para el módulo de Mis Partidas. */
+window.CINE_JUEGOS=JUEGOS;
+
+</script>
+
+
+<script type="module">
+/* ═══════════════ MIS PARTIDAS · FIREBASE ═══════════════ */
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
+import { getAuth, GoogleAuthProvider, browserLocalPersistence, setPersistence, signInWithPopup, signInWithRedirect, getRedirectResult, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-auth.js";
+import { initializeFirestore, getFirestore, persistentLocalCache, persistentMultipleTabManager, collection, addDoc, updateDoc, deleteDoc, doc, query, orderBy, onSnapshot, Timestamp, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyARWtc1D6PeFjMPDSAKNmmKGPOoK5KmC8s",
+  authDomain: "ludoteca-cocoa-9a141.firebaseapp.com",
+  projectId: "ludoteca-cocoa-9a141",
+  storageBucket: "ludoteca-cocoa-9a141.firebasestorage.app",
+  messagingSenderId: "117633023336",
+  appId: "1:117633023336:web:8a6bca55510b987da26add"
+};
+
+const fbApp=initializeApp(firebaseConfig);
+const auth=getAuth(fbApp);
+try{await setPersistence(auth,browserLocalPersistence);}catch(_){/* Firebase conserva la sesión disponible. */}
+let db;
+try{db=initializeFirestore(fbApp,{localCache:persistentLocalCache({tabManager:persistentMultipleTabManager()})});}
+catch(_){db=getFirestore(fbApp);}
+
+const J=Array.isArray(window.CINE_JUEGOS)?window.CINE_JUEGOS:[];
+const $=s=>document.querySelector(s);
+const authBox=$("#partidas-auth"),appBox=$("#partidas-app"),sync=$("#partidas-sync"),form=$("#partidas-form"),lista=$("#partidas-lista"),vacio=$("#partidas-vacio"),estrenos=$("#partidas-estrenos");
+let user=null,partidas=[],editingId=null,unsubscribe=null,toastTimer=null;
+const pad=n=>String(n).padStart(2,"0");
+const localInput=d=>`${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}T${pad(d.getHours())}:${pad(d.getMinutes())}`;
+const escapeHTML=v=>String(v??"").replace(/[&<>'"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;","'":"&#39;",'"':"&quot;"}[c]));
+const juego=c=>J.find(g=>g.c===c);
+const fechaDe=p=>p.fecha?.toDate?p.fecha.toDate():new Date(p.fecha||0);
+const fmtFecha=d=>new Intl.DateTimeFormat("es-AR",{day:"2-digit",month:"short",year:"numeric"}).format(d).replace(" de "," ").replace(" de "," ");
+const fmtHora=d=>new Intl.DateTimeFormat("es-AR",{hour:"2-digit",minute:"2-digit",hour12:false}).format(d);
+const minutosTxt=n=>{n=Number(n)||0;if(!n)return "";const h=Math.floor(n/60),m=n%60;return h?`${h} h${m?` ${m} min`:""}`:`${m} min`;};
+function toast(msg){const el=$("#partidas-toast");if(!el)return;el.textContent=msg;el.classList.add("on");clearTimeout(toastTimer);toastTimer=setTimeout(()=>el.classList.remove("on"),3200);}
+function setSync(txt,kind=""){if(!sync)return;sync.textContent=txt;sync.className=`salameta partidas-sync ${kind}`;}
+function errorTexto(err){const c=err?.code||"";if(c.includes("permission-denied"))return "Firestore todavía está bloqueado: falta publicar las reglas de Mis Partidas.";if(c.includes("unauthorized-domain"))return "Falta autorizar faviocaron.github.io en Firebase Authentication.";if(c.includes("popup"))return "No pude abrir el acceso de Google. Volvé a intentarlo.";return "No pude completar la operación. Revisá la conexión e intentá otra vez.";}
+
+function poblarSelects(){
+ const opts=J.slice().sort((a,b)=>a.n.localeCompare(b.n,"es")).map(g=>`<option value="${escapeHTML(g.c)}">${escapeHTML(g.n)} · ${escapeHTML(g.c)}</option>`).join("");
+ $("#pf-juego").innerHTML=`<option value="">Elegí un juego</option>${opts}`;
+ $("#partidas-filtro-juego").innerHTML=`<option value="">Todos los juegos</option>${opts}`;
+ ["#pf-favio","#pf-juli"].forEach(id=>{const s=$(id);for(let i=1;i<=10;i++){const o=document.createElement("option");o.value=String(i);o.textContent=`${i}/10`;s.appendChild(o);}});
+}
+poblarSelects();
+
+function resultadosPara(g){
+ const m=String(g?.modo||"").toLowerCase();
+ if(m.includes("cooper")||m.includes("solitario"))return [["","Sin registrar"],["victoria","Victoria"],["derrota","Derrota"]];
+ if(m.includes("roles ocultos")||m.includes("semi")||m.includes("asim"))return [["","Sin registrar"],["victoria","Victoria"],["derrota","Derrota"],["mixto","Resultado mixto"]];
+ return [["","Sin registrar"],["completada","Partida completada"]];
+}
+function adaptarResultado(){const g=juego($("#pf-juego").value);const s=$("#pf-resultado"),actual=s.value;s.innerHTML=resultadosPara(g).map(([v,l])=>`<option value="${v}">${l}</option>`).join("");if([...s.options].some(o=>o.value===actual))s.value=actual;const m=String(g?.modo||"").toLowerCase();$("#pf-ganador-wrap").hidden=m.includes("cooper")||m.includes("solitario");}
+$("#pf-juego").addEventListener("change",adaptarResultado);
+
+function abrirForm(codigo="",p=null){
+ editingId=p?.id||null;$("#partidas-form-titulo").textContent=editingId?"Editar función":"Registrar función";$("#pf-guardar").textContent=editingId?"Guardar cambios":"Guardar función";
+ $("#pf-juego").value=p?.juego||codigo||"";$("#pf-fecha").value=localInput(p?fechaDe(p):new Date());$("#pf-duracion").value=p?.duracionMin||"";$("#pf-jugadores").value=Array.isArray(p?.jugadores)?p.jugadores.join(", "):(!partidas.length?"Favio, Juli":"");$("#pf-ganador").value=p?.ganador||"";$("#pf-favio").value=p?.ratings?.favio||"";$("#pf-juli").value=p?.ratings?.juli||"";$("#pf-nota").value=p?.nota||"";adaptarResultado();$("#pf-resultado").value=p?.resultado||"";form.hidden=false;form.scrollIntoView({behavior:"smooth",block:"start"});
+}
+function cerrarForm(){editingId=null;form.hidden=true;form.reset();$("#pf-fecha").value=localInput(new Date());adaptarResultado();}
+$("#partidas-nueva").addEventListener("click",()=>abrirForm());$("#pf-cancelar").addEventListener("click",cerrarForm);
+document.addEventListener("click",e=>{const b=e.target.closest(".registrar-partida-rapida");if(!b)return;location.hash="#mis-partidas";setTimeout(()=>abrirForm(b.dataset.juego||""),250);});
+
+function resumen(){
+ const cods=new Set(partidas.map(p=>p.juego));const mins=partidas.reduce((s,p)=>s+(Number(p.duracionMin)||0),0);const conteo={};partidas.forEach(p=>conteo[p.juego]=(conteo[p.juego]||0)+1);const top=Object.entries(conteo).sort((a,b)=>b[1]-a[1])[0];
+ $("#ps-total").textContent=partidas.length;$("#ps-juegos").textContent=cods.size;$("#ps-horas").textContent=mins?`${Math.round(mins/6)/10} h`:"0 h";$("#ps-top").textContent=top?(juego(top[0])?.n||top[0]):"—";
+ const faltan=J.filter(g=>!cods.has(g.c));estrenos.innerHTML=faltan.length?faltan.map(g=>`<button class="partidas-chip" type="button" data-estreno="${escapeHTML(g.c)}">${escapeHTML(g.n)}</button>`).join(""):`<span class="partidas-ayuda">Toda la cartelera tiene al menos una partida registrada.</span>`;
+}
+estrenos.addEventListener("click",e=>{const b=e.target.closest("[data-estreno]");if(b)abrirForm(b.dataset.estreno);});
+
+function renderHistorial(){
+ const filtro=$("#partidas-filtro-juego").value;const ps=filtro?partidas.filter(p=>p.juego===filtro):partidas;vacio.hidden=ps.length>0;
+ lista.innerHTML=ps.map(p=>{const g=juego(p.juego),d=fechaDe(p),dia=pad(d.getDate()),mes=new Intl.DateTimeFormat("es-AR",{month:"short"}).format(d).replace(".","").toUpperCase();const meta=[fmtFecha(d),fmtHora(d),Array.isArray(p.jugadores)&&p.jugadores.length?`${p.jugadores.length} jugadores`:"",p.duracionMin?minutosTxt(p.duracionMin):"",p.resultado?String(p.resultado).replace(/^./,c=>c.toUpperCase()):"",p.ganador?`Ganó: ${p.ganador}`:""].filter(Boolean).join(" · ");const ratings=[p.ratings?.favio?`Favio ${p.ratings.favio}/10`:"",p.ratings?.juli?`Juli ${p.ratings.juli}/10`:""].filter(Boolean).join(" · ");return `<article class="partida-item"><div class="partida-fecha"><b>${dia}</b><span>${mes}</span></div><div class="partida-info"><h4>${escapeHTML(g?.n||p.juego)}</h4><div class="partida-meta">${escapeHTML(meta)}${ratings?` · ${escapeHTML(ratings)}`:""}</div>${p.nota?`<div class="partida-nota">${escapeHTML(p.nota)}</div>`:""}</div><div class="partida-actions"><button class="partida-mini" type="button" data-edit="${p.id}">Editar</button><button class="partida-mini" type="button" data-del="${p.id}">Borrar</button></div></article>`;}).join("");
+ resumen();
+}
+$("#partidas-filtro-juego").addEventListener("change",renderHistorial);
+lista.addEventListener("click",async e=>{const eb=e.target.closest("[data-edit]");if(eb){const p=partidas.find(x=>x.id===eb.dataset.edit);if(p)abrirForm(p.juego,p);return;}const dbtn=e.target.closest("[data-del]");if(!dbtn||!user)return;const p=partidas.find(x=>x.id===dbtn.dataset.del);if(!p)return;if(!confirm(`¿Borrar la partida de ${juego(p.juego)?.n||p.juego}?`))return;try{await deleteDoc(doc(db,"usuarios",user.uid,"partidas",p.id));toast("Función eliminada.");}catch(err){toast(errorTexto(err));}});
+
+form.addEventListener("submit",async e=>{e.preventDefault();if(!user)return;const codigo=$("#pf-juego").value,fecha=$("#pf-fecha").value;if(!codigo||!fecha){toast("Elegí juego y fecha.");return;}const jugadores=$("#pf-jugadores").value.split(",").map(x=>x.trim()).filter(Boolean).slice(0,20);const data={juego:codigo,fecha:Timestamp.fromDate(new Date(fecha)),jugadores,duracionMin:$("#pf-duracion").value?Number($("#pf-duracion").value):null,resultado:$("#pf-resultado").value||null,ganador:$("#pf-ganador").value.trim()||null,ratings:{favio:$("#pf-favio").value?Number($("#pf-favio").value):null,juli:$("#pf-juli").value?Number($("#pf-juli").value):null},nota:$("#pf-nota").value.trim()||null,actualizadoEn:serverTimestamp()};try{if(editingId)await updateDoc(doc(db,"usuarios",user.uid,"partidas",editingId),data);else await addDoc(collection(db,"usuarios",user.uid,"partidas"),{...data,creadoEn:serverTimestamp()});toast(editingId?"Cambios guardados.":"Función archivada.");cerrarForm();}catch(err){toast(errorTexto(err));}});
+
+function apiHistorial(){
+ window.CINE_PARTIDAS_API=Object.freeze({ready:()=>!!user,diasDesde:(codigo)=>{const arr=partidas.filter(p=>p.juego===codigo);if(!arr.length)return null;const ms=Date.now()-Math.max(...arr.map(p=>fechaDe(p).getTime()));return Math.max(0,ms/86400000);},veces:codigo=>partidas.filter(p=>p.juego===codigo).length,promedio:(codigo)=>{const nums=partidas.filter(p=>p.juego===codigo).flatMap(p=>[p.ratings?.favio,p.ratings?.juli]).filter(Number.isFinite);return nums.length?nums.reduce((a,b)=>a+b,0)/nums.length:null;}});
+}
+apiHistorial();
+
+function escuchar(){if(unsubscribe)unsubscribe();if(!user)return;setSync(navigator.onLine?"Firebase · sincronizando":"Sin conexión · usando copia local",navigator.onLine?"":"warn");const q=query(collection(db,"usuarios",user.uid,"partidas"),orderBy("fecha","desc"));unsubscribe=onSnapshot(q,{includeMetadataChanges:true},snap=>{partidas=snap.docs.map(d=>({id:d.id,...d.data()}));renderHistorial();apiHistorial();if(snap.metadata.hasPendingWrites)setSync("Guardando cambios…","warn");else if(snap.metadata.fromCache&&!navigator.onLine)setSync("Sin conexión · cambios locales","warn");else setSync("Firebase · sincronizado","ok");},err=>{setSync("Firebase · acceso pendiente","warn");toast(errorTexto(err));});}
+
+$("#partidas-login").addEventListener("click",async()=>{const provider=new GoogleAuthProvider();try{await signInWithPopup(auth,provider);}catch(err){if(["auth/popup-blocked","auth/cancelled-popup-request","auth/operation-not-supported-in-this-environment"].includes(err.code)){try{await signInWithRedirect(auth,provider);}catch(e){toast(errorTexto(e));}}else toast(errorTexto(err));}});
+$("#partidas-logout").addEventListener("click",()=>signOut(auth));
+try{await getRedirectResult(auth);}catch(err){toast(errorTexto(err));}
+onAuthStateChanged(auth,u=>{user=u||null;authBox.hidden=!!user;appBox.hidden=!user;$("#partidas-usuario").textContent=user?.email||"";if(user){escuchar();}else{if(unsubscribe){unsubscribe();unsubscribe=null;}partidas=[];renderHistorial();apiHistorial();setSync("Firebase · esperando acceso");cerrarForm();}});
+addEventListener("online",()=>{if(user)setSync("Firebase · sincronizando");});addEventListener("offline",()=>{if(user)setSync("Sin conexión · usando copia local","warn");});
+
+function descargar(nombre,contenido,tipo){const blob=new Blob([contenido],{type:tipo});const url=URL.createObjectURL(blob),a=document.createElement("a");a.href=url;a.download=nombre;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);}
+$("#partidas-export-json").addEventListener("click",()=>{const limpio=partidas.map(({id,...p})=>({...p,fecha:fechaDe(p).toISOString(),creadoEn:undefined,actualizadoEn:undefined}));descargar(`ludoteca-cocoa-partidas-${new Date().toISOString().slice(0,10)}.json`,JSON.stringify({version:1,exportado:new Date().toISOString(),partidas:limpio},null,2),"application/json");});
+$("#partidas-export-csv").addEventListener("click",()=>{const cols=["fecha","juego","nombre","jugadores","duracionMin","resultado","ganador","notaFavio","notaJuli","nota"];const q=v=>`"${String(v??"").replaceAll('"','""')}"`;const rows=partidas.map(p=>[fechaDe(p).toISOString(),p.juego,juego(p.juego)?.n||"",(p.jugadores||[]).join(" | "),p.duracionMin||"",p.resultado||"",p.ganador||"",p.ratings?.favio||"",p.ratings?.juli||"",p.nota||""]);descargar(`ludoteca-cocoa-partidas-${new Date().toISOString().slice(0,10)}.csv`,[cols,...rows].map(r=>r.map(q).join(",")).join("\n"),"text/csv;charset=utf-8");});
 </script>
 
 <!-- Revisión editorial: 2026-09-10. 91 fichas; sinopsis de 30–40 palabras;
