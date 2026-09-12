@@ -162,7 +162,8 @@ nav{
 .navlinks a.activo{color:var(--orovivo);border-bottom-color:var(--oro)}
 .navcta{border:1px solid var(--oro);padding:7px 16px !important;color:var(--orovivo) !important;position:relative}
 .navcta:hover{background:var(--oro);color:var(--noche) !important}
-@media(max-width:1080px){.navlinks a:not(.navcta){display:none}}
+@media(max-width:1080px){.navlinks a:not(.navcta):not(.navpartidas){display:none}}
+@media(max-width:720px){.navpartidas{display:none!important}}
 
 /* ───────────────────────────── HERO ───────────────────────────── */
 header{
@@ -710,7 +711,7 @@ html.rev-on .rev.in{opacity:1;transform:none}
 }
 .hc-print:hover{border-color:var(--carmesi);color:var(--carmesi)}
 @media print{
-  nav,header,.coco-intro,.comousar,.sala,.boleteria,footer,.fab,.fabmenu,#prog,.pista,.hc-print,.telon,.avisojs{display:none !important}
+  nav,header,.coco-intro,.comousar,.sala,.boleteria,#mis-partidas,.partidas-toast,footer,.fab,.fabmenu,#prog,.pista,.hc-print,.telon,.avisojs{display:none !important}
   body{background:#fff;color:#000}
   body::before{display:none}
   #cartelera{padding:0;border:0;background:#fff}
@@ -816,40 +817,35 @@ button:disabled{opacity:.55;cursor:not-allowed}#print-contexto{padding:12px 40px
 .partidas-auth,.partidas-panel{margin-top:44px;border:1px solid var(--linea-oro);background:linear-gradient(180deg,#1A1209,#120C07);box-shadow:0 28px 72px rgba(0,0,0,.48);position:relative}
 .partidas-auth::before,.partidas-panel::before{content:"";position:absolute;inset:8px;border:1px solid var(--linea-oro-suave);pointer-events:none}
 .partidas-auth{display:flex;align-items:center;justify-content:space-between;gap:28px;padding:34px 38px}
-.partidas-auth h3,.partidas-form h3,.partidas-subtit{font-family:var(--anton);font-weight:400;text-transform:uppercase;letter-spacing:.045em;color:var(--marfil);margin:0}
+.partidas-auth h3,.partidas-form h3,.partidas-subtit,.partidas-import h3{font-family:var(--anton);font-weight:400;text-transform:uppercase;letter-spacing:.045em;color:var(--marfil);margin:0}
 .partidas-auth h3{font-size:1.65rem}.partidas-auth p{margin:7px 0 0;color:var(--humo);max-width:720px}
-.partidas-btn{border:1px solid var(--oro);background:linear-gradient(180deg,var(--orovivo),var(--oro));color:var(--noche);font-family:var(--mono);font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:13px 18px;min-height:46px}
+.partidas-btn{border:1px solid var(--oro);background:linear-gradient(180deg,var(--orovivo),var(--oro));color:var(--noche);font-family:var(--mono);font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:12px 18px;min-height:48px;display:inline-flex;align-items:center;justify-content:center;gap:8px}
 .partidas-btn:hover{background:var(--marfil);border-color:var(--marfil)}
 .partidas-btn.sec{background:transparent;color:var(--orovivo);box-shadow:none}.partidas-btn.sec:hover{background:rgba(201,162,75,.12);color:var(--marfil)}
 .partidas-btn.danger{background:transparent;color:var(--carmesivivo);border-color:rgba(224,68,64,.65)}.partidas-btn.danger:hover{background:rgba(224,68,64,.12)}
-.partidas-toolbar{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin:44px 0 24px}.partidas-toolbar .partidas-btn:first-child{margin-right:auto}
-.partidas-usuario{font-family:var(--mono);font-size:.68rem;color:var(--humo);letter-spacing:.06em;max-width:270px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.partidas-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin:0 0 34px}
-.partidas-stat{padding:22px 20px;border:1px solid var(--linea-oro-suave);background:rgba(11,8,7,.42);min-height:108px}
-.partidas-stat .n{font-family:var(--anton);font-size:2rem;line-height:1;color:var(--orovivo)}
-.partidas-stat .l{margin-top:9px;font-family:var(--mono);font-size:.61rem;letter-spacing:.13em;text-transform:uppercase;color:var(--humo2-texto)}
-.partidas-form{padding:32px 34px;margin:0 0 34px;border:1px solid var(--oro);background:linear-gradient(180deg,rgba(49,19,15,.72),rgba(18,12,7,.92));position:relative}
-.partidas-form[hidden]{display:none}.partidas-form h3{font-size:1.7rem;color:var(--orovivo);margin-bottom:5px}.partidas-form .intro{margin:0 0 24px;color:var(--humo);font-size:.9rem}
-.partidas-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px 24px}.partidas-campo.full{grid-column:1/-1}
-.partidas-campo label{display:block;font-family:var(--mono);font-size:.63rem;letter-spacing:.14em;text-transform:uppercase;color:var(--oro);margin-bottom:8px}
-.partidas-campo input,.partidas-campo select,.partidas-campo textarea{width:100%;min-height:48px;padding:11px 13px;background:#0F0A06;border:1px solid rgba(201,162,75,.45);border-radius:0;color:var(--marfil);font:1rem var(--grotesk);color-scheme:dark}
-.partidas-campo textarea{min-height:92px;resize:vertical}.partidas-campo input:focus,.partidas-campo select:focus,.partidas-campo textarea:focus{outline:none;border-color:var(--orovivo);box-shadow:0 0 0 3px rgba(235,200,120,.10)}
-.partidas-ayuda{display:block;margin-top:6px;color:var(--humo2-texto);font-size:.78rem}.partidas-form-acciones{display:flex;gap:12px;margin-top:25px;flex-wrap:wrap}
-.partidas-doscols{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(280px,.75fr);gap:28px;align-items:start}
-.partidas-bloque{border-top:1px solid var(--linea-oro-suave);padding-top:22px}.partidas-subtit{font-size:1.35rem;margin-bottom:15px}.partidas-filtros{display:flex;gap:12px;margin-bottom:16px;align-items:center}.partidas-filtros select{flex:1;min-height:44px;background:#0F0A06;color:var(--marfil);border:1px solid var(--linea-oro);padding:9px 12px;font: .9rem var(--grotesk)}
-.partidas-lista{display:flex;flex-direction:column;gap:12px}.partida-item{display:grid;grid-template-columns:74px minmax(0,1fr) auto;gap:16px;align-items:center;padding:17px 18px;border:1px solid var(--linea-oro-suave);background:rgba(11,8,7,.42)}
-.partida-fecha{text-align:center;border-right:1px solid var(--linea-oro-suave);padding-right:14px}.partida-fecha b{display:block;font-family:var(--anton);font-size:1.55rem;color:var(--orovivo);line-height:1}.partida-fecha span{font-family:var(--mono);font-size:.58rem;letter-spacing:.12em;color:var(--humo2-texto);text-transform:uppercase}
-.partida-info h4{font-family:var(--anton);font-weight:400;font-size:1.25rem;text-transform:uppercase;letter-spacing:.025em;margin:0 0 4px;color:var(--marfil)}
-.partida-meta{font-family:var(--mono);font-size:.65rem;color:var(--humo);letter-spacing:.04em}.partida-nota{margin-top:7px;color:var(--humo);font-size:.83rem;line-height:1.45}.partida-actions{display:flex;gap:6px}.partida-mini{border:1px solid var(--linea-oro-suave);background:transparent;color:var(--humo);font: .61rem var(--mono);padding:8px 9px;text-transform:uppercase}.partida-mini:hover{color:var(--orovivo);border-color:var(--oro)}
-.partidas-vacio{padding:28px 18px;border:1px dashed var(--linea-oro-suave);text-align:center;color:var(--humo);font-family:var(--playfair);font-style:italic}
-.partidas-estrenos{display:flex;flex-wrap:wrap;gap:8px}.partidas-chip{border:1px solid var(--linea-oro-suave);padding:7px 10px;color:var(--humo);font: .63rem var(--mono);background:rgba(11,8,7,.28)}
-.partidas-chip:hover{color:var(--orovivo);border-color:var(--oro)}
-.partidas-sync{transition:color .2s}.partidas-sync.ok{color:var(--orovivo)}.partidas-sync.warn{color:var(--carmesivivo)}
-.partidas-toast{position:fixed;left:50%;bottom:28px;z-index:2400;transform:translate(-50%,18px);opacity:0;pointer-events:none;max-width:min(92vw,560px);padding:13px 18px;background:#120C07;border:1px solid var(--oro);box-shadow:0 16px 44px rgba(0,0,0,.6);font: .72rem var(--mono);color:var(--marfil);transition:.25s}.partidas-toast.on{opacity:1;transform:translate(-50%,0)}
-.registrar-partida-rapida{align-self:flex-start;margin-top:12px;background:none;border:0;border-bottom:1px solid var(--linea-oro);padding:4px 0;color:var(--orovivo);font: .66rem var(--mono);letter-spacing:.16em;text-transform:uppercase}.registrar-partida-rapida:hover{color:var(--marfil);border-bottom-color:var(--marfil)}
-@media(max-width:980px){.partidas-stats{grid-template-columns:1fr 1fr}.partidas-doscols{grid-template-columns:1fr}}
-@media(max-width:700px){.partidas-auth{align-items:stretch;flex-direction:column;padding:26px 24px}.partidas-grid{grid-template-columns:1fr}.partidas-campo.full{grid-column:auto}.partidas-form{padding:26px 22px}.partidas-toolbar{align-items:stretch}.partidas-toolbar .partidas-btn:first-child{margin-right:0;width:100%}.partidas-usuario{order:4;max-width:100%;width:100%}.partida-item{grid-template-columns:58px 1fr}.partida-actions{grid-column:1/-1;justify-content:flex-end}.partida-fecha{padding-right:10px}.partidas-filtros{flex-direction:column;align-items:stretch}}
-@media(max-width:460px){.partidas-stats{grid-template-columns:1fr 1fr;gap:10px}.partidas-stat{padding:18px 14px;min-height:96px}.partidas-stat .n{font-size:1.6rem}.partidas-auth{margin-top:30px}.partidas-form-acciones .partidas-btn{width:100%}}
+.partidas-btn[aria-busy="true"]::after{content:"";width:12px;height:12px;border:2px solid currentColor;border-right-color:transparent;border-radius:50%;animation:partidasSpin .75s linear infinite}
+@keyframes partidasSpin{to{transform:rotate(360deg)}}
+.partidas-toolbar{display:grid;grid-template-columns:minmax(220px,1fr) auto;gap:12px;align-items:start;margin:44px 0 24px}.partidas-toolbar>#partidas-nueva{width:100%;min-height:58px;font-size:.78rem}.partidas-toolbar-meta{display:flex;gap:12px;align-items:center;justify-content:flex-end;flex-wrap:wrap}
+.partidas-usuario{font-family:var(--mono);font-size:.68rem;color:var(--humo);letter-spacing:.04em;max-width:270px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.partidas-opciones{position:relative}.partidas-opciones>summary{list-style:none;min-height:48px;display:flex;align-items:center;justify-content:center;padding:11px 15px;border:1px solid var(--linea-oro);color:var(--orovivo);font:.69rem var(--mono);letter-spacing:.08em;text-transform:uppercase;cursor:pointer}.partidas-opciones>summary::-webkit-details-marker{display:none}.partidas-opciones>summary::after{content:"+";margin-left:9px;font-size:1rem}.partidas-opciones[open]>summary::after{content:"−"}.partidas-opciones-menu{position:absolute;right:0;top:55px;z-index:30;min-width:250px;padding:10px;display:grid;gap:8px;background:#120C07;border:1px solid var(--oro);box-shadow:0 18px 42px rgba(0,0,0,.64)}.partidas-opciones-menu .partidas-btn{width:100%}
+.partidas-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin:0 0 16px}.partidas-stat{padding:22px 20px;border:1px solid var(--linea-oro-suave);background:rgba(11,8,7,.42);min-height:108px}.partidas-stat .n{font-family:var(--anton);font-size:2rem;line-height:1.05;color:var(--orovivo);overflow-wrap:anywhere}.partidas-stat .l{margin-top:9px;font-family:var(--mono);font-size:.61rem;letter-spacing:.12em;text-transform:uppercase;color:var(--humo2-texto)}
+.partidas-resumen-extra{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:0 0 34px}.partidas-dato{padding:14px 16px;border:1px solid var(--linea-oro-suave);background:rgba(11,8,7,.25)}.partidas-dato b{display:block;color:var(--marfil);font-size:.88rem;line-height:1.35}.partidas-dato span{display:block;margin-top:4px;color:var(--humo2-texto);font:.59rem var(--mono);letter-spacing:.08em;text-transform:uppercase}
+.partidas-form{padding:32px 34px;margin:0 0 34px;border:1px solid var(--oro);background:linear-gradient(180deg,rgba(49,19,15,.72),rgba(18,12,7,.92));position:relative;scroll-margin-top:82px}.partidas-form[hidden]{display:none}.partidas-form h3{font-size:1.7rem;color:var(--orovivo);margin-bottom:5px}.partidas-form .intro{margin:0 0 24px;color:var(--humo);font-size:.9rem}.partidas-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px 24px}.partidas-campo.full{grid-column:1/-1}.partidas-campo label{display:block;font-family:var(--mono);font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;color:var(--oro);margin-bottom:8px}.partidas-campo input,.partidas-campo select,.partidas-campo textarea{width:100%;min-height:50px;padding:11px 13px;background:#0F0A06;border:1px solid rgba(201,162,75,.45);border-radius:0;color:var(--marfil);font:1rem var(--grotesk);color-scheme:dark}.partidas-campo textarea{min-height:96px;resize:vertical}.partidas-campo input:focus,.partidas-campo select:focus,.partidas-campo textarea:focus{outline:none;border-color:var(--orovivo);box-shadow:0 0 0 3px rgba(235,200,120,.10)}.partidas-campo [aria-invalid="true"]{border-color:var(--carmesivivo)}
+.partidas-ayuda{display:block;margin-top:6px;color:var(--humo2-texto);font-size:.8rem;line-height:1.45}.partidas-error{color:var(--carmesivivo)!important}.partidas-form-acciones{display:flex;gap:12px;margin-top:25px;flex-wrap:wrap}.partidas-form-status{min-height:1.4em;margin-top:12px;color:var(--humo);font:.68rem var(--mono)}
+.partidas-habituales{display:flex;flex-wrap:wrap;gap:7px;margin-top:9px}.partidas-persona{min-height:42px;padding:8px 11px;border:1px solid var(--linea-oro-suave);background:transparent;color:var(--humo);font:.68rem var(--mono)}.partidas-persona:hover,.partidas-persona[aria-pressed="true"]{color:var(--orovivo);border-color:var(--oro);background:rgba(201,162,75,.08)}
+.partidas-mas{grid-column:1/-1;border-top:1px solid var(--linea-oro-suave);padding-top:4px}.partidas-mas>summary{min-height:48px;display:flex;align-items:center;cursor:pointer;color:var(--orovivo);font:.7rem var(--mono);letter-spacing:.08em;text-transform:uppercase}.partidas-mas>summary::before{content:"+";margin-right:9px;font-size:1rem}.partidas-mas[open]>summary::before{content:"−"}.partidas-mas-contenido{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px 24px;padding-top:15px}.partidas-detalles-juego{grid-column:1/-1;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px 24px;padding-top:2px}.partidas-detalles-titulo{grid-column:1/-1;margin:0;color:var(--humo);font:.65rem var(--mono);letter-spacing:.1em;text-transform:uppercase}
+.partidas-doscols{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(280px,.75fr);gap:28px;align-items:start}.partidas-bloque{border-top:1px solid var(--linea-oro-suave);padding-top:22px}.partidas-subtit{font-size:1.35rem;margin-bottom:15px}.partidas-filtros{display:flex;gap:12px;margin-bottom:8px;align-items:center}.partidas-filtros select{flex:1;min-height:48px;background:#0F0A06;color:var(--marfil);border:1px solid var(--linea-oro);padding:9px 12px;font:.92rem var(--grotesk)}.partidas-contexto{min-height:1.5em;margin:0 0 14px;color:var(--humo2-texto);font:.65rem var(--mono);line-height:1.5}
+.partidas-lista{display:flex;flex-direction:column;gap:12px}.partida-item{display:grid;grid-template-columns:74px minmax(0,1fr) auto;gap:16px;align-items:center;padding:17px 18px;border:1px solid var(--linea-oro-suave);background:rgba(11,8,7,.42)}.partida-fecha{text-align:center;border-right:1px solid var(--linea-oro-suave);padding-right:14px}.partida-fecha b{display:block;font-family:var(--anton);font-size:1.55rem;color:var(--orovivo);line-height:1}.partida-fecha span{font-family:var(--mono);font-size:.6rem;letter-spacing:.1em;color:var(--humo2-texto);text-transform:uppercase}.partida-info h4{font-family:var(--anton);font-weight:400;font-size:1.25rem;text-transform:uppercase;letter-spacing:.025em;margin:0 0 4px;color:var(--marfil)}.partida-meta{font-family:var(--mono);font-size:.67rem;color:var(--humo);line-height:1.55}.partida-jugadores{margin-top:5px;color:var(--marfil);font-size:.82rem}.partida-nota{margin-top:7px;color:var(--humo);font-size:.85rem;line-height:1.5}.partida-detalles{margin-top:6px;color:var(--humo2-texto);font:.64rem var(--mono);line-height:1.5}.partida-actions{display:flex;gap:7px}.partida-mini{min-height:44px;border:1px solid var(--linea-oro-suave);background:transparent;color:var(--humo);font:.68rem var(--mono);padding:9px 11px;text-transform:uppercase}.partida-mini:hover{color:var(--orovivo);border-color:var(--oro)}.partida-mini:disabled{opacity:.5}
+.partidas-vacio{padding:28px 18px;border:1px dashed var(--linea-oro-suave);text-align:center;color:var(--humo);font-family:var(--playfair);font-style:italic}.partidas-estrenos{display:flex;flex-wrap:wrap;gap:8px}.partidas-chip{min-height:42px;border:1px solid var(--linea-oro-suave);padding:8px 11px;color:var(--humo);font:.66rem var(--mono);background:rgba(11,8,7,.28)}.partidas-chip:hover{color:var(--orovivo);border-color:var(--oro)}.partidas-ver-todas{margin-top:12px;background:none;border:0;color:var(--orovivo);font:.67rem var(--mono);text-transform:uppercase;border-bottom:1px solid var(--linea-oro);padding:8px 0;min-height:40px}
+.partidas-mini-lista{display:grid;gap:8px;margin-top:22px}.partidas-mini-lista h4{margin:0 0 4px;color:var(--marfil);font:1rem var(--anton);letter-spacing:.04em;text-transform:uppercase}.partidas-mini-lista p{margin:0;color:var(--humo);font-size:.82rem;line-height:1.5}.partidas-ranking{display:grid;gap:6px}.partidas-ranking div{display:flex;justify-content:space-between;gap:10px;padding:7px 0;border-bottom:1px dotted var(--linea-oro-suave);font-size:.82rem}.partidas-ranking b{color:var(--orovivo);white-space:nowrap}
+.partidas-sync{transition:color .2s}.partidas-sync.ok{color:var(--orovivo)}.partidas-sync.warn{color:var(--carmesivivo)}.partidas-sync.neutral{color:var(--humo)}
+.partidas-import{margin:0 0 28px;padding:24px;border:1px solid var(--oro);background:rgba(11,8,7,.55);scroll-margin-top:82px}.partidas-import h3{font-size:1.35rem;color:var(--orovivo)}.partidas-import p{margin:8px 0 16px;color:var(--humo)}.partidas-import-resumen{font:.72rem var(--mono);color:var(--marfil);line-height:1.7}.partidas-import-acciones{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+.partidas-toast{position:fixed;left:50%;bottom:max(24px,calc(env(safe-area-inset-bottom) + 14px));z-index:2400;transform:translate(-50%,18px);opacity:0;pointer-events:none;max-width:min(92vw,600px);padding:13px 18px;background:#120C07;border:1px solid var(--oro);box-shadow:0 16px 44px rgba(0,0,0,.6);font:.72rem var(--mono);color:var(--marfil);transition:.25s}.partidas-toast.on{opacity:1;transform:translate(-50%,0)}
+.registrar-partida-rapida{align-self:flex-start;margin-top:12px;background:none;border:0;border-bottom:1px solid var(--linea-oro);padding:8px 0;min-height:44px;color:var(--orovivo);font:.68rem var(--mono);letter-spacing:.12em;text-transform:uppercase}.registrar-partida-rapida:hover{color:var(--marfil);border-bottom-color:var(--marfil)}
+@media(max-width:980px){.partidas-stats{grid-template-columns:1fr 1fr}.partidas-doscols{grid-template-columns:1fr}.partidas-resumen-extra{grid-template-columns:1fr 1fr 1fr}}
+@media(max-width:700px){.partidas-auth{align-items:stretch;flex-direction:column;padding:26px 24px}.partidas-toolbar{grid-template-columns:1fr}.partidas-toolbar-meta{justify-content:space-between}.partidas-opciones{margin-left:auto}.partidas-opciones-menu{right:0}.partidas-usuario{max-width:58vw}.partidas-grid,.partidas-mas-contenido,.partidas-detalles-juego{grid-template-columns:1fr}.partidas-campo.full,.partidas-mas,.partidas-detalles-juego,.partidas-detalles-titulo{grid-column:auto}.partidas-form{padding:26px 22px}.partida-item{grid-template-columns:58px 1fr}.partida-actions{grid-column:1/-1;justify-content:flex-end}.partida-fecha{padding-right:10px}.partidas-filtros{flex-direction:column;align-items:stretch}.partidas-toast{top:76px;bottom:auto}.partidas-import-acciones .partidas-btn{width:100%}}
+@media(max-width:520px){.partidas-resumen-extra{grid-template-columns:1fr}.partidas-usuario{max-width:48vw}.partidas-stats{grid-template-columns:1fr 1fr;gap:10px}.partidas-stat{padding:18px 14px;min-height:96px}.partidas-stat .n{font-size:1.6rem}.partidas-auth{margin-top:30px}.partidas-form-acciones .partidas-btn{width:100%}.partidas-opciones-menu{position:fixed;left:20px;right:20px;top:auto;bottom:max(82px,calc(env(safe-area-inset-bottom) + 70px));min-width:0}}
+@media (prefers-reduced-motion:reduce){.partidas-toast,.partidas-sync{transition:none}.partidas-btn[aria-busy="true"]::after{animation:none}}
 
 </style>
 <noscript><style>.rev{opacity:1!important;transform:none!important}</style></noscript>
@@ -2731,9 +2727,10 @@ html.rev-on .rev{transition-duration:.5s;transition-timing-function:var(--cine-e
 <div class="salahead rev">
 <div class="salanum" aria-hidden="true">A</div>
 <div class="salatit"><div class="sobret">Archivo privado — historial de la casa</div><h2 id="partidas-titulo">Mis Partidas</h2><div class="sub">Cada función deja una entrada en el archivo.</div></div>
-<div class="salameta partidas-sync" id="partidas-sync">Firebase · esperando acceso</div>
+<div class="salameta partidas-sync neutral" id="partidas-sync">Archivo · esperando acceso</div>
 </div>
 <hr class="regla">
+<div class="visualmente-oculto" id="partidas-live" role="status" aria-live="polite"></div>
 
 <div class="partidas-auth rev" id="partidas-auth">
 <div><h3>Tu archivo vive en la nube</h3><p>Iniciá sesión con Google para registrar partidas y ver el mismo historial desde tus dispositivos.</p></div>
@@ -2743,53 +2740,86 @@ html.rev-on .rev{transition-duration:.5s;transition-timing-function:var(--cine-e
 <div id="partidas-app" hidden>
 <div class="partidas-toolbar">
 <button class="partidas-btn" id="partidas-nueva" type="button">+ Registrar función</button>
+<div class="partidas-toolbar-meta">
 <span class="partidas-usuario" id="partidas-usuario"></span>
+<details class="partidas-opciones" id="partidas-opciones">
+<summary>Opciones del archivo</summary>
+<div class="partidas-opciones-menu">
 <button class="partidas-btn sec" id="partidas-export-json" type="button">Exportar backup</button>
-<button class="partidas-btn sec" id="partidas-export-csv" type="button">CSV</button>
+<button class="partidas-btn sec" id="partidas-import" type="button">Importar backup</button>
+<input id="partidas-import-file" type="file" accept="application/json,.json" hidden>
+<button class="partidas-btn sec" id="partidas-export-csv" type="button">Exportar CSV</button>
 <button class="partidas-btn sec" id="partidas-logout" type="button">Salir</button>
+</div>
+</details>
+</div>
 </div>
 
 <div class="partidas-stats" aria-label="Resumen de partidas">
-<div class="partidas-stat"><div class="n" id="ps-total">0</div><div class="l">Partidas jugadas</div></div>
+<div class="partidas-stat"><div class="n" id="ps-total">0</div><div class="l">Partidas registradas</div></div>
 <div class="partidas-stat"><div class="n" id="ps-juegos">0</div><div class="l">Juegos diferentes</div></div>
-<div class="partidas-stat"><div class="n" id="ps-horas">0 h</div><div class="l">Tiempo en mesa</div></div>
+<div class="partidas-stat"><div class="n" id="ps-horas">—</div><div class="l">Tiempo registrado</div></div>
 <div class="partidas-stat"><div class="n" id="ps-top">—</div><div class="l">Más jugado</div></div>
 </div>
+<div class="partidas-resumen-extra" aria-label="Datos complementarios del archivo">
+<div class="partidas-dato"><b id="ps-ultima">—</b><span>Última función</span></div>
+<div class="partidas-dato"><b id="ps-olvidado">—</b><span>Más tiempo sin registro</span></div>
+<div class="partidas-dato"><b id="ps-cobertura">Sin duraciones</b><span>Cobertura de tiempo</span></div>
+</div>
 
-<form class="partidas-form" id="partidas-form" hidden>
+<form class="partidas-form" id="partidas-form" hidden novalidate>
 <h3 id="partidas-form-titulo">Registrar función</h3>
-<p class="intro">Los únicos datos imprescindibles son el juego y la fecha. El resto lo completás sólo si te sirve.</p>
+<p class="intro">Juego, fecha, participantes y resultado primero. Todo lo demás queda en <b>Más detalles</b>.</p>
 <div class="partidas-grid">
 <div class="partidas-campo full"><label for="pf-juego">Juego</label><select id="pf-juego" required></select></div>
 <div class="partidas-campo"><label for="pf-fecha">Fecha y hora</label><input id="pf-fecha" type="datetime-local" required></div>
-<div class="partidas-campo"><label for="pf-duracion">Duración real · minutos</label><input id="pf-duracion" type="number" min="1" max="1440" inputmode="numeric" placeholder="Ej. 135"><small class="partidas-ayuda">Opcional. Podés dejarlo vacío.</small></div>
-<div class="partidas-campo full"><label for="pf-jugadores">Quiénes jugaron</label><input id="pf-jugadores" type="text" maxlength="240" placeholder="Favio, Juli"><small class="partidas-ayuda">Separá los nombres con coma.</small></div>
+<div class="partidas-campo full"><label for="pf-jugadores">Quiénes jugaron</label><input id="pf-jugadores" type="text" maxlength="240" autocomplete="off" placeholder="Favio, Juli" aria-describedby="pf-jugadores-ayuda"><small class="partidas-ayuda" id="pf-jugadores-ayuda">Separá los nombres con coma. Máximo 20; nunca se recortan sin avisar.</small><div class="partidas-habituales" id="partidas-jugadores-habituales" aria-label="Participantes habituales"></div></div>
 <div class="partidas-campo"><label for="pf-resultado">Resultado</label><select id="pf-resultado"></select></div>
-<div class="partidas-campo" id="pf-ganador-wrap"><label for="pf-ganador">Ganador / ganadores</label><input id="pf-ganador" type="text" maxlength="120" placeholder="Opcional"></div>
-<div class="partidas-campo"><label for="pf-favio">Nota Favio</label><select id="pf-favio"><option value="">Sin nota</option></select></div>
-<div class="partidas-campo"><label for="pf-juli">Nota Juli</label><select id="pf-juli"><option value="">Sin nota</option></select></div>
-<div class="partidas-campo full"><label for="pf-nota">Nota de la función</label><textarea id="pf-nota" maxlength="900" placeholder="Algo que quieras recordar de esta partida…"></textarea></div>
+<div class="partidas-campo" id="pf-ganador-wrap"><label for="pf-ganador" id="pf-ganador-label">Ganador / ganadores</label><input id="pf-ganador" type="text" maxlength="120" placeholder="Opcional"></div>
+<details class="partidas-mas" id="partidas-mas-detalles">
+<summary>Más detalles</summary>
+<div class="partidas-mas-contenido">
+<div class="partidas-campo"><label for="pf-duracion">Duración real · minutos</label><input id="pf-duracion" type="number" min="1" max="1440" inputmode="numeric" placeholder="Ej. 135"><small class="partidas-ayuda">Vacío significa “sin dato”, no cero minutos.</small></div>
+<div class="partidas-campo"><label for="pf-favio">Puntuación de Favio</label><select id="pf-favio"><option value="">Sin puntuación</option></select></div>
+<div class="partidas-campo"><label for="pf-juli">Puntuación de Juli</label><select id="pf-juli"><option value="">Sin puntuación</option></select></div>
+<div class="partidas-campo full"><label for="pf-nota">Comentario de la función</label><textarea id="pf-nota" maxlength="900" placeholder="Algo que quieras recordar de esta partida…"></textarea></div>
+<div class="partidas-detalles-juego" id="pf-detalles-juego" hidden></div>
+</div>
+</details>
 </div>
 <div class="partidas-form-acciones"><button class="partidas-btn" id="pf-guardar" type="submit">Guardar función</button><button class="partidas-btn sec" id="pf-cancelar" type="button">Cancelar</button></div>
+<div class="partidas-form-status" id="partidas-form-status" role="status" aria-live="polite"></div>
 </form>
+
+<section class="partidas-import" id="partidas-import-panel" aria-labelledby="partidas-import-titulo" hidden tabindex="-1">
+<h3 id="partidas-import-titulo">Previsualizar importación</h3>
+<p>No se escribe nada hasta que confirmes. Los conflictos y posibles duplicados se muestran antes.</p>
+<div class="partidas-import-resumen" id="partidas-import-resumen"></div>
+<div class="partidas-import-acciones"><button class="partidas-btn" id="partidas-import-nuevos" type="button">Importar sólo nuevos</button><button class="partidas-btn sec" id="partidas-import-reemplazar" type="button">Reemplazar conflictos</button><button class="partidas-btn sec" id="partidas-import-cancelar" type="button">Cancelar</button></div>
+</section>
 
 <div class="partidas-doscols">
 <div class="partidas-bloque">
 <h3 class="partidas-subtit">Historial de funciones</h3>
 <div class="partidas-filtros"><select id="partidas-filtro-juego" aria-label="Filtrar historial por juego"></select></div>
+<div class="partidas-contexto" id="partidas-contexto"></div>
 <div class="partidas-lista" id="partidas-lista"></div>
 <div class="partidas-vacio" id="partidas-vacio">Todavía no hay funciones archivadas.</div>
 </div>
 <div class="partidas-bloque">
-<h3 class="partidas-subtit">Funciones sin estrenar</h3>
-<p class="partidas-ayuda" style="margin:0 0 14px">Juegos de la cartelera que todavía no tienen ninguna partida registrada.</p>
+<h3 class="partidas-subtit">Funciones sin registros</h3>
+<p class="partidas-ayuda" style="margin:0 0 14px">Juegos de la cartelera sin partidas cargadas en este archivo. No significa necesariamente que nunca los hayas jugado.</p>
 <div class="partidas-estrenos" id="partidas-estrenos"></div>
+<button class="partidas-ver-todas" id="partidas-ver-todas" type="button" hidden>Ver todas</button>
+<div class="partidas-mini-lista" id="partidas-ranking-wrap" hidden><h4>Ranking personal</h4><p>Se muestran juegos con al menos dos puntuaciones registradas.</p><div class="partidas-ranking" id="partidas-ranking"></div></div>
+<div class="partidas-mini-lista" id="partidas-jugadores-wrap" hidden><h4>Compañeros frecuentes</h4><div class="partidas-ranking" id="partidas-jugadores-ranking"></div></div>
+<div class="partidas-mini-lista" id="partidas-coop-wrap" hidden><h4>Cooperativos</h4><p id="partidas-coop"></p></div>
 </div>
 </div>
 </div>
 </div>
 </section>
-<div class="partidas-toast" id="partidas-toast" role="status" aria-live="polite"></div>
+<div class="partidas-toast" id="partidas-toast" role="status" aria-live="polite" aria-atomic="true"></div>
 
 </main>
 <footer>
@@ -5961,15 +5991,20 @@ const COCO=(()=>{
   if(F.t&&F.t!=="999"&&duracion(g)!==null)puntos+=2;
   if(e.seriesRecientes.has(serie(g)))puntos-=2;
   const hp=window.CINE_PARTIDAS_API;
-   if(hp&&hp.ready&&hp.ready()){
-    const dias=hp.diasDesde(g.c);
-    if(dias===null)puntos+=3;
-    else if(dias<2)puntos-=6;
-    else if(dias<7)puntos-=4;
-    else if(dias<30)puntos-=1;
-    const prom=hp.promedio(g.c);
-    if(prom!==null&&prom>=9)puntos+=2; else if(prom!==null&&prom>=8)puntos+=1;
-   }
+  // El historial sólo altera a Coco cuando el archivo fue confirmado por el servidor.
+  // Así una caché parcial nunca se interpreta como «este juego no tiene partidas».
+  if(hp&&hp.ready&&hp.ready()){
+    if(typeof hp.ajuste==="function")puntos+=hp.ajuste(g.c,"equilibrado");
+    else{
+      const dias=hp.diasDesde(g.c);
+      if(dias===null)puntos+=3;
+      else if(dias<2)puntos-=6;
+      else if(dias<7)puntos-=4;
+      else if(dias<30)puntos-=1;
+      const prom=hp.promedio(g.c);
+      if(prom!==null&&prom>=9)puntos+=2; else if(prom!==null&&prom>=8)puntos+=1;
+    }
+  }
   return puntos;
  }
  function elegir(vis){
@@ -6111,7 +6146,7 @@ seguro("progreso-parallax",function(){
 seguro("fab-scrollspy",function(){
   const fab=$("#fab"), menu=$("#fabmenu");
   if(!fab||!menu)return;
-  menu.innerHTML=SALAS.map(s=>`<a href="#sala-${s.id}" data-sala="${s.id}">Sala ${s.num} · ${s.nombre}</a>`).join("")+`<a href="#cartelera" data-sala="x">∞ · Boletería</a>`;
+  menu.innerHTML=SALAS.map(s=>`<a href="#sala-${s.id}" data-sala="${s.id}">Sala ${s.num} · ${s.nombre}</a>`).join("")+`<a href="#cartelera" data-sala="x">∞ · Boletería</a><a href="#mis-partidas" data-sala="p">Archivo · Mis Partidas</a>`;
   let abierto=false;
      const inerte=(el,v)=>{
      if(v){el.setAttribute("inert","");el.setAttribute("aria-hidden","true");}
@@ -6207,11 +6242,12 @@ window.CINE_JUEGOS=JUEGOS;
 
 
 <script type="module">
-/* ═══════════════ MIS PARTIDAS · FIREBASE ═══════════════ */
-import { initializeApp } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
-import { getAuth, GoogleAuthProvider, browserLocalPersistence, setPersistence, signInWithPopup, signInWithRedirect, getRedirectResult, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
-import { initializeFirestore, getFirestore, persistentLocalCache, persistentMultipleTabManager, collection, addDoc, updateDoc, deleteDoc, doc, query, orderBy, onSnapshot, Timestamp, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
+/* ═══════════════ MIS PARTIDAS · FIREBASE · ARCHIVO V2 ═══════════════ */
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
+import { getAuth, GoogleAuthProvider, browserLocalPersistence, setPersistence, signInWithPopup, signInWithRedirect, getRedirectResult, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
+import { initializeFirestore, getFirestore, persistentLocalCache, persistentMultipleTabManager, collection, setDoc, updateDoc, deleteDoc, doc, query, orderBy, onSnapshot, Timestamp, serverTimestamp, writeBatch } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
 
+// Firebase Web Config identifica este proyecto público; la autorización real vive en Auth + Firestore Rules.
 const firebaseConfig = {
   apiKey: "AIzaSyARWtc1D6PeFjMPDSAKNmmKGPOoK5KmC8s",
   authDomain: "ludoteca-cocoa-9a141.firebaseapp.com",
@@ -6223,85 +6259,174 @@ const firebaseConfig = {
 
 const fbApp=initializeApp(firebaseConfig);
 const auth=getAuth(fbApp);
-try{await setPersistence(auth,browserLocalPersistence);}catch(_){/* Firebase conserva la sesión disponible. */}
-let db;
+let authPersistence=true;
+try{await setPersistence(auth,browserLocalPersistence);}catch(_){authPersistence=false;}
+let db,cachePersistente=true;
 try{db=initializeFirestore(fbApp,{localCache:persistentLocalCache({tabManager:persistentMultipleTabManager()})});}
-catch(_){db=getFirestore(fbApp);}
+catch(_){cachePersistente=false;db=getFirestore(fbApp);}
 
 const J=Array.isArray(window.CINE_JUEGOS)?window.CINE_JUEGOS:[];
+const JMAP=new Map(J.map(g=>[g.c,g]));
 const $=s=>document.querySelector(s);
-const authBox=$("#partidas-auth"),appBox=$("#partidas-app"),sync=$("#partidas-sync"),form=$("#partidas-form"),lista=$("#partidas-lista"),vacio=$("#partidas-vacio"),estrenos=$("#partidas-estrenos");
-let user=null,partidas=[],editingId=null,unsubscribe=null,toastTimer=null;
+const authBox=$("#partidas-auth"),appBox=$("#partidas-app"),sync=$("#partidas-sync"),live=$("#partidas-live"),form=$("#partidas-form"),formStatus=$("#partidas-form-status"),lista=$("#partidas-lista"),vacio=$("#partidas-vacio"),estrenos=$("#partidas-estrenos"),habituales=$("#partidas-jugadores-habituales"),importPanel=$("#partidas-import-panel");
+const REDUCED_M=matchMedia("(prefers-reduced-motion: reduce)").matches;
+const LIMITES=Object.freeze({jugadores:20,nombre:80,ganador:120,nota:900,detalle:160,archivo:5*1024*1024});
+const RESULTADOS_VALIDOS=new Set(["victoria","derrota","mixto","completada","objetivo-cumplido","objetivo-fallido"]);
+const PERFIL_OVERRIDES=Object.freeze({"S·01":"social","R·30":"social","D·01":"completada"});
+const DETALLES_POR_JUEGO=Object.freeze({
+  "T·01":[["protagonista","Final Girl"],["asesino","Asesino"],["localizacion","Localización"]],
+  "T·10":[["personaje","Personaje"],["objetivo","Objetivo"],["supervivientes","Supervivientes"]],
+  "T·12":[["personaje","Personaje"],["objetivo","Objetivo"],["supervivientes","Supervivientes"]],
+  "T·02":[["personaje","Personaje"],["objetivo","Objetivo"],["supervivientes","Supervivientes"]],
+  "T·04":[["escenario","Escenario"]],
+  "T·03":[["episodio","Episodio"],["primigenio","Primigenio"]],
+  "T·11":[["episodio","Episodio"],["primigenio","Primigenio"]]
+});
+
+const state={user:null,authReady:false,dataReady:false,source:"none",lastMeta:null,partidas:[],index:new Map(),players:new Map(),unsubscribe:null,editingId:null,editingBase:null,formRevision:0,openTrigger:null,submitting:false,pendingDeletes:new Set(),toastTimer:null,lastRenderSig:"",invalidDocs:0,showAllUnlogged:false,importPreview:null,listenerUid:null,importBusy:false};
 const pad=n=>String(n).padStart(2,"0");
-const localInput=d=>`${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}T${pad(d.getHours())}:${pad(d.getMinutes())}`;
 const escapeHTML=v=>String(v??"").replace(/[&<>'"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;","'":"&#39;",'"':"&quot;"}[c]));
-const juego=c=>J.find(g=>g.c===c);
-const fechaDe=p=>p.fecha?.toDate?p.fecha.toDate():new Date(p.fecha||0);
-const fmtFecha=d=>new Intl.DateTimeFormat("es-AR",{day:"2-digit",month:"short",year:"numeric"}).format(d).replace(" de "," ").replace(" de "," ");
-const fmtHora=d=>new Intl.DateTimeFormat("es-AR",{hour:"2-digit",minute:"2-digit",hour12:false}).format(d);
-const minutosTxt=n=>{n=Number(n)||0;if(!n)return "";const h=Math.floor(n/60),m=n%60;return h?`${h} h${m?` ${m} min`:""}`:`${m} min`;};
-function toast(msg){const el=$("#partidas-toast");if(!el)return;el.textContent=msg;el.classList.add("on");clearTimeout(toastTimer);toastTimer=setTimeout(()=>el.classList.remove("on"),3200);}
-function setSync(txt,kind=""){if(!sync)return;sync.textContent=txt;sync.className=`salameta partidas-sync ${kind}`;}
-function errorTexto(err){const c=err?.code||"";if(c.includes("permission-denied"))return "Firestore todavía está bloqueado: falta publicar las reglas de Mis Partidas.";if(c.includes("unauthorized-domain"))return "Falta autorizar faviocaron.github.io en Firebase Authentication.";if(c.includes("popup"))return "No pude abrir el acceso de Google. Volvé a intentarlo.";return "No pude completar la operación. Revisá la conexión e intentá otra vez.";}
+const juego=c=>JMAP.get(c)||null;
+const localInput=d=>`${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}T${pad(d.getHours())}:${pad(d.getMinutes())}`;
+const fmtFecha=d=>new Intl.DateTimeFormat("es-AR",{day:"2-digit",month:"2-digit",year:"numeric"}).format(d);
+const fmtHora=d=>new Intl.DateTimeFormat("es-AR",{hour:"2-digit",minute:"2-digit"}).format(d);
+const minutosTxt=n=>{n=Number(n);if(!Number.isFinite(n)||n<=0)return "";const h=Math.floor(n/60),m=n%60;return h&&m?`${h} h ${m} min`:h?`${h} h`:`${m} min`;};
+const isFiniteDate=d=>d instanceof Date&&Number.isFinite(d.getTime());
+const toDate=v=>{try{if(v?.toDate)return v.toDate();if(v instanceof Date)return v;const d=new Date(v);return isFiniteDate(d)?d:null;}catch(_){return null;}};
+const tsMs=v=>toDate(v)?.getTime()??null;
+const cleanText=(v,max)=>typeof v==="string"?v.trim().slice(0,max):"";
+const rating=v=>{const n=Number(v);return Number.isInteger(n)&&n>=1&&n<=10?n:null;};
+const duration=v=>{const n=Number(v);return Number.isInteger(n)&&n>=1&&n<=1440?n:null;};
+const serializeDetails=d=>d&&typeof d==="object"&&!Array.isArray(d)?Object.fromEntries(Object.entries(d).filter(([k,v])=>/^[a-z][a-z0-9_-]{0,30}$/i.test(k)&&typeof v==="string"&&v.trim()).map(([k,v])=>[k,v.trim().slice(0,LIMITES.detalle)])):{};
+const versionToken=p=>JSON.stringify([p?.id,p?.juego,tsMs(p?.fecha),p?.jugadores||[],p?.duracionMin??null,p?.resultado??null,p?.ganador??null,p?.ratings?.favio??null,p?.ratings?.juli??null,p?.nota??null,p?.detalles||{},tsMs(p?.actualizadoEn)]);
+const fingerprint=p=>`${p.juego}|${tsMs(p.fecha)||""}|${(p.jugadores||[]).map(x=>x.toLocaleLowerCase("es")).sort().join("|")}`;
 
-function poblarSelects(){
- const opts=J.slice().sort((a,b)=>a.n.localeCompare(b.n,"es")).map(g=>`<option value="${escapeHTML(g.c)}">${escapeHTML(g.n)} · ${escapeHTML(g.c)}</option>`).join("");
- $("#pf-juego").innerHTML=`<option value="">Elegí un juego</option>${opts}`;
- $("#partidas-filtro-juego").innerHTML=`<option value="">Todos los juegos</option>${opts}`;
- ["#pf-favio","#pf-juli"].forEach(id=>{const s=$(id);for(let i=1;i<=10;i++){const o=document.createElement("option");o.value=String(i);o.textContent=`${i}/10`;s.appendChild(o);}});
+function toast(msg){const el=$("#partidas-toast");if(!el)return;clearTimeout(state.toastTimer);el.textContent=msg;el.classList.add("on");state.toastTimer=setTimeout(()=>el.classList.remove("on"),4200);}
+function announce(msg){if(live)live.textContent=msg;}
+function setSync(text,kind="neutral",speak=false){sync.textContent=text;sync.classList.remove("ok","warn","neutral");sync.classList.add(kind);if(speak)announce(text);}
+function errorTexto(err){const c=String(err?.code||"");if(c.includes("permission-denied"))return "Firebase rechazó la operación. Revisá la sesión y las reglas de Firestore.";if(c.includes("unavailable")||c.includes("network"))return "No se pudo confirmar la operación con Firebase. Si existe caché local, puede quedar pendiente hasta recuperar conexión.";if(c.includes("popup-closed"))return "Se cerró la ventana de Google antes de iniciar sesión.";if(c.includes("unauthorized-domain"))return "Este dominio no está autorizado en Firebase Authentication.";if(c.includes("auth/"))return `No se pudo completar el acceso con Google (${c.replace("auth/","")}).`;return c?`No se pudo completar la operación (${c}).`:"No se pudo completar la operación.";}
+
+function perfilRegistro(g){const o=PERFIL_OVERRIDES[g?.c];if(o)return o;switch(g?.modo){case "Cooperativo":return "cooperativo";case "Solitario":return "solitario";case "Roles ocultos":return "mixto";case "Competitivo":case "En equipos":return "competitivo";default:return "completada";}}
+function opcionesResultado(perfil){if(perfil==="cooperativo"||perfil==="solitario")return [["","Sin registrar"],["victoria","Victoria"],["derrota","Derrota"]];if(perfil==="mixto")return [["","Sin registrar"],["completada","Partida completada"],["objetivo-cumplido","Objetivo cumplido"],["objetivo-fallido","Objetivo fallido"],["mixto","Resultado mixto"]];if(perfil==="competitivo"||perfil==="completada")return [["","Sin registrar"],["completada","Partida completada"]];return [["","Sin registrar"]];}
+function perfilPermiteGanador(perfil){return perfil==="competitivo"||perfil==="mixto";}
+
+function normalizarPartida(snap){
+ const raw=snap.data?.()||{};const fecha=toDate(raw.fecha);const code=cleanText(raw.juego,32);
+ if(!fecha||!code)return null;
+ const jugadores=Array.isArray(raw.jugadores)?raw.jugadores.filter(v=>typeof v==="string").map(v=>v.trim().slice(0,LIMITES.nombre)).filter(Boolean).slice(0,LIMITES.jugadores):[];
+ const resultado=typeof raw.resultado==="string"&&raw.resultado.length<=40?raw.resultado:null;
+ const ganador=raw.ganador==null?null:cleanText(raw.ganador,LIMITES.ganador)||null;
+ const nota=raw.nota==null?null:cleanText(raw.nota,LIMITES.nota)||null;
+ return {id:String(snap.id),schemaVersion:Number.isInteger(raw.schemaVersion)?raw.schemaVersion:1,juego:code,fecha,jugadores,duracionMin:duration(raw.duracionMin),resultado,ganador,ratings:{favio:rating(raw.ratings?.favio),juli:rating(raw.ratings?.juli)},nota,detalles:serializeDetails(raw.detalles),creadoEn:toDate(raw.creadoEn),actualizadoEn:toDate(raw.actualizadoEn)};
 }
-poblarSelects();
-
-function resultadosPara(g){
- const m=String(g?.modo||"").toLowerCase();
- if(m.includes("cooper")||m.includes("solitario"))return [["","Sin registrar"],["victoria","Victoria"],["derrota","Derrota"]];
- if(m.includes("roles ocultos")||m.includes("semi")||m.includes("asim"))return [["","Sin registrar"],["victoria","Victoria"],["derrota","Derrota"],["mixto","Resultado mixto"]];
- return [["","Sin registrar"],["completada","Partida completada"]];
+function rebuildIndex(){
+ const idx=new Map(),players=new Map();
+ for(const p of state.partidas){let e=idx.get(p.juego);if(!e){e={count:0,lastMs:null,minutes:0,durations:0,ratingSum:0,ratingCount:0,players:new Map(),wins:0,coopResults:0};idx.set(p.juego,e);}e.count++;const ms=tsMs(p.fecha);if(ms!==null)e.lastMs=e.lastMs===null?ms:Math.max(e.lastMs,ms);if(p.duracionMin){e.minutes+=p.duracionMin;e.durations++;}for(const r of [p.ratings?.favio,p.ratings?.juli])if(Number.isInteger(r)&&r>=1&&r<=10){e.ratingSum+=r;e.ratingCount++;}for(const name of p.jugadores||[]){players.set(name,(players.get(name)||0)+1);e.players.set(name,(e.players.get(name)||0)+1);}const g=juego(p.juego);if(perfilRegistro(g)==="cooperativo"&&["victoria","derrota"].includes(p.resultado)){e.coopResults++;if(p.resultado==="victoria")e.wins++;}}
+ state.index=idx;state.players=players;
 }
-function adaptarResultado(){const g=juego($("#pf-juego").value);const s=$("#pf-resultado"),actual=s.value;s.innerHTML=resultadosPara(g).map(([v,l])=>`<option value="${v}">${l}</option>`).join("");if([...s.options].some(o=>o.value===actual))s.value=actual;const m=String(g?.modo||"").toLowerCase();$("#pf-ganador-wrap").hidden=m.includes("cooper")||m.includes("solitario");}
-$("#pf-juego").addEventListener("change",adaptarResultado);
+function idxFor(code){return state.index.get(code)||null;}
 
-function abrirForm(codigo="",p=null){
- editingId=p?.id||null;$("#partidas-form-titulo").textContent=editingId?"Editar función":"Registrar función";$("#pf-guardar").textContent=editingId?"Guardar cambios":"Guardar función";
- $("#pf-juego").value=p?.juego||codigo||"";$("#pf-fecha").value=localInput(p?fechaDe(p):new Date());$("#pf-duracion").value=p?.duracionMin||"";$("#pf-jugadores").value=Array.isArray(p?.jugadores)?p.jugadores.join(", "):(!partidas.length?"Favio, Juli":"");$("#pf-ganador").value=p?.ganador||"";$("#pf-favio").value=p?.ratings?.favio||"";$("#pf-juli").value=p?.ratings?.juli||"";$("#pf-nota").value=p?.nota||"";adaptarResultado();$("#pf-resultado").value=p?.resultado||"";form.hidden=false;form.scrollIntoView({behavior:"smooth",block:"start"});
+// API pequeña e indexada para Coco. Nunca recorre todo el historial por recomendación.
+window.CINE_PARTIDAS_API=Object.freeze({
+ version:2,
+ ready:()=>!!state.user&&state.dataReady&&state.source==="server",
+ available:()=>!!state.user&&state.dataReady,
+ estado:()=>Object.freeze({authReady:state.authReady,dataReady:state.dataReady,source:state.source,persistentCache:cachePersistente}),
+ diasDesde:codigo=>{const e=idxFor(codigo);return e?.lastMs==null?null:Math.max(0,(Date.now()-e.lastMs)/86400000);},
+ veces:codigo=>idxFor(codigo)?.count||0,
+ promedio:codigo=>{const e=idxFor(codigo);return e&&e.ratingCount?e.ratingSum/e.ratingCount:null;},
+ minutos:codigo=>idxFor(codigo)?.minutes||0,
+ participantes:codigo=>{const e=idxFor(codigo);return e?[...e.players.entries()].sort((a,b)=>b[1]-a[1]).map(([nombre,veces])=>({nombre,veces})):[];},
+ ajuste:(codigo,intencion="equilibrado")=>{const e=idxFor(codigo);let puntos=0;if(!e){return intencion==="segura"?0:3;}const dias=e.lastMs==null?null:Math.max(0,(Date.now()-e.lastMs)/86400000);if(dias!==null){if(dias<2)puntos-=6;else if(dias<7)puntos-=4;else if(dias<30)puntos-=1;else if(intencion==="diferente"&&dias>=90)puntos+=2;}const prom=e.ratingCount?e.ratingSum/e.ratingCount:null;if(prom!==null){if(prom>=9)puntos+=intencion==="diferente"?1:2;else if(prom>=8)puntos+=1;}if(intencion==="segura"&&e.count>=3)puntos+=2;if(intencion==="diferente"&&e.count<=1)puntos+=2;return puntos;}
+});
+
+function popularSelects(){const opts=J.map(g=>`<option value="${escapeHTML(g.c)}">${escapeHTML(g.n)}</option>`).join("");$("#pf-juego").innerHTML='<option value="">Elegir juego…</option>'+opts;$("#partidas-filtro-juego").innerHTML='<option value="">Todos los juegos</option>'+opts;for(const id of ["pf-favio","pf-juli"]){const s=$("#"+id);s.innerHTML='<option value="">Sin puntuación</option>'+Array.from({length:10},(_,i)=>`<option value="${i+1}">${i+1}/10</option>`).join("");}}
+popularSelects();
+
+function renderGameDetails(code,values={}){const wrap=$("#pf-detalles-juego"),fields=DETALLES_POR_JUEGO[code]||[];if(!fields.length){wrap.hidden=true;wrap.innerHTML="";return;}wrap.hidden=false;wrap.innerHTML=`<p class="partidas-detalles-titulo">Detalles opcionales de ${escapeHTML(juego(code)?.n||code)}</p>`+fields.map(([key,label])=>`<div class="partidas-campo"><label for="pfd-${escapeHTML(key)}">${escapeHTML(label)}</label><input id="pfd-${escapeHTML(key)}" data-detail="${escapeHTML(key)}" maxlength="${LIMITES.detalle}" value="${escapeHTML(values?.[key]||"")}"></div>`).join("");}
+function adaptarResultado({keep=true}={}){const g=juego($("#pf-juego").value),perfil=perfilRegistro(g),sel=$("#pf-resultado"),actual=keep?sel.value:"";let opts=opcionesResultado(perfil);if(actual&&!opts.some(([v])=>v===actual))opts=[...opts,[actual,`Registro anterior: ${actual}`]];sel.innerHTML=opts.map(([v,l])=>`<option value="${escapeHTML(v)}">${escapeHTML(l)}</option>`).join("");sel.value=opts.some(([v])=>v===actual)?actual:"";const allow=perfilPermiteGanador(perfil),wrap=$("#pf-ganador-wrap");wrap.hidden=!allow;$("#pf-ganador-label").textContent=perfil==="mixto"?"Ganador / supervivientes":"Ganador / ganadores";if(!allow)$("#pf-ganador").value="";renderGameDetails(g?.c||"",state.editingId?state.partidas.find(p=>p.id===state.editingId)?.detalles||{}:{});}
+$("#pf-juego").addEventListener("change",()=>adaptarResultado({keep:false}));
+
+function parsePlayersText(){return $("#pf-jugadores").value.split(",").map(x=>x.trim()).filter(Boolean);}
+function renderHabituales(){const names=[...state.players.entries()].sort((a,b)=>b[1]-a[1]||a[0].localeCompare(b[0],"es")).slice(0,8).map(([n])=>n);const current=new Set(parsePlayersText().map(x=>x.toLocaleLowerCase("es")));habituales.innerHTML=names.map(n=>`<button class="partidas-persona" type="button" data-player="${escapeHTML(n)}" aria-pressed="${current.has(n.toLocaleLowerCase("es"))}">${escapeHTML(n)}</button>`).join("");}
+habituales.addEventListener("click",e=>{const b=e.target.closest("[data-player]");if(!b)return;const name=b.dataset.player,arr=parsePlayersText(),i=arr.findIndex(x=>x.toLocaleLowerCase("es")===name.toLocaleLowerCase("es"));if(i>=0)arr.splice(i,1);else arr.push(name);$("#pf-jugadores").value=arr.join(", ");renderHabituales();});
+$("#pf-jugadores").addEventListener("input",renderHabituales);
+
+function latestPlayers(){const p=state.partidas.find(p=>Array.isArray(p.jugadores)&&p.jugadores.length);return p?.jugadores?.slice()||(["Favio","Juli"]);}
+function focusAfterOpen(code){requestAnimationFrame(()=>{const el=code?$("#pf-jugadores"):$("#pf-juego");el?.focus({preventScroll:true});});}
+function abrirForm(codigo="",p=null,trigger=document.activeElement){
+ state.formRevision++;state.openTrigger=trigger instanceof HTMLElement?trigger:null;state.editingId=p?.id||null;state.editingBase=p?versionToken(p):null;state.submitting=false;$("#pf-guardar").disabled=false;$("#pf-guardar").removeAttribute("aria-busy");formStatus.textContent="";$("#partidas-form-titulo").textContent=state.editingId?"Editar función":"Registrar función";$("#pf-guardar").textContent=state.editingId?"Guardar cambios":"Guardar función";
+ const code=p?.juego||codigo||"";if(code&&!JMAP.has(code)&&!$("#pf-juego option[value='"+CSS.escape(code)+"']").length){const o=document.createElement("option");o.value=code;o.textContent=`${code} · juego fuera de la cartelera actual`;$("#pf-juego").appendChild(o);}
+ $("#pf-juego").value=code;$("#pf-fecha").value=localInput(p?.fecha||new Date());$("#pf-jugadores").value=Array.isArray(p?.jugadores)?p.jugadores.join(", "):latestPlayers().join(", ");$("#pf-ganador").value=p?.ganador||"";$("#pf-duracion").value=p?.duracionMin||"";$("#pf-favio").value=p?.ratings?.favio||"";$("#pf-juli").value=p?.ratings?.juli||"";$("#pf-nota").value=p?.nota||"";adaptarResultado({keep:false});$("#pf-resultado").value=p?.resultado||"";renderGameDetails(code,p?.detalles||{});renderHabituales();$("#partidas-mas-detalles").open=!!(p&&(p.duracionMin||p.ratings?.favio||p.ratings?.juli||p.nota||Object.keys(p.detalles||{}).length));form.hidden=false;form.scrollIntoView({behavior:REDUCED_M?"auto":"smooth",block:"start"});focusAfterOpen(code);
 }
-function cerrarForm(){editingId=null;form.hidden=true;form.reset();$("#pf-fecha").value=localInput(new Date());adaptarResultado();}
-$("#partidas-nueva").addEventListener("click",()=>abrirForm());$("#pf-cancelar").addEventListener("click",cerrarForm);
-document.addEventListener("click",e=>{const b=e.target.closest(".registrar-partida-rapida");if(!b)return;location.hash="#mis-partidas";setTimeout(()=>abrirForm(b.dataset.juego||""),250);});
+function cerrarForm({restoreFocus=true,expectedRevision=null}={}){if(expectedRevision!==null&&expectedRevision!==state.formRevision)return false;state.editingId=null;state.editingBase=null;state.formRevision++;state.submitting=false;form.hidden=true;form.reset();$("#pf-fecha").value=localInput(new Date());$("#partidas-mas-detalles").open=false;adaptarResultado({keep:false});formStatus.textContent="";if(restoreFocus&&state.openTrigger?.isConnected)state.openTrigger.focus({preventScroll:true});state.openTrigger=null;return true;}
+$("#partidas-nueva").addEventListener("click",e=>abrirForm("",null,e.currentTarget));$("#pf-cancelar").addEventListener("click",()=>cerrarForm());
+document.addEventListener("click",e=>{const b=e.target.closest(".registrar-partida-rapida");if(!b)return;const code=b.dataset.juego||"";sessionStorage.setItem("cine-cocoa:registro-pendiente",code);location.hash="#mis-partidas";setTimeout(()=>{if(state.user)abrirForm(code,null,b);else toast("Iniciá sesión y retomamos esta función automáticamente.");},250);});
 
-function resumen(){
- const cods=new Set(partidas.map(p=>p.juego));const mins=partidas.reduce((s,p)=>s+(Number(p.duracionMin)||0),0);const conteo={};partidas.forEach(p=>conteo[p.juego]=(conteo[p.juego]||0)+1);const top=Object.entries(conteo).sort((a,b)=>b[1]-a[1])[0];
- $("#ps-total").textContent=partidas.length;$("#ps-juegos").textContent=cods.size;$("#ps-horas").textContent=mins?`${Math.round(mins/6)/10} h`:"0 h";$("#ps-top").textContent=top?(juego(top[0])?.n||top[0]):"—";
- const faltan=J.filter(g=>!cods.has(g.c));estrenos.innerHTML=faltan.length?faltan.map(g=>`<button class="partidas-chip" type="button" data-estreno="${escapeHTML(g.c)}">${escapeHTML(g.n)}</button>`).join(""):`<span class="partidas-ayuda">Toda la cartelera tiene al menos una partida registrada.</span>`;
+function collectDetails(){const out={};$("#pf-detalles-juego").querySelectorAll("[data-detail]").forEach(el=>{const v=cleanText(el.value,LIMITES.detalle);if(v)out[el.dataset.detail]=v;});return out;}
+function buildDraft(){
+ const code=$("#pf-juego").value,game=juego(code),fechaRaw=$("#pf-fecha").value,fecha=new Date(fechaRaw);if(!code||!JMAP.has(code))throw new Error("Elegí un juego de la cartelera.");if(!fechaRaw||!isFiniteDate(fecha))throw new Error("Indicá una fecha válida.");const players=parsePlayersText();if(players.length>LIMITES.jugadores)throw new Error(`Hay ${players.length} participantes. El máximo es ${LIMITES.jugadores}; no se recortó ningún nombre.`);if(players.some(n=>n.length>LIMITES.nombre))throw new Error(`Cada nombre puede tener hasta ${LIMITES.nombre} caracteres.`);const durRaw=$("#pf-duracion").value.trim();let dur=null;if(durRaw){dur=duration(durRaw);if(dur===null)throw new Error("La duración debe ser un número entero entre 1 y 1440 minutos.");}const perfil=perfilRegistro(game),resultado=$("#pf-resultado").value||null;if(resultado&&!opcionesResultado(perfil).some(([v])=>v===resultado)&&!RESULTADOS_VALIDOS.has(resultado))throw new Error("El resultado elegido no corresponde a este juego.");const allowWinner=perfilPermiteGanador(perfil);const rf=$("#pf-favio").value,rj=$("#pf-juli").value;if(rf&&rating(rf)===null||rj&&rating(rj)===null)throw new Error("Las puntuaciones deben estar entre 1 y 10.");return {schemaVersion:2,juego:code,fecha:Timestamp.fromDate(fecha),jugadores:players,duracionMin:dur,resultado,ganador:allowWinner?(cleanText($("#pf-ganador").value,LIMITES.ganador)||null):null,ratings:{favio:rf?rating(rf):null,juli:rj?rating(rj):null},nota:cleanText($("#pf-nota").value,LIMITES.nota)||null,detalles:collectDetails()};
 }
-estrenos.addEventListener("click",e=>{const b=e.target.closest("[data-estreno]");if(b)abrirForm(b.dataset.estreno);});
+function plainComparable(p){return {schemaVersion:p.schemaVersion||1,juego:p.juego,fecha:tsMs(p.fecha),jugadores:p.jugadores||[],duracionMin:p.duracionMin??null,resultado:p.resultado??null,ganador:p.ganador??null,ratings:{favio:p.ratings?.favio??null,juli:p.ratings?.juli??null},nota:p.nota??null,detalles:p.detalles||{}};}
+function draftComparable(d){return {...d,fecha:tsMs(d.fecha)};}
+function diffDraft(original,draft){const a=plainComparable(original),b=draftComparable(draft),patch={};for(const k of Object.keys(b))if(JSON.stringify(a[k])!==JSON.stringify(b[k]))patch[k]=draft[k];return patch;}
 
-function renderHistorial(){
- const filtro=$("#partidas-filtro-juego").value;const ps=filtro?partidas.filter(p=>p.juego===filtro):partidas;vacio.hidden=ps.length>0;
- lista.innerHTML=ps.map(p=>{const g=juego(p.juego),d=fechaDe(p),dia=pad(d.getDate()),mes=new Intl.DateTimeFormat("es-AR",{month:"short"}).format(d).replace(".","").toUpperCase();const meta=[fmtFecha(d),fmtHora(d),Array.isArray(p.jugadores)&&p.jugadores.length?`${p.jugadores.length} jugadores`:"",p.duracionMin?minutosTxt(p.duracionMin):"",p.resultado?String(p.resultado).replace(/^./,c=>c.toUpperCase()):"",p.ganador?`Ganó: ${p.ganador}`:""].filter(Boolean).join(" · ");const ratings=[p.ratings?.favio?`Favio ${p.ratings.favio}/10`:"",p.ratings?.juli?`Juli ${p.ratings.juli}/10`:""].filter(Boolean).join(" · ");return `<article class="partida-item"><div class="partida-fecha"><b>${dia}</b><span>${mes}</span></div><div class="partida-info"><h4>${escapeHTML(g?.n||p.juego)}</h4><div class="partida-meta">${escapeHTML(meta)}${ratings?` · ${escapeHTML(ratings)}`:""}</div>${p.nota?`<div class="partida-nota">${escapeHTML(p.nota)}</div>`:""}</div><div class="partida-actions"><button class="partida-mini" type="button" data-edit="${p.id}">Editar</button><button class="partida-mini" type="button" data-del="${p.id}">Borrar</button></div></article>`;}).join("");
- resumen();
+form.addEventListener("submit",e=>{
+ e.preventDefault();if(!state.user||state.submitting)return;let draft;try{draft=buildDraft();}catch(err){formStatus.textContent=err.message;formStatus.classList.add("partidas-error");toast(err.message);return;}formStatus.classList.remove("partidas-error");const uid=state.user.uid,revision=state.formRevision,editing=state.editingId;let promise,label;
+ if(editing){const current=state.partidas.find(p=>p.id===editing);if(!current){toast("Esta partida ya no está en el archivo. Recargá antes de editar.");return;}if(state.editingBase&&versionToken(current)!==state.editingBase&&!confirm("Esta partida cambió en otra pestaña o dispositivo. ¿Querés guardar tus cambios igualmente?"))return;const patch=diffDraft(current,draft);if(!Object.keys(patch).length){toast("No había cambios para guardar.");cerrarForm({expectedRevision:revision});return;}patch.schemaVersion=2;patch.actualizadoEn=serverTimestamp();promise=updateDoc(doc(db,"usuarios",uid,"partidas",editing),patch);label="Cambios guardados localmente";
+ }else{const ref=doc(collection(db,"usuarios",uid,"partidas"));promise=setDoc(ref,{...draft,creadoEn:serverTimestamp(),actualizadoEn:serverTimestamp()});label="Función archivada localmente";}
+ state.submitting=true;$("#pf-guardar").disabled=true;$("#pf-guardar").setAttribute("aria-busy","true");formStatus.textContent="Guardando en este dispositivo…";const recovery={...draft,id:editing||null,fecha:toDate(draft.fecha),ratings:{...draft.ratings},detalles:{...draft.detalles}};cerrarForm({restoreFocus:true,expectedRevision:revision});toast(`${label}. ${navigator.onLine?"Sincronizando…":"Se sincronizará cuando vuelva la conexión."}`);
+ promise.then(()=>{if(state.user?.uid===uid)toast(editing?"Cambios confirmados por Firebase.":"Función confirmada por Firebase.");}).catch(err=>{toast(errorTexto(err));if(state.user?.uid===uid&&form.hidden)abrirForm(recovery.juego,recovery,$("#partidas-nueva"));});
+});
+
+function renderSummary(){
+ const total=state.partidas.length,cods=[...state.index.keys()],minutes=state.partidas.reduce((a,p)=>a+(p.duracionMin||0),0),durationCount=state.partidas.filter(p=>p.duracionMin).length;$("#ps-total").textContent=total;$("#ps-juegos").textContent=cods.length;$("#ps-horas").textContent=durationCount?`${Math.round(minutes/6)/10} h`:"—";$("#ps-cobertura").textContent=durationCount?`${durationCount} de ${total} con duración`:"Sin duraciones";
+ const counts=cods.map(c=>[c,state.index.get(c).count]).sort((a,b)=>b[1]-a[1]);if(counts.length){const max=counts[0][1],ties=counts.filter(x=>x[1]===max);$("#ps-top").textContent=ties.length===1?(juego(ties[0][0])?.n||ties[0][0]):`${juego(ties[0][0])?.n||ties[0][0]} +${ties.length-1}`;}else $("#ps-top").textContent="—";
+ const latest=state.partidas[0];$("#ps-ultima").textContent=latest?`${juego(latest.juego)?.n||latest.juego} · ${fmtFecha(latest.fecha)}`:"—";const played=cods.map(c=>[c,state.index.get(c).lastMs]).filter(x=>x[1]!==null).sort((a,b)=>a[1]-b[1]);$("#ps-olvidado").textContent=played.length?`${juego(played[0][0])?.n||played[0][0]} · ${Math.floor((Date.now()-played[0][1])/86400000)} d`:"—";
+ const faltan=J.filter(g=>!state.index.has(g.c)),show=state.showAllUnlogged?faltan:faltan.slice(0,12);estrenos.innerHTML=faltan.length?show.map(g=>`<button class="partidas-chip" type="button" data-estreno="${escapeHTML(g.c)}">${escapeHTML(g.n)}</button>`).join(""):`<span class="partidas-ayuda">Toda la cartelera tiene al menos una partida registrada.</span>`;const more=$("#partidas-ver-todas");more.hidden=faltan.length<=12;more.textContent=state.showAllUnlogged?"Ver menos":`Ver todas (${faltan.length})`;
+ const rated=cods.map(c=>{const e=state.index.get(c);return [c,e.ratingCount?e.ratingSum/e.ratingCount:null,e.ratingCount];}).filter(x=>x[2]>=2).sort((a,b)=>b[1]-a[1]||b[2]-a[2]).slice(0,5),rankWrap=$("#partidas-ranking-wrap");rankWrap.hidden=!rated.length;$("#partidas-ranking").innerHTML=rated.map(([c,prom,n])=>`<div><span>${escapeHTML(juego(c)?.n||c)} <small>(${n})</small></span><b>${prom.toFixed(1)}</b></div>`).join("");
+ const players=[...state.players.entries()].sort((a,b)=>b[1]-a[1]).slice(0,5),pw=$("#partidas-jugadores-wrap");pw.hidden=!players.length;$("#partidas-jugadores-ranking").innerHTML=players.map(([n,c])=>`<div><span>${escapeHTML(n)}</span><b>${c}</b></div>`).join("");
+ let coopW=0,coopN=0;for(const e of state.index.values()){coopW+=e.wins;coopN+=e.coopResults;}const cw=$("#partidas-coop-wrap");cw.hidden=!coopN;$("#partidas-coop").textContent=coopN?`${Math.round(coopW/coopN*100)}% de victorias sobre ${coopN} resultados cooperativos registrados.`:"";renderHabituales();
 }
-$("#partidas-filtro-juego").addEventListener("change",renderHistorial);
-lista.addEventListener("click",async e=>{const eb=e.target.closest("[data-edit]");if(eb){const p=partidas.find(x=>x.id===eb.dataset.edit);if(p)abrirForm(p.juego,p);return;}const dbtn=e.target.closest("[data-del]");if(!dbtn||!user)return;const p=partidas.find(x=>x.id===dbtn.dataset.del);if(!p)return;if(!confirm(`¿Borrar la partida de ${juego(p.juego)?.n||p.juego}?`))return;try{await deleteDoc(doc(db,"usuarios",user.uid,"partidas",p.id));toast("Función eliminada.");}catch(err){toast(errorTexto(err));}});
+$("#partidas-ver-todas").addEventListener("click",()=>{state.showAllUnlogged=!state.showAllUnlogged;renderSummary();});
+estrenos.addEventListener("click",e=>{const b=e.target.closest("[data-estreno]");if(b)abrirForm(b.dataset.estreno,null,b);});
 
-form.addEventListener("submit",async e=>{e.preventDefault();if(!user)return;const codigo=$("#pf-juego").value,fecha=$("#pf-fecha").value;if(!codigo||!fecha){toast("Elegí juego y fecha.");return;}const jugadores=$("#pf-jugadores").value.split(",").map(x=>x.trim()).filter(Boolean).slice(0,20);const data={juego:codigo,fecha:Timestamp.fromDate(new Date(fecha)),jugadores,duracionMin:$("#pf-duracion").value?Number($("#pf-duracion").value):null,resultado:$("#pf-resultado").value||null,ganador:$("#pf-ganador").value.trim()||null,ratings:{favio:$("#pf-favio").value?Number($("#pf-favio").value):null,juli:$("#pf-juli").value?Number($("#pf-juli").value):null},nota:$("#pf-nota").value.trim()||null,actualizadoEn:serverTimestamp()};try{if(editingId)await updateDoc(doc(db,"usuarios",user.uid,"partidas",editingId),data);else await addDoc(collection(db,"usuarios",user.uid,"partidas"),{...data,creadoEn:serverTimestamp()});toast(editingId?"Cambios guardados.":"Función archivada.");cerrarForm();}catch(err){toast(errorTexto(err));}});
-
-function apiHistorial(){
- window.CINE_PARTIDAS_API=Object.freeze({ready:()=>!!user,diasDesde:(codigo)=>{const arr=partidas.filter(p=>p.juego===codigo);if(!arr.length)return null;const ms=Date.now()-Math.max(...arr.map(p=>fechaDe(p).getTime()));return Math.max(0,ms/86400000);},veces:codigo=>partidas.filter(p=>p.juego===codigo).length,promedio:(codigo)=>{const nums=partidas.filter(p=>p.juego===codigo).flatMap(p=>[p.ratings?.favio,p.ratings?.juli]).filter(Number.isFinite);return nums.length?nums.reduce((a,b)=>a+b,0)/nums.length:null;}});
+function detailText(p){const defs=DETALLES_POR_JUEGO[p.juego]||[];return defs.map(([k,l])=>p.detalles?.[k]?`${l}: ${p.detalles[k]}`:"").filter(Boolean).join(" · ");}
+function renderContext(ps,filtro){const el=$("#partidas-contexto");if(!filtro){el.textContent=state.partidas.length?`${state.partidas.length} funciones en el archivo.`:"";return;}const e=state.index.get(filtro);if(!e){el.textContent="No hay partidas registradas para este juego.";return;}const prom=e.ratingCount?` · puntuación media ${ (e.ratingSum/e.ratingCount).toFixed(1) }/10 (${e.ratingCount})`:"";el.textContent=`${e.count} ${e.count===1?"partida":"partidas"}${e.durations?` · ${minutosTxt(e.minutes)} registrados`:" · sin duración registrada"}${prom}.`;}
+function renderHistory(){
+ const filtro=$("#partidas-filtro-juego").value,ps=filtro?state.partidas.filter(p=>p.juego===filtro):state.partidas;vacio.hidden=ps.length>0;vacio.textContent=filtro?"No hay partidas registradas para este juego.":"Todavía no hay funciones archivadas.";renderContext(ps,filtro);lista.innerHTML=ps.map(p=>{const g=juego(p.juego),d=p.fecha,dia=pad(d.getDate()),mes=new Intl.DateTimeFormat("es-AR",{month:"short"}).format(d).replace(".","").toUpperCase(),players=p.jugadores?.join(", ")||"Participantes sin registrar",meta=[fmtFecha(d),fmtHora(d),p.duracionMin?minutosTxt(p.duracionMin):"duración sin registrar",p.resultado?String(p.resultado).replace(/^./,c=>c.toUpperCase()):"",p.ganador?`Ganó: ${p.ganador}`:""].filter(Boolean).join(" · "),ratings=[p.ratings?.favio?`Favio ${p.ratings.favio}/10`:"",p.ratings?.juli?`Juli ${p.ratings.juli}/10`:""].filter(Boolean).join(" · "),dt=detailText(p),id=escapeHTML(p.id),delPending=state.pendingDeletes.has(p.id);return `<article class="partida-item" data-partida="${id}"><div class="partida-fecha"><b>${dia}</b><span>${mes}</span></div><div class="partida-info"><h4>${escapeHTML(g?.n||`${p.juego} · fuera de cartel`)}</h4><div class="partida-meta">${escapeHTML(meta)}${ratings?` · ${escapeHTML(ratings)}`:""}</div><div class="partida-jugadores">${escapeHTML(players)}</div>${p.nota?`<div class="partida-nota">${escapeHTML(p.nota)}</div>`:""}${dt?`<div class="partida-detalles">${escapeHTML(dt)}</div>`:""}</div><div class="partida-actions"><button class="partida-mini" type="button" data-edit="${id}" ${delPending?"disabled":""}>Editar</button><button class="partida-mini" type="button" data-del="${id}" ${delPending?"disabled aria-busy=\"true\"":""}>${delPending?"Borrando…":"Borrar"}</button></div></article>`;}).join("");renderSummary();
 }
-apiHistorial();
+$("#partidas-filtro-juego").addEventListener("change",renderHistory);
+lista.addEventListener("click",e=>{const eb=e.target.closest("[data-edit]");if(eb){const p=state.partidas.find(x=>x.id===eb.dataset.edit);if(p)abrirForm(p.juego,p,eb);return;}const b=e.target.closest("[data-del]");if(!b||!state.user||state.pendingDeletes.has(b.dataset.del))return;const p=state.partidas.find(x=>x.id===b.dataset.del);if(!p)return;const name=juego(p.juego)?.n||p.juego;if(!confirm(`¿Borrar ${name} del ${fmtFecha(p.fecha)}?`))return;const uid=state.user.uid;state.pendingDeletes.add(p.id);renderHistory();deleteDoc(doc(db,"usuarios",uid,"partidas",p.id)).then(()=>{state.pendingDeletes.delete(p.id);if(state.user?.uid===uid)toast("Función eliminada y confirmada por Firebase.");}).catch(err=>{state.pendingDeletes.delete(p.id);renderHistory();toast(errorTexto(err));});});
 
-function escuchar(){if(unsubscribe)unsubscribe();if(!user)return;setSync(navigator.onLine?"Firebase · sincronizando":"Sin conexión · usando copia local",navigator.onLine?"":"warn");const q=query(collection(db,"usuarios",user.uid,"partidas"),orderBy("fecha","desc"));unsubscribe=onSnapshot(q,{includeMetadataChanges:true},snap=>{partidas=snap.docs.map(d=>({id:d.id,...d.data()}));renderHistorial();apiHistorial();if(snap.metadata.hasPendingWrites)setSync("Guardando cambios…","warn");else if(snap.metadata.fromCache&&!navigator.onLine)setSync("Sin conexión · cambios locales","warn");else setSync("Firebase · sincronizado","ok");},err=>{setSync("Firebase · acceso pendiente","warn");toast(errorTexto(err));});}
+function dataSignature(ps){return JSON.stringify(ps.map(p=>[p.id,p.schemaVersion,p.juego,tsMs(p.fecha),p.jugadores,p.duracionMin,p.resultado,p.ganador,p.ratings,p.nota,p.detalles,tsMs(p.actualizadoEn)]));}
+function clearArchive(){state.partidas=[];state.index=new Map();state.players=new Map();state.dataReady=false;state.source="none";state.lastMeta=null;state.lastRenderSig="";state.invalidDocs=0;renderHistory();}
+function stopListener(){if(state.unsubscribe){state.unsubscribe();state.unsubscribe=null;}state.listenerUid=null;}
+function listen(uid){stopListener();state.listenerUid=uid;state.dataReady=false;state.source="loading";setSync(cachePersistente?"Archivo · cargando":"Archivo online · cargando","neutral");const q=query(collection(db,"usuarios",uid,"partidas"),orderBy("fecha","desc"));state.unsubscribe=onSnapshot(q,{includeMetadataChanges:true},snap=>{if(state.user?.uid!==uid||state.listenerUid!==uid)return;const normalized=[],bad=[];for(const d of snap.docs){const p=normalizarPartida(d);if(p)normalized.push(p);else bad.push(d.id);}state.partidas=normalized;state.invalidDocs=bad.length;rebuildIndex();state.dataReady=true;state.source=snap.metadata.fromCache?"cache":"server";state.lastMeta={fromCache:snap.metadata.fromCache,hasPendingWrites:snap.metadata.hasPendingWrites};const sig=dataSignature(normalized);if(sig!==state.lastRenderSig){state.lastRenderSig=sig;renderHistory();}if(snap.metadata.hasPendingWrites)setSync(navigator.onLine?"Cambios locales · sincronizando":"Sin conexión · cambios pendientes","warn",true);else if(snap.metadata.fromCache)setSync(navigator.onLine?"Copia local · verificando servidor":"Sin conexión · copia local","warn");else setSync("Archivo · sincronizado","ok",true);if(bad.length)toast(`${bad.length} registro${bad.length===1?"":"s"} inválido${bad.length===1?"":"s"} se omitió${bad.length===1?"":"eron"} para proteger el historial.`);},err=>{if(state.user?.uid!==uid)return;state.dataReady=false;state.source="error";setSync("Archivo · error de acceso","warn",true);toast(errorTexto(err));});}
 
-$("#partidas-login").addEventListener("click",async()=>{const provider=new GoogleAuthProvider();try{await signInWithPopup(auth,provider);}catch(err){if(["auth/popup-blocked","auth/cancelled-popup-request","auth/operation-not-supported-in-this-environment"].includes(err.code)){try{await signInWithRedirect(auth,provider);}catch(e){toast(errorTexto(e));}}else toast(errorTexto(err));}});
+$("#partidas-login").addEventListener("click",async()=>{const provider=new GoogleAuthProvider();$("#partidas-login").disabled=true;try{await signInWithPopup(auth,provider);}catch(err){if(["auth/popup-blocked","auth/cancelled-popup-request","auth/operation-not-supported-in-this-environment"].includes(err.code)){try{sessionStorage.setItem("cine-cocoa:auth-redirect","1");await signInWithRedirect(auth,provider);}catch(e){toast(errorTexto(e));}}else toast(errorTexto(err));}finally{$("#partidas-login").disabled=false;}});
 $("#partidas-logout").addEventListener("click",()=>signOut(auth));
-try{await getRedirectResult(auth);}catch(err){toast(errorTexto(err));}
-onAuthStateChanged(auth,u=>{user=u||null;authBox.hidden=!!user;appBox.hidden=!user;$("#partidas-usuario").textContent=user?.email||"";if(user){escuchar();}else{if(unsubscribe){unsubscribe();unsubscribe=null;}partidas=[];renderHistorial();apiHistorial();setSync("Firebase · esperando acceso");cerrarForm();}});
-addEventListener("online",()=>{if(user)setSync("Firebase · sincronizando");});addEventListener("offline",()=>{if(user)setSync("Sin conexión · usando copia local","warn");});
+try{await getRedirectResult(auth);}catch(err){toast(errorTexto(err));}finally{sessionStorage.removeItem("cine-cocoa:auth-redirect");}
+onAuthStateChanged(auth,u=>{state.authReady=true;const next=u||null,oldUid=state.user?.uid||null,nextUid=next?.uid||null;if(oldUid!==nextUid){stopListener();clearArchive();cerrarForm({restoreFocus:false});state.importPreview=null;importPanel.hidden=true;}state.user=next;authBox.hidden=!!next;appBox.hidden=!next;$("#partidas-usuario").textContent=next?.email||"";if(next){if(!authPersistence)toast("La sesión no pudo fijarse como persistente en este navegador.");if(!cachePersistente)toast("La caché persistente de Firestore no está disponible; el archivo seguirá funcionando online.");listen(next.uid);const pending=sessionStorage.getItem("cine-cocoa:registro-pendiente");if(pending){sessionStorage.removeItem("cine-cocoa:registro-pendiente");setTimeout(()=>abrirForm(pending,null,$("#partidas-nueva")),250);}}else setSync("Archivo · esperando acceso","neutral");});
+addEventListener("online",()=>{if(!state.user)return;if(state.lastMeta?.hasPendingWrites)setSync("Cambios locales · sincronizando","warn");else if(state.lastMeta?.fromCache)setSync("Copia local · verificando servidor","warn");else if(state.source==="server")setSync("Archivo · sincronizado","ok");});
+addEventListener("offline",()=>{if(state.user)setSync(state.lastMeta?.hasPendingWrites?"Sin conexión · cambios pendientes":"Sin conexión · copia local","warn",true);});
 
-function descargar(nombre,contenido,tipo){const blob=new Blob([contenido],{type:tipo});const url=URL.createObjectURL(blob),a=document.createElement("a");a.href=url;a.download=nombre;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);}
-$("#partidas-export-json").addEventListener("click",()=>{const limpio=partidas.map(({id,...p})=>({...p,fecha:fechaDe(p).toISOString(),creadoEn:undefined,actualizadoEn:undefined}));descargar(`ludoteca-cocoa-partidas-${new Date().toISOString().slice(0,10)}.json`,JSON.stringify({version:1,exportado:new Date().toISOString(),partidas:limpio},null,2),"application/json");});
-$("#partidas-export-csv").addEventListener("click",()=>{const cols=["fecha","juego","nombre","jugadores","duracionMin","resultado","ganador","notaFavio","notaJuli","nota"];const q=v=>`"${String(v??"").replaceAll('"','""')}"`;const rows=partidas.map(p=>[fechaDe(p).toISOString(),p.juego,juego(p.juego)?.n||"",(p.jugadores||[]).join(" | "),p.duracionMin||"",p.resultado||"",p.ganador||"",p.ratings?.favio||"",p.ratings?.juli||"",p.nota||""]);descargar(`ludoteca-cocoa-partidas-${new Date().toISOString().slice(0,10)}.csv`,[cols,...rows].map(r=>r.map(q).join(",")).join("\n"),"text/csv;charset=utf-8");});
+function descargar(nombre,contenido,tipo){const blob=new Blob([contenido],{type:tipo}),url=URL.createObjectURL(blob),a=document.createElement("a");a.href=url;a.download=nombre;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);}
+function iso(v){const d=toDate(v);return d?d.toISOString():null;}
+$("#partidas-export-json").addEventListener("click",()=>{const out=state.partidas.map(p=>({id:p.id,schemaVersion:p.schemaVersion||1,juego:p.juego,fecha:iso(p.fecha),jugadores:p.jugadores,duracionMin:p.duracionMin,resultado:p.resultado,ganador:p.ganador,ratings:p.ratings,nota:p.nota,detalles:p.detalles,creadoEn:iso(p.creadoEn),actualizadoEn:iso(p.actualizadoEn)}));descargar(`ludoteca-cocoa-partidas-${new Date().toISOString().slice(0,10)}.json`,JSON.stringify({version:2,exportado:new Date().toISOString(),partidas:out},null,2),"application/json");});
+function csvCell(v){let x=String(v??"");if(/^[=+\-@\t\r\n]/.test(x))x="'"+x;return `"${x.replaceAll('"','""')}"`;}
+$("#partidas-export-csv").addEventListener("click",()=>{const cols=["fecha","juego","nombre","jugadores","duracionMin","resultado","ganador","puntuacionFavio","puntuacionJuli","comentario"];const rows=state.partidas.map(p=>[iso(p.fecha),p.juego,juego(p.juego)?.n||"",(p.jugadores||[]).join(" | "),p.duracionMin??"",p.resultado||"",p.ganador||"",p.ratings?.favio??"",p.ratings?.juli??"",p.nota||""]);descargar(`ludoteca-cocoa-partidas-${new Date().toISOString().slice(0,10)}.csv`,`\ufeff${[cols,...rows].map(r=>r.map(csvCell).join(",")).join("\n")}`,"text/csv;charset=utf-8");});
+
+function normalizeImportRecord(raw,i){if(!raw||typeof raw!=="object")return {error:`Registro ${i+1}: formato inválido`};const code=cleanText(raw.juego,32),date=toDate(raw.fecha);if(!code||!date)return {error:`Registro ${i+1}: falta juego o fecha válida`};const players=Array.isArray(raw.jugadores)?raw.jugadores.map(x=>cleanText(x,LIMITES.nombre)).filter(Boolean):[];if(players.length>LIMITES.jugadores)return {error:`Registro ${i+1}: más de ${LIMITES.jugadores} participantes`};const dur=raw.duracionMin==null||raw.duracionMin===""?null:duration(raw.duracionMin);if(raw.duracionMin!=null&&raw.duracionMin!==""&&dur===null)return {error:`Registro ${i+1}: duración inválida`};const rec={id:typeof raw.id==="string"&&/^[A-Za-z0-9_-]{1,120}$/.test(raw.id)?raw.id:null,schemaVersion:2,juego:code,fecha:Timestamp.fromDate(date),jugadores:players,duracionMin:dur,resultado:typeof raw.resultado==="string"&&raw.resultado.length<=40?raw.resultado:null,ganador:cleanText(raw.ganador,LIMITES.ganador)||null,ratings:{favio:rating(raw.ratings?.favio??raw.notaFavio),juli:rating(raw.ratings?.juli??raw.notaJuli)},nota:cleanText(raw.nota,LIMITES.nota)||null,detalles:serializeDetails(raw.detalles)};return {record:rec};}
+$("#partidas-import").addEventListener("click",()=>{if(!state.user)return;if(!(state.dataReady&&state.source==="server")){toast("Esperá a que el archivo esté confirmado por el servidor antes de importar.");return;}$("#partidas-import-file").value="";$("#partidas-import-file").click();});
+$("#partidas-import-file").addEventListener("change",async e=>{const file=e.target.files?.[0];if(!file)return;if(file.size>LIMITES.archivo){toast("El backup supera 5 MB.");return;}let obj;try{obj=JSON.parse(await file.text());}catch(_){toast("El archivo no contiene JSON válido.");return;}if(![1,2].includes(Number(obj?.version))||!Array.isArray(obj?.partidas)){toast("El archivo no es un backup compatible de Ludoteca Cocoa.");return;}const records=[],errors=[];obj.partidas.forEach((r,i)=>{const x=normalizeImportRecord(r,i);if(x.error)errors.push(x.error);else records.push(x.record);});const ids=new Set(state.partidas.map(p=>p.id)),fps=new Set(state.partidas.map(fingerprint)),conflicts=records.filter(r=>r.id&&ids.has(r.id)),dupes=records.filter(r=>!r.id&&fps.has(fingerprint(r)));state.importPreview={records,errors,conflictIds:new Set(conflicts.map(r=>r.id)),duplicateFingerprints:new Set(dupes.map(fingerprint))};$("#partidas-import-resumen").textContent=`${records.length} registros válidos · ${errors.length} inválidos · ${conflicts.length} conflictos por ID · ${dupes.length} posibles duplicados sin ID.`;$("#partidas-import-reemplazar").disabled=!conflicts.length;importPanel.hidden=false;importPanel.scrollIntoView({behavior:REDUCED_M?"auto":"smooth",block:"start"});importPanel.focus({preventScroll:true});});
+$("#partidas-import-cancelar").addEventListener("click",()=>{state.importPreview=null;importPanel.hidden=true;$("#partidas-import").focus();});
+function runImport(replace){const pr=state.importPreview;if(!pr||!state.user||state.importBusy)return;const uid=state.user.uid,existingIds=new Set(state.partidas.map(p=>p.id)),existingFp=new Set(state.partidas.map(fingerprint));const todo=pr.records.filter(r=>{if(r.id&&existingIds.has(r.id))return replace;if(!r.id&&existingFp.has(fingerprint(r)))return false;return true;});if(!todo.length){toast("No hay registros nuevos para importar.");return;}state.importBusy=true;$("#partidas-import-nuevos").disabled=true;$("#partidas-import-reemplazar").disabled=true;const commits=[];for(let start=0;start<todo.length;start+=400){const batch=writeBatch(db);for(const r of todo.slice(start,start+400)){const conflict=r.id&&existingIds.has(r.id),ref=r.id?doc(db,"usuarios",uid,"partidas",r.id):doc(collection(db,"usuarios",uid,"partidas"));const data={schemaVersion:2,juego:r.juego,fecha:r.fecha,jugadores:r.jugadores,duracionMin:r.duracionMin,resultado:r.resultado,ganador:r.ganador,ratings:r.ratings,nota:r.nota,detalles:r.detalles,actualizadoEn:serverTimestamp()};if(conflict&&replace)batch.update(ref,data);else batch.set(ref,{...data,creadoEn:serverTimestamp()});}commits.push(batch.commit());}state.importPreview=null;importPanel.hidden=true;toast(`${todo.length} registro${todo.length===1?"":"s"} aceptado${todo.length===1?"":"s"} localmente. ${navigator.onLine?"Sincronizando…":"Se sincronizará cuando vuelva la conexión."}`);Promise.all(commits).then(()=>{if(state.user?.uid===uid)toast("Importación confirmada por Firebase.");}).catch(err=>toast(errorTexto(err))).finally(()=>{state.importBusy=false;$("#partidas-import-nuevos").disabled=false;$("#partidas-import-reemplazar").disabled=false;});}
+$("#partidas-import-nuevos").addEventListener("click",()=>runImport(false));$("#partidas-import-reemplazar").addEventListener("click",()=>runImport(true));
+
+// Cerrar el menú secundario al elegir una acción o al presionar Escape.
+$("#partidas-opciones").addEventListener("click",e=>{if(e.target.closest("button"))setTimeout(()=>$("#partidas-opciones").removeAttribute("open"),0);});
+document.addEventListener("keydown",e=>{if(e.key==="Escape"&&$("#partidas-opciones").open){$("#partidas-opciones").open=false;$("#partidas-opciones summary").focus();}});
 </script>
 
 <!-- Revisión editorial: 2026-09-10. 91 fichas; sinopsis de 30–40 palabras;
